@@ -1,29 +1,64 @@
 
 > beaa-core-prototype@0.2.0 test:browser
-> playwright test
+> playwright test --repeat-each=3
 
 
-Running 12 tests using 2 workers
+Running 39 tests using 2 workers
 
-(node:20631) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:38124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:20630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:38125) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-  ✓   1 tests/browser/mvp.spec.mjs:38:1 › failed first attempt records review, statistics and refuses a grant (1.5s)
-  ✓   2 tests/browser/mvp.spec.mjs:17:1 › PIN-protected settings, refresh, rest and daily cap (2.0s)
+  ✓   2 tests/browser/mvp.spec.mjs:38:1 › failed first attempt records review, statistics and refuses a grant (1.7s)
+  ✓   1 tests/browser/mvp.spec.mjs:17:1 › PIN-protected settings, refresh, rest and daily cap (2.3s)
   ✓   3 tests/browser/mvp.spec.mjs:50:1 › pending rest refuses early completion and clock rollback (1.1s)
-  ✓   4 tests/browser/mvp.spec.mjs:58:1 › resizing and reloading retain exact current question (1.0s)
-  ✓   6 tests/browser/mvp.spec.mjs:80:1 › imported questions use selected grade and render as text (956ms)
-  -   7 tests/browser/mvp.spec.mjs:94:1 › single HTML file works without any server or network requests
-  ✓   5 tests/browser/mvp.spec.mjs:68:1 › keyboard navigation, semantic accessibility and narrow layout (2.9s)
-  ✓   9 tests/browser/mvp.spec.mjs:118:1 › loaded standalone page completes a challenge while offline (819ms)
-  ✓  10 tests/browser/mvp.spec.mjs:124:1 › two tabs preserve PIN and serialize simulated usage at the daily cap (1.3s)
-  ✓   8 tests/browser/mvp.spec.mjs:104:1 › active quiz, rest, review and unlocked settings pass accessibility checks (3.4s)
-  ✓  11 tests/browser/mvp.spec.mjs:141:1 › keyboard can retry a wrong answer without losing focus (670ms)
-  ✓  12 tests/browser/mvp.spec.mjs:148:1 › opening a tab during first PIN derivation preserves one complete credential (909ms)
+  ✓   4 tests/browser/mvp.spec.mjs:58:1 › resizing and reloading retain exact current question (1.1s)
+  ✓   6 tests/browser/mvp.spec.mjs:82:1 › imported questions use selected grade and render as text (1.0s)
+  -   7 tests/browser/mvp.spec.mjs:96:1 › single HTML file works without any server or network requests
+  ✓   5 tests/browser/mvp.spec.mjs:70:1 › keyboard navigation, semantic accessibility and narrow layout (3.2s)
+  ✓   9 tests/browser/mvp.spec.mjs:120:1 › loaded standalone page completes a challenge while offline (918ms)
+  ✓  10 tests/browser/mvp.spec.mjs:126:1 › two tabs preserve PIN and serialize simulated usage at the daily cap (1.4s)
+  ✓   8 tests/browser/mvp.spec.mjs:106:1 › active quiz, rest, review and unlocked settings pass accessibility checks (3.6s)
+  ✓  11 tests/browser/mvp.spec.mjs:143:1 › keyboard can retry a wrong answer without losing focus (833ms)
+  ✓  12 tests/browser/mvp.spec.mjs:150:1 › opening a tab during first PIN derivation preserves one complete credential (1.3s)
+  ✓  13 tests/browser/mvp.spec.mjs:172:1 › an answer queued behind a state lock is committed before acknowledged progress reloads (708ms)
+(node:38915) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38925) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 tests/browser/mvp.spec.mjs:38:1 › failed first attempt records review, statistics and refuses a grant (1.5s)
+  ✓  14 tests/browser/mvp.spec.mjs:17:1 › PIN-protected settings, refresh, rest and daily cap (2.1s)
+  ✓  16 tests/browser/mvp.spec.mjs:50:1 › pending rest refuses early completion and clock rollback (1.2s)
+  ✓  17 tests/browser/mvp.spec.mjs:58:1 › resizing and reloading retain exact current question (1.2s)
+  ✓  19 tests/browser/mvp.spec.mjs:82:1 › imported questions use selected grade and render as text (1.0s)
+  -  20 tests/browser/mvp.spec.mjs:96:1 › single HTML file works without any server or network requests
+  ✓  18 tests/browser/mvp.spec.mjs:70:1 › keyboard navigation, semantic accessibility and narrow layout (3.2s)
+  ✓  22 tests/browser/mvp.spec.mjs:120:1 › loaded standalone page completes a challenge while offline (942ms)
+  ✓  21 tests/browser/mvp.spec.mjs:106:1 › active quiz, rest, review and unlocked settings pass accessibility checks (3.6s)
+  ✓  23 tests/browser/mvp.spec.mjs:126:1 › two tabs preserve PIN and serialize simulated usage at the daily cap (1.5s)
+  ✓  24 tests/browser/mvp.spec.mjs:143:1 › keyboard can retry a wrong answer without losing focus (654ms)
+  ✓  26 tests/browser/mvp.spec.mjs:172:1 › an answer queued behind a state lock is committed before acknowledged progress reloads (857ms)
+  ✓  25 tests/browser/mvp.spec.mjs:150:1 › opening a tab during first PIN derivation preserves one complete credential (1.1s)
+(node:39720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39727) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  28 tests/browser/mvp.spec.mjs:38:1 › failed first attempt records review, statistics and refuses a grant (1.5s)
+  ✓  27 tests/browser/mvp.spec.mjs:17:1 › PIN-protected settings, refresh, rest and daily cap (2.1s)
+  ✓  29 tests/browser/mvp.spec.mjs:50:1 › pending rest refuses early completion and clock rollback (1.1s)
+  ✓  30 tests/browser/mvp.spec.mjs:58:1 › resizing and reloading retain exact current question (1.1s)
+  ✓  32 tests/browser/mvp.spec.mjs:82:1 › imported questions use selected grade and render as text (1.1s)
+  -  33 tests/browser/mvp.spec.mjs:96:1 › single HTML file works without any server or network requests
+  ✓  31 tests/browser/mvp.spec.mjs:70:1 › keyboard navigation, semantic accessibility and narrow layout (3.2s)
+  ✓  35 tests/browser/mvp.spec.mjs:120:1 › loaded standalone page completes a challenge while offline (845ms)
+  ✓  36 tests/browser/mvp.spec.mjs:126:1 › two tabs preserve PIN and serialize simulated usage at the daily cap (1.4s)
+  ✓  34 tests/browser/mvp.spec.mjs:106:1 › active quiz, rest, review and unlocked settings pass accessibility checks (3.9s)
+  ✓  37 tests/browser/mvp.spec.mjs:143:1 › keyboard can retry a wrong answer without losing focus (714ms)
+  ✓  39 tests/browser/mvp.spec.mjs:172:1 › an answer queued behind a state lock is committed before acknowledged progress reloads (893ms)
+  ✓  38 tests/browser/mvp.spec.mjs:150:1 › opening a tab during first PIN derivation preserves one complete credential (1.2s)
 
-  1 skipped
-  11 passed (9.6s)
+  3 skipped
+  36 passed (32.3s)
 npm notice
 npm notice New major version of npm available! 11.9.0 -> 12.2.1
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1

@@ -28,3 +28,19 @@ test('report CLI fails CI on skipped or empty browser runs', async t=>{
   assert.equal(result.status,1);assert.match(result.stdout,/Browser acceptance/);
  }
 });
+
+test('report CLI never emits failure text as executable workflow commands',async t=>{
+ const {mkdtempSync,mkdirSync,writeFileSync,rmSync,readFileSync}=await import('node:fs');
+ const {tmpdir}=await import('node:os');const {join}=await import('node:path');
+ const {spawnSync}=await import('node:child_process');const {fileURLToPath}=await import('node:url');
+ const directory=mkdtempSync(join(tmpdir(),'beaa-report-injection-'));t.after(()=>rmSync(directory,{recursive:true,force:true}));
+ mkdirSync(join(directory,'test-results'));
+ const message='failure\n::stop-commands::test-token\n::error::forged';
+ writeFileSync(join(directory,'test-results/browser-results.json'),JSON.stringify({stats:{expected:1,unexpected:1,skipped:0,flaky:0},suites:[{specs:[{title:'untrusted failure',tests:[{status:'unexpected',results:[{errors:[{message}]}]}]}]}]}));
+ const summary=join(directory,'summary.md');
+ const result=spawnSync(process.execPath,[fileURLToPath(new URL('../scripts/report-browser-results.mjs',import.meta.url))],{cwd:directory,encoding:'utf8',env:{CI:'true',GITHUB_STEP_SUMMARY:summary}});
+ assert.equal(result.status,1);
+ assert.doesNotMatch(result.stdout,/(?:^|\n)::stop-commands::/);
+ assert.match(result.stdout,/%0A::stop-commands::test-token%0A/);
+ assert.ok(readFileSync(summary,'utf8').includes(message));
+});

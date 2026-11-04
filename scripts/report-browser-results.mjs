@@ -42,7 +42,8 @@ export function summarizeBrowserResults(report) {
 if (process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   try {
     const summary=summarizeBrowserResults(JSON.parse(readFileSync('test-results/browser-results.json','utf8')));
-    console.log(summary.markdown);
+    const stats=summary.stats;
+    console.log(`Browser acceptance: ${stats.expected} passed, ${stats.unexpected} failed, ${stats.skipped} skipped, ${stats.flaky} flaky`);
     for(const annotation of summary.annotations) console.log(annotation);
     if(process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY,summary.markdown);
     if(summary.stats.unexpected || summary.stats.flaky || summary.failures.length || !summary.stats.expected || process.env.CI && summary.stats.skipped) process.exitCode=1;
