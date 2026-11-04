@@ -1,0 +1,10 @@
+{
+  "name": "beaa-harmony",
+  "version": "0.1.0",
+  "description": "学知守护 UI 验证工程（无系统级管控权限）",
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hvigor": "4.0.2",
+    "@ohos/hvigor-ohos-plugin": "4.0.2"
+  }
+}
