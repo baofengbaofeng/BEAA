@@ -9,7 +9,9 @@
 - 本地优先，不依赖联网解答基础题目
 
 ## 状态
-**已完成仓库文档初始化，尚无可运行应用。** HarmonyOS 4 对第三方应用的使用监控与限制能力尚需真机验证，不能宣称已支持全设备锁定。
+**已提交 ArkUI 原生交互页面与 Stage 项目骨架，但尚未经过 DevEco Studio 编译或真机安装验证。** HarmonyOS 4 对第三方应用的使用监控与限制能力尚需真机验证，不能宣称已支持全设备锁定。
+
+原生 UI 源码入口：[apps/harmony/entry/src/main/ets/pages/Index.ets](apps/harmony/entry/src/main/ets/pages/Index.ets)。运行说明：[apps/harmony/README.md](apps/harmony/README.md)。设备能力验证：[docs/DEVICE_POC.md](docs/DEVICE_POC.md)。
 
 ## 文档
 - [产品需求](docs/PRD.md)
@@ -23,3 +25,7 @@
 
 ## 分支
 `master` 稳定；`dev` 开发集成；新增功能通过 `feature/*` 分支和PR进入开发分支。
+
+## 不需要平板环境的预览
+
+[浏览器交互原型](apps/web-preview/index.html) · [使用说明](apps/web-preview/README.md)。下载 HTML 后直接用浏览器打开，体验模拟计时、答题、休息和家长设置。**仅用于演示，不具备系统应用限制能力。**
