@@ -1,0 +1,11 @@
+{
+  "name": "beaa-core-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test shared/domain/*.test.mjs",
+    "demo": "node shared/domain/demo.mjs"
+  },
+  "engines": {"node": ">=20"}
+}
