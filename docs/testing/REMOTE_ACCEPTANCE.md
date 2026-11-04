@@ -1,5 +1,7 @@
 # M1 远程验收补全
 
+**最新结论：M1浏览器功能验收完成；de1d10b严格CI为Success。PR #3已合并到master，当前新增修复需另建至dev的PR，API403仍阻止自动创建。下文保留诊断过程中的历史失败，不代表最终结果。**
+
 2026-11-04 通过 GitHub 公开网页核对，未使用不可用的 API，也未读取需要登录的日志。
 
 ## 已确认的远程事实
@@ -34,3 +36,18 @@
 修复后本地结果：Node 36/36；PIN高风险并发场景20/20；浏览器全套三轮合计36通过、3本地策略跳过、0失败。报告器不再向stdout输出原始错误Markdown，工作流命令注入回归通过。原始最终输出见acceptance-node-results.txt及acceptance-browser-results.txt。
 
 网络补充：为本地安装与CI相同的浏览器，官方cdn.playwright.dev下载被403拒绝；已在配置草稿保留api.github.com并新增cdn.playwright.dev，未应用或发布。系统Chromium本地检查仍可运行，下载失败不代表同版本浏览器已安装。
+
+
+## 最终远程证据
+
+- 修复提交：de1d10bbcfb6f77652a77906dab268e67f5f407c。
+- 严格CI：[41812445236](https://github.com/baofengbaofeng/BEAA/actions/runs/41812445236)，公开摘要Status=Success，总耗时48秒。确认页面提交与修复SHA一致。
+- CI报告器对缺报告、零通过、任何跳过、flaky和失败均返回非零，且禁止test.only。因此该成功包含独立HTML打开验收；本机系统Chromium的file://策略跳过不能替代该证据。
+- CI产物beaa-browser-evidence存在，公开摘要显示171 KB，artifact摘要sha256:93ef2216ae272e71e8ad9b627424883bd455ff5f02d2e8e57a0089bc1c8c6dd5。未读取需要登录的原始CI日志/产物；该artifact摘要不是演示ZIP单独的校验和。
+- 本地npm test 36/36，PIN并发定向20/20，浏览器全套三轮36通过/3策略跳过/0失败，demo与打包命令成功。ZIP消费端校验通过，使用说明包含完整仓库与解压包两种HTTP目录。
+
+## 当前集成与人工条件
+
+PR #3网页状态为MERGED、baseBranch=master、head为06e7bdf；master已由仓库方更新至cf7db8b，dev仍为374f8b6。本轮未执行任何master修改或PR合并，也不回滚仓库方操作。后续提交仍在feature/browser-mvp-hardening；需[新建至dev的PR](https://github.com/baofengbaofeng/BEAA/compare/dev...feature/browser-mvp-hardening?expand=1)。gh pr edit/create使用的api.github.com仍403，旧PR已合并后不能再靠修改base完成这一步。
+
+需要环境设置中的api.github.com、cdn.playwright.dev草稿生效时，由用户审核保存并按产品流程发布；此任务未发布环境。原生阶段仍需兼容SDK/DevEco、签名和真机；见NATIVE_INTEGRATION.md。M1功能验收关闭后停止新增演示功能。
