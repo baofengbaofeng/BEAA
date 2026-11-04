@@ -7,7 +7,8 @@
     "test": "node --test shared/domain/*.test.mjs tests/*.test.mjs",
     "demo": "node shared/domain/demo.mjs",
     "test:browser": "playwright test",
-    "build:demo": "python3 scripts/package-demo.py"
+    "build:demo": "python3 scripts/package-demo.py",
+    "native:preflight": "node scripts/native-preflight.mjs"
   },
   "engines": {
     "node": ">=20"

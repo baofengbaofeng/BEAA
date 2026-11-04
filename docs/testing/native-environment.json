@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "status": "blocked",
+  "tools": {
+    "java": {
+      "available": true,
+      "reason": null,
+      "version": "21.0.12.1",
+      "required": true
+    },
+    "ohpm": {
+      "available": false,
+      "reason": "not_found",
+      "version": null,
+      "required": true
+    },
+    "hvigor": {
+      "available": false,
+      "reason": "not_found",
+      "version": null,
+      "required": true
+    },
+    "hdc": {
+      "available": false,
+      "reason": "not_found",
+      "version": null,
+      "required": false
+    }
+  },
+  "sdk": {
+    "configured": false,
+    "source": null,
+    "available": false,
+    "contentsVerified": false
+  },
+  "missing": [
+    "ohpm",
+    "hvigor",
+    "sdk"
+  ],
+  "compatibilityVerified": false,
+  "buildAttempted": false,
+  "signingVerified": false,
+  "deviceVerified": false
+}

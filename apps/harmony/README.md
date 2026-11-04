@@ -23,3 +23,14 @@
 
 ## 下一道技术门禁
 在真实 MatePad 11 上确认 HarmonyOS 4 可用的官方计时与限制权限，再实现 `DeviceControlAdapter`；否则仅能诚实提供应用内计时/学习挑战功能。
+
+
+## 自动构建前置项预检
+
+在仓库根目录运行 `npm run native:preflight`，或 `npm run native:preflight -- --sdk /path/to/sdk`。显式路径优先，否则按顺序选择DEVECO_SDK_HOME、HARMONYOS_SDK_HOME、OHOS_SDK_HOME中实际存在的目录；不输出变量值。
+
+工具检查PATH中的java、ohpm、hvigor可执行性和版本；hdc作为后续设备工具单独报告，不阻止构建前置项检查。IDE内置工具若未进入终端PATH，仍会显示缺失；应在对应IDE的开发终端运行，或按正式安装说明配置PATH。
+
+退出2表示缺前置项，退出0仅表示检测到命令与所选目录，不代表SDK内容正确、版本兼容、签名有效或编译通过；参数错误退出1。脚本不会下载SDK、修改工程版本、读取证书或连接设备。工具版本命令有10秒超时。
+
+当前云环境实际预检见[原生环境报告](../../docs/testing/NATIVE_PREFLIGHT.md)。后续必须在匹配工具链中执行真实构建并保存HAP/日志，再进行真机验收。
