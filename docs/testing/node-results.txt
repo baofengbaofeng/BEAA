@@ -1,0 +1,47 @@
+
+> beaa-core-prototype@0.2.0 test
+> node --test shared/domain/*.test.mjs tests/*.test.mjs
+
+✔ rejects invalid policy and duplicate subjects (1.033541ms)
+✔ accumulates usage across intervals (0.288002ms)
+✔ requires correct answers and minimum rest before releasing (1.39292ms)
+✔ rejects replay or out-of-order answers (0.238848ms)
+✔ enforces daily hard cap even if one usage report spans multiple cycles (0.130185ms)
+✔ day transition only advances to later day (0.176835ms)
+✔ native application scaffold has required entry and resources (1.652218ms)
+✔ UI demo includes four required flows and responsive layout (0.476405ms)
+✔ page route and app name are consistent (1.11315ms)
+✔ browser preview includes responsive layout and honest disclaimer (0.965759ms)
+✔ timer triggers challenge and wrong answer does not advance (4.675605ms)
+✔ all correct answers require minimum rest before next cycle (2.01275ms)
+✔ daily cap remains locked, even when extra time is attempted (23.021878ms)
+✔ settings are stored locally and malformed storage does not crash (17.608346ms)
+✔ unauthorized settings and reset are rejected (1.584087ms)
+✔ completed rest progress survives reload without truncation (2.551007ms)
+✔ storage failure is visible and does not crash interactions (1.010406ms)
+✔ invalid stored phase and forged incomplete grant cannot render a reward (1.593921ms)
+✔ wrong first answers create review and a failed challenge without a grant (1.376125ms)
+✔ grade subject and topic filter actual questions and reject insufficient pools (15.149988ms)
+✔ changing settings during a challenge is rejected (15.676949ms)
+✔ PIN is hashed, wrong PIN rejected, cooldown and reload require authentication (102.414433ms)
+✔ import rejects malformed banks and HTML is escaped in rendered questions (16.250199ms)
+✔ insufficient pool does not start a challenge (15.840143ms)
+✔ daily rollover resets only daily usage and a clock rollback cannot complete rest (1.527902ms)
+✔ stale question button cannot answer the following question (1.562273ms)
+✔ invalid persisted answering phase cannot grant already exhausted daily allowance (1.094723ms)
+✔ corrupt optional records never erase PIN or daily allowance (19.973294ms)
+✔ an older tab cannot overwrite a newer daily lock on navigation (1.997377ms)
+✔ a state change during PIN hashing cannot authorize a mismatched credential pair (1.268663ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 331.882293
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
