@@ -1,11 +1,9 @@
-name: BEAA logic and native source checks
-
+name: BEAA logic, browser and native source checks
 on:
   push:
-    branches: [dev]
+    branches: [dev, 'feature/**']
   pull_request:
     branches: [dev, master]
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,7 +14,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
+      - run: npm ci
       - name: Run business and scaffold tests
         run: npm test
       - name: Run domain demonstration
         run: npm run demo
+      - name: Install browser and runtime libraries
+        run: npx playwright install --with-deps chromium
+      - name: Run actual browser and accessibility checks
+        run: npm run test:browser
+      - name: Package standalone browser demonstration
+        run: npm run build:demo
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: beaa-browser-evidence
+          path: |
+            test-results/
+            dist/
+          if-no-files-found: warn

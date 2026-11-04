@@ -29,3 +29,7 @@
 ## 不需要平板环境的预览
 
 [浏览器交互原型](apps/web-preview/index.html) · [使用说明](apps/web-preview/README.md)。下载 HTML 后直接用浏览器打开，体验模拟计时、答题、休息和家长设置。**仅用于演示，不具备系统应用限制能力。**
+
+## 浏览器 MVP 开发与验证
+
+已加入配置题库、错题复习、学习记录、本地家长 PIN 及恢复测试。`npm ci && npm test` 验证规则；`npm run test:browser` 运行真实浏览器测试（先安装 Playwright Chromium），`npm run build:demo` 生成独立 HTML 演示包。详细命令见 [浏览器说明](apps/web-preview/README.md)，实际结果与限制见 [测试报告](docs/testing/BROWSER_MVP_REPORT.md)。这仍是模拟使用数据的浏览器演示，不是已验收的原生设备管控产品。
