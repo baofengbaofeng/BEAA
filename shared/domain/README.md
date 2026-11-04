@@ -31,3 +31,19 @@ const recovered = decodeSession(text);
 快照只验证数据一致性，不证明答案、时间或存储内容的真实性。认证/防篡改、修订号比较与CAS/原子写入、旧快照回放防护由平台存储适配器负责；revision字段本身不提供这些能力。上层遇到解码错误应保留原始记录并进入恢复流程，不能以新建会话代替失败恢复。
 
 `npm run demo`实际使用临时文件保存/读取答题及休息快照，然后继续引擎流程并清理文件；时长和答案仍为演示输入。该模块尚未接入浏览器单文件原型或原生Preferences，也不能直接作为ArkTS模块使用；原生移植、可信休息证据及权限状态核对仍需匹配SDK和平台实现。
+
+## 共享答题应用服务
+
+`quiz-service.mjs`在规则引擎与共享题库之间提供纯状态迁移：
+
+- `startQuiz(session, bank, options)`在CHALLENGE_REQUIRED时组卷，返回`{session,questions}`的attempt，固定本轮题目/答案副本。
+- `getCurrentQuestion(attempt)`只返回当前题公开字段；待答题不暴露标准答案或解释。
+- `submitQuizAnswer(attempt,{questionId,chosen})`从固定快照查标准答案，返回新的attempt和本题feedback；不接受客户端自报correct/expected。一次合法作答推进一题，错题本轮仍计错；通过条件由原策略决定。
+- `getQuizReview(attempt)`仅返回已答题的选择、评分和解释，供复习或学习记录使用。
+- `encodeQuizAttempt(attempt,revision=0)`及`decodeQuizAttempt(text)`保存/恢复规则与题目快照，恢复后不依赖当前题库文件。返回值为`{revision,attempt}`；重新核对每条已存评分与固定答案的一致性。
+
+测验JSON为`{schemaVersion:1,domain:规则快照,quizSnapshot:{version:1,questions:题目快照}}`，长度上限仍为1,000,000码元。题库更新不改变已开始的测验。休息完成后用finishRest得到普通session，结束当前attempt；长期学习记录由记录服务保存。
+
+attempt和测验JSON含标准答案，只由可信应用服务/受保护存储持有；界面取得公开题目、feedback和已答复习数据。该函数层不是认证RPC。原生控制层仍负责请求/事件去重、期望修订号核对、原子提交与认证，之后才能调用设备适配器。
+
+`npm run demo`已改为从共享样例实际组卷、使用模拟选项调用服务判分、保存并恢复测验文件，再完成休息。没有直接把同一变量当作用户选项和标准答案。

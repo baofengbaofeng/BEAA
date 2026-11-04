@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test shared/domain/*.test.mjs tests/*.test.mjs",
+    "test": "node --test shared/domain/*.test.mjs shared/quiz/*.test.mjs tests/*.test.mjs",
     "demo": "node shared/domain/demo.mjs",
     "test:browser": "playwright test",
     "build:demo": "python3 scripts/package-demo.py",

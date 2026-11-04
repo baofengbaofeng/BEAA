@@ -35,3 +35,9 @@ SessionEnvelope 设计包含 schemaVersion、revision、policyVersion、session�
 冷启动顺序：由平台存储认证并读取完整记录，解码验证规则状态，再核对平台授权/实际限制及可信日切换、休息证据，最后决定是否调用系统适配器。未知或损坏快照应进入恢复流程，保留账本，不能默认放行。
 
 跨日仅清零日累计，不重置周期/挑战/休息。每日锁下保留的已通过挑战，在日切换后回到待核验休息状态，由原有可信restEvidence判断是否满足要求；日期变化本身不能充当休息证明。revision是存储方元数据，快照函数不实现CAS、原子写入或抗回放。
+
+## 共享题库与测验快照
+
+`shared/quiz/bank.mjs`提供题库校验与年级/学科/知识点组卷；`shared/domain/quiz-service.mjs`提供固定题目快照、标准答案查验、公开题目及已答复习视图。QuizAttempt快照封装既有DomainSnapshot和quizSnapshot，恢复时核对每条评分、题序、年级/科目及阶段关联，不依赖当前题库文件。
+
+标准答案快照归可信controller/store管理；原生界面只获取公开题目和已作答反馈。请求事件ID、期望revision/CAS、存储认证与系统权限仍由平台集成层处理。该共享JS组件尚未接原生UI/Preferences，未通过ArkTS编译。
