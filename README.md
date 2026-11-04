@@ -9,7 +9,9 @@
 - 本地优先，不依赖联网解答基础题目
 
 ## 状态
-**已完成仓库文档初始化，尚无可运行应用。** HarmonyOS 4 对第三方应用的使用监控与限制能力尚需真机验证，不能宣称已支持全设备锁定。
+**已提交 ArkUI 原生交互页面与 Stage 项目骨架，但尚未经过 DevEco Studio 编译或真机安装验证。** HarmonyOS 4 对第三方应用的使用监控与限制能力尚需真机验证，不能宣称已支持全设备锁定。
+
+原生 UI 源码入口：[apps/harmony/entry/src/main/ets/pages/Index.ets](apps/harmony/entry/src/main/ets/pages/Index.ets)。运行说明：[apps/harmony/README.md](apps/harmony/README.md)。设备能力验证：[docs/DEVICE_POC.md](docs/DEVICE_POC.md)。
 
 ## 文档
 - [产品需求](docs/PRD.md)
