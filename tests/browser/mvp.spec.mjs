@@ -95,7 +95,7 @@ test('single HTML file works without any server or network requests',async({page
  const file=new URL('../../apps/web-preview/index.html',import.meta.url);
  const requests=[];page.on('request',r=>{if(r.url().startsWith('http'))requests.push(r.url());});
  try { await page.goto(file.href); } catch(error) {
-  test.skip(String(error).includes('ERR_BLOCKED_BY_ADMINISTRATOR'),'Managed Chromium policy blocks file:// navigation; HTTP/offline flow is tested separately.');throw error;
+  test.skip(!process.env.CI && String(error).includes('ERR_BLOCKED_BY_ADMINISTRATOR'),'Managed Chromium policy blocks local file:// navigation; CI must validate the standalone file.');throw error;
  }
  await start(page);await solve(page);
  await expect(page.getByRole('heading',{name:'挑战成功，获得待生效资格'})).toBeVisible();expect(requests).toEqual([]);

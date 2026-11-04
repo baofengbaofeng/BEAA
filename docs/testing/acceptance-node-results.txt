@@ -1,0 +1,48 @@
+
+> beaa-core-prototype@0.2.0 test
+> node --test shared/domain/*.test.mjs tests/*.test.mjs
+
+✔ rejects invalid policy and duplicate subjects (1.314131ms)
+✔ accumulates usage across intervals (0.323706ms)
+✔ requires correct answers and minimum rest before releasing (1.197697ms)
+✔ rejects replay or out-of-order answers (0.222775ms)
+✔ enforces daily hard cap even if one usage report spans multiple cycles (0.130085ms)
+✔ day transition only advances to later day (0.272539ms)
+✔ native application scaffold has required entry and resources (1.165839ms)
+✔ UI demo includes four required flows and responsive layout (0.37935ms)
+✔ page route and app name are consistent (1.322334ms)
+✔ standalone package contains matching sources, valid quiz data and reproducible checksums (103.978021ms)
+✔ browser preview includes responsive layout and honest disclaimer (0.97919ms)
+✔ timer triggers challenge and wrong answer does not advance (4.006111ms)
+✔ all correct answers require minimum rest before next cycle (1.536755ms)
+✔ daily cap remains locked, even when extra time is attempted (20.340128ms)
+✔ settings are stored locally and malformed storage does not crash (16.746252ms)
+✔ unauthorized settings and reset are rejected (1.674252ms)
+✔ completed rest progress survives reload without truncation (2.213561ms)
+✔ storage failure is visible and does not crash interactions (1.084747ms)
+✔ invalid stored phase and forged incomplete grant cannot render a reward (1.369634ms)
+✔ wrong first answers create review and a failed challenge without a grant (1.475544ms)
+✔ grade subject and topic filter actual questions and reject insufficient pools (17.622792ms)
+✔ changing settings during a challenge is rejected (15.336385ms)
+✔ PIN is hashed, wrong PIN rejected, cooldown and reload require authentication (107.333ms)
+✔ import rejects malformed banks and HTML is escaped in rendered questions (16.938344ms)
+✔ insufficient pool does not start a challenge (16.826693ms)
+✔ daily rollover resets only daily usage and a clock rollback cannot complete rest (1.966571ms)
+✔ stale question button cannot answer the following question (1.150847ms)
+✔ invalid persisted answering phase cannot grant already exhausted daily allowance (0.822764ms)
+✔ corrupt optional records never erase PIN or daily allowance (20.264655ms)
+✔ an older tab cannot overwrite a newer daily lock on navigation (2.114452ms)
+✔ a state change during PIN hashing cannot authorize a mismatched credential pair (1.174101ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 370.685793
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
