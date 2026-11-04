@@ -55,3 +55,43 @@ test('day transition only advances to later day', () => {
   assert.equal(next.dailySeconds,0);
   assert.equal(next.dayKey,'2026-11-05');
 });
+
+test('day rollover preserves a pending rest and does not release its grant',()=>{
+ const rest=complete(challenged());const next=rollDay(rest,'2026-11-05');
+ assert.equal(next.phase,Phase.REST_REQUIRED);assert.equal(next.pendingGrant,true);
+ assert.deepEqual(next.challenge,rest.challenge);assert.equal(next.dailySeconds,0);
+ assert.throws(()=>finishRest(next,599));assert.equal(finishRest(next,600).phase,Phase.AVAILABLE);
+});
+
+test('day rollover preserves partial cycle usage and in-progress answers',()=>{
+ const partial=rollDay(recordUsage(initial(),1200),'2026-11-05');
+ assert.equal(recordUsage(partial,600).phase,Phase.CHALLENGE_REQUIRED);
+ const active=submitAnswer(challenged(),'a','A','A');const next=rollDay(active,'2026-11-05');
+ assert.equal(next.phase,Phase.CHALLENGE_ACTIVE);assert.deepEqual(next.challenge,active.challenge);
+ assert.throws(()=>submitAnswer(next,'a','A','A'));
+});
+
+test('new day removes daily lock without bypassing an exhausted cycle',()=>{
+ const locked=recordUsage(initial(),7200);const next=rollDay(locked,'2026-11-05');
+ assert.equal(next.phase,Phase.CHALLENGE_REQUIRED);assert.equal(next.cycleSeconds,7200);
+ assert.equal(recordUsage(next,60).dailySeconds,0);
+ const short=createSession({...policy,dailyLimitMinutes:15},'2026-11-04');
+ const partial=rollDay(recordUsage(short,900),'2026-11-05');
+ assert.equal(partial.phase,Phase.AVAILABLE);assert.equal(partial.cycleSeconds,900);
+});
+
+test('calendar service rejects impossible dates and supports Gregorian leap years',()=>{
+ for(const day of ['2026-02-29','2026-04-31','2026-13-01','0000-01-01','1900-02-29']){
+  assert.throws(()=>createSession(policy,day));
+  assert.throws(()=>rollDay(initial(),day));
+ }
+ assert.equal(createSession(policy,'2000-02-29').dayKey,'2000-02-29');
+ assert.equal(createSession(policy,'0001-01-01').dayKey,'0001-01-01');
+ assert.throws(()=>rollDay(initial(),'2026-11-31'));
+});
+
+test('policy and challenge identifiers reject sparse arrays',()=>{
+ assert.throws(()=>validatePolicy({...policy,subjects:new Array(1)}));
+ const s=recordUsage(createSession({...policy,questionCount:1,requiredCorrect:1},'2026-11-04'),1800);
+ assert.throws(()=>startChallenge(s,new Array(1)));
+});
