@@ -9,7 +9,7 @@ const match = html.match(/<script>([\s\S]*?)<\/script>/);
 assert.ok(match, 'embedded preview script exists');
 const script = match[1];
 
-export function harness(initial = null, storageFails = false) {
+export function harness(initial = null, storageFails = false, readHook = null) {
   let handler;
   const storage = new Map(initial ? [['beaa-web-preview-v1', JSON.stringify(initial)]] : []);
   let now = 1_000_000;
@@ -32,7 +32,7 @@ export function harness(initial = null, storageFails = false) {
   };
   class MockDate extends Date { static now() { return now; } }
   const localStorage = {
-    getItem(k) { return storage.get(k) ?? null; },
+    getItem(k) { return readHook ? readHook(storage,k) : storage.get(k) ?? null; },
     setItem(k, v) { if(storageFails) throw new Error('quota'); storage.set(k, v); }
   };
   const context = vm.createContext({
@@ -144,7 +144,7 @@ test('storage failure is visible and does not crash interactions', () => {
 
 test('invalid stored phase and forged incomplete grant cannot render a reward', () => {
   const h=harness({phase:'rest',question:0,correct:0,restStart:1,page:'success'});
-  assert.notEqual(h.current().phase,'rest'); assert.doesNotMatch(h.page(),/获得下一轮/);
+  assert.notEqual(h.evaluate('s.phase'),'rest'); assert.doesNotMatch(h.page(),/获得下一轮/);
 });
 
 test('wrong first answers create review and a failed challenge without a grant', () => {
@@ -203,7 +203,7 @@ test('stale question button cannot answer the following question', () => {
 });
 
 test('invalid persisted answering phase cannot grant already exhausted daily allowance', () => {
- const h=harness({phase:'answering',dailyUsed:120,page:'home'});assert.equal(h.current().phase,'daily');h.action('start');assert.equal(h.current().phase,'daily');
+ const h=harness({phase:'answering',dailyUsed:120,page:'home'});assert.equal(h.evaluate('s.phase'),'daily');h.navigate('home');h.action('start');assert.equal(h.current().phase,'daily');
 });
 
 test('corrupt optional records never erase PIN or daily allowance', async () => {
@@ -224,4 +224,21 @@ test('a state change during PIN hashing cannot authorize a mismatched credential
  h.evaluate("let resolvePin;pinDigest=()=>new Promise(r=>resolvePin=r)");const pending=h.action('unlock');
  h.storage.set('beaa-web-preview-v1',JSON.stringify({...h.current(),lastTime:2000000}));h.evaluate('syncState()');h.evaluate("resolvePin('a'.repeat(64))");await pending;
  assert.equal(h.evaluate('parentUntil'),0);assert.equal(h.current().pinHash,null);assert.equal(h.current().pinSalt,null);
+});
+
+
+test('initialization binds state and version to the same raw storage snapshot',async()=>{
+ const parent=harness();await parent.parent();parent.action('fill');const committed=parent.current();
+ const older={...committed,pinHash:null,pinSalt:null,dailyUsed:0,cycleUsed:0,phase:'available'};
+ let first=true;
+ const resumed=harness(older,false,(storage,key)=>{
+  if(first){first=false;const value=storage.get(key);storage.set(key,JSON.stringify(committed));return value;}
+  return storage.get(key) ?? null;
+ });
+ assert.equal(resumed.evaluate('s.pinHash'),committed.pinHash);
+ assert.equal(resumed.evaluate('s.dailyUsed'),30);
+ assert.equal(resumed.current().pinHash,committed.pinHash);
+ resumed.navigate('home');
+ assert.equal(resumed.current().pinHash,committed.pinHash);
+ assert.equal(resumed.current().dailyUsed,30);
 });

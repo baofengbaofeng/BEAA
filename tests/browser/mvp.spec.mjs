@@ -57,6 +57,8 @@ test('pending rest refuses early completion and clock rollback',async({page})=>{
 
 test('resizing and reloading retain exact current question',async({page})=>{
  await start(page);await page.getByRole('button',{name:/^C\s/}).click();
+ // A click queues the asynchronous state lock; reload only after the answer is acknowledged.
+ await expect(page.getByRole('heading',{name:'第 2 / 5 题'})).toBeVisible();
  for(const viewport of [{width:1024,height:768},{width:360,height:800},{width:768,height:1024}]){
   await page.setViewportSize(viewport);await page.reload();
   await expect(page.getByRole('heading',{name:'第 2 / 5 题'})).toBeVisible();
@@ -95,7 +97,7 @@ test('single HTML file works without any server or network requests',async({page
  const file=new URL('../../apps/web-preview/index.html',import.meta.url);
  const requests=[];page.on('request',r=>{if(r.url().startsWith('http'))requests.push(r.url());});
  try { await page.goto(file.href); } catch(error) {
-  test.skip(String(error).includes('ERR_BLOCKED_BY_ADMINISTRATOR'),'Managed Chromium policy blocks file:// navigation; HTTP/offline flow is tested separately.');throw error;
+  test.skip(!process.env.CI && String(error).includes('ERR_BLOCKED_BY_ADMINISTRATOR'),'Managed Chromium policy blocks local file:// navigation; CI must validate the standalone file.');throw error;
  }
  await start(page);await solve(page);
  await expect(page.getByRole('heading',{name:'挑战成功，获得待生效资格'})).toBeVisible();expect(requests).toEqual([]);
@@ -146,14 +148,34 @@ test('keyboard can retry a wrong answer without losing focus',async({page})=>{
 });
 
 test('opening a tab during first PIN derivation preserves one complete credential',async({page,context})=>{
+ const observeWrites=()=>{window.observedWrites=[];const original=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){if(key==='beaa-web-preview-v1'){const x=JSON.parse(value);window.observedWrites.push({pin:!!x.pinHash,salt:!!x.pinSalt,note:x.answerNote,page:x.page,stack:new Error().stack.split('\n').slice(1,5).join(' ')});}return original.call(this,key,value);};};
+ await page.evaluate(observeWrites);await context.addInitScript(observeWrites);
+
  await page.getByRole('button',{name:'家长设置',exact:true}).click();
  await page.getByLabel('家长 PIN',{exact:true}).fill('839271');await page.getByLabel('再次输入 PIN').fill('839271');
- await page.evaluate(()=>{const original=pinDigest;pinDigest=async(...args)=>{window.digestStarted=true;await new Promise(resolve=>window.releaseDigest=resolve);return original(...args);};});
+ await page.evaluate(()=>{const original=pinDigest;pinDigest=async(...args)=>{window.digestStarted=true;window.digestStage='waiting';await new Promise(resolve=>window.releaseDigest=resolve);window.digestStage='deriving';const result=await original(...args);window.digestStage='derived';return result;};});
  await page.getByRole('button',{name:'设置 PIN'}).click();await expect.poll(()=>page.evaluate(()=>window.digestStarted)).toBeTruthy();
  const other=await context.newPage();await other.goto(path);await page.evaluate(()=>window.releaseDigest());
- await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('beaa-web-preview-v1')).pinHash)).toMatch(/^[a-f0-9]{64}$/);
+ try {await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('beaa-web-preview-v1')).pinHash)).toMatch(/^[a-f0-9]{64}$/);}catch(error){
+  const diagnostics=await page.evaluate(async()=>({stage:window.digestStage,busy,interactionPending,inMemoryPin:!!s.pinHash,inLastSavedPin:!!JSON.parse(lastSaved).pinHash,storedPin:!!JSON.parse(localStorage.getItem(STORAGE)).pinHash,note:s.answerNote,locks:await navigator.locks.query()}));
+  const writes=await page.evaluate(()=>window.observedWrites),otherWrites=await other.evaluate(()=>window.observedWrites);
+  throw Error(error.message+'\nPIN race diagnostics: '+JSON.stringify({diagnostics,writes,otherWrites}));
+ }
+ expect(await other.evaluate(()=>window.observedWrites)).toHaveLength(0);
  await other.getByRole('button',{name:'家长设置',exact:true}).click();
  await expect(other.getByLabel('再次输入 PIN')).toHaveCount(0);
  await other.getByLabel('家长 PIN',{exact:true}).fill('839271');await other.getByRole('button',{name:'验证 PIN'}).click();
  await expect(other.getByLabel('每日使用上限（分钟）')).toBeVisible();await other.close();
+});
+
+
+test('an answer queued behind a state lock is committed before acknowledged progress reloads',async({page})=>{
+ await start(page);
+ await page.evaluate(()=>{navigator.locks.request('beaa-state',()=>new Promise(resolve=>window.releaseStateForTest=resolve));});
+ await expect.poll(()=>page.evaluate(()=>typeof window.releaseStateForTest)).toBe('function');
+ const answer=page.getByRole('button',{name:/^C\s/});await answer.click();await expect(answer).toBeDisabled();
+ expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('beaa-web-preview-v1')).question)).toBe(0);
+ await page.evaluate(()=>window.releaseStateForTest());
+ await expect(page.getByRole('heading',{name:'第 2 / 5 题'})).toBeVisible();
+ await page.reload();await expect(page.getByRole('heading',{name:'第 2 / 5 题'})).toBeVisible();
 });

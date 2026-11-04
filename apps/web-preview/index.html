@@ -60,8 +60,8 @@ function clean(v,min,max,def){return Number.isInteger(v)&&v>=min&&v<=max?v:def;}
 function validQuestion(q){return q&&typeof q.id==='string'&&q.id.length>0&&q.id.length<=80&&Number.isInteger(q.grade)&&q.grade>=1&&q.grade<=6&&Object.hasOwn(subjects,q.subject)&&Object.hasOwn(topics,q.topic)&&typeof q.text==='string'&&q.text.length>0&&q.text.length<=1000&&Array.isArray(q.options)&&q.options.length>=2&&q.options.length<=8&&q.options.every(o=>typeof o==='string'&&o.length>0&&o.length<=500)&&new Set(q.options).size===q.options.length&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length&&typeof q.explain==='string'&&q.explain.length<=2000;}
 function validateBank(bank){if(!Array.isArray(bank)||!bank.length||bank.length>2000||!bank.every(validQuestion)||new Set(bank.map(q=>q.id)).size!==bank.length)throw Error('题库格式错误：需 1–2000 道有效且 ID 唯一的题目');return bank;}
 function dayKey(now){const d=new Date(now);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
-function restore(){try{
- const x=JSON.parse(localStorage.getItem(STORAGE)||"{}");const s=structuredDefaults();
+function restore(raw){try{
+ const x=JSON.parse(raw||"{}");const s=structuredDefaults();
  for(const [k,min,max] of [["period",5,120],["dailyLimit",15,600],["rest",0,60],["grade",1,6],["questionCount",1,20],["requiredCorrect",1,20],["dailyUsed",0,600],["cycleUsed",0,600],["question",0,20],["correct",0,20],["restStart",0,Number.MAX_SAFE_INTEGER],["failedPins",0,5],["lockUntil",0,Number.MAX_SAFE_INTEGER],["lastTime",0,Number.MAX_SAFE_INTEGER]]) s[k]=clean(x?.[k],min,max,s[k]);
  for(const [k,allowed] of Object.entries({page:['home','quiz','success','settings','review','records'],phase:['available','challenge','answering','rest','daily'],subject:['all',...Object.keys(subjects)],topic:['all',...Object.keys(topics)]}))if(allowed.includes(x?.[k]))s[k]=x[k];
  if(s.requiredCorrect>s.questionCount)s.requiredCorrect=s.questionCount;
@@ -79,11 +79,13 @@ function restore(){try{
  return s;
  }catch{return structuredDefaults()}}
 function structuredDefaults(){return {...defaults,activeQuestions:[],attempted:[],mistakes:[],history:[],bank:[],audit:[]};}
-let s=restore();const el=document.getElementById("app"),nav=document.getElementById("nav");
+const el=document.getElementById("app"),nav=document.getElementById("nav");
 let parentUntil=0,busy=false,storageError=false,reviewNote='',lastSaved=null,interactionPending=false,pendingFocus=null;
 try{lastSaved=localStorage.getItem(STORAGE);}catch{storageError=true;}
+// Parse the same immutable snapshot used by conflict detection.
+let s=restore(lastSaved);
 const escapeHTML=x=>String(x).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-function syncState(){try{const raw=localStorage.getItem(STORAGE);if(raw!==lastSaved){s=restore();parentUntil=0;lastSaved=raw;return true;}}catch{storageError=true;}return false;}
+function syncState(){try{const raw=localStorage.getItem(STORAGE);if(raw!==lastSaved){s=restore(raw);parentUntil=0;lastSaved=raw;return true;}}catch{storageError=true;}return false;}
 function save(){try{const raw=localStorage.getItem(STORAGE);if(raw!==lastSaved){syncState();s.answerNote='检测到其他页面更新，已恢复最新进度，请重试操作。';return;}const serialized=JSON.stringify(s);localStorage.setItem(STORAGE,serialized);lastSaved=serialized;storageError=false;}catch{storageError=true;}}
 function clock(){const now=Date.now();if(now<s.lastTime){s.answerNote='检测到时间回拨，休息资格暂停至时间恢复。';return false;}s.lastTime=now;const day=dayKey(now);if(!s.day)s.day=day;else if(day>s.day){s.day=day;s.dailyUsed=0;if(s.phase==='daily'){s.phase='available';s.cycleUsed=0;}}return true;}
 function navigate(page){s.page=page;save();render();const heading=el.querySelector?.('h1');heading?.setAttribute('tabindex','-1');heading?.focus();}
@@ -172,6 +174,7 @@ document.addEventListener("click",e=>{
 });
 function withStateLock(fn){if(typeof navigator!=='undefined'&&navigator.locks&&!(typeof location!=='undefined'&&location.protocol==='file:'))return navigator.locks.request('beaa-state',fn);return fn();}
 if(typeof window!=='undefined')window.addEventListener('storage',e=>{if(e.key===STORAGE||e.key===null)withStateLock(()=>{if(syncState())render();});});
-withStateLock(()=>{syncState();clock();save();render();});
+// Opening an existing tab is read-only: never republish a cached startup snapshot.
+withStateLock(()=>{syncState();clock();if(lastSaved===null)save();render();});
 </script>
 </body></html>

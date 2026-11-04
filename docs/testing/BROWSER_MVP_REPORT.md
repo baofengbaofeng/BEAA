@@ -49,3 +49,5 @@
 最终演示 ZIP SHA256：`2b35e54d0f3f6fcd3fcac373d26af12cff219c513e1f3ca5c466e7ff06e2496e`。
 
 交付状态：功能提交 `090f7fac08d608e789395c06343a34b82f0094cc` 已推送 `feature/browser-mvp-hardening`，远端 SHA 已用 `git ls-remote` 核对。`gh pr create --base dev --head feature/browser-mvp-hardening` 返回 `Post https://api.github.com/graphql: Forbidden`，PR 尚未创建。PR 说明保存在 [PR_DESCRIPTION.md](../development/PR_DESCRIPTION.md)。不得把分支已推送描述为 PR/CI 已验收。
+
+后续更新：已通过公开网页确认090f7fa的分支/PR CI成功，06e7bdf也已补推；PR #3存在但目标master待改dev。最新验收门禁与证据见 [REMOTE_ACCEPTANCE.md](REMOTE_ACCEPTANCE.md)，以上初轮API/推送阻碍记录保留为历史，不代表当前远端状态。
