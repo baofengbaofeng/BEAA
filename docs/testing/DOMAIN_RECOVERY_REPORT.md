@@ -16,6 +16,6 @@
 
 ## 执行证据与限制
 
-完整npm test62/62通过，npm run demo成功；原始输出见domain-recovery-node-results.txt和domain-recovery-demo.txt。独立审查未发现Critical/Important问题，并额外执行合法状态迁移检查。
+完整npm test63/63通过，npm run demo成功；原始输出见domain-recovery-node-results.txt和domain-recovery-demo.txt。独立审查未发现Critical/Important问题，并额外执行合法状态迁移检查。
 
 这不是原生持久化后端或可信认证系统。revision仅为元数据，实际CAS/原子写入、防回滚、答案与时钟真实性、权限核对需由平台服务保证；本轮未验证ArkTS编译、Preferences、HAP、签名或真机管控。

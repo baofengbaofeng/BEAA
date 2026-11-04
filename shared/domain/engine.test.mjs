@@ -95,3 +95,11 @@ test('policy and challenge identifiers reject sparse arrays',()=>{
  const s=recordUsage(createSession({...policy,questionCount:1,requiredCorrect:1},'2026-11-04'),1800);
  assert.throws(()=>startChallenge(s,new Array(1)));
 });
+
+test('line endings cannot disguise the same calendar date as a new day',()=>{
+ const locked=recordUsage(initial(),7200);
+ for(const ending of ['\n','\r\n','\u2028']){
+  assert.throws(()=>createSession(policy,locked.dayKey+ending));
+  assert.throws(()=>rollDay(locked,locked.dayKey+ending));
+ }
+});
