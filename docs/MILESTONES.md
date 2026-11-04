@@ -55,3 +55,7 @@ M1 浏览器功能验收完成，证据见 [远程验收报告](testing/REMOTE_A
 ## M2 可自动准备项（2026-11-04）
 
 已增加 `npm run native:preflight`、SDK/工具检测与可复现CLI测试，完整Node测试43/43通过。当前真实预检退出2（缺ohpm/hvigor/sdk），见 [原生预检报告](testing/NATIVE_PREFLIGHT.md)。这是构建准备工具，不是原生编译或设备验收，M2的BLOCKED_HUMAN状态不变。
+
+## M2 Stage 结构修复（2026-11-04）
+
+修复默认产品声明层级及缺失的AppScope名称/图标资源，新增配置链接与资源解析检查；完整Node测试45/45。证据见[结构修复报告](testing/HARMONY_SCAFFOLD_REPORT.md)。仅确认静态结构及回归通过，原生SDK编译、HAP和设备门禁仍未执行，M2状态不变。
