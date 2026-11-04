@@ -108,7 +108,7 @@ test('settings are stored locally and malformed storage does not crash', () => {
   h.fields.period.value = '25';
   h.action('saveSettings');
   assert.equal(h.current().period, 25);
-  assert.doesNotThrow(() => vm.runInContext(script.replaceAll('const STORAGE=', 'const STORAGE_NEW='), vm.createContext({
+  assert.doesNotThrow(() => vm.runInContext(script, vm.createContext({
     document: {getElementById: id => ({innerHTML:''}),addEventListener:()=>{}},
     localStorage:{getItem:()=>'{broken',setItem:()=>{}},
     Date,
