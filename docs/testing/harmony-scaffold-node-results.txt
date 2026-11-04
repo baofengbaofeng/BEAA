@@ -1,0 +1,62 @@
+
+> beaa-core-prototype@0.2.0 test
+> node --test shared/domain/*.test.mjs tests/*.test.mjs
+
+✔ rejects invalid policy and duplicate subjects (1.625545ms)
+✔ accumulates usage across intervals (0.42104ms)
+✔ requires correct answers and minimum rest before releasing (1.567209ms)
+✔ rejects replay or out-of-order answers (0.284639ms)
+✔ enforces daily hard cap even if one usage report spans multiple cycles (0.198843ms)
+✔ day transition only advances to later day (0.342384ms)
+✔ browser report includes nested failure details and preserves skipped counts (1.412611ms)
+✔ browser report rejects missing outcome statistics (1.174029ms)
+✔ report CLI fails CI on skipped or empty browser runs (76.269584ms)
+✔ report CLI never emits failure text as executable workflow commands (46.485514ms)
+✔ native application scaffold has required entry and resources (1.433652ms)
+✔ UI demo includes four required flows and responsive layout (0.365699ms)
+✔ page route and app name are consistent (2.996374ms)
+✔ module targets reference products declared in the app build profile (1.623492ms)
+✔ application metadata resolves its label and icon inside AppScope (4.114416ms)
+✔ native preflight lists missing tools and SDK without claiming build readiness (2.99329ms)
+✔ an unset or nonexistent SDK binding cannot satisfy native prerequisites (0.219303ms)
+✔ available prerequisites never imply successful compilation or device validation (0.225622ms)
+✔ failed required version commands block while missing hdc is optional (0.162109ms)
+✔ SDK discovery uses an existing binding after a stale earlier binding (0.234405ms)
+✔ an explicit SDK argument never silently falls back to another binding (0.127948ms)
+✔ preflight CLI distinguishes detected prerequisites, bad arguments and missing tools (127.996365ms)
+✔ standalone package contains matching sources, valid quiz data and reproducible checksums (2211.618835ms)
+✔ browser preview includes responsive layout and honest disclaimer (1.025301ms)
+✔ timer triggers challenge and wrong answer does not advance (3.905423ms)
+✔ all correct answers require minimum rest before next cycle (1.643521ms)
+✔ daily cap remains locked, even when extra time is attempted (22.149059ms)
+✔ settings are stored locally and malformed storage does not crash (20.723933ms)
+✔ unauthorized settings and reset are rejected (1.782406ms)
+✔ completed rest progress survives reload without truncation (3.49594ms)
+✔ storage failure is visible and does not crash interactions (1.356748ms)
+✔ invalid stored phase and forged incomplete grant cannot render a reward (1.227568ms)
+✔ wrong first answers create review and a failed challenge without a grant (1.569132ms)
+✔ grade subject and topic filter actual questions and reject insufficient pools (18.782299ms)
+✔ changing settings during a challenge is rejected (17.036637ms)
+✔ PIN is hashed, wrong PIN rejected, cooldown and reload require authentication (114.401067ms)
+✔ import rejects malformed banks and HTML is escaped in rendered questions (17.021855ms)
+✔ insufficient pool does not start a challenge (17.43971ms)
+✔ daily rollover resets only daily usage and a clock rollback cannot complete rest (1.884797ms)
+✔ stale question button cannot answer the following question (1.308017ms)
+✔ invalid persisted answering phase cannot grant already exhausted daily allowance (0.999293ms)
+✔ corrupt optional records never erase PIN or daily allowance (26.779128ms)
+✔ an older tab cannot overwrite a newer daily lock on navigation (2.599038ms)
+✔ a state change during PIN hashing cannot authorize a mismatched credential pair (1.33015ms)
+✔ initialization binds state and version to the same raw storage snapshot (21.495756ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2372.847871
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
