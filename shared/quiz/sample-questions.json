@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g3-001",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "36 ÷ 4 + 7 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "14"
+        },
+        {
+          "id": "B",
+          "text": "15"
+        },
+        {
+          "id": "C",
+          "text": "16"
+        },
+        {
+          "id": "D",
+          "text": "17"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "先算36÷4=9，再算9+7=16。"
+    },
+    {
+      "id": "chinese-g3-001",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“春眠不觉晓”的下一句是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "处处闻啼鸟"
+        },
+        {
+          "id": "B",
+          "text": "花落知多少"
+        },
+        {
+          "id": "C",
+          "text": "夜来风雨声"
+        },
+        {
+          "id": "D",
+          "text": "床前明月光"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "出自孟浩然《春晓》。"
+    },
+    {
+      "id": "english-g3-001",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "apple的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "梨"
+        },
+        {
+          "id": "B",
+          "text": "香蕉"
+        },
+        {
+          "id": "C",
+          "text": "苹果"
+        },
+        {
+          "id": "D",
+          "text": "橙子"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "apple是苹果。"
+    }
+  ]
+}
