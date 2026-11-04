@@ -25,3 +25,7 @@
 
 ## 分支
 `master` 稳定；`dev` 开发集成；新增功能通过 `feature/*` 分支和PR进入开发分支。
+
+## 不需要平板环境的预览
+
+[浏览器交互原型](apps/web-preview/index.html) · [使用说明](apps/web-preview/README.md)。下载 HTML 后直接用浏览器打开，体验模拟计时、答题、休息和家长设置。**仅用于演示，不具备系统应用限制能力。**
