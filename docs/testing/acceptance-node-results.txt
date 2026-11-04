@@ -1,0 +1,53 @@
+
+> beaa-core-prototype@0.2.0 test
+> node --test shared/domain/*.test.mjs tests/*.test.mjs
+
+✔ rejects invalid policy and duplicate subjects (1.384377ms)
+✔ accumulates usage across intervals (0.382193ms)
+✔ requires correct answers and minimum rest before releasing (1.530406ms)
+✔ rejects replay or out-of-order answers (0.26012ms)
+✔ enforces daily hard cap even if one usage report spans multiple cycles (0.213431ms)
+✔ day transition only advances to later day (0.326851ms)
+✔ browser report includes nested failure details and preserves skipped counts (1.518428ms)
+✔ browser report rejects missing outcome statistics (1.380111ms)
+✔ report CLI fails CI on skipped or empty browser runs (90.459938ms)
+✔ report CLI never emits failure text as executable workflow commands (34.337449ms)
+✔ native application scaffold has required entry and resources (0.958908ms)
+✔ UI demo includes four required flows and responsive layout (0.419019ms)
+✔ page route and app name are consistent (1.669054ms)
+✔ standalone package contains matching sources, valid quiz data and reproducible checksums (2221.170767ms)
+✔ browser preview includes responsive layout and honest disclaimer (1.364367ms)
+✔ timer triggers challenge and wrong answer does not advance (5.278971ms)
+✔ all correct answers require minimum rest before next cycle (2.291088ms)
+✔ daily cap remains locked, even when extra time is attempted (21.748862ms)
+✔ settings are stored locally and malformed storage does not crash (19.632436ms)
+✔ unauthorized settings and reset are rejected (1.431728ms)
+✔ completed rest progress survives reload without truncation (3.436366ms)
+✔ storage failure is visible and does not crash interactions (1.452769ms)
+✔ invalid stored phase and forged incomplete grant cannot render a reward (1.180511ms)
+✔ wrong first answers create review and a failed challenge without a grant (1.480902ms)
+✔ grade subject and topic filter actual questions and reject insufficient pools (16.890272ms)
+✔ changing settings during a challenge is rejected (18.607227ms)
+✔ PIN is hashed, wrong PIN rejected, cooldown and reload require authentication (106.784756ms)
+✔ import rejects malformed banks and HTML is escaped in rendered questions (17.676332ms)
+✔ insufficient pool does not start a challenge (16.751873ms)
+✔ daily rollover resets only daily usage and a clock rollback cannot complete rest (1.820441ms)
+✔ stale question button cannot answer the following question (1.545488ms)
+✔ invalid persisted answering phase cannot grant already exhausted daily allowance (1.163916ms)
+✔ corrupt optional records never erase PIN or daily allowance (18.967698ms)
+✔ an older tab cannot overwrite a newer daily lock on navigation (1.967942ms)
+✔ a state change during PIN hashing cannot authorize a mismatched credential pair (1.51308ms)
+✔ initialization binds state and version to the same raw storage snapshot (16.406145ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2356.437005
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

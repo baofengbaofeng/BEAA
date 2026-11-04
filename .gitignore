@@ -17,3 +17,6 @@ coverage/
 !.env.example
 device-logs/
 local-data/
+
+test-results/
+playwright-report/
