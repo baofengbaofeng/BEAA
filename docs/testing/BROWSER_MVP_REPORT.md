@@ -47,3 +47,5 @@
 4. 内置题库只供流程演示，正式面向儿童使用前需要教学内容审核；PIN/墙钟/localStorage 不提供生产级防篡改保证。
 
 最终演示 ZIP SHA256：`2b35e54d0f3f6fcd3fcac373d26af12cff219c513e1f3ca5c466e7ff06e2496e`。
+
+交付状态：功能提交 `090f7fac08d608e789395c06343a34b82f0094cc` 已推送 `feature/browser-mvp-hardening`，远端 SHA 已用 `git ls-remote` 核对。`gh pr create --base dev --head feature/browser-mvp-hardening` 返回 `Post https://api.github.com/graphql: Forbidden`，PR 尚未创建。PR 说明保存在 [PR_DESCRIPTION.md](../development/PR_DESCRIPTION.md)。不得把分支已推送描述为 PR/CI 已验收。
