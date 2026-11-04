@@ -1,0 +1,80 @@
+
+> beaa-core-prototype@0.2.0 test
+> node --test shared/domain/*.test.mjs tests/*.test.mjs
+
+✔ rejects invalid policy and duplicate subjects (2.167116ms)
+✔ accumulates usage across intervals (0.509412ms)
+✔ requires correct answers and minimum rest before releasing (0.560867ms)
+✔ rejects replay or out-of-order answers (0.238011ms)
+✔ enforces daily hard cap even if one usage report spans multiple cycles (0.143171ms)
+✔ day transition only advances to later day (0.317839ms)
+✔ day rollover preserves a pending rest and does not release its grant (0.466739ms)
+✔ day rollover preserves partial cycle usage and in-progress answers (0.273223ms)
+✔ new day removes daily lock without bypassing an exhausted cycle (0.285811ms)
+✔ calendar service rejects impossible dates and supports Gregorian leap years (0.647455ms)
+✔ policy and challenge identifiers reject sparse arrays (0.323768ms)
+✔ line endings cannot disguise the same calendar date as a new day (0.235888ms)
+✔ snapshots round-trip every reachable phase without changing counters or answers (5.36951ms)
+✔ disk recovery preserves pending rest and daily usage before the next cycle (3.212017ms)
+✔ resumed answers remain ordered and rejected answers do not mutate the snapshot (0.480749ms)
+✔ cross-day recovery keeps restrictions even when cycle usage exceeds new daily usage (1.184958ms)
+✔ malformed, non-string and oversized input fail without creating a new session (0.577972ms)
+✔ unsupported versions, invalid revisions and extra envelope fields are rejected (0.536161ms)
+✔ restored grants require a complete passing challenge and the rest phase (0.457234ms)
+✔ daily cap, counters and phase contradictions are not silently clamped (0.692491ms)
+✔ invalid question identifiers, duplicate/out-of-order answers and unknown fields fail (0.496833ms)
+✔ validation returns an independent copy without mutating the live engine (0.404817ms)
+✔ daily-cap defensive output retains a completed quiz for next-day rest reconciliation (0.385739ms)
+✔ snapshot grants follow the configured correct-answer threshold (0.33946ms)
+✔ browser report includes nested failure details and preserves skipped counts (1.714079ms)
+✔ browser report rejects missing outcome statistics (4.097383ms)
+✔ report CLI fails CI on skipped or empty browser runs (93.542461ms)
+✔ report CLI never emits failure text as executable workflow commands (47.917947ms)
+✔ native application scaffold has required entry and resources (1.371503ms)
+✔ UI demo includes four required flows and responsive layout (0.394682ms)
+✔ page route and app name are consistent (0.238802ms)
+✔ module targets reference products declared in the app build profile (1.315661ms)
+✔ application metadata resolves its label and icon inside AppScope (0.596179ms)
+✔ native preflight lists missing tools and SDK without claiming build readiness (2.690018ms)
+✔ an unset or nonexistent SDK binding cannot satisfy native prerequisites (0.27844ms)
+✔ available prerequisites never imply successful compilation or device validation (0.272803ms)
+✔ failed required version commands block while missing hdc is optional (0.23063ms)
+✔ SDK discovery uses an existing binding after a stale earlier binding (0.370146ms)
+✔ an explicit SDK argument never silently falls back to another binding (0.282707ms)
+✔ preflight CLI distinguishes detected prerequisites, bad arguments and missing tools (149.073912ms)
+✔ standalone package contains matching sources, valid quiz data and reproducible checksums (2235.039618ms)
+✔ browser preview includes responsive layout and honest disclaimer (1.355169ms)
+✔ timer triggers challenge and wrong answer does not advance (5.93862ms)
+✔ all correct answers require minimum rest before next cycle (2.524163ms)
+✔ daily cap remains locked, even when extra time is attempted (22.969274ms)
+✔ settings are stored locally and malformed storage does not crash (19.152349ms)
+✔ unauthorized settings and reset are rejected (1.86425ms)
+✔ completed rest progress survives reload without truncation (2.811437ms)
+✔ storage failure is visible and does not crash interactions (1.516356ms)
+✔ invalid stored phase and forged incomplete grant cannot render a reward (1.861125ms)
+✔ wrong first answers create review and a failed challenge without a grant (2.293523ms)
+✔ grade subject and topic filter actual questions and reject insufficient pools (19.630504ms)
+✔ changing settings during a challenge is rejected (17.498129ms)
+✔ PIN is hashed, wrong PIN rejected, cooldown and reload require authentication (137.219169ms)
+✔ import rejects malformed banks and HTML is escaped in rendered questions (33.517146ms)
+✔ insufficient pool does not start a challenge (18.326822ms)
+✔ daily rollover resets only daily usage and a clock rollback cannot complete rest (2.044976ms)
+✔ stale question button cannot answer the following question (1.626629ms)
+✔ invalid persisted answering phase cannot grant already exhausted daily allowance (1.367397ms)
+✔ corrupt optional records never erase PIN or daily allowance (42.298368ms)
+✔ an older tab cannot overwrite a newer daily lock on navigation (2.61693ms)
+✔ a state change during PIN hashing cannot authorize a mismatched credential pair (1.589003ms)
+✔ initialization binds state and version to the same raw storage snapshot (21.834835ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 63
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2442.309888
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

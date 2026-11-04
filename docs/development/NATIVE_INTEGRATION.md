@@ -27,3 +27,11 @@ SessionEnvelope 设计包含 schemaVersion、revision、policyVersion、session�
 ## 人工准备后的验证命令/证据
 
 在匹配 SDK 的 DevEco Studio 中同步 hvigor/ohpm，执行 IDE 对应的 assembleHap 任务（具体任务及版本由生成模板确定），保存完整工具版本、命令和退出状态；仅使用本地签名配置。安装后按 `docs/DEVICE_POC.md` 与 `tests/ACCEPTANCE.md` 收集型号/系统子版本、权限、横竖屏、后台/重启/分屏和撤权证据。只有这些证据齐全才允许更新原生构建/真机门禁。
+
+## 已实现的SDK无关规则恢复契约
+
+`shared/domain/snapshot.mjs`提供schemaVersion=1/revision/session的规则载荷、严格校验和JSON编解码；配合现有engine使用。原生SessionEnvelope可承载该规则状态，policyVersion、quizSnapshot、restEvidence、audit和平台事务仍按前述设计实现，本轮未实现ArkTS/Preferences后端。
+
+冷启动顺序：由平台存储认证并读取完整记录，解码验证规则状态，再核对平台授权/实际限制及可信日切换、休息证据，最后决定是否调用系统适配器。未知或损坏快照应进入恢复流程，保留账本，不能默认放行。
+
+跨日仅清零日累计，不重置周期/挑战/休息。每日锁下保留的已通过挑战，在日切换后回到待核验休息状态，由原有可信restEvidence判断是否满足要求；日期变化本身不能充当休息证明。revision是存储方元数据，快照函数不实现CAS、原子写入或抗回放。

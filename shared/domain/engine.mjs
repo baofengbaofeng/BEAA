@@ -17,6 +17,20 @@ function integer(value, name, low, high) {
   }
 }
 
+/** Calendar format only; authorization to advance a day belongs to the caller. */
+export function validateDayKey(value) {
+  const match = typeof value === 'string' && /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) throw new TypeError('dayKey must be a valid YYYY-MM-DD date');
+  const [,yearText,monthText,dayText] = match;
+  const year = Number(yearText), month = Number(monthText), day = Number(dayText);
+  const leap = year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
+  const days = [31,leap ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+  if (year < 1 || month < 1 || month > 12 || day < 1 || day > days[month-1]) {
+    throw new TypeError('dayKey must be a valid YYYY-MM-DD date');
+  }
+  return value;
+}
+
 export function validatePolicy(input) {
   if (!input || typeof input !== 'object') throw new TypeError('policy required');
   const p = structuredClone(input);
@@ -29,15 +43,13 @@ export function validatePolicy(input) {
   const allowed = ['chinese', 'math', 'english'];
   if (!Array.isArray(p.subjects) || !p.subjects.length ||
       new Set(p.subjects).size !== p.subjects.length ||
-      p.subjects.some(x => !allowed.includes(x))) throw new TypeError('invalid subjects');
+      Array.from(p.subjects).some(x => !allowed.includes(x))) throw new TypeError('invalid subjects');
   return p;
 }
 
 export function createSession(policy, dayKey) {
   const p = validatePolicy(policy);
-  if (typeof dayKey !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) {
-    throw new TypeError('dayKey must be YYYY-MM-DD');
-  }
+  validateDayKey(dayKey);
   return { policy: p, dayKey, phase: Phase.AVAILABLE,
     dailySeconds: 0, cycleSeconds: 0, challenge: null, pendingGrant: false };
 }
@@ -61,7 +73,7 @@ export function startChallenge(s, questionIds) {
   if (s.phase !== Phase.CHALLENGE_REQUIRED) throw new Error('challenge not required');
   if (!Array.isArray(questionIds) ||
       questionIds.length !== s.policy.questionCount ||
-      questionIds.some(x => typeof x !== 'string' || !x) ||
+      Array.from(questionIds).some(x => typeof x !== 'string' || !x) ||
       new Set(questionIds).size !== questionIds.length) {
     throw new Error('invalid questions');
   }
@@ -109,8 +121,22 @@ export function finishRest(s, verifiedSeconds) {
 
 /** Only a trusted calendar service may request a day rollover. */
 export function rollDay(s, nextDay) {
-  if (typeof nextDay !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(nextDay) ||
-      nextDay <= s.dayKey) throw new Error('invalid next day');
-  return { ...s, dayKey: nextDay, phase: Phase.AVAILABLE,
-    dailySeconds: 0, cycleSeconds: 0, pendingGrant: false, challenge: null };
+  validateDayKey(nextDay);
+  validateDayKey(s.dayKey);
+  if (nextDay <= s.dayKey) throw new Error('invalid next day');
+  // Calendar rollover removes only the daily guard. It is not a rest or quiz event.
+  let phase = s.phase;
+  let pendingGrant = s.pendingGrant;
+  if (s.phase === Phase.DAILY_LOCKED) {
+    phase = s.cycleSeconds >= s.policy.periodMinutes * 60 ? Phase.CHALLENGE_REQUIRED : Phase.AVAILABLE;
+    if (s.challenge) {
+      const { questionIds, answers } = s.challenge;
+      const complete = answers.length === questionIds.length;
+      const passed = complete && answers.filter(answer => answer.correct).length >= s.policy.requiredCorrect;
+      phase = !complete ? Phase.CHALLENGE_ACTIVE : passed ? Phase.REST_REQUIRED : Phase.CHALLENGE_REQUIRED;
+    }
+    // Calendar rollover cannot certify rest: retained grants require trusted rest evidence.
+    pendingGrant = phase === Phase.REST_REQUIRED;
+  }
+  return { ...s, dayKey: nextDay, phase, dailySeconds: 0, pendingGrant };
 }
