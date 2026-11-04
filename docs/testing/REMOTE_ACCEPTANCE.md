@@ -1,6 +1,6 @@
 # M1 远程验收补全
 
-**最新结论：M1浏览器功能验收完成；de1d10b严格CI为Success。PR #3已合并到master，当前新增修复需另建至dev的PR，API403仍阻止自动创建。下文保留诊断过程中的历史失败，不代表最终结果。**
+**最新结论：PR #5已合并到dev（0e3a10a），PR专属CI 41820903218为Success。新环境API访问恢复；原生SDK仍缺。下文保留历史诊断过程，当前交付状态见PUBLISHED_ENVIRONMENT.md。**
 
 2026-11-04 通过 GitHub 公开网页核对，未使用不可用的 API，也未读取需要登录的日志。
 
@@ -46,7 +46,7 @@
 - CI产物beaa-browser-evidence存在，公开摘要显示171 KB，artifact摘要sha256:93ef2216ae272e71e8ad9b627424883bd455ff5f02d2e8e57a0089bc1c8c6dd5。未读取需要登录的原始CI日志/产物；该artifact摘要不是演示ZIP单独的校验和。
 - 本地npm test 36/36，PIN并发定向20/20，浏览器全套三轮36通过/3策略跳过/0失败，demo与打包命令成功。ZIP消费端校验通过，使用说明包含完整仓库与解压包两种HTTP目录。
 
-## 当前集成与人工条件
+## 发布前集成与人工条件（历史）
 
 PR #3网页状态为MERGED、baseBranch=master、head为06e7bdf；master已由仓库方更新至cf7db8b，dev仍为374f8b6。本轮未执行任何master修改或PR合并，也不回滚仓库方操作。后续提交仍在feature/browser-mvp-hardening；需[新建至dev的PR](https://github.com/baofengbaofeng/BEAA/compare/dev...feature/browser-mvp-hardening?expand=1)。gh pr edit/create使用的api.github.com仍403，旧PR已合并后不能再靠修改base完成这一步。
 

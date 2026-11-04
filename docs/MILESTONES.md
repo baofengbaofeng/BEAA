@@ -50,7 +50,7 @@
 
 M1 浏览器功能验收完成，证据见 [远程验收报告](testing/REMOTE_ACCEPTANCE.md)。最终本地 Node 36/36，浏览器全套三轮36通过/3本地策略跳过；修复提交de1d10b的严格CI [41812445236](https://github.com/baofengbaofeng/BEAA/actions/runs/41812445236) 为Success，CI禁止独立文件测试跳过。
 
-集成流程仍有阻碍：PR #3 已由仓库方合并到master（只含截至06e7bdf的版本）；本轮新增修复尚需新建目标dev的PR，API仍403，未完成该集成步骤。M1完成不等于原生产品交付，M2仍需要SDK、签名、目标设备和权限证据。按自动流转规则，停止扩展M1功能，交付当前证据及人工条件。
+集成流程已完成：[PR #5](https://github.com/baofengbaofeng/BEAA/pull/5) 已合并到dev，合并提交0e3a10a；PR专属CI 41820903218为Success。新发布环境的本地Node测试43/43、系统Chromium12通过/1策略跳过。M1完成不等于原生产品交付，M2仍需要SDK、签名、目标设备和权限证据。停止扩展M1功能，交付记录见 [发布后验证](testing/PUBLISHED_ENVIRONMENT.md)。
 
 ## M2 可自动准备项（2026-11-04）
 

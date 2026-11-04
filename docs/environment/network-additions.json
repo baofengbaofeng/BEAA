@@ -1,0 +1,12 @@
+{
+  "config": {
+    "network": {
+      "allowed_domains": [
+        "api.github.com",
+        "cdn.playwright.dev",
+        "storage.googleapis.com",
+        "productionresultssa19.blob.core.windows.net"
+      ]
+    }
+  }
+}

@@ -28,4 +28,4 @@
 2. 使用匹配模板校对现有工程配置后执行真实构建，保存命令、工具版本、退出状态与产物；当前未通过这一门禁。
 3. 按DEVICE_POC.md及ACCEPTANCE.md准备目标设备与正式权限验证。没有真机前，不将模拟使用分钟描述为跨应用实际统计。
 
-GitHub交付仍受当前API 403和间歇性Git写入500影响；配置工具只能保存api.github.com/cdn.playwright.dev网络草稿，无法应用或发布，需由用户在环境设置让草稿生效后才能继续相应操作。
+环境发布后，GitHub API已可用，PR #5已合并到dev；本机SDK/ohpm/hvigor缺项仍未解除。额外下载域名的建议保存失败（draft_not_editable），已保留于docs/environment/network-additions.json，详见PUBLISHED_ENVIRONMENT.md。
