@@ -135,4 +135,48 @@ const result = completeVerifiedRest(rest, currentTrustedCheckpoint);
 
 格式为`{schemaVersion:1,restId,revision,sourceSession,bootId,cursorMs,restStartedMs,lastInterval,completion}`。lastInterval保存最近命令及null/boot_changed/clock_discontinuity/gap复位原因；restStartedMs为空表示未建立连续有效段。sourceSession保留本次规则/账本；不接受上层直接修改日期/策略来更新已建证据。真实日切换、休息后下一轮、规则更新与设备恢复由可信生命周期层原子迁移，需保留学习历史、核对当前日期和系统权限；不得直接覆盖单轮quiz-progress的session。
 
-该纯模块只验证一致性，不证明bootId、单调时间或休息条件的真实性。原生端仍需经正式API验证证据来源、进程恢复的同启动时钟连续性、认证存储/CAS与事件排序，并在持久提交后执行平台操作。`npm run demo`使用**合成区间**，实际保存/读取半程休息文件并完成、重试；quiz/rest两个独立文件只演示各自编解码，不是跨阶段原子事务或设备重启/离屏测量证据。
+该纯模块只验证一致性，不证明bootId、单调时间或休息条件的真实性。原生端仍需经正式API验证证据来源、进程恢复的同启动时钟连续性、认证存储/CAS与事件排序，并在持久提交后执行平台操作。`npm run demo`使用**合成区间**，现通过下述统一生命周期快照保存/恢复半程休息并完成、重试；仍不是设备重启/离屏测量或原生持久性证据。
+
+## 统一生命周期与阶段提交
+
+`guardian-lifecycle.mjs`复用已有业务组件，提供`使用累计→挑战→归档/休息→下一轮`与可信日切换的单快照迁移；`lifecycle-controller.mjs`调用统一原子存储端口。旧的单轮quiz/rest接口继续可用，原生集成优先选择统一接口，避免分别保存阶段文件。
+
+```js
+import { createGuardianLifecycle, getGuardianView,
+  encodeGuardianLifecycle, decodeGuardianLifecycle } from './guardian-lifecycle.mjs';
+import { commitGuardianCommand } from './lifecycle-controller.mjs';
+// 仅首次建立家庭账本；恢复失败绝不能调用create替代。
+const initial = createGuardianLifecycle('stable-ledger-id', policy, trustedDayKey);
+// store.read()返回已提交JSON；CAS必须原子比较lifecycleId+revision并持久写入完整JSON。
+const result = await commitGuardianCommand(store, {
+  lifecycleId: initial.lifecycleId, eventId: 'stable-event-id', expectedRevision: 0,
+  type: 'record_usage', payload: { seconds: trustedUsageSeconds }
+});
+// result: {outcome:'committed'|'duplicate', ...公开view, feedback}
+```
+
+统一格式`{schemaVersion:1,lifecycleId,revision,round,calendarDay,history,stage,lastReceipt}`，长度上限8,000,000个UTF16码元：
+
+- lifecycleId为不复用的可信标识（1–96字符），全局revision每个合法新事件递增。round只在新测验时递增，生成`lifecycleId/round/N`，不会因最近200轮历史淘汰而重置。计数耗尽明确拒绝。
+- stage为普通session、quiz或rest判别联合。顶层history只存一次，测验progress恢复时注入history校验。通过末题同时归档与建立rest；未通过保留失败记录并允许新round重练。休息完成同时保存完成证明、切换普通session并保留日累计/历史。
+- lastReceipt保存最近的规范化command、已答feedback，以及仅用于最近完成命令的`restCompletion:{progress,quiz}`证明。恢复时复核完成休息与新session/学习历史一致；下一个新事件淘汰旧receipt。最近同命令重试无副作用，同eventId内容冲突或旧revision拒绝；更早事件不承诺返回duplicate，但完整旧命令不能作为新提交重放。
+- calendarDay只由可信日历事件前进。普通session/进行中测验更新日期并保留周期/答案；已完成测验及休息来源日期不改，以保留原归档关联。`getGuardianSession`在当前日期派生日累计，休息完成再落地该日期；跨日不表示休息已完成。
+
+命令均严格为`{lifecycleId,eventId,expectedRevision,type,payload}`：
+
+| type | payload | 允许阶段与效果 |
+|---|---|---|
+| record_usage | `{seconds}` | 普通AVAILABLE状态，计入可信秒数；达到每日上限即锁定 |
+| begin_quiz | `{knowledgePoints:[]}` | 需要挑战时组卷；可信题库放在第三参`{bank}`，不写入命令或receipt |
+| answer | `{questionId,chosen,completedAt,restAnchor}` | 正在答题；非末题后两项为null，末题提供可信完成时间和`{bootId,monotonicMs}`；通过即进入rest |
+| observe_rest | `{bootId,fromMs,toMs,condition}` | 待休息，复用已有完整区间校验 |
+| complete_rest | `{checkpoint:{bootId,monotonicMs}}` | 足量证据及新检查点确认后结束休息 |
+| roll_day | `{nextDay}` | 可信日期前进，不创建额外资格 |
+
+`applyGuardianCommand(state,command,context={})`返回`{state,duplicate,feedback}`纯迁移，不写存储。`validateGuardianLifecycle`、encode/decode同时校验阶段、round ID、日历、归档/休息来源、最近回执及账本关联；损坏不创建新会话。`getGuardianView`只返回阶段、日期、日/周期秒数、pendingGrant、公开当前题和休息状态，不暴露未答题标准答案或私有聚合。
+
+`commitGuardianCommand(store,command,context={})`在异步read前复制命令/题库，校验与编码成功后只调用一次`compareAndSwap({lifecycleId,revision},text)`。只有确认提交或读取到匹配receipt才返回反馈。端口抛错可能意味着“未写”或“已写但响应丢失”，调用方保留原命令，重读后重试；CAS冲突不自动重试另一答案，非法端口响应不当作成功。`GuardianError`含`code`（INVALID_LIFECYCLE、INVALID_COMMAND、INVALID_STATE、INVALID_STORE、CONFLICT、STORE_FAILURE、COUNTER_EXHAUSTED、UNSUPPORTED_VERSION、SNAPSHOT_TOO_LARGE，以及子模块拒绝的休息/题库错误码）。
+
+这些函数是可信应用服务接口，**不是已认证的UI/RPC入口**。平台层必须验证身份、事件/题库来源、有效使用秒数、完整休息区间、真实日切换以及存储认证/防回放；不得把儿童传入seconds/nextDay或自报bootId当作可信证据。eventId与lifecycleId不得复用。策略更新及家长身份/临时授权服务尚未纳入该聚合；平台授权/系统限制仍须独立核验。返回AVAILABLE不是设备已解锁证明，duplicate不能再次触发系统奖励/恢复操作。
+
+`npm run demo`现使用**一个**独占临时文件，经统一controller完成使用计入、部分答题恢复、通过归档并建立休息、半程休息恢复、完成重试和第二轮开始，所有阶段使用同一个全局revision。同步比较/rename仅用于单进程示例；没有多进程锁、fsync、原生存储或真实设备证据。生产端口的原子性、持久性、权限撤销/重启/断电行为仍须SDK与真机验证。
