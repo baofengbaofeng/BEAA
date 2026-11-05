@@ -1,0 +1,60 @@
+
+> beaa-core-prototype@0.2.0 test
+> node --test shared/domain/*.test.mjs tests/*.test.mjs
+
+✔ rejects invalid policy and duplicate subjects (1.744975ms)
+✔ accumulates usage across intervals (0.496383ms)
+✔ requires correct answers and minimum rest before releasing (1.690855ms)
+✔ rejects replay or out-of-order answers (0.315786ms)
+✔ enforces daily hard cap even if one usage report spans multiple cycles (0.197822ms)
+✔ day transition only advances to later day (0.307744ms)
+✔ browser report includes nested failure details and preserves skipped counts (1.678046ms)
+✔ browser report rejects missing outcome statistics (1.659989ms)
+✔ report CLI fails CI on skipped or empty browser runs (136.979364ms)
+✔ report CLI never emits failure text as executable workflow commands (59.322292ms)
+✔ native application scaffold has required entry and resources (1.205129ms)
+✔ UI demo includes four required flows and responsive layout (0.477515ms)
+✔ page route and app name are consistent (1.532852ms)
+✔ native preflight lists missing tools and SDK without claiming build readiness (6.838031ms)
+✔ an unset or nonexistent SDK binding cannot satisfy native prerequisites (0.452498ms)
+✔ available prerequisites never imply successful compilation or device validation (0.172084ms)
+✔ failed required version commands block while missing hdc is optional (0.189479ms)
+✔ SDK discovery uses an existing binding after a stale earlier binding (0.213815ms)
+✔ an explicit SDK argument never silently falls back to another binding (0.213986ms)
+✔ preflight CLI distinguishes detected prerequisites, bad arguments and missing tools (225.961307ms)
+✔ standalone package contains matching sources, valid quiz data and reproducible checksums (2301.123958ms)
+✔ browser preview includes responsive layout and honest disclaimer (1.555195ms)
+✔ timer triggers challenge and wrong answer does not advance (6.030781ms)
+✔ all correct answers require minimum rest before next cycle (2.395505ms)
+✔ daily cap remains locked, even when extra time is attempted (31.907969ms)
+✔ settings are stored locally and malformed storage does not crash (32.29836ms)
+✔ unauthorized settings and reset are rejected (2.223932ms)
+✔ completed rest progress survives reload without truncation (3.054538ms)
+✔ storage failure is visible and does not crash interactions (1.777974ms)
+✔ invalid stored phase and forged incomplete grant cannot render a reward (1.966361ms)
+✔ wrong first answers create review and a failed challenge without a grant (1.889829ms)
+✔ grade subject and topic filter actual questions and reject insufficient pools (21.776388ms)
+✔ changing settings during a challenge is rejected (22.247212ms)
+✔ PIN is hashed, wrong PIN rejected, cooldown and reload require authentication (147.684442ms)
+✔ import rejects malformed banks and HTML is escaped in rendered questions (27.462389ms)
+✔ insufficient pool does not start a challenge (25.077194ms)
+✔ daily rollover resets only daily usage and a clock rollback cannot complete rest (2.420092ms)
+✔ stale question button cannot answer the following question (1.850231ms)
+✔ invalid persisted answering phase cannot grant already exhausted daily allowance (1.393156ms)
+✔ corrupt optional records never erase PIN or daily allowance (32.361864ms)
+✔ an older tab cannot overwrite a newer daily lock on navigation (3.344205ms)
+✔ a state change during PIN hashing cannot authorize a mismatched credential pair (14.124481ms)
+✔ initialization binds state and version to the same raw storage snapshot (31.494093ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2532.699771
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

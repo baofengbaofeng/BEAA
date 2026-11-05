@@ -34,3 +34,11 @@
 退出2表示缺前置项，退出0仅表示检测到命令与所选目录，不代表SDK内容正确、版本兼容、签名有效或编译通过；参数错误退出1。脚本不会下载SDK、修改工程版本、读取证书或连接设备。工具版本命令有10秒超时。
 
 当前云环境实际预检见[原生环境报告](../../docs/testing/NATIVE_PREFLIGHT.md)。后续必须在匹配工具链中执行真实构建并保存HAP/日志，再进行真机验收。
+
+## 已核对的 Stage 结构
+
+默认产品声明位于 `build-profile.json5` 的 `app.products`，模块的 `applyToProducts` 关联该产品。`AppScope/app.json5` 中的应用名称和图标在 `AppScope/resources/base` 下提供；入口模块保留自身资源。
+
+结构参照官方 OpenHarmony 4/API 10 [StageModel build-profile](https://github.com/openharmony/applications_app_samples/blob/e54e3ce7a019e33c2c5c1382dd3b1ba19632af3d/code/BasicFeature/ApplicationModels/StageModel/build-profile.json5) 和 [AppScope名称资源](https://github.com/openharmony/applications_app_samples/blob/e54e3ce7a019e33c2c5c1382dd3b1ba19632af3d/code/BasicFeature/ApplicationModels/StageModel/AppScope/resources/base/element/string.json)。只引用通用Stage结构，未采用样例的SDK、运行平台或签名配置。图标复用本项目既有素材。
+
+`npm test` 现在验证应用产品/模块目标链接、AppScope资源解析，并使用JSON5解析器读取.json5配置。静态检查不能替代真实SDK编译、图标资源打包、安装和设备验收；相关门禁仍未通过。

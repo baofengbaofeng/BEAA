@@ -50,8 +50,20 @@
 
 M1 浏览器功能验收完成，证据见 [远程验收报告](testing/REMOTE_ACCEPTANCE.md)。最终本地 Node 36/36，浏览器全套三轮36通过/3本地策略跳过；修复提交de1d10b的严格CI [41812445236](https://github.com/baofengbaofeng/BEAA/actions/runs/41812445236) 为Success，CI禁止独立文件测试跳过。
 
-集成流程仍有阻碍：PR #3 已由仓库方合并到master（只含截至06e7bdf的版本）；本轮新增修复尚需新建目标dev的PR，API仍403，未完成该集成步骤。M1完成不等于原生产品交付，M2仍需要SDK、签名、目标设备和权限证据。按自动流转规则，停止扩展M1功能，交付当前证据及人工条件。
+集成流程已完成：[PR #5](https://github.com/baofengbaofeng/BEAA/pull/5) 已合并到dev，合并提交0e3a10a；PR专属CI 41820903218为Success。新发布环境的本地Node测试43/43、系统Chromium12通过/1策略跳过。M1完成不等于原生产品交付，M2仍需要SDK、签名、目标设备和权限证据。停止扩展M1功能，交付记录见 [发布后验证](testing/PUBLISHED_ENVIRONMENT.md)。
 
 ## M2 可自动准备项（2026-11-04）
 
 已增加 `npm run native:preflight`、SDK/工具检测与可复现CLI测试，完整Node测试43/43通过。当前真实预检退出2（缺ohpm/hvigor/sdk），见 [原生预检报告](testing/NATIVE_PREFLIGHT.md)。这是构建准备工具，不是原生编译或设备验收，M2的BLOCKED_HUMAN状态不变。
+
+## M2 Stage 结构修复（2026-11-04）
+
+修复默认产品声明层级及缺失的AppScope名称/图标资源，新增配置链接与资源解析检查；完整Node测试45/45。证据见[结构修复报告](testing/HARMONY_SCAFFOLD_REPORT.md)。仅确认静态结构及回归通过，原生SDK编译、HAP和设备门禁仍未执行，M2状态不变。
+
+## M2 规则快照与异常恢复（2026-11-04）
+
+SDK无关的规则快照编解码/一致性校验已实现，修复跨日提前放行、非法日期及稀疏输入问题；完整Node测试63/63，真实临时文件恢复示例通过。见[恢复验证报告](testing/DOMAIN_RECOVERY_REPORT.md)。原生存储适配、SDK编译和设备门禁仍未执行，M2状态不变。
+
+## M2 共享题库与答题服务（2026-11-04）
+
+实现SDK无关的年级/学科/知识点组卷、基于固定题快照判分、已答题复习和测验恢复关联校验；样例扩至默认所需5题。完整Node测试80/80、磁盘恢复demo通过，见[验证报告](testing/SHARED_QUIZ_REPORT.md)。该组件尚未接原生UI/存储或SDK编译，M2状态不变。
