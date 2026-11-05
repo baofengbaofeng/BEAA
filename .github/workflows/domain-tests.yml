@@ -26,6 +26,8 @@ jobs:
         run: npm run demo:parent
       - name: Run read-only device status demonstration
         run: npm run demo:device
+      - name: Run persistent question bank demonstration
+        run: npm run demo:bank
       - name: Install browser and runtime libraries
         run: npx playwright install --with-deps chromium
       - name: Run actual browser and accessibility checks
