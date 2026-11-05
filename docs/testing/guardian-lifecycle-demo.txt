@@ -1,0 +1,13 @@
+
+> beaa-core-prototype@0.2.0 demo
+> node shared/domain/demo.mjs
+
+30分钟后: CHALLENGE_REQUIRED
+题库组卷: 5 题
+单文件答题恢复: CHALLENGE_ACTIVE 已答题: 2
+答题通过并归档/进入休息: REST_REQUIRED 学习轮数: 1
+末题重试: duplicate
+单文件休息恢复（合成）: 300 秒，仍需 300 秒
+休息完成: AVAILABLE 今日累计秒数: 1800
+重复完成休息: duplicate
+进入下一轮: 2 今日累计秒数: 3600 历史轮数: 1
