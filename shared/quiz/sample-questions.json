@@ -26,7 +26,11 @@
         }
       ],
       "correctOptionId": "C",
-      "explanation": "先算36÷4=9，再算9+7=16。"
+      "explanation": "先算36÷4=9，再算9+7=16。",
+      "knowledgePoints": [
+        "division",
+        "arithmetic"
+      ]
     },
     {
       "id": "chinese-g3-001",
@@ -53,7 +57,10 @@
         }
       ],
       "correctOptionId": "A",
-      "explanation": "出自孟浩然《春晓》。"
+      "explanation": "出自孟浩然《春晓》。",
+      "knowledgePoints": [
+        "poetry"
+      ]
     },
     {
       "id": "english-g3-001",
@@ -80,7 +87,72 @@
         }
       ],
       "correctOptionId": "C",
-      "explanation": "apple是苹果。"
+      "explanation": "apple是苹果。",
+      "knowledgePoints": [
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "math-g3-002",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "8 × 6 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "42"
+        },
+        {
+          "id": "B",
+          "text": "48"
+        },
+        {
+          "id": "C",
+          "text": "54"
+        },
+        {
+          "id": "D",
+          "text": "56"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "8×6=48。",
+      "knowledgePoints": [
+        "multiplication",
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "math-g3-003",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "15 + 17 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "30"
+        },
+        {
+          "id": "B",
+          "text": "31"
+        },
+        {
+          "id": "C",
+          "text": "32"
+        },
+        {
+          "id": "D",
+          "text": "33"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "15+17=32。",
+      "knowledgePoints": [
+        "addition",
+        "arithmetic"
+      ]
     }
   ]
 }
