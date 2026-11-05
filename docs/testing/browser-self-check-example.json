@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "runnerVersion": 1,
+  "startedAt": "2026-11-05T11:21:13.081Z",
+  "scope": "isolated_browser_simulation",
+  "storageMode": "isolated_memory",
+  "lockMode": "isolated_test_queue",
+  "simulatedClock": true,
+  "nativeBuildValidated": false,
+  "deviceVerification": false,
+  "crossAppUsageValidated": false,
+  "healthOutcomeValidated": false,
+  "cases": [
+    {
+      "id": "failure",
+      "title": "答错后无使用资格，错题和统计可查看",
+      "status": "passed",
+      "detail": "通过"
+    },
+    {
+      "id": "rest",
+      "title": "答题通过后必须休息满 10 分钟",
+      "status": "passed",
+      "detail": "通过"
+    },
+    {
+      "id": "daily",
+      "title": "每日累计 120 分钟后不能继续获得资格",
+      "status": "passed",
+      "detail": "通过"
+    },
+    {
+      "id": "recovery",
+      "title": "内存快照重载与横竖尺寸切换保持进度",
+      "status": "passed",
+      "detail": "通过"
+    },
+    {
+      "id": "parent",
+      "title": "家长 PIN 验证、设置保存与重载后重新授权",
+      "status": "passed",
+      "detail": "通过"
+    },
+    {
+      "id": "rollback",
+      "title": "时钟回拨时休息资格暂停",
+      "status": "passed",
+      "detail": "通过"
+    }
+  ],
+  "appSha256": "a271aeba8bd7f43ef3ceb7faf6ff6706e9d07bd034a7f06f818081b0c3286e39",
+  "status": "passed",
+  "completedAt": "2026-11-05T11:21:14.657Z"
+}
