@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { createGuardianLifecycle,decodeGuardianLifecycle,getGuardianSession,getGuardianView } from '../../shared/domain/guardian-lifecycle.mjs';
 import { commitGuardianCommand } from '../../shared/domain/lifecycle-controller.mjs';
 import { getLearningStats } from '../../shared/domain/learning-history.mjs';
-import { createSqliteLifecycleStore,openSqliteLifecycleStore } from './sqlite-store.mjs';
+import { createSqliteLifecycleStore,openSqliteLifecycleStore,inspectSqliteLifecycleBackup } from './sqlite-store.mjs';
 
 const policy={periodMinutes:30,dailyLimitMinutes:120,restMinutes:10,questionCount:5,requiredCorrect:5,grade:3,subjects:['chinese','math','english']};
 const bank=JSON.parse(readFileSync(new URL('../../shared/quiz/sample-questions.json',import.meta.url),'utf8'));
@@ -32,10 +32,14 @@ try{
   await submit('observe_rest',{bootId:'synthetic-boot',fromMs:1000,toMs:301000,condition:'resting'});
   store=await openSqliteLifecycleStore(path);state=decodeGuardianLifecycle(await store.read());
   console.log('数据库恢复合成休息:',getGuardianView(state).rest.verifiedSeconds,'秒');
+  const backupPath=join(directory,'checkpoint.sqlite3'),backup=await store.backup(backupPath);
+  console.log('一致性备份修订号:',backup.revision);
   await submit('observe_rest',{bootId:'synthetic-boot',fromMs:301000,toMs:601000,condition:'resting'});
   const complete=await submit('complete_rest',{checkpoint:{bootId:'synthetic-boot',monotonicMs:601000}});
   console.log('休息完成:',getGuardianSession(state).phase,'累计秒数:',getGuardianSession(state).dailySeconds);
   console.log('完成重试:',(await commitGuardianCommand(store,complete.event)).outcome);
   await submit('record_usage',{seconds:1800});await submit('begin_quiz',{knowledgePoints:[]},{bank});
   console.log('第二轮已开始，日累计:',getGuardianSession(state).dailySeconds,'秒；保留学习轮数:',getLearningStats(state.history).quizCount);
+  const inspected=await inspectSqliteLifecycleBackup(backupPath);
+  console.log('只读备份检查:',inspected.revision,'；当前修订号:',state.revision,'（未回滚）');
 }finally{rmSync(directory,{recursive:true,force:true});}

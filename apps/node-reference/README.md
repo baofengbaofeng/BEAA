@@ -55,3 +55,28 @@ CAS异常/超时可能发生在提交前，也可能是提交后响应丢失；�
 测试使用独立Python进程并发CAS；真实事务在COMMIT前SIGKILL后恢复旧状态，在COMMIT后SIGKILL恢复完整新阶段/历史/回执。另覆盖锁争用、已提交应答丢失后重开、损坏/版本拒绝、不安全路径、非法metadata和辅助进程故障/超时。
 
 SIGKILL事务边界由**测试专用writer**控制，不是生产helper的故障开关。它验证Linux/SQLite的实际事务恢复，不能证明真实断电、磁盘控制器缓存、文件系统失效或目标平板行为。FULL同步仍依赖底层文件系统；本轮不提供生产备份/迁移、加密、认证、防回放、原生SDK、签名或真机验收。
+
+## 一致备份与只读检查
+
+存储端口新增`await store.backup(newPath)`；`inspectSqliteLifecycleBackup(path, options?)`只读检查副本。二者仅返回`{lifecycleId, revision, snapshotSha256}`，不输出题目、标准答案或儿童学习记录。backup不推进源revision、重写回执或发放资格。
+
+```js
+import { inspectSqliteLifecycleBackup } from './sqlite-store.mjs';
+const summary = await store.backup(newPrivateBackupPath);
+const checked = await inspectSqliteLifecycleBackup(newPrivateBackupPath);
+```
+
+CLI也提供相同功能。下面假设已有有效开发数据库，备份目录已由调用者创建为当前UID私有0700；请按实际路径替换：
+
+```bash
+npm run backup:sqlite -- --source local-data/guardian.sqlite3 --target local-data/backups/checkpoint.sqlite3
+npm run inspect:sqlite -- --source local-data/backups/checkpoint.sqlite3
+```
+
+目标必须是不存在的新文件，权限与祖先链规则同主库。既有目标、源自身或符号链接不会被覆盖；工具不替你创建目录或修改已有权限。CLI成功stdout只有JSON元数据，参数错误退出2，存储错误退出1且stderr仅固定代码/消息，错误不回显路径/载荷。
+
+备份先验证来源完整业务快照，随后在SQLite固定读事务内使用Online Backup API复制数据库，并验证目标与该事务来源一致；不会直接复制活跃数据库/journal文件。若来源并发提交，备份可能对应开始调用后的较新完整revision，以返回metadata为准。未提交writer的数据不纳入副本。备份目标新建0600，检查以`mode=ro`打开，不做迁移/恢复或提交领域事件。
+
+检查成功只证明该副本通过当前格式/完整性校验，**不证明它最新、真实或可用来恢复使用额度**。示例备份revision8后源继续到12，再检查旧8，当前账本保持12。没有restore/自动failover接口，不得将旧副本直接替换较新账本来清零已用额度；真正恢复仍需单独核对授权、防回放及不可丢失账本。
+
+若helper超时或备份异常，可能留下空/不完整或已完成但应答未知的目标。工具保留它供诊断、不自动删除/覆盖；应先只读检查，必要时选另一个新路径重试。不要把残留文件当作成功备份。备份含完整私有数据，和主库一样不加密/不认证，不能直接公开分享；参考权限不防同UID/root修改，摘要也不防回放。仍未验证设备断电或原生平台备份。
