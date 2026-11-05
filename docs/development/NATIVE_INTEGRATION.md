@@ -89,3 +89,11 @@ progress的revision等于本轮已答数量，attemptId必须跨轮唯一。该�
 SQLite参考端口现提供Online Backup API一致备份与只读检查，覆盖未提交writer/并发提交情况下的完整快照、独占新目标及metadata摘要返回。copy目标权限和祖先信任要求同主库；inspect使用只读连接，不改主库或备份。原生备份实现可参考这些行为测试，但不能直接导入Node/Python代码。
 
 本轮不提供restore或自动failover。旧副本即使结构一致，也可能遗漏后续使用累计/权限变更，不能拿来覆盖当前账本或重新发放资格。未来恢复需单独设计与验证授权、版本迁移、防回滚和不可丢失额度记录。备份失败残留目标保留诊断，检查不能证明最新性/真实性；平台受保护存储、加密及真实断电/设备迁移仍未验收。
+
+## 家长身份参考与报告授权接口
+
+新增通用`getParentLearningReport(store,authorizer,token,query)`，在读取前后调用可信authorizer，核对lifecycleId/credentialVersion，拒绝跨家庭、失效/注销和读取中凭据变更；只返回已完成记录，不改使用资格。不能把用户传入proof/boolean或Python内部协议当作验证入口。
+
+Linux参考服务使用独立auth SQLite、PBKDF2-HMAC-SHA256 600k、随机盐、事务失败计数/冷却与实例内短时token，换PIN按凭据版本撤销其他实例授权。凭据库不属于guardian备份格式；不存在/损坏不自动重置。Node/Python传输复用同一限时/错误隔离实现，PIN不进argv/日志、token不落盘。
+
+原生仍需自己的可信初始化、密钥库/安全存储与身份实现；该参考不能直接导入ArkTS，也不证明操作者为成年人或阻止同UID修改/回滚。token时钟与真实后台/休眠恢复需平台验证，恢复时宜清理授权。家长设置更新/临时使用授权、账户恢复和设备权限未在本轮接入；M2门禁不变。
