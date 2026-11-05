@@ -41,3 +41,11 @@ SessionEnvelope 设计包含 schemaVersion、revision、policyVersion、session�
 `shared/quiz/bank.mjs`提供题库校验与年级/学科/知识点组卷；`shared/domain/quiz-service.mjs`提供固定题目快照、标准答案查验、公开题目及已答复习视图。QuizAttempt快照封装既有DomainSnapshot和quizSnapshot，恢复时核对每条评分、题序、年级/科目及阶段关联，不依赖当前题库文件。
 
 标准答案快照归可信controller/store管理；原生界面只获取公开题目和已作答反馈。请求事件ID、期望revision/CAS、存储认证与系统权限仍由平台集成层处理。该共享JS组件尚未接原生UI/Preferences，未通过ArkTS编译。
+
+## 共享学习历史契约
+
+`shared/domain/learning-history.mjs`已提供独立的完成测验归档、保留窗口去重、错题查询、按日期/年级的学科与知识点统计和版本化JSON校验。默认保留最近200轮（可设1–200），原题快照和原阈值保证后续题库/规则修改不改变历史评分。统计只覆盖保留窗口，不表示终身累计。
+
+原生控制层必须在最后一题提交时生成并持久化稳定attemptId/completedAt，同事务保存完整attempt与历史（或可靠outbox事件后重试），并在跨日或新测验前归档。损坏历史的恢复与使用账本隔离，不能以历史通过结果重新发放资格。窗口外事件仅返回outside_window，保留窗口内同ID冲突拒绝，长期去重及存储认证仍由平台实现。含标准答案与儿童记录的历史不能向未授权界面整体暴露；家长/孩子的查询范围由控制层授权。
+
+`encodeLearningHistory`/`decodeLearningHistory`仅定义载荷和校验，不实现ArkTS、Preferences、事务或可靠队列。SDK、签名、设备权限及实际安装验收门禁保持不变。
