@@ -9,7 +9,9 @@
     "test:browser": "playwright test",
     "build:demo": "python3 scripts/package-demo.py",
     "native:preflight": "node scripts/native-preflight.mjs",
-    "demo:sqlite": "node apps/node-reference/demo.mjs"
+    "demo:sqlite": "node apps/node-reference/demo.mjs",
+    "backup:sqlite": "node apps/node-reference/backup.mjs backup",
+    "inspect:sqlite": "node apps/node-reference/backup.mjs inspect"
   },
   "engines": {
     "node": ">=20"

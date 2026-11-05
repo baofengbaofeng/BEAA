@@ -37,3 +37,5 @@
 ## 云端 SQLite 存储参考
 
 `npm run demo:sqlite` 在真实SQLite数据库上运行共享生命周期及恢复示例，需要Node20+、Python3.11+与POSIX环境，无新增依赖。并发CAS、提交前后进程SIGKILL恢复等测试随`npm test`执行。见[参考适配器说明](apps/node-reference/README.md)和[验证报告](docs/testing/SQLITE_REFERENCE_REPORT.md)。这是云端存储证据，不代表原生后端、真实计时或设备管控已验收。
+
+参考数据库支持`npm run backup:sqlite -- --source PATH --target NEW_PATH`一致备份，以及`npm run inspect:sqlite -- --source PATH`只读检查；目录需满足私有权限要求，目标不得已存在。工具仅输出元数据，不自动用旧副本恢复账本。见[备份验证报告](docs/testing/SQLITE_BACKUP_REPORT.md)。

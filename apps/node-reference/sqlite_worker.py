@@ -66,9 +66,9 @@ def secure_path(path, existing=True):
           entry.st_nlink == 1 and entry.st_mode & 0o077 == 0, 'UNSAFE_STORAGE')
 
 
-def connect_existing(path):
+def connect_existing(path, read_only=False):
     secure_path(path)
-    connection = sqlite3.connect(path.as_uri() + '?mode=rw', uri=True, timeout=2, isolation_level=None)
+    connection = sqlite3.connect(path.as_uri() + ('?mode=ro' if read_only else '?mode=rw'), uri=True, timeout=2, isolation_level=None)
     connection.execute('PRAGMA synchronous=FULL')
     return connection
 
@@ -92,15 +92,19 @@ def read_row(connection):
     return identity, rev, text
 
 
-def initialize(path, text):
-    identity, rev = metadata(text)
-    check(rev == 0, 'INVALID_REQUEST')
+def reserve_private_file(path):
     secure_path(path, existing=False)
     try:
         descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_RDWR, 0o600)
     except FileExistsError:
         raise StoreFailure('ALREADY_EXISTS')
     os.close(descriptor)
+
+
+def initialize(path, text):
+    identity, rev = metadata(text)
+    check(rev == 0, 'INVALID_REQUEST')
+    reserve_private_file(path)
     connection = connect_existing(path)
     try:
         connection.execute('PRAGMA journal_mode=DELETE')
@@ -119,25 +123,51 @@ def initialize(path, text):
     return True
 
 
+
+def backup_database(path, target):
+    # Pin the source read snapshot before reserving any destination. Copy the database
+    # with SQLite, never by copying a live database/journal file pair.
+    source = connect_existing(path, read_only=True)
+    try:
+        source.execute('BEGIN')
+        expected = read_row(source)
+        reserve_private_file(target)
+        destination = connect_existing(target)
+        try:
+            source.backup(destination, pages=128, sleep=0.05)
+            copied = read_row(destination)
+            check(copied == expected, 'CORRUPT_STORE')
+        finally:
+            destination.close()
+        source.execute('COMMIT')
+        return copied[2]
+    finally:
+        source.close()
+
+
 def run(path, message):
     check(type(message) is dict, 'INVALID_REQUEST')
     operation = message.get('operation')
     if operation == 'initialize':
         fields(message, ['operation', 'text'])
         return initialize(path, message['text'])
-    check(operation in ('read', 'cas'), 'INVALID_REQUEST')
-    fields(message, ['operation'] if operation == 'read' else ['operation', 'expected', 'text'])
+    if operation == 'backup':
+        fields(message, ['operation', 'target'])
+        check(type(message['target']) is str and len(message['target']) > 0, 'INVALID_REQUEST')
+        return backup_database(path, Path(message['target']).absolute())
+    check(operation in ('read', 'inspect', 'cas'), 'INVALID_REQUEST')
+    fields(message, ['operation'] if operation in ('read', 'inspect') else ['operation', 'expected', 'text'])
     if operation == 'cas':
         expected = message['expected']
         fields(expected, ['lifecycleId', 'revision'])
         check(type(expected['lifecycleId']) is str and revision(expected['revision']), 'INVALID_REQUEST')
         identity, rev = metadata(message['text'])
         check(identity == expected['lifecycleId'] and rev == expected['revision'] + 1, 'INVALID_REQUEST')
-    connection = connect_existing(path)
+    connection = connect_existing(path, read_only=operation == 'inspect')
     try:
-        connection.execute('BEGIN' if operation == 'read' else 'BEGIN IMMEDIATE')
+        connection.execute('BEGIN' if operation in ('read', 'inspect') else 'BEGIN IMMEDIATE')
         current_id, current_rev, current_text = read_row(connection)
-        if operation == 'read':
+        if operation in ('read', 'inspect'):
             connection.execute('COMMIT')
             return current_text
         if (current_id, current_rev) != (expected['lifecycleId'], expected['revision']):

@@ -87,3 +87,7 @@ SDK无关的完成测验归档、保留窗口重复/冲突处理、错题查询�
 ## M2/P4 云端SQLite存储与进程中断恢复（2026-11-05）
 
 增加统一生命周期的真实SQLite参考端口，覆盖独立进程CAS、锁等待、已提交应答丢失、COMMIT前后SIGKILL恢复、损坏/不安全存储拒绝；完整Node160/160，SQLite闭环示例通过。见[SQLite验证报告](testing/SQLITE_REFERENCE_REPORT.md)。证据限当前Linux/Node/Python环境，不等于原生存储或断电/真机验收，M2门禁不变。
+
+## P4/P5 参考数据库备份与检查（2026-11-05）
+
+增加SQLite Online Backup一致备份与mode=ro检查、严格CLI、新目标不覆盖及旧副本不自动回滚账本；完整Node170/170，SQLite示例备份revision8、源继续到12后只读检查旧副本仍保持当前12。见[备份验证报告](testing/SQLITE_BACKUP_REPORT.md)。不提供自动恢复额度，原生/设备/断电门禁不变。
