@@ -47,3 +47,30 @@ const recovered = decodeSession(text);
 attempt和测验JSON含标准答案，只由可信应用服务/受保护存储持有；界面取得公开题目、feedback和已答复习数据。该函数层不是认证RPC。原生控制层仍负责请求/事件去重、期望修订号核对、原子提交与认证，之后才能调用设备适配器。
 
 `npm run demo`已改为从共享样例实际组卷、使用模拟选项调用服务判分、保存并恢复测验文件，再完成休息。没有直接把同一变量当作用户选项和标准答案。
+
+## 学习记录、错题与统计
+
+`learning-history.mjs`提供独立的教育记录接口，不读取或发放使用资格：
+
+```js
+import { createLearningHistory, recordCompletedQuiz, getLearningStats,
+  encodeLearningHistory, decodeLearningHistory } from './learning-history.mjs';
+// attempt必须已经答完，元数据由可信完成事件提供并在重试时保持相同。
+const result = recordCompletedQuiz(createLearningHistory(), attempt, {
+  attemptId: 'stable-completion-event-id', completedAt: 1793836800000
+});
+const text = encodeLearningHistory(result.history, 1);
+const { history } = decodeLearningHistory(text);
+const stats = getLearningStats(history);
+```
+
+- `createLearningHistory(limit=200)`建立独立历史，limit为1–200整数。按完成时间、事件ID升序保留最近limit轮；列表查询返回最新在前。提前到达的较旧事件不会挤掉较新记录，返回`outside_window`。
+- `recordCompletedQuiz(history,attempt,{attemptId,completedAt})`仅接收答完且通过关联校验的attempt，保留题目快照、所选答案、完成日及当时通过阈值。同一保留ID/内容重试返回`duplicate`，同ID冲突抛`CONFLICT`；新增返回`added`。输入不修改。
+- `listLearningRecords(history,{dayKey?,grade?})`计算每轮正确数与学习通过结果；`getWrongAnswers(history,{dayKey?,grade?,subject?,knowledgePoint?})`返回每次错答的题目、所选答案、标准答案与解释，不合并重复错答。
+- `getLearningStats(history,{dayKey?,grade?})`汇总保留窗口内的轮数、通过轮数、作答/正确数、整数百分比准确率以及各学科/知识点分布。无作答准确率为null；多知识点题在每个标签各计一次，因此标签合计可能超过作答总数。过滤范围无记录时返回空统计。
+- `validateLearningHistory`严格核对完整有序记录；正确率和通过结果从所选答案及原题快照计算，不保存可自报的评分字段。恢复不会查询现有题库或改变历史题答案。
+- JSON格式`{schemaVersion:1,revision,history:{schemaVersion:1,limit,records}}`，最多5,000,000个UTF-16码元。即使单条合法，累计文本超过限制也会明确拒绝编码，调用方必须处理，不能静默丢记录。错误类`LearningHistoryError`，代码`INVALID_HISTORY`、`INVALID_METADATA`、`INVALID_QUERY`、`CONFLICT`、`UNSUPPORTED_VERSION`、`SNAPSHOT_TOO_LARGE`。
+
+必须在测验刚完成、跨日或下一轮测验之前归档，dayKey取本次完成时的session日期。completedAt是显式提供的非负毫秒时间戳（不超JavaScript Date范围），不是模块核实的可信时间。外层需稳定保存完成事件ID/时间，把最后一题提交和归档放入原子事务或可靠事件队列，防止崩溃漏记。保留窗口内去重不等于长期事件去重；外层仍负责认证、CAS、长期去重和防回放。学习通过只是教育统计，不表示休息已完成、设备已解锁或日额度增加。
+
+历史含题目标准答案和儿童学习数据，应由受保护存储/家长授权查询管理。解码失败应保留原始数据并报告恢复错误，不能清空使用账本或默认放行。`npm run demo`已实际写入、读取学习历史临时文件并输出统计；尚未接原生UI或平台持久化后端。
