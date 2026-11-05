@@ -1,0 +1,18 @@
+
+> beaa-core-prototype@0.2.0 demo:parent
+> node apps/node-reference/parent-demo.mjs
+
+家长验证参考演示；学习/使用输入均为合成数据
+未授权查询: PARENT_UNAUTHORIZED
+授权后报告: 1 轮，正确 4 / 5 ，错题 1
+注销后查询: PARENT_UNAUTHORIZED
+换PIN后旧授权: PARENT_UNAUTHORIZED
+新PIN重新验证成功；凭据版本: 2 ；修改设置前修订号: 7
+授权保存设置: active 每日上限 90 分钟；已用 1800 秒
+新门槛4/5；当前阶段: CHALLENGE_REQUIRED ；历史通过轮数: 0
+设置重试: duplicate
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

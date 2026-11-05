@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { createGuardianLifecycle,decodeGuardianLifecycle,getGuardianView } from '../../shared/domain/guardian-lifecycle.mjs';
 import { commitGuardianCommand } from '../../shared/domain/lifecycle-controller.mjs';
 import { getParentLearningReport } from '../../shared/domain/parent-report.mjs';
+import { commitParentPolicyChange } from '../../shared/domain/parent-policy.mjs';
 import { createSqliteLifecycleStore } from './sqlite-store.mjs';
 import { createParentAuthService } from './parent-auth.mjs';
 
@@ -35,5 +36,12 @@ try{
   const next=await auth.login(DEMO_PIN),updated=await auth.changePin(next.token,NEXT_PIN);
   try{await auth.authorize(next.token);}catch(error){console.log('换PIN后旧授权:',error.code);}
   const renewed=await auth.login(NEXT_PIN);await getParentLearningReport(store,auth,renewed.token);
-  console.log('新PIN重新验证成功；凭据版本:',updated.credentialVersion,'；使用账本未改变:',state.revision);
+  console.log('新PIN重新验证成功；凭据版本:',updated.credentialVersion,'；修改设置前修订号:',state.revision);
+  const command={lifecycleId:state.lifecycleId,eventId:`parent-settings-${state.revision}`,expectedRevision:state.revision,
+    type:'set_policy',payload:{policy:{...state.policy,dailyLimitMinutes:90,requiredCorrect:4}}};
+  const saved=await commitParentPolicyChange(store,auth,renewed.token,command);state=decodeGuardianLifecycle(await store.read());
+  const unchangedHistory=await getParentLearningReport(store,auth,renewed.token);
+  console.log('授权保存设置:',saved.settings.effect,'每日上限',saved.settings.activePolicy.dailyLimitMinutes,'分钟；已用',saved.dailySeconds,'秒');
+  console.log('新门槛4/5；当前阶段:',saved.phase,'；历史通过轮数:',unchangedHistory.stats.passedQuizCount);
+  console.log('设置重试:',(await commitParentPolicyChange(store,auth,renewed.token,command)).outcome);
 }finally{rmSync(directory,{recursive:true,force:true});}
