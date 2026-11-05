@@ -83,3 +83,7 @@ SDK无关的完成测验归档、保留窗口重复/冲突处理、错题查询�
 ## M2 统一生命周期与阶段迁移（2026-11-05）
 
 新增全局revision与单快照的使用/答题/归档/休息/下一轮/跨日迁移，复用既有业务组件；完整Node146/146，单文件恢复与下一轮示例通过。见[生命周期验证报告](testing/GUARDIAN_LIFECYCLE_REPORT.md)。生产原子存储、可信时间/使用/休息采集、原生SDK和真机门禁仍未验证，M2状态不变。
+
+## M2/P4 云端SQLite存储与进程中断恢复（2026-11-05）
+
+增加统一生命周期的真实SQLite参考端口，覆盖独立进程CAS、锁等待、已提交应答丢失、COMMIT前后SIGKILL恢复、损坏/不安全存储拒绝；完整Node160/160，SQLite闭环示例通过。见[SQLite验证报告](testing/SQLITE_REFERENCE_REPORT.md)。证据限当前Linux/Node/Python环境，不等于原生存储或断电/真机验收，M2门禁不变。
