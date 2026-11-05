@@ -103,3 +103,36 @@ const result = await commitQuizAnswer(store, {
 该聚合覆盖单轮答题/归档；revision是本轮答案序号，不是跨轮全局存储版本。后续休息/跨日及新轮建立需可信controller在事务边界转换，保持原日累计、休息证据和历史；不能修改当前progress的session后仍当作本轮提交使用。结果phase是读取/提交时的业务阶段，不是系统已解锁证明。唯一ID、认证、存储防回放、权限核验与跨轮事务由平台层负责。
 
 `npm run demo`以独占的临时文件实现**仅限示例的单进程同步CAS+rename**，实际通过controller提交、从文件恢复组合快照并重试末题，统计仍为1轮。它没有多进程锁或fsync持久性保证，不是原生存储后端，也不是断电/设备崩溃测试。生产原子端口及ArkTS/Preferences接入仍待SDK与平台验证。
+
+## 可恢复的休息证据
+
+`rest-progress.mjs`把RestMonitor的输入契约变成可校验的纯状态机。它**不采集设备数据**；下面的区间必须由可信平台适配器核实整个区间的状态，不能用两个时刻的“空闲”采样或前台倒计时推断期间都在休息。
+
+```js
+import { createRestProgress, observeRestInterval, getRestStatus,
+  completeVerifiedRest, encodeRestProgress, decodeRestProgress } from './rest-progress.mjs';
+// passedSession是已完成且待休息的规则session；ID关联本次通过事件，跨轮不可复用。
+let rest = createRestProgress('stable-passed-round-id', passedSession, {
+  bootId: trustedBootId, monotonicMs: trustedStartMs
+});
+rest = observeRestInterval(rest, {
+  restId: rest.restId, expectedRevision: rest.revision, bootId: trustedBootId,
+  fromMs: trustedStartMs, toMs: trustedEndMs, condition: 'resting'
+}).progress;
+rest = decodeRestProgress(encodeRestProgress(rest));
+// 当前检查点来自平台，不能重用缓存检查点冒充当前状态；检查点本身不补足休息时间。
+const result = completeVerifiedRest(rest, currentTrustedCheckpoint);
+// result: {progress, session, duplicate}；先原子保存progress/生命周期状态，再执行恢复操作。
+```
+
+- `createRestProgress(restId,session,{bootId,monotonicMs})`只接收合法REST_REQUIRED且有待生效资格的源session，初始有效休息为0。源session及输出均独立复制。
+- `observeRestInterval(progress,command)`的condition仅为resting/active/unknown；同启动且与上次边界连续的resting区间累计。active/unknown使连续休息归零；间隙只从新确证区间开始，之前和间隙内的时间不计。boot变化、重叠或单调时钟退回会丢弃旧证据及当前异常区间，以toMs为新边界。
+- 所有毫秒与revision是非负安全整数，单区间最多86,400,000ms。最近原命令同内容重试无副作用；跨休息ID、内容冲突、旧/未来revision拒绝。更早事件不保留去重表，原生层须管理事件排序/重读及长期防回放。
+- `getRestStatus`返回已核实秒数（向下取整）、剩余秒数（向上取整）、ready、completed及当前业务phase。599,999ms不能满足10分钟。ready只描述已存证据足量，不代表当前平台已核验或系统已恢复使用。
+- `completeVerifiedRest(progress,{bootId,monotonicMs})`要求当前检查点同启动且不早于已观察边界，再确认休息足量；检查点不会补计未核实区间。换启动或回退抛STALE_EVIDENCE，需平台重新同步/观察。0分钟策略可立即完成。实现不调用Date.now或依赖日历时间差。
+- 完成后保存completion检查点、revision+1，`getRestSession`据此推导finishRest结果；日累计保持，周期和挑战按既有引擎结束。完成重试返回原结果和duplicate=true，不再增加revision或再次发资格；新观察事件拒绝。已完成receipt不代表重新授予设备权限，重启后仍需核对平台能力/实际限制。
+- `validateRestProgress`与JSON编解码校验源session、区间、边界、revision、resetReason及completion关联；未知版本/字段、矛盾状态或损坏数据明确拒绝，不自动建立新休息或清空账本。JSON最多1,000,000个UTF16码元；`RestProgressError`代码为INVALID_REST、INVALID_INTERVAL、INVALID_CHECKPOINT、CONFLICT、ALREADY_COMPLETED、STALE_EVIDENCE、REST_NOT_COMPLETE、REVISION_EXHAUSTED、UNSUPPORTED_VERSION、SNAPSHOT_TOO_LARGE。
+
+格式为`{schemaVersion:1,restId,revision,sourceSession,bootId,cursorMs,restStartedMs,lastInterval,completion}`。lastInterval保存最近命令及null/boot_changed/clock_discontinuity/gap复位原因；restStartedMs为空表示未建立连续有效段。sourceSession保留本次规则/账本；不接受上层直接修改日期/策略来更新已建证据。真实日切换、休息后下一轮、规则更新与设备恢复由可信生命周期层原子迁移，需保留学习历史、核对当前日期和系统权限；不得直接覆盖单轮quiz-progress的session。
+
+该纯模块只验证一致性，不证明bootId、单调时间或休息条件的真实性。原生端仍需经正式API验证证据来源、进程恢复的同启动时钟连续性、认证存储/CAS与事件排序，并在持久提交后执行平台操作。`npm run demo`使用**合成区间**，实际保存/读取半程休息文件并完成、重试；quiz/rest两个独立文件只演示各自编解码，不是跨阶段原子事务或设备重启/离屏测量证据。
