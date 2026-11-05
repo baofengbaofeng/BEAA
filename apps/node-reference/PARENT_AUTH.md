@@ -1,6 +1,6 @@
 # 家长PIN与短时授权参考服务
 
-本地Linux/Node参考实现，为共享学习报告提供真实PIN校验和短时授权；不是系统账号、原生安全存储或设备管理员认证。本轮没有改浏览器MVP，也未接原生UI或设置写入/临时放行。
+本地Linux/Node参考实现，为共享学习报告提供真实PIN校验和短时授权；不是系统账号、原生安全存储或设备管理员认证。浏览器MVP及原生UI保持既有状态；设置写入现通过下述共享授权网关，临时放行尚未实现。
 
 ## 运行
 
@@ -42,10 +42,18 @@ auth.logout(login.token);
 
 `shared/domain/parent-report.mjs`的authorizer是可信服务依赖，不是UI提供的boolean或自报proof。读取前后均验证scope/credentialVersion，跨家庭或读取期间失效/注销/换PIN时拒绝。报告只含已完成记录的stats、records、wrongAnswers及账本revision/日期；当前未答题快照不返回。query支持日期/年级，与原学习统计相同，异步期间改动输入不改变本次查询。
 
-该函数不增加使用资格、不修改任何账本，也不将验证结果当作系统已解锁。未来设置写入/临时授权应经过同类可信应用服务及独立规则，不得开放Python worker协议或把自报grant当作认证。
+该函数不增加使用资格、不修改任何账本，也不将验证结果当作系统已解锁。设置写入已通过共享parent-policy网关；未来临时授权仍需独立规则，不得开放Python worker协议或把自报grant当作认证。
 
 ## 安全与验收边界
 
 私有文件/摘要不提供加密、同UID/root隔离或防回滚；数字PIN熵有限，不能替代原生密钥库与系统身份。此服务不验证操作者年龄，首次设置需要可信家长初始化流程；删除/修改本地文件的同UID攻击不在参考安全边界内。
 
 token按当前实例的单调时钟到期，未验证真实设备休眠/恢复行为。原生移植需选择满足生命周期语义的可信时钟，或在后台/恢复时主动清授权，并核对平台能力；不能凭云端测试宣称支持真机安全存储、设备重启、断电或权限防绕过。Linux /proc时钟也不是HarmonyOS/iPadOS已验证API。
+
+## 授权设置写入
+
+共享`commitParentPolicyChange(store,auth,token,command)`实际保存完整policy；命令为`{lifecycleId,eventId,expectedRevision,type:'set_policy',payload:{policy}}`。使用有效登录token和当前全局revision，不能用自报boolean授权；一般生命周期controller拒绝该类型。
+
+普通阶段立即生效，正在答题/休息则返回明确pending；当轮原题/门槛/休息不变，在下一次允许使用前应用。结果settings含activePolicy/pendingPolicy/effect，UI应显示待生效状态，不当作立即解锁。旧失败成绩不按新门槛重判。
+
+新生命周期schema2独立保留实际日累计，降限再升限不返还已用时间；读取旧schema1先严格迁移，成功CAS前不改旧文件。详见[共享接口说明](../../shared/domain/README.md)。`demo:parent`保存每日90分钟/门槛4/5，当前仍需挑战，旧4/5记录仍失败，已用1800秒保持。临时放行、账户恢复及原生安全存储仍待实现。

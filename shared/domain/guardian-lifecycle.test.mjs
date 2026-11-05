@@ -111,7 +111,7 @@ test('corrupt stage, history, source association or receipt is rejected without 
   const bad=structuredClone(s);mutate(bad);rejects(()=>decodeGuardianLifecycle(JSON.stringify(bad)));
  }
  for(const text of ['{','null','[]','{}'])rejects(()=>decodeGuardianLifecycle(text));
- const version=structuredClone(s);version.schemaVersion=2;rejects(()=>decodeGuardianLifecycle(JSON.stringify(version)),'UNSUPPORTED_VERSION');
+ const version=structuredClone(s);version.schemaVersion=3;rejects(()=>decodeGuardianLifecycle(JSON.stringify(version)),'UNSUPPORTED_VERSION');
  rejects(()=>decodeGuardianLifecycle(' '.repeat(8000001)),'SNAPSHOT_TOO_LARGE');assert.equal(getLearningStats(s.history).quizCount,1);
 });
 

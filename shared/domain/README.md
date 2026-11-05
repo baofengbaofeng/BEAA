@@ -155,7 +155,7 @@ const result = await commitGuardianCommand(store, {
 // result: {outcome:'committed'|'duplicate', ...公开view, feedback}
 ```
 
-统一格式`{schemaVersion:1,lifecycleId,revision,round,calendarDay,history,stage,lastReceipt}`，长度上限8,000,000个UTF16码元：
+统一格式`{schemaVersion:2,lifecycleId,revision,round,calendarDay,policy,dailyUsageSeconds,pendingPolicy,history,stage,lastReceipt}`，长度上限8,000,000个UTF16码元：
 
 - lifecycleId为不复用的可信标识（1–96字符），全局revision每个合法新事件递增。round只在新测验时递增，生成`lifecycleId/round/N`，不会因最近200轮历史淘汰而重置。计数耗尽明确拒绝。
 - stage为普通session、quiz或rest判别联合。顶层history只存一次，测验progress恢复时注入history校验。通过末题同时归档与建立rest；未通过保留失败记录并允许新round重练。休息完成同时保存完成证明、切换普通session并保留日累计/历史。
@@ -177,7 +177,7 @@ const result = await commitGuardianCommand(store, {
 
 `commitGuardianCommand(store,command,context={})`在异步read前复制命令/题库，校验与编码成功后只调用一次`compareAndSwap({lifecycleId,revision},text)`。只有确认提交或读取到匹配receipt才返回反馈。端口抛错可能意味着“未写”或“已写但响应丢失”，调用方保留原命令，重读后重试；CAS冲突不自动重试另一答案，非法端口响应不当作成功。`GuardianError`含`code`（INVALID_LIFECYCLE、INVALID_COMMAND、INVALID_STATE、INVALID_STORE、CONFLICT、STORE_FAILURE、COUNTER_EXHAUSTED、UNSUPPORTED_VERSION、SNAPSHOT_TOO_LARGE，以及子模块拒绝的休息/题库错误码）。
 
-这些函数是可信应用服务接口，**不是已认证的UI/RPC入口**。平台层必须验证身份、事件/题库来源、有效使用秒数、完整休息区间、真实日切换以及存储认证/防回放；不得把儿童传入seconds/nextDay或自报bootId当作可信证据。eventId与lifecycleId不得复用。策略更新及家长身份/临时授权服务尚未纳入该聚合；平台授权/系统限制仍须独立核验。返回AVAILABLE不是设备已解锁证明，duplicate不能再次触发系统奖励/恢复操作。
+这些函数是可信应用服务接口，**不是已认证的UI/RPC入口**。平台层必须验证身份、事件/题库来源、有效使用秒数、完整休息区间、真实日切换以及存储认证/防回放；不得把儿童传入seconds/nextDay或自报bootId当作可信证据。eventId与lifecycleId不得复用。策略更新通过下述家长授权网关提交；临时使用授权尚未纳入该聚合；平台授权/系统限制仍须独立核验。返回AVAILABLE不是设备已解锁证明，duplicate不能再次触发系统奖励/恢复操作。
 
 `npm run demo`现使用**一个**独占临时文件，经统一controller完成使用计入、部分答题恢复、通过归档并建立休息、半程休息恢复、完成重试和第二轮开始，所有阶段使用同一个全局revision。同步比较/rename仅用于单进程示例；没有多进程锁、fsync、原生存储或真实设备证据。生产端口的原子性、持久性、权限撤销/重启/断电行为仍须SDK与真机验证。
 
@@ -187,4 +187,34 @@ const result = await commitGuardianCommand(store, {
 
 函数在读取已提交生命周期前后核对授权，检查家庭账本scope与凭据版本未变；过期、注销、读取中撤销或跨家庭时不释放报告。query在异步前复制，支持dayKey/grade。返回`{revision,dayKey,stats,records,wrongAnswers}`，只来源于已完成学习历史；不暴露当前未答题快照，不更改使用累计或发放资格。授权/读取/快照/查询错误明确拒绝，不创建替代账本。
 
-Linux参考authorizer见`apps/node-reference/parent-auth.mjs`和[接入说明](../../apps/node-reference/PARENT_AUTH.md)，使用独立SQLite凭据、真实PBKDF2及短时令牌；该实现不是ArkTS/原生安全存储。家长设置写操作、临时放行与生产账户恢复尚未接入该报告接口。
+Linux参考authorizer见`apps/node-reference/parent-auth.mjs`和[接入说明](../../apps/node-reference/PARENT_AUTH.md)，使用独立SQLite凭据、真实PBKDF2及短时令牌；该实现不是ArkTS/原生安全存储。家长设置写操作使用下述独立授权网关；报告接口不写设置，临时放行与生产账户恢复尚未实现。
+
+## 经过家长验证的设置写入与schema2
+
+`parent-policy.mjs`提供`commitParentPolicyChange(store,authorizer,token,command)`，仅接受`type:'set_policy',payload:{policy:完整规则}`。七个规则字段（及可选version1）复用现有严格范围校验，不能夹带使用时长、日期或自报权限。一般`commitGuardianCommand`明确拒绝set_policy；内部纯reducer仍供可信业务调用，不能当作无需验证的UI/RPC入口。
+
+```js
+import { commitParentPolicyChange } from './parent-policy.mjs';
+import { getGuardianPolicyStatus } from './guardian-lifecycle.mjs';
+const result = await commitParentPolicyChange(store, parentAuthorizer, token, {
+  lifecycleId, eventId: stableEventId, expectedRevision,
+  type: 'set_policy', payload: { policy: validatedParentChoice }
+});
+// result: {outcome, ...公开view, settings:{activePolicy,pendingPolicy,effect}}
+```
+
+网关在读/编码前后调用可信authorizer，核对家庭scope和凭据版本，随后CAS整个生命周期；未授权/跨家庭不读写，读取中失效/撤销拒绝。并发冲突不自动覆盖，原命令重试仅确认已提交回执。凭据库与账本库独立，CAS前最后一次成功授权是授权检查点，不构成跨库原子撤销事务，不能取消已被接收的写入。写入结果未知需重读同命令，不得重建账本。
+
+生效规则：
+
+- 普通使用、日锁或已失败测验：立即应用，按新周期/上限重新计算阶段；增加周期可能增加本轮可用时间，但不会减少已用时长。
+- 正在答题：保存pendingPolicy，原题、年级/科目、题量与通过阈值保持；完成失败时应用新配置供下一次重练，通过后还须完成原休息。
+- 正在休息：保存pendingPolicy，原休息要求保持；满足原证据后，在下一次允许使用前应用。降低休息时间不会提前完成当前休息，增加休息时间用于后续轮次。
+- 待生效配置可替换；提交与active相同规则可取消。`getGuardianPolicyStatus`返回active、after_current_challenge或after_current_rest，UI应明确显示当前与待生效规则；答题通过后仍待原休息，状态会转为after_current_rest。
+- 记录保留原门槛/答案，旧4/5失败不会因新门槛4/5而追溯通过。新题库需满足新年级/科目/题量，不足仍拒绝组卷，不改标签凑题。
+
+schema2的`dailyUsageSeconds`是**权威实际日累计**，不因降低限额截断，仅可信roll_day清零。原engine/session schema1仍要求dailySeconds不超过cap，因此普通session保存`min(actual,cap)`投影；其作用是引擎判定，**UI/计费式累计展示必须使用getGuardianView.dailySeconds或根dailyUsageSeconds**，不可拿投影覆盖账本。父母从20分钟已用将上限设15分钟会日锁，展示仍20分钟；再提高45分钟时仍从已用20分钟继续，不取回差额。
+
+`guardian-legacy.mjs`冻结旧schema1只读契约，恢复先严格验证，再在内存迁移policy/actual/pending至schema2，保留revision、round、身份、题目、休息和历史。read/inspect/backup不改旧文件，下一次成功CAS才写schema2；SQLite表仍user_version1，只是payload支持1/2。schema2缺失累计/规则等字段拒绝，不退回schema1解释；旧读者不能读取schema2应失败，禁止手动丢字段降版或以旧副本恢复额度。
+
+此授权网关不提供家长临时放行或系统权限，不会清空历史/重置额度。Node参考`demo:parent`现实际登录后保存设置、重试并保留旧失败记录；原生设置UI、可信授权/存储及设备限制仍需平台接入与验收。
