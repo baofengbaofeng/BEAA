@@ -33,3 +33,13 @@
 ## 浏览器 MVP 开发与验证
 
 已加入配置题库、错题复习、学习记录、本地家长 PIN 及恢复测试。`npm ci && npm test` 验证规则；`npm run test:browser` 运行真实浏览器测试（先安装 Playwright Chromium），`npm run build:demo` 生成独立 HTML 演示包。详细命令见 [浏览器说明](apps/web-preview/README.md)，实际结果与限制见 [测试报告](docs/testing/BROWSER_MVP_REPORT.md)。这仍是模拟使用数据的浏览器演示，不是已验收的原生设备管控产品。
+
+## 云端 SQLite 存储参考
+
+`npm run demo:sqlite` 在真实SQLite数据库上运行共享生命周期及恢复示例，需要Node20+、Python3.11+与POSIX环境，无新增依赖。并发CAS、提交前后进程SIGKILL恢复等测试随`npm test`执行。见[参考适配器说明](apps/node-reference/README.md)和[验证报告](docs/testing/SQLITE_REFERENCE_REPORT.md)。这是云端存储证据，不代表原生后端、真实计时或设备管控已验收。
+
+参考数据库支持`npm run backup:sqlite -- --source PATH --target NEW_PATH`一致备份，以及`npm run inspect:sqlite -- --source PATH`只读检查；目录需满足私有权限要求，目标不得已存在。工具仅输出元数据，不自动用旧副本恢复账本。见[备份验证报告](docs/testing/SQLITE_BACKUP_REPORT.md)。
+
+## 家长验证参考
+
+`npm run demo:parent`演示本地PIN验证、持久失败冷却、五分钟授权、注销/换PIN撤销及受保护学习报告。凭据与学习账本分库存储，输出不含PIN/token；见[参考说明](apps/node-reference/PARENT_AUTH.md)和[验证报告](docs/testing/PARENT_AUTH_REPORT.md)。原生安全存储及设备生命周期仍待验收。

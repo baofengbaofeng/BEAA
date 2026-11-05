@@ -20,3 +20,5 @@ local-data/
 
 test-results/
 playwright-report/
+
+__pycache__/

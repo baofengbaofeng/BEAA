@@ -75,3 +75,25 @@ progress的revision等于本轮已答数量，attemptId必须跨轮唯一。该�
 可信日切换在普通/进行中测验更新session；完成测验和休息保留原完成日期/题目关联，calendarDay记录可信当前日期，查询/休息结束派生新日累计。日切换不会证明休息，不改变历史归档日。题库作为可信上下文用于新轮组卷，当前题目只暴露公开字段，状态载荷仍含私有答案。
 
 原生集成应优先使用统一生命周期端口；旧的单轮模块保留为业务组件/单元接口。策略更新、家长认证/临时授权、真实Usage/Rest/Calendar适配、权限核对及系统操作仍需后续平台服务。示例已从两个阶段文件改为一个临时JSON，不等于原生SDK、断电恢复或设备管控验收。
+
+## 云端 SQLite 原子存储参考（非原生后端）
+
+`apps/node-reference/sqlite-store.mjs`通过Python标准库SQLite实现统一生命周期read/CAS契约；BEGIN IMMEDIATE在真实独立进程间比较lifecycleId+revision、写完整快照后提交。使用DELETE journal/FULL同步、固定格式版本、摘要/metadata核对及私有目录/文件限制，未知或损坏数据库拒绝恢复，不自动重建。
+
+新增真实数据库并发、锁超时、已提交应答丢失重开、COMMIT前/后SIGKILL恢复证据；测试writer独立于生产helper，没有给生产接口加入故障开关。`npm run demo:sqlite`运行该参考适配器，输入时间/休息仍为合成值。
+
+此参考实现要求Node20+/Python3.11+/POSIX，不能直接用于ArkTS/HAP。它可作为原生SQLite/Preferences事务适配的行为基准；平台仍需实现受保护存储/认证、防回滚及备份迁移，验证文件系统持久性、真实断电/设备重启、权限撤销和系统限制。SHA256是损坏检测而非认证，POSIX权限不防同UID恶意修改。
+
+## 参考存储的一致备份边界
+
+SQLite参考端口现提供Online Backup API一致备份与只读检查，覆盖未提交writer/并发提交情况下的完整快照、独占新目标及metadata摘要返回。copy目标权限和祖先信任要求同主库；inspect使用只读连接，不改主库或备份。原生备份实现可参考这些行为测试，但不能直接导入Node/Python代码。
+
+本轮不提供restore或自动failover。旧副本即使结构一致，也可能遗漏后续使用累计/权限变更，不能拿来覆盖当前账本或重新发放资格。未来恢复需单独设计与验证授权、版本迁移、防回滚和不可丢失额度记录。备份失败残留目标保留诊断，检查不能证明最新性/真实性；平台受保护存储、加密及真实断电/设备迁移仍未验收。
+
+## 家长身份参考与报告授权接口
+
+新增通用`getParentLearningReport(store,authorizer,token,query)`，在读取前后调用可信authorizer，核对lifecycleId/credentialVersion，拒绝跨家庭、失效/注销和读取中凭据变更；只返回已完成记录，不改使用资格。不能把用户传入proof/boolean或Python内部协议当作验证入口。
+
+Linux参考服务使用独立auth SQLite、PBKDF2-HMAC-SHA256 600k、随机盐、事务失败计数/冷却与实例内短时token，换PIN按凭据版本撤销其他实例授权。凭据库不属于guardian备份格式；不存在/损坏不自动重置。Node/Python传输复用同一限时/错误隔离实现，PIN不进argv/日志、token不落盘。
+
+原生仍需自己的可信初始化、密钥库/安全存储与身份实现；该参考不能直接导入ArkTS，也不证明操作者为成年人或阻止同UID修改/回滚。token时钟与真实后台/休眠恢复需平台验证，恢复时宜清理授权。家长设置更新/临时使用授权、账户恢复和设备权限未在本轮接入；M2门禁不变。

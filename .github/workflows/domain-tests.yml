@@ -20,6 +20,10 @@ jobs:
         run: npm test
       - name: Run domain demonstration
         run: npm run demo
+      - name: Run SQLite reference persistence demonstration
+        run: npm run demo:sqlite
+      - name: Run parent authorization reference demonstration
+        run: npm run demo:parent
       - name: Install browser and runtime libraries
         run: npx playwright install --with-deps chromium
       - name: Run actual browser and accessibility checks
