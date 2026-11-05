@@ -1,11 +1,11 @@
-import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { decodeGuardianLifecycle,encodeGuardianLifecycle } from '../../shared/domain/guardian-lifecycle.mjs';
 
+import { invokePythonWorker } from './python-worker.mjs';
+
 const WORKER=fileURLToPath(new URL('./sqlite_worker.py',import.meta.url));
-const MAX_BYTES=32*1024*1024;
 const MESSAGES={ALREADY_EXISTS:'Database already exists',STORE_MISSING:'Database is missing',UNSAFE_STORAGE:'Private owned storage is required',
   UNSUPPORTED_STORE:'Unsupported database format',UNSUPPORTED_PLATFORM:'Reference adapter requires POSIX and Python 3.11+',CORRUPT_STORE:'Stored data is inconsistent',
   STORE_BUSY:'Database transaction is busy',STORE_IO:'Database operation failed',INVALID_REQUEST:'Invalid storage request',
@@ -18,25 +18,8 @@ function snapshot(text){
   try{const value=decodeGuardianLifecycle(text);check(Buffer.from(value.lifecycleId,'utf8').toString('utf8')===value.lifecycleId,'INVALID_SNAPSHOT');return value;}
   catch{throw new SqliteStoreError('INVALID_SNAPSHOT');}
 }
-function worker(path,python,message){
-  const input=JSON.stringify(message);check(Buffer.byteLength(input,'utf8')<=MAX_BYTES,'INVALID_REQUEST');
-  return new Promise((resolveResult,reject)=>{
-    const child=spawn(python,[WORKER,path],{stdio:['pipe','pipe','pipe'],shell:false});let settled=false,bytes=0;const output=[];
-    const finish=(error,value)=>{if(settled)return;settled=true;clearTimeout(timer);error?reject(error):resolveResult(value);};
-    const timer=setTimeout(()=>{child.kill('SIGKILL');finish(new SqliteStoreError('STORE_TIMEOUT'));},10000);
-    child.once('error',()=>finish(new SqliteStoreError('BACKEND_UNAVAILABLE')));
-    child.stdin.on('error',()=>{});child.stderr.resume();
-    child.stdout.on('data',part=>{bytes+=part.length;if(bytes>MAX_BYTES){child.kill('SIGKILL');finish(new SqliteStoreError('PROTOCOL_ERROR'));}else output.push(part);});
-    child.once('close',code=>{
-      if(settled)return;
-      let response;try{response=JSON.parse(Buffer.concat(output).toString('utf8'));}catch{return finish(new SqliteStoreError('PROTOCOL_ERROR'));}
-      if(!response || typeof response!=='object' || Array.isArray(response))return finish(new SqliteStoreError('PROTOCOL_ERROR'));
-      if(response.ok===false && typeof response.code==='string')return finish(new SqliteStoreError(response.code));
-      if(code!==0 || response.ok!==true || !Object.hasOwn(response,'value'))return finish(new SqliteStoreError('PROTOCOL_ERROR'));
-      finish(null,response.value);
-    });
-    child.stdin.end(input);
-  });
+async function worker(path,python,message){
+  try{return await invokePythonWorker(WORKER,path,python,message);}catch(error){throw new SqliteStoreError(error.code);}
 }
 function options(path,input){
   check(typeof path==='string' && path.length>0 && !path.includes('\0') && input && typeof input==='object' && !Array.isArray(input) && Object.keys(input).every(k=>k==='python'),'INVALID_REQUEST');

@@ -180,3 +180,11 @@ const result = await commitGuardianCommand(store, {
 这些函数是可信应用服务接口，**不是已认证的UI/RPC入口**。平台层必须验证身份、事件/题库来源、有效使用秒数、完整休息区间、真实日切换以及存储认证/防回放；不得把儿童传入seconds/nextDay或自报bootId当作可信证据。eventId与lifecycleId不得复用。策略更新及家长身份/临时授权服务尚未纳入该聚合；平台授权/系统限制仍须独立核验。返回AVAILABLE不是设备已解锁证明，duplicate不能再次触发系统奖励/恢复操作。
 
 `npm run demo`现使用**一个**独占临时文件，经统一controller完成使用计入、部分答题恢复、通过归档并建立休息、半程休息恢复、完成重试和第二轮开始，所有阶段使用同一个全局revision。同步比较/rename仅用于单进程示例；没有多进程锁、fsync、原生存储或真实设备证据。生产端口的原子性、持久性、权限撤销/重启/断电行为仍须SDK与真机验证。
+
+## 家长授权后的学习报告
+
+`parent-report.mjs`提供`getParentLearningReport(store,authorizer,token,query={})`。authorizer是可信依赖，`authorize(token)`必须校验真实授权后返回`{lifecycleId,credentialVersion}`；不能接受客户端自报boolean/proof作为授权。
+
+函数在读取已提交生命周期前后核对授权，检查家庭账本scope与凭据版本未变；过期、注销、读取中撤销或跨家庭时不释放报告。query在异步前复制，支持dayKey/grade。返回`{revision,dayKey,stats,records,wrongAnswers}`，只来源于已完成学习历史；不暴露当前未答题快照，不更改使用累计或发放资格。授权/读取/快照/查询错误明确拒绝，不创建替代账本。
+
+Linux参考authorizer见`apps/node-reference/parent-auth.mjs`和[接入说明](../../apps/node-reference/PARENT_AUTH.md)，使用独立SQLite凭据、真实PBKDF2及短时令牌；该实现不是ArkTS/原生安全存储。家长设置写操作、临时放行与生产账户恢复尚未接入该报告接口。

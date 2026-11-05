@@ -11,7 +11,8 @@
     "native:preflight": "node scripts/native-preflight.mjs",
     "demo:sqlite": "node apps/node-reference/demo.mjs",
     "backup:sqlite": "node apps/node-reference/backup.mjs backup",
-    "inspect:sqlite": "node apps/node-reference/backup.mjs inspect"
+    "inspect:sqlite": "node apps/node-reference/backup.mjs inspect",
+    "demo:parent": "node apps/node-reference/parent-demo.mjs"
   },
   "engines": {
     "node": ">=20"
