@@ -1,44 +1,57 @@
-import { mkdtempSync,writeFileSync,readFileSync,rmSync } from 'node:fs';
+import { mkdtempSync,writeFileSync,readFileSync,renameSync,rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createSession,recordUsage,finishRest,Phase } from './engine.mjs';
-import { startQuiz,getCurrentQuestion,submitQuizAnswer,encodeQuizAttempt,decodeQuizAttempt } from './quiz-service.mjs';
-import { createLearningHistory,recordCompletedQuiz,encodeLearningHistory,decodeLearningHistory,getLearningStats } from './learning-history.mjs';
+import { startQuiz,getCurrentQuestion } from './quiz-service.mjs';
+import { getLearningStats } from './learning-history.mjs';
+import { createQuizProgress,encodeQuizProgress,decodeQuizProgress } from './quiz-progress.mjs';
+import { commitQuizAnswer } from './quiz-controller.mjs';
 
 const policy={periodMinutes:30,dailyLimitMinutes:120,restMinutes:10,
   questionCount:5,requiredCorrect:5,grade:3,subjects:['chinese','math','english']};
 const bank=JSON.parse(readFileSync(new URL('../quiz/sample-questions.json',import.meta.url),'utf8'));
-let state=recordUsage(createSession(policy,'2026-11-04'),30*60);
+let state=recordUsage(createSession(policy,'2026-11-05'),30*60);
 console.log('30分钟后:',state.phase);
-let attempt=startQuiz(state,bank);
-console.log('题库组卷:',attempt.questions.length,'题');
-// Simulated child submissions; the service obtains its own standard answer key.
+let progress=createQuizProgress('demo-round-1',startQuiz(state,bank));
+console.log('题库组卷:',progress.attempt.questions.length,'题');
+// Simulated child choices and completion metadata; no trusted device clock is available.
 const choices={'math-g3-001':'C','math-g3-002':'B','math-g3-003':'C','chinese-g3-001':'A','english-g3-001':'C'};
-function answerCurrent(current){
-  const question=getCurrentQuestion(current);
-  return submitQuizAnswer(current,{questionId:question.id,chosen:choices[question.id]}).attempt;
+function answerCommand(current){
+  const question=getCurrentQuestion(current.attempt);
+  return {attemptId:current.attemptId,expectedRevision:current.revision,questionId:question.id,
+    chosen:choices[question.id],completedAt:current.revision===4?Date.UTC(2026,10,5,10):null};
 }
-for(let i=0;i<2;i++)attempt=answerCurrent(attempt);
 const directory=mkdtempSync(join(tmpdir(),'beaa-domain-demo-'));
 try{
-  const file=join(directory,'quiz.json');
-  writeFileSync(file,encodeQuizAttempt(attempt,1),{mode:0o600});
-  attempt=decodeQuizAttempt(readFileSync(file,'utf8')).attempt;
-  console.log('测验快照恢复:',attempt.session.phase,'已答题:',attempt.session.challenge.answers.length);
-  while(attempt.session.phase===Phase.CHALLENGE_ACTIVE)attempt=answerCurrent(attempt);
-  console.log('答题通过:',attempt.session.phase);
-  // Stable synthetic completion metadata; not a trusted device clock or event ID.
-  let history=recordCompletedQuiz(createLearningHistory(),attempt,{
-    attemptId:'demo-completion-1',completedAt:Date.UTC(2026,10,4,10)
-  }).history;
-  const historyFile=join(directory,'history.json');
-  writeFileSync(historyFile,encodeLearningHistory(history,1),{mode:0o600});
-  history=decodeLearningHistory(readFileSync(historyFile,'utf8')).history;
-  const stats=getLearningStats(history);
-  console.log('学习记录恢复:',stats.quizCount,'轮', '正确:',stats.correctCount+'/'+stats.answerCount);
-  writeFileSync(file,encodeQuizAttempt(attempt,2),{mode:0o600});
-  attempt=decodeQuizAttempt(readFileSync(file,'utf8')).attempt;
-  // The supplied rest duration is demonstration input, not a device measurement.
-  state=finishRest(attempt.session,10*60);
+  const file=join(directory,'progress.json');
+  writeFileSync(file,encodeQuizProgress(progress),{mode:0o600});
+  // Demonstration only: single process owns this file. Synchronous CAS has no await gap.
+  // Rename replaces the whole snapshot; multi-process locking and power-loss durability
+  // are NOT implemented or verified here. Native adapters must provide their own guarantees.
+  const store={
+    async read(){return readFileSync(file,'utf8');},
+    async compareAndSwap(expected,text){
+      const current=decodeQuizProgress(readFileSync(file,'utf8'));
+      if(current.attemptId!==expected.attemptId || current.revision!==expected.revision)return false;
+      const temporary=join(directory,'progress.next');
+      writeFileSync(temporary,text,{mode:0o600});renameSync(temporary,file);return true;
+    }
+  };
+  for(let i=0;i<2;i++){
+    await commitQuizAnswer(store,answerCommand(progress));progress=decodeQuizProgress(await store.read());
+  }
+  console.log('测验快照恢复:',progress.attempt.session.phase,'已答题:',progress.revision);
+  let last;
+  while(progress.attempt.session.phase===Phase.CHALLENGE_ACTIVE){
+    last=answerCommand(progress);await commitQuizAnswer(store,last);progress=decodeQuizProgress(await store.read());
+  }
+  console.log('答题通过:',progress.attempt.session.phase);
+  const repeated=await commitQuizAnswer(store,last);
+  console.log('末题重试:',repeated.outcome,'已答题:',repeated.revision);
+  const stats=getLearningStats(progress.history);
+  console.log('学习记录恢复:',stats.quizCount,'轮','正确:',stats.correctCount+'/'+stats.answerCount);
+  // Rest duration remains demonstration input, not a verified platform measurement.
+  // Rest ends this single-round progress aggregate; the next round needs a new unique ID.
+  state=finishRest(progress.attempt.session,10*60);
   console.log('休息完成:',state.phase,'今日累计秒数:',state.dailySeconds);
 }finally{rmSync(directory,{recursive:true,force:true});}
