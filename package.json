@@ -6,13 +6,14 @@
   "scripts": {
     "test": "node --test shared/domain/*.test.mjs shared/quiz/*.test.mjs tests/*.test.mjs",
     "demo": "node shared/domain/demo.mjs",
-    "test:browser": "playwright test",
+    "test:browser": "npm run build:browser-check && playwright test",
     "build:demo": "python3 scripts/package-demo.py",
     "native:preflight": "node scripts/native-preflight.mjs",
     "demo:sqlite": "node apps/node-reference/demo.mjs",
     "backup:sqlite": "node apps/node-reference/backup.mjs backup",
     "inspect:sqlite": "node apps/node-reference/backup.mjs inspect",
-    "demo:parent": "node apps/node-reference/parent-demo.mjs"
+    "demo:parent": "node apps/node-reference/parent-demo.mjs",
+    "build:browser-check": "python3 scripts/package-browser-check.py"
   },
   "engines": {
     "node": ">=20"

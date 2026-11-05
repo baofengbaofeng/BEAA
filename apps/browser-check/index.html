@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>学知守护 · 浏览器规则检查</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#edf7f8;color:#183f49;font:17px/1.7 system-ui,sans-serif}main{max-width:900px;margin:auto;padding:24px}h1{font-size:28px;line-height:1.4}section{background:white;padding:20px;border-radius:18px;margin:18px 0}button{font:inherit;border:2px solid #246776;border-radius:12px;background:#246776;color:white;padding:10px 20px;margin:6px 8px 6px 0;cursor:pointer}button:disabled{opacity:.65;cursor:default}button:focus-visible{outline:3px solid #8b5100;outline-offset:3px}li{margin:10px 0;overflow-wrap:anywhere}[data-status=failed],[data-status=blocked]{color:#922929}[data-status=passed]{color:#176344}#stage{overflow:hidden;max-width:100%}iframe{border:0;pointer-events:none;transform-origin:top left}small{font-size:15px}code{overflow-wrap:anywhere}
+</style></head><body><main>
+<h1>学知守护 · 浏览器规则检查</h1>
+<section aria-label="检查说明"><p>无需安装开发软件。点击开始，自动检查答题、休息、每日上限、进度恢复和家长验证，再下载报告。</p><p><strong>所有使用时间和休息时间均为模拟，数据只保存在隔离内存中。</strong>检查不会读取或修改你已有的学习进度或家长设置，也不会上传报告。</p><p>通过仅说明此浏览器中的演示规则符合这些检查；不能证明真实跨应用计时或锁定、原生应用可安装，也不能证明护眼或其他健康改善。真实设备与健康效果仍需另外验证。</p></section>
+<section aria-label="运行检查"><button id="start">开始检查</button><button id="download" disabled>下载检查报告</button><p id="summary" role="status" aria-live="polite" data-status="idle">尚未运行</p><ol id="results"></ol><div id="stage" role="region" aria-label="隔离的演示画面"></div></section>
+<p><small>检查使用固定样例题与虚拟时钟；刷新恢复检查使用内存快照，不代表设备磁盘持久化或系统后台恢复验证。请保留下载的报告，方便开发人员定位失败项目。</small></p>
+</main>
+<script type="application/json" id="beaa-app-source">{"format":1,"base64":null,"sha256":null}</script>
+<script>
+'use strict';
+const startButton=document.querySelector('#start'),downloadButton=document.querySelector('#download'),summary=document.querySelector('#summary'),results=document.querySelector('#results'),stage=document.querySelector('#stage');
+let report=null,active=null;
+const pause=()=>new Promise(resolve=>setTimeout(resolve,10));
+async function deadline(promise,ms,message){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error(message)),ms);})]);}finally{clearTimeout(timer);}}
+function assert(condition,message){if(!condition)throw Error(message);}
+async function until(fn,message){const end=performance.now()+6000;while(performance.now()<end){if(fn())return;await pause();}throw Error(message);}
+async function source(){
+ const payload=JSON.parse(document.querySelector('#beaa-app-source').textContent);assert(payload.format===1,'不支持的源码包格式');
+ let bytes;
+ if(payload.base64){bytes=Uint8Array.from(atob(payload.base64),c=>c.charCodeAt(0));assert(/^[a-f0-9]{64}$/.test(payload.sha256),'源码校验值缺失');}
+ else{assert(location.protocol!=='file:','此文件未打包，请使用独立检查文件');const response=await fetch('../web-preview/index.html',{cache:'no-store',signal:AbortSignal.timeout(8000)});assert(response.ok,'无法读取演示源码');bytes=new Uint8Array(await response.arrayBuffer());}
+ assert(crypto.subtle,'浏览器缺少安全加密接口，请使用本地独立文件或安全连接');const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
+ if(payload.base64)assert(hash===payload.sha256,'源码校验失败，停止执行');return {html:new TextDecoder('utf-8',{fatal:true}).decode(bytes),hash};
+}
+function storage(map){return {get length(){return map.size;},key(i){return [...map.keys()][i]??null;},getItem(k){return map.get(String(k))??null;},setItem(k,v){map.set(String(k),String(v));},removeItem(k){map.delete(String(k));},clear(){map.clear();}};}
+async function sandbox(html,map=new Map(),clock={now:new Date(2026,0,15,12).getTime()}){
+ active?.remove();const frame=document.createElement('iframe');active=frame;frame.title='隔离模拟演示';frame.tabIndex=-1;frame.setAttribute('sandbox','allow-scripts allow-same-origin');frame.srcdoc='<!doctype html><html><body></body></html>';
+ const loaded=new Promise(resolve=>frame.addEventListener('load',resolve,{once:true}));stage.append(frame);await deadline(loaded,3000,'隔离画面加载超时');
+ const w=frame.contentWindow,d=w.document;d.open();let queue=Promise.resolve(),runtimeError=false;
+ try{
+  const memory=storage(map),RealDate=w.Date;
+  Object.defineProperty(w,'localStorage',{value:memory,configurable:false});assert(w.localStorage===memory,'无法隔离存储');
+  Object.defineProperty(w.navigator,'locks',{value:{request(_name,fn){const result=queue.then(fn);queue=result.catch(()=>{});return result;}},configurable:false});
+  class SimulatedDate extends RealDate{constructor(...args){super(...(args.length?args:[clock.now]));}static now(){return clock.now;}}
+  Object.defineProperty(w,'Date',{value:SimulatedDate});assert(w.Date.now()===clock.now,'无法隔离时钟');
+ }catch(error){frame.remove();throw Error('不支持安全隔离；未执行演示源码');}
+ w.addEventListener('error',()=>{runtimeError=true;});
+ w.addEventListener('unhandledrejection',()=>{runtimeError=true;});
+ d.write(html);d.close();
+ const driver={map,clock,frame,async idle(){await deadline(queue,3000,'演示操作超时');await pause();assert(!runtimeError,'演示发生运行错误');await until(()=>d.querySelector('#app h1')&&!d.querySelector('#app button:disabled'),'演示未完成操作');},text(){return d.querySelector('#app').textContent;},async click(selector){const el=d.querySelector(selector);assert(el&&!el.disabled,'未找到可操作控件：'+selector);el.click();await this.idle();},input(id,value){const el=d.getElementById(id);assert(el&&!el.disabled,'设置字段不可用');el.value=String(value);},async heading(text){await until(()=>d.querySelector('#app h1')?.textContent.includes(text),'预期页面未出现：'+text);},size(width,height){frame.style.width=width+'px';frame.style.height=height+'px';const scale=Math.min(1,stage.clientWidth/width);frame.style.transform='scale('+scale+')';stage.style.height=height*scale+'px';},noOverflow(){assert(d.documentElement.scrollWidth<=w.innerWidth,'演示页面出现横向溢出');}};
+ driver.size(360,800);await driver.idle();return driver;
+}
+async function blockedUsage(d,phase){await d.click('[data-page="home"]');const doc=d.frame.contentDocument,before=doc.querySelector('.stat').textContent,cycle=doc.querySelector('#app .big').textContent;assert(doc.querySelector('#app strong').textContent===phase,'限制阶段不符');await d.click('[data-action="use"]');assert(doc.querySelector('.stat').textContent===before&&doc.querySelector('#app .big').textContent===cycle,'限制阶段仍然增加使用时间');assert(doc.querySelector('#app strong').textContent===phase,'限制阶段被绕过');}
+async function challenge(d){await d.click('[data-page="home"]');await d.click('[data-action="fill"]');assert(d.text().includes('需要学习挑战'),'周期结束未触发挑战');await blockedUsage(d,'需要学习挑战');await d.click('[data-action="start"]');await d.heading('第 1 / 5 题');}
+async function solve(d){for(const i of [2,1,0,2,2])await d.click('[data-answer="'+i+'"]');}
+const cases=[
+ ['failure','答错后无使用资格，错题和统计可查看',async html=>{const d=await sandbox(html);await challenge(d);await d.click('[data-answer="0"]');await solve(d);await d.heading('本轮未通过');await blockedUsage(d,'需要学习挑战');await d.click('[data-page="review"]');assert(d.text().includes('36 ÷ 4 + 7'),'缺少错题');await d.click('[data-page="records"]');assert(d.text().includes('80%'),'首次正确率不符');}],
+ ['rest','答题通过后必须休息满 10 分钟',async html=>{const d=await sandbox(html);await challenge(d);await solve(d);await d.heading('挑战成功');await blockedUsage(d,'等待完成休息');await d.click('[data-page="success"]');await d.click('[data-action="rest"]');assert(d.text().includes('休息时间尚未达到'),'提前放行');d.clock.now+=599000;await d.click('[data-action="rest"]');assert(d.text().includes('休息时间尚未达到'),'边界提前放行');d.clock.now+=1000;await d.click('[data-action="rest"]');assert(d.text().includes('已使用 30 分钟')&&d.text().includes('可使用'),'休息完成后状态不符');}],
+ ['daily','每日累计 120 分钟后不能继续获得资格',async html=>{const d=await sandbox(html);for(let i=0;i<3;i++){await challenge(d);await solve(d);d.clock.now+=600000;await d.click('[data-action="rest"]');}await d.click('[data-action="fill"]');assert(d.text().includes('已达每日上限'),'达到上限未限制');await d.click('[data-action="use"]');assert(d.text().includes('已使用 120 分钟'),'日累计不正确');await d.click('[data-page="quiz"]');assert(!d.frame.contentDocument.querySelector('[data-answer]'),'日上限后仍允许答题解锁');}],
+ ['recovery','内存快照重载与横竖尺寸切换保持进度',async html=>{let d=await sandbox(html);await challenge(d);await d.click('[data-answer="2"]');await d.heading('第 2 / 5 题');d=await sandbox(html,d.map,d.clock);await d.heading('第 2 / 5 题');for(const size of [[960,540],[360,800]]){d.size(...size);await pause();d.noOverflow();await d.heading('第 2 / 5 题');}}],
+ ['parent','家长 PIN 验证、设置保存与重载后重新授权',async html=>{let d=await sandbox(html);await d.click('[data-page="settings"]');d.input('pin','839271');d.input('pinConfirm','839271');await d.click('[data-action="unlock"]');d.input('dailyLimit',60);await d.click('[data-action="saveSettings"]');d=await sandbox(html,d.map,d.clock);d.input('pin','000000');await d.click('[data-action="unlock"]');assert(d.text().includes('PIN 不正确'),'错误 PIN 未被拒绝');d.input('pin','839271');await d.click('[data-action="unlock"]');assert(d.frame.contentDocument.getElementById('dailyLimit')?.value==='60','家长设置恢复失败');}],
+ ['rollback','时钟回拨时休息资格暂停',async html=>{const d=await sandbox(html);await challenge(d);await solve(d);d.clock.now-=3600000;await d.click('[data-action="rest"]');assert(d.text().includes('时间回拨'),'回拨时未暂停资格');}]
+];
+function status(value,text){summary.dataset.status=value;summary.textContent=text;}
+startButton.addEventListener('click',async()=>{
+ startButton.disabled=true;downloadButton.disabled=true;results.replaceChildren();report={schema:1,runnerVersion:1,startedAt:new Date().toISOString(),scope:'isolated_browser_simulation',storageMode:'isolated_memory',lockMode:'isolated_test_queue',simulatedClock:true,nativeBuildValidated:false,deviceVerification:false,crossAppUsageValidated:false,healthOutcomeValidated:false,cases:[]};status('running','正在准备隔离检查…');
+ try{const app=await deadline(source(),10000,'源码准备超时');report.appSha256=app.hash;for(const [id,title,check] of cases){const row=document.createElement('li');row.dataset.case=id;row.textContent=title+'：检查中';results.append(row);let state='passed',detail='通过';try{await deadline(check(app.html),10000,'单项检查超时');}catch(error){state=error.message.includes('不支持安全隔离')?'unsupported':'failed';detail=state==='unsupported'?'此浏览器不支持安全隔离':'检查失败：'+error.message;}row.dataset.status=state;row.textContent=title+'：'+detail;report.cases.push({id,title,status:state,detail});}const value=report.cases.some(x=>x.status==='failed')?'failed':report.cases.some(x=>x.status==='unsupported')?'incomplete':'passed';status(value,value==='passed'?cases.length+' 项规则检查通过（隔离模拟）':value==='failed'?'存在失败项目，请下载报告':'环境能力不足，检查未完成');}
+ catch(error){status('blocked','检查未运行：'+error.message);report.error=error.message;}
+ finally{active?.remove();active=null;stage.style.height='0';report.status=summary.dataset.status;report.completedAt=new Date().toISOString();downloadButton.disabled=false;startButton.disabled=false;}
+});
+downloadButton.addEventListener('click',()=>{if(!report)return;const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)+'\n'],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='beaa-browser-check.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+</script></body></html>
