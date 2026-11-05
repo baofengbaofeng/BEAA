@@ -36,7 +36,7 @@ def revision(value):
 def metadata(text):
     check(type(text) is str and len(text.encode('utf-16-le')) // 2 <= MAX_TEXT_UNITS, 'CORRUPT_STORE')
     value = json.loads(text)
-    check(type(value) is dict and value.get('schemaVersion') == 1 and
+    check(type(value) is dict and type(value.get('schemaVersion')) is int and value.get('schemaVersion') in (1, 2) and
           type(value.get('lifecycleId')) is str and revision(value.get('revision')), 'CORRUPT_STORE')
     identity = value['lifecycleId']
     check(0 < len(identity) <= 96 and identity.strip() == identity, 'CORRUPT_STORE')

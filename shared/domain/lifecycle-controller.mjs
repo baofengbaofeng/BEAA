@@ -10,6 +10,7 @@ export async function commitGuardianCommand(store,command,context={}){
   if(!store || typeof store.read!=='function' || typeof store.compareAndSwap!=='function')throw new GuardianError('INVALID_STORE','A complete atomic lifecycle store is required');
   let captured,resources;
   try{captured=structuredClone(command);resources=structuredClone(context);}catch{throw new GuardianError('INVALID_COMMAND','Lifecycle input cannot be captured');}
+  if(captured?.type==='set_policy')throw new GuardianError('PARENT_AUTH_REQUIRED','Policy changes require the parent authorization gateway');
   let text;
   try{text=await store.read();}catch{throw new GuardianError('STORE_FAILURE','Unable to read the committed lifecycle');}
   const previous=decodeGuardianLifecycle(text),transition=applyGuardianCommand(previous,captured,resources);

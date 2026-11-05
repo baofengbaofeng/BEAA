@@ -30,6 +30,10 @@
 
 [浏览器交互原型](apps/web-preview/index.html) · [使用说明](apps/web-preview/README.md)。下载 HTML 后直接用浏览器打开，体验模拟计时、答题、休息和家长设置。**仅用于演示，不具备系统应用限制能力。**
 
+## 无需安装的一键规则检查
+
+取得交付文件 `beaa-browser-check.html`，用现代浏览器打开并点击「开始检查」，再下载 JSON 报告。独立文件不需要联网或安装开发工具，不修改已有进度。六项检查使用隔离数据和模拟时间，通过不代表跨应用管控或健康改善。见[使用说明](apps/browser-check/README.md)和[验证记录](docs/testing/BROWSER_SELF_CHECK_REPORT.md)。开发者用 `npm run build:browser-check` 生成该文件。
+
 ## 浏览器 MVP 开发与验证
 
 已加入配置题库、错题复习、学习记录、本地家长 PIN 及恢复测试。`npm ci && npm test` 验证规则；`npm run test:browser` 运行真实浏览器测试（先安装 Playwright Chromium），`npm run build:demo` 生成独立 HTML 演示包。详细命令见 [浏览器说明](apps/web-preview/README.md)，实际结果与限制见 [测试报告](docs/testing/BROWSER_MVP_REPORT.md)。这仍是模拟使用数据的浏览器演示，不是已验收的原生设备管控产品。
