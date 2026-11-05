@@ -49,3 +49,11 @@ SessionEnvelope 设计包含 schemaVersion、revision、policyVersion、session�
 原生控制层必须在最后一题提交时生成并持久化稳定attemptId/completedAt，同事务保存完整attempt与历史（或可靠outbox事件后重试），并在跨日或新测验前归档。损坏历史的恢复与使用账本隔离，不能以历史通过结果重新发放资格。窗口外事件仅返回outside_window，保留窗口内同ID冲突拒绝，长期去重及存储认证仍由平台实现。含标准答案与儿童记录的历史不能向未授权界面整体暴露；家长/孩子的查询范围由控制层授权。
 
 `encodeLearningHistory`/`decodeLearningHistory`仅定义载荷和校验，不实现ArkTS、Preferences、事务或可靠队列。SDK、签名、设备权限及实际安装验收门禁保持不变。
+
+## 单轮答题与学习归档的原子端口
+
+共享`quiz-progress.mjs`已把每题推进、末题完成与历史归档合成单个状态快照；完成恢复会重新核对题目、答案、日期、原阈值及完成事件的历史关联。`quiz-controller.mjs`捕获提交命令，读取已提交快照，校验轮次/期望revision，然后调用一次`compareAndSwap({attemptId,revision}, newText)`；只在确认提交后返回feedback，或通过已提交记录确认duplicate。写前失败、并发冲突与应答丢失后的重试已有内存端口故障注入证据。
+
+**仍需原生实现**：read返回完整已提交记录；CAS必须在同一原子操作中比较两个字段并持久化全部文本，false表示未写，异常可表示提交结果未知（上层重读后以相同命令重试）。未经互斥保护的先读后写无法替代CAS。真实存储认证、持久性、跨进程争用及进程/设备重启测试尚未实现或验证。demo只有单进程独占临时文件的同步比较/rename，不证明断电可靠性。
+
+progress的revision等于本轮已答数量，attemptId必须跨轮唯一。该聚合结束于已完成测验，休息/跨日和新轮建立应以可信生命周期事务迁移，不能重新包装旧状态并重置修订号来绕过事件保护。旧ID不能因学习记录被淘汰而复用；平台层需保证长期唯一/防回放。业务阶段和学习通过结果都不能代替实际系统限制状态核验。

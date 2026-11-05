@@ -30,7 +30,7 @@ const recovered = decodeSession(text);
 
 快照只验证数据一致性，不证明答案、时间或存储内容的真实性。认证/防篡改、修订号比较与CAS/原子写入、旧快照回放防护由平台存储适配器负责；revision字段本身不提供这些能力。上层遇到解码错误应保留原始记录并进入恢复流程，不能以新建会话代替失败恢复。
 
-`npm run demo`实际使用临时文件保存/读取答题及休息快照，然后继续引擎流程并清理文件；时长和答案仍为演示输入。该模块尚未接入浏览器单文件原型或原生Preferences，也不能直接作为ArkTS模块使用；原生移植、可信休息证据及权限状态核对仍需匹配SDK和平台实现。
+`npm run demo`实际使用临时文件保存/读取答题与学习记录的组合快照，然后继续休息流程并清理文件；时长和答案仍为演示输入。该模块尚未接入浏览器单文件原型或原生Preferences，也不能直接作为ArkTS模块使用；原生移植、可信休息证据及权限状态核对仍需匹配SDK和平台实现。
 
 ## 共享答题应用服务
 
@@ -73,4 +73,33 @@ const stats = getLearningStats(history);
 
 必须在测验刚完成、跨日或下一轮测验之前归档，dayKey取本次完成时的session日期。completedAt是显式提供的非负毫秒时间戳（不超JavaScript Date范围），不是模块核实的可信时间。外层需稳定保存完成事件ID/时间，把最后一题提交和归档放入原子事务或可靠事件队列，防止崩溃漏记。保留窗口内去重不等于长期事件去重；外层仍负责认证、CAS、长期去重和防回放。学习通过只是教育统计，不表示休息已完成、设备已解锁或日额度增加。
 
-历史含题目标准答案和儿童学习数据，应由受保护存储/家长授权查询管理。解码失败应保留原始数据并报告恢复错误，不能清空使用账本或默认放行。`npm run demo`已实际写入、读取学习历史临时文件并输出统计；尚未接原生UI或平台持久化后端。
+历史含题目标准答案和儿童学习数据，应由受保护存储/家长授权查询管理。解码失败应保留原始数据并报告恢复错误，不能清空使用账本或默认放行。`npm run demo`已实际写入、读取含学习历史的组合快照文件并输出统计；尚未接原生UI或平台持久化后端。
+
+## 答题与归档的一致提交
+
+`quiz-progress.mjs`把单轮attempt与history组合为`{schemaVersion:1,revision,attemptId,attempt,history,completion}`；`quiz-controller.mjs`负责通过外部原子存储端口提交。
+
+- `createQuizProgress(attemptId,attempt,history?)`只接收未作答的active测验，复制输入。attemptId由可信控制层生成，跨轮不可复用；当前历史中已存在的ID会被拒绝。
+- `submitProgressAnswer(progress,{attemptId,expectedRevision,questionId,chosen,completedAt})`生成新progress、feedback及duplicate标志。expectedRevision对应本轮已答题数量；非末题completedAt必须为null，末题为稳定可信完成时间。末题推进与通过/未通过归档在一次纯状态迁移中完成。
+- 旧revision的命令只有在轮次、题目、原选项及末题完成时间均相同时才视为重复；修改选项或跨轮重放会拒绝。相同题ID不能把旧轮答案误应用到新轮。
+- `validateQuizProgress`、`encodeQuizProgress`、`decodeQuizProgress`同时校验答案前缀/revision、完成事件与当前保留历史的关联。完成状态缺少匹配记录会报错；真实落在保留窗口之外的完成事件可保存明确的outside_window结果。组合快照最多6,000,000个UTF16码元，不自动清空或修补损坏数据。
+
+```js
+// store是平台实现的受保护原子端口，不是localStorage包装器。
+// read(): Promise<已提交JSON文本>
+// compareAndSwap({attemptId, revision}, newText): Promise<boolean>
+import { commitQuizAnswer } from './quiz-controller.mjs';
+const result = await commitQuizAnswer(store, {
+  attemptId: 'stable-round-id', expectedRevision: 0,
+  questionId: 'chinese-g3-001', chosen: 'A', completedAt: null
+});
+// result: {outcome:'committed'|'duplicate',revision,feedback,phase,archiveOutcome}
+```
+
+端口必须原子比较轮次ID和revision、持久化完整文本，并且只在持久提交后返回true；不匹配返回false。先read再无条件write不满足该契约。controller在所有迁移/编码校验完成后仅调用一次CAS，冲突报CONFLICT，不自动换答案重试；读写异常或非法应答报STORE_FAILURE，不返回未确认的成功反馈。已提交但响应丢失时，可重试**同一原命令**，通过读取已提交快照返回duplicate。调用前捕获命令副本，异步读取期间界面改选不会替换本次提交。
+
+错误类`QuizProgressError`，代码`INVALID_PROGRESS`、`INVALID_COMMAND`、`INVALID_STORE`、`CONFLICT`、`STORE_FAILURE`、`UNSUPPORTED_VERSION`、`SNAPSHOT_TOO_LARGE`。含标准答案的progress只供可信控制层/受保护存储使用，界面只取得已答反馈和授权范围内的公开视图。
+
+该聚合覆盖单轮答题/归档；revision是本轮答案序号，不是跨轮全局存储版本。后续休息/跨日及新轮建立需可信controller在事务边界转换，保持原日累计、休息证据和历史；不能修改当前progress的session后仍当作本轮提交使用。结果phase是读取/提交时的业务阶段，不是系统已解锁证明。唯一ID、认证、存储防回放、权限核验与跨轮事务由平台层负责。
+
+`npm run demo`以独占的临时文件实现**仅限示例的单进程同步CAS+rename**，实际通过controller提交、从文件恢复组合快照并重试末题，统计仍为1轮。它没有多进程锁或fsync持久性保证，不是原生存储后端，也不是断电/设备崩溃测试。生产原子端口及ArkTS/Preferences接入仍待SDK与平台验证。
