@@ -1,0 +1,13 @@
+
+> beaa-core-prototype@0.2.0 demo:device
+> node apps/node-reference/device-demo.mjs
+
+真实SQLite只读状态演示；使用输入为合成数据，设备适配器明确不支持，没有跨应用监控或限制。
+{"label":"初始：业务允许不等于设备已解锁","phase":"AVAILABLE","dailySeconds":0,"expectedRestriction":"released","deviceStatus":"unsupported","observedRestriction":"unknown","consistent":false,"deviceControlValidated":false}
+{"label":"合成周期到期：规则要求限制，设备仍未验证","phase":"CHALLENGE_REQUIRED","dailySeconds":1800,"expectedRestriction":"restricted","deviceStatus":"unsupported","observedRestriction":"unknown","consistent":false,"deviceControlValidated":false}
+重新打开账本一致；状态查询没有重置或改写账本。
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

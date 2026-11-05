@@ -6,7 +6,7 @@
 
 ## 业务与平台接口
 
-沿用 `docs/ARCHITECTURE.md` 的 DeviceControlAdapter 和 `shared/domain/engine.mjs`。原生接入时用 ArkTS 类型适配业务契约，而非直接导入 `.mjs`。能力报告必须分别描述 usage/restriction/restore；不支持时返回 unsupported，不抛装成功，不回退为系统已锁定。计时、日期与休息只接收经设备适配器核实的事件。浏览器 demo 中的按钮、系统墙钟和 PIN 摘要不是这些可信来源。
+沿用 `docs/ARCHITECTURE.md` 的 DeviceControlAdapter 和 `shared/domain/engine.mjs`。原生接入时用 ArkTS 类型适配业务契约，而非直接导入 `.mjs`。完整设备动作接入必须分别验证 usage/restriction/restore；本轮只读状态契约仅包含 usage/restriction，见[平台状态契约](../../shared/domain/DEVICE_CONTROL.md)，restore（解除限制能力）在未来动作服务中单独定义与验收，不能由reported_ready推断；不支持时返回 unsupported，不抛装成功，不回退为系统已锁定。计时、日期与休息只接收经设备适配器核实的事件。浏览器 demo 中的按钮、系统墙钟和 PIN 摘要不是这些可信来源。
 
 推荐服务边界：
 

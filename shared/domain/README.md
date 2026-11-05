@@ -218,3 +218,7 @@ schema2的`dailyUsageSeconds`是**权威实际日累计**，不因降低限额�
 `guardian-legacy.mjs`冻结旧schema1只读契约，恢复先严格验证，再在内存迁移policy/actual/pending至schema2，保留revision、round、身份、题目、休息和历史。read/inspect/backup不改旧文件，下一次成功CAS才写schema2；SQLite表仍user_version1，只是payload支持1/2。schema2缺失累计/规则等字段拒绝，不退回schema1解释；旧读者不能读取schema2应失败，禁止手动丢字段降版或以旧副本恢复额度。
 
 此授权网关不提供家长临时放行或系统权限，不会清空历史/重置额度。Node参考`demo:parent`现实际登录后保存设置、重试并保留旧失败记录；原生设置UI、可信授权/存储及设备限制仍需平台接入与验收。
+
+## 平台能力与限制状态查询
+
+`device-control.mjs`增加SDK无关只读适配器契约、明确unsupported默认实现和规则/设备分开的诊断视图。权限撤销、未知/错误响应、scope/revision变化和超时不能报告ready，查询期间账本变化拒绝过期视图。默认适配器不监控或操作设备，所有输出deviceControlValidated=false。见[完整契约](DEVICE_CONTROL.md)，`npm run demo:device`用真实SQLite验证账本不被查询改写。
