@@ -1,0 +1,79 @@
+
+> beaa-core-prototype@0.2.0 test:browser
+> npm run build:browser-check && npm run build:starter-bank && playwright test
+
+
+> beaa-core-prototype@0.2.0 build:browser-check
+> python3 scripts/package-browser-check.py
+
+Packaged offline browser check: /workspace/BEAA/dist/beaa-browser-check.html
+
+> beaa-core-prototype@0.2.0 build:starter-bank
+> node scripts/package-starter-bank.mjs
+
+Built 90 starter questions across 18 grade/subject groups: /workspace/BEAA/dist/beaa-starter-bank
+
+Running 50 tests using 2 workers
+
+(node:290870) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:290871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 tests/browser/browser-check.spec.mjs:17:1 › daily limit regression is detected instead of reporting success (2.8s)
+  ✓   3 tests/browser/browser-check.spec.mjs:21:1 › tampered embedded source blocks execution (460ms)
+  -   4 tests/browser/browser-check.spec.mjs:25:1 › standalone file completes with no HTTP requests
+  ✓   5 tests/browser/browser-check.spec.mjs:30:1 › unavailable storage isolation never runs the app or touches real progress (671ms)
+  ✓   1 tests/browser/browser-check.spec.mjs:6:1 › isolated checks pass, export honest report and preserve all real storage (4.7s)
+  ✓   6 tests/browser/browser-check.spec.mjs:36:1 › attempting use during pending rest exposes a bypass regression (2.4s)
+  ✓   8 tests/browser/delivery-timing.spec.mjs:2:1 › queued permit issuance anchors validity to actual processing time (693ms)
+  ✓   9 tests/browser/delivery.spec.mjs:4:1 › bounded parent use is persisted, exhausted and cannot resume until parent ends it (1.7s)
+  ✓  10 tests/browser/delivery.spec.mjs:11:1 › learning summary downloads without private credentials and default reminders appear (3.2s)
+  ✓  11 tests/browser/delivery.spec.mjs:15:1 › critical corruption blocks interaction and preserves the original storage bytes (409ms)
+  ✓  12 tests/browser/delivery.spec.mjs:18:1 › wall expiry stops a temporary session while the page is open (685ms)
+  ✓  13 tests/browser/delivery.spec.mjs:21:1 › two real tabs cannot spend a temporary budget twice (984ms)
+  ✓  14 tests/browser/delivery.spec.mjs:27:1 › delayed minimum permit can spend sub-minute allowance and keep exact seconds after reload (793ms)
+  ✓  15 tests/browser/mvp.spec.mjs:17:1 › PIN-protected settings, refresh, rest and daily cap (1.6s)
+  ✓  16 tests/browser/mvp.spec.mjs:38:1 › failed first attempt records review, statistics and refuses a grant (1.2s)
+  ✓  17 tests/browser/mvp.spec.mjs:50:1 › pending rest refuses early completion and clock rollback (1.2s)
+  ✓  18 tests/browser/mvp.spec.mjs:58:1 › resizing and reloading retain exact current question (798ms)
+  ✓  19 tests/browser/mvp.spec.mjs:70:1 › keyboard navigation, semantic accessibility and narrow layout (2.2s)
+  ✓  20 tests/browser/mvp.spec.mjs:82:1 › imported questions use selected grade and render as text (919ms)
+  -  21 tests/browser/mvp.spec.mjs:96:1 › single HTML file works without any server or network requests
+  ✓   7 tests/browser/browser-check.spec.mjs:40:1 › a never-settling app operation times out with a downloadable failed report (19.2s)
+  ✓  23 tests/browser/mvp.spec.mjs:120:1 › loaded standalone page completes a challenge while offline (895ms)
+  ✓  24 tests/browser/mvp.spec.mjs:126:1 › two tabs preserve PIN and serialize simulated usage at the daily cap (1.4s)
+  ✓  25 tests/browser/mvp.spec.mjs:143:1 › keyboard can retry a wrong answer without losing focus (682ms)
+  ✓  22 tests/browser/mvp.spec.mjs:106:1 › active quiz, rest, review and unlocked settings pass accessibility checks (3.6s)
+  ✓  27 tests/browser/mvp.spec.mjs:172:1 › an answer queued behind a state lock is committed before acknowledged progress reloads (841ms)
+  ✓  26 tests/browser/mvp.spec.mjs:150:1 › opening a tab during first PIN derivation preserves one complete credential (1.3s)
+  ✓  29 tests/browser/native-reminders.spec.mjs:9:1 › corrupt local data requests pause instead of supplying invented available state (450ms)
+  ✓  28 tests/browser/native-reminders.spec.mjs:2:1 › only committed simulated state reaches the notification host and contains no credentials or answers (653ms)
+  ✓  30 tests/browser/native-summary.spec.mjs:3:1 › native export waits for the matching receipt and never reports an unconfirmed download (983ms)
+  ✓  31 tests/browser/native-summary.spec.mjs:6:1 › native failure and cancellation are explicit and do not fall back to browser download (1.0s)
+  ✓  32 tests/browser/native-summary.spec.mjs:13:1 › a pending export is not duplicated and late receipts after timeout cannot claim success (967ms)
+  ✓  33 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 1 chinese: import, retain usage and pass five real UI questions (1.9s)
+  ✓  34 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 1 math: import, retain usage and pass five real UI questions (1.6s)
+  ✓  35 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 1 english: import, retain usage and pass five real UI questions (1.5s)
+  ✓  36 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 2 chinese: import, retain usage and pass five real UI questions (1.6s)
+  ✓  37 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 2 math: import, retain usage and pass five real UI questions (1.4s)
+  ✓  38 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 2 english: import, retain usage and pass five real UI questions (1.5s)
+  ✓  39 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 3 chinese: import, retain usage and pass five real UI questions (1.5s)
+  ✓  40 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 3 math: import, retain usage and pass five real UI questions (1.5s)
+  ✓  41 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 3 english: import, retain usage and pass five real UI questions (1.5s)
+  ✓  42 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 4 chinese: import, retain usage and pass five real UI questions (1.5s)
+  ✓  43 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 4 math: import, retain usage and pass five real UI questions (1.5s)
+  ✓  44 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 4 english: import, retain usage and pass five real UI questions (1.6s)
+  ✓  45 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 5 chinese: import, retain usage and pass five real UI questions (1.6s)
+  ✓  46 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 5 math: import, retain usage and pass five real UI questions (1.6s)
+  ✓  47 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 5 english: import, retain usage and pass five real UI questions (1.7s)
+  ✓  48 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 6 chinese: import, retain usage and pass five real UI questions (1.7s)
+  ✓  49 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 6 math: import, retain usage and pass five real UI questions (1.7s)
+  ✓  50 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 6 english: import, retain usage and pass five real UI questions (1.4s)
+
+  2 skipped
+  48 passed (46.3s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

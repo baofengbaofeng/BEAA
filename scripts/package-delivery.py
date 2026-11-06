@@ -59,7 +59,7 @@ def main():
     elif package_path.exists():
         raise ValueError('Unrelated output archive; choose a new path')
     files = sources()
-    required = ['scripts/package-native-preview.mjs', 'docs/DELIVERY_GUIDE.md', 'docs/testing/COMPLETE_DELIVERY_REPORT.md', 'apps/harmony/entry/src/main/resources/rawfile/beaa-preview.html']
+    required = ['scripts/package-native-preview.mjs', 'docs/DELIVERY_GUIDE.md', 'docs/testing/COMPLETE_DELIVERY_REPORT.md', 'docs/testing/NATIVE_SERVICES_REPORT.md', 'apps/harmony/entry/src/main/resources/rawfile/beaa-preview.html']
     if any(name not in files for name in required):
         raise ValueError('Delivery sources missing; stage or commit all intended source files first')
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
@@ -92,7 +92,7 @@ def main():
         'sourceContainsWorkingTreeChanges': dirty,
         'sourceTreeSha256': digest(json.dumps([(name, digest(data)) for name, data in sorted(files.items())], separators=(',', ':')).encode()),
         'nativeBuildValidated': False, 'deviceControlValidated': False, 'healthOutcomeValidated': False,
-        'testsExecutedByPackager': False, 'testEvidence': 'BEAA/docs/testing/COMPLETE_DELIVERY_REPORT.md',
+        'testsExecutedByPackager': False, 'testEvidence': 'BEAA/docs/testing/NATIVE_SERVICES_REPORT.md',
         'outputFiles': sorted([*contents, 'manifest.json', 'SHA256SUMS'])
     }
     contents['manifest.json'] = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode()

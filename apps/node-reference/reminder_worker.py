@@ -1,0 +1,119 @@
+"""Private reference reminder outbox; never a native store or public protocol."""
+import hashlib
+import hmac
+import json
+from pathlib import Path
+import os
+import sqlite3
+import sys
+from sqlite_worker import StoreFailure, check, fields, revision, reserve_private_file, connect_existing, validate_header
+
+APPLICATION_ID = 0x4245414E
+COLUMNS = ['id', 'scope_id', 'revision', 'payload', 'sha256']
+MAX_REQUEST_BYTES = 16 * 1024 * 1024
+
+
+def metadata(text):
+    check(type(text) is str and len(text.encode('utf-16-le')) // 2 <= 500000, 'CORRUPT_STORE')
+    value = json.loads(text)
+    check(type(value) is dict and type(value.get('version')) is int and value['version'] == 1 and
+          type(value.get('scopeId')) is str and revision(value.get('revision')), 'CORRUPT_STORE')
+    identity = value['scopeId']
+    check(0 < len(identity) <= 96 and identity.strip() == identity, 'CORRUPT_STORE')
+    identity.encode('utf-8')
+    return identity, value['revision']
+
+
+def read_row(connection):
+    check(connection.execute('PRAGMA application_id').fetchone()[0] == APPLICATION_ID and
+          connection.execute('PRAGMA user_version').fetchone()[0] == 1 and
+          connection.execute('PRAGMA journal_mode').fetchone()[0].lower() == 'delete' and
+          [r[1] for r in connection.execute('PRAGMA table_info(reminder_outbox)')] == COLUMNS, 'UNSUPPORTED_STORE')
+    rows = connection.execute('SELECT id,scope_id,revision,payload,sha256 FROM reminder_outbox').fetchall()
+    check(len(rows) == 1 and rows[0][0] == 1, 'CORRUPT_STORE')
+    _, identity, rev, text, digest = rows[0]
+    check(type(identity) is str and revision(rev) and type(text) is str and type(digest) is str and
+          hmac.compare_digest(hashlib.sha256(text.encode('utf-8')).hexdigest(), digest), 'CORRUPT_STORE')
+    check(metadata(text) == (identity, rev), 'CORRUPT_STORE')
+    return identity, rev, text
+
+
+def initialize(path, text):
+    identity, rev = metadata(text)
+    check(rev == 0, 'INVALID_REQUEST')
+    reserve_private_file(path)
+    connection = connect_existing(path)
+    try:
+        connection.execute('PRAGMA journal_mode=DELETE')
+        connection.execute('BEGIN IMMEDIATE')
+        connection.execute('CREATE TABLE reminder_outbox ('
+                           'id INTEGER PRIMARY KEY CHECK(id=1), scope_id TEXT NOT NULL, '
+                           'revision INTEGER NOT NULL, payload TEXT NOT NULL, sha256 TEXT NOT NULL)')
+        connection.execute(f'PRAGMA application_id={APPLICATION_ID}')
+        connection.execute('PRAGMA user_version=1')
+        connection.execute('INSERT INTO reminder_outbox VALUES (1,?,?,?,?)',
+                           (identity, rev, text, hashlib.sha256(text.encode('utf-8')).hexdigest()))
+        connection.execute('COMMIT')
+    finally:
+        connection.close()
+    return True
+
+
+def run(path, message):
+    check(type(message) is dict, 'INVALID_REQUEST')
+    operation = message.get('operation')
+    if operation == 'initialize':
+        fields(message, ['operation', 'text'])
+        return initialize(path, message['text'])
+    check(operation in ('read', 'cas'), 'INVALID_REQUEST')
+    fields(message, ['operation'] if operation == 'read' else ['operation', 'expected', 'text'])
+    if operation == 'cas':
+        expected = message['expected']
+        fields(expected, ['scopeId', 'revision'])
+        check(type(expected['scopeId']) is str and revision(expected['revision']), 'INVALID_REQUEST')
+        identity, rev = metadata(message['text'])
+        check(identity == expected['scopeId'] and rev == expected['revision'] + 1, 'INVALID_REQUEST')
+    validate_header(path, APPLICATION_ID)
+    # Even a logical read must permit SQLite to roll back a valid interrupted delivery.
+    connection = connect_existing(path)
+    try:
+        connection.execute('BEGIN' if operation == 'read' else 'BEGIN IMMEDIATE')
+        current_id, current_rev, current_text = read_row(connection)
+        if operation == 'read':
+            connection.execute('COMMIT')
+            return current_text
+        if (current_id, current_rev) != (expected['scopeId'], expected['revision']):
+            connection.execute('ROLLBACK')
+            return False
+        connection.execute('UPDATE reminder_outbox SET revision=?,payload=?,sha256=? WHERE id=1',
+                           (rev, message['text'], hashlib.sha256(message['text'].encode('utf-8')).hexdigest()))
+        connection.execute('COMMIT')
+        return True
+    finally:
+        connection.close()
+
+
+def main():
+    try:
+        check(os.name == 'posix' and sys.version_info >= (3, 11) and len(sys.argv) == 2, 'UNSUPPORTED_PLATFORM')
+        data = sys.stdin.buffer.read(MAX_REQUEST_BYTES + 1)
+        check(len(data) <= MAX_REQUEST_BYTES, 'INVALID_REQUEST')
+        value = run(Path(sys.argv[1]).absolute(), json.loads(data.decode('utf-8')))
+        response = {'ok': True, 'value': value}
+    except StoreFailure as error:
+        response = {'ok': False, 'code': error.code}
+    except sqlite3.OperationalError as error:
+        code = getattr(error, 'sqlite_errorcode', None)
+        response = {'ok': False, 'code': 'STORE_BUSY' if type(code) is int and (code & 0xff) in (5, 6) else 'STORE_IO'}
+    except sqlite3.DatabaseError:
+        response = {'ok': False, 'code': 'CORRUPT_STORE'}
+    except (ValueError, TypeError, UnicodeError):
+        response = {'ok': False, 'code': 'CORRUPT_STORE'}
+    except OSError:
+        response = {'ok': False, 'code': 'STORE_IO'}
+    sys.stdout.write(json.dumps(response, ensure_ascii=False))
+    return 0 if response['ok'] else 1
+
+
+if __name__ == '__main__':
+    sys.exit(main())

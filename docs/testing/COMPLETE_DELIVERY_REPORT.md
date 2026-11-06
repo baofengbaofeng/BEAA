@@ -1,5 +1,7 @@
 # 整体阶段交付与需求核对
 
+本文件保留PR34交付时点。后续宿主/提醒开发状态见[最新报告](NATIVE_SERVICES_REPORT.md)及[当前剩余清单](../REMAINING_WORK.md)。
+
 2026-11-06（北京时间）；基于dev c336f42（PR33已合并），分支feature/complete-functional-delivery。用户要求将后续工作集中执行、一次交付；本轮在原工程补缺，没有新建项目或合并master。
 
 ## 本轮代码

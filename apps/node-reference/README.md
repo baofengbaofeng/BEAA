@@ -102,3 +102,9 @@ npm run inspect:sqlite -- --source local-data/backups/checkpoint.sqlite3
 ## 使用预提醒计算参考
 
 `npm run demo:reminders`将合成有效使用量通过controller提交到真实临时SQLite，在300/60/0秒边界计算5分钟/1分钟/到期事件，验证较早日上限与重新打开后日累计保持。读取提示不提交新修订。见[接口、并发与投递限制](../../shared/domain/USAGE_REMINDERS.md)；这不是通知发送示例，不包含原生采样、通知权限或设备操作。
+
+## 持久通知队列参考
+
+`npm run demo:notifications`用guardian与reminder两份真实私有SQLite演示提交失败/重开、同ID重试、阈值升级、旧项取消和暂停；通知为记录型替身，不发送系统通知。需要npm依赖中的TypeScript来编译同一原生纯服务源，新增reminder库使用独立格式标记；误传其他三库在SQLite恢复前拒绝。原生RDB队列另为未构建候选，不直接互换数据库。接口和限制见[宿主说明](../harmony/NATIVE_SERVICES.md)。
+
+通知演示的cycle字段取guardian.round作分组，表示测验轮次；网页使用自己的持久周期序号。它们不作为统一的真实设备周期身份，生产接入应绑定可信业务周期。

@@ -293,3 +293,16 @@ test('a delayed one-minute permit can consume bounded seconds and preserve them 
  const h=harness();await h.parent();h.fields.permitMinutes={value:'1'};h.action('issuePermit');h.advance(1001);h.action('useOne');assert.equal(h.current().dailyUsed,0);assert.equal(h.current().dailyRemainderSeconds,58);assert.equal(h.current().cycleRemainderSeconds,58);assert.equal(h.current().permit.usedSeconds,58);
  const reopened=harness(h.current(),false,null,1001001);assert.equal(reopened.current().dailyRemainderSeconds,58);reopened.action('useSecond');assert.equal(reopened.current().dailyRemainderSeconds,59);assert.equal(reopened.current().permit.usedSeconds,59);
 });
+
+test('native reminder snapshots use committed revisions and cycle sequence without exposing private data',()=>{
+ const h=harness(),sent=[],pauses=[];h.context.window={beaaNative:{updateReminderState:text=>{sent.push(JSON.parse(text));return 'accepted';},pauseReminders:()=>{pauses.push(true);return 'accepted';}}};
+ h.evaluate('pushNativeReminder()');const initial=sent.at(-1);assert.equal(initial.scopeId,'web-preview');assert.equal(initial.simulated,true);assert.equal(initial.phase,'AVAILABLE');assert.equal(initial.revision,h.current().stateRevision);assert(!JSON.stringify(initial).match(/pinHash|pinSalt|correctOptionId/));
+ h.action('useOne');assert(sent.at(-1).revision>initial.revision);const source=h.current();assert.equal(sent.at(-1).cycleRemainingSeconds,1740);const resumed=harness(source);assert.equal(resumed.current().stateRevision,source.stateRevision);
+});
+test('native simulation cycle IDs survive history retention and failed writes only pause notifications',()=>{
+ const h=harness();h.action('fill');h.action('start');[2,1,0,2,2].forEach(h.answer);h.advance(600000);h.action('rest');assert.equal(h.current().cycleSequence,1);
+ const failed=harness(null,true),sent=[],paused=[];failed.context.window={beaaNative:{updateReminderState:t=>{sent.push(t);return 'accepted';},pauseReminders:()=>{paused.push(true);return 'accepted';}}};failed.evaluate('pushNativeReminder()');assert.equal(sent.length,0);assert.equal(paused.length,1);
+});
+test('parent demo reset keeps monotonic native notification revisions and starts a fresh cycle identity',async()=>{
+ const h=harness();await h.parent();h.action('useOne');const before=h.current();h.action('reset');assert(h.current().stateRevision>before.stateRevision);assert(h.current().cycleSequence>before.cycleSequence);assert.equal(h.current().dailyUsed,0);
+});

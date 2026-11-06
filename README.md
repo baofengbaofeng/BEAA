@@ -74,3 +74,7 @@
 本地运行：在仓库根目录执行`python3 -m http.server 4173 --bind 127.0.0.1`，打开`http://127.0.0.1:4173/apps/web-preview/`。Windows可将`python3`改为`py`，前端无需先安装npm依赖。首次由家长设置PIN。
 
 `npm run build:delivery`生成`dist/beaa-delivery.zip`，集中包含离线演示、规则检查、可导入题库、源码、手册和校验和。新增临时时段/审计/摘要、页面提醒和恢复保护；原生离线资源与同一页面同步，未接真实设备权限。[运行与交付说明](docs/DELIVERY_GUIDE.md) · [需求与验证清单](docs/testing/COMPLETE_DELIVERY_REPORT.md)。打包不等于测试通过或原生安装成功，剩余设备/签名/权限项目见清单。
+
+## 原生宿主与通知队列接入
+
+已增加严格摘要保存宿主、模拟提醒的持久队列/重试/去重/取消、原生文件/通知/RDB候选适配。`npm run demo:notifications`验证真实SQLite恢复与记录型通知端口；`npm run check:native-core`验证纯TS服务，不是HAP编译。[宿主说明](apps/harmony/NATIVE_SERVICES.md) · [测试报告](docs/testing/NATIVE_SERVICES_REPORT.md) · [当前剩余清单](docs/REMAINING_WORK.md)。真实采样、原生安全资格账本与跨应用控制仍未实现/未验收。
