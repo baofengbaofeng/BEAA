@@ -16,10 +16,10 @@ test('native application scaffold has required entry and resources', () => {
   ]) assert.equal(existsSync(new URL(file,root)), true, file);
 });
 
-test('native offline entry uses the same tested responsive page without a privilege bridge', () => {
+test('native offline entry uses the same tested responsive page with a narrow summary export bridge', () => {
   const page=read('entry/src/main/ets/pages/Index.ets');
   assert.match(page,/Web\(/);assert.match(page,/\$rawfile\('beaa-preview.html'\)/);assert.match(page,/domStorageAccess\(true\)/);
-  assert.doesNotMatch(page,/javaScriptProxy|restrictApps|releaseApps/);
+  assert.match(page,/javaScriptProxy/);assert.match(page,/exportLearningSummary/);assert.doesNotMatch(page,/restrictApps|releaseApps|setPolicy|verifyPin/);
   const embedded=read('entry/src/main/resources/rawfile/beaa-preview.html');
   assert.equal(embedded,readFileSync(new URL('../apps/web-preview/index.html',import.meta.url),'utf8'));
   for(const marker of ['@media(max-width:760px)','学习挑战','家长设置','检查休息条件','不具备设备管控权限'])assert.ok(embedded.includes(marker),marker);

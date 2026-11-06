@@ -1,10 +1,13 @@
 import web_webview from '@ohos.web.webview';
+import { NativePreviewBridge } from '../services/NativePreviewBridge';
 
 /** Offline preview host. No device-control bridge, native usage sampling or native auth. */
 @Entry
 @Component
 struct Index {
   private controller: web_webview.WebviewController = new web_webview.WebviewController();
+
+  private bridge: NativePreviewBridge = new NativePreviewBridge(this.controller);
 
   build() {
     Column({ space: 8 }) {
@@ -15,6 +18,7 @@ struct Index {
       Web({ src: $rawfile('beaa-preview.html'), controller: this.controller })
         .javaScriptAccess(true)
         .domStorageAccess(true)
+        .javaScriptProxy({ object: this.bridge, name: 'beaaNative', methodList: ['exportLearningSummary'], controller: this.controller })
         .width('100%')
         .layoutWeight(1)
     }

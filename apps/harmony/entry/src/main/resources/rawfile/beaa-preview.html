@@ -139,6 +139,7 @@ function restore(raw){try{
  }catch{recoveryBlocked=true;return structuredDefaults()}}
 function structuredDefaults(){return {...defaults,activeQuestions:[],attempted:[],mistakes:[],history:[],bank:[],audit:[]};}
 const el=document.getElementById("app"),nav=document.getElementById("nav");
+let pendingNativeExport=null,nativeExportTimer=null;
 let parentUntil=0,busy=false,storageError=false,recoveryBlocked=false,reviewNote='',lastSaved=null,interactionPending=false,pendingFocus=null;
 try{lastSaved=localStorage.getItem(STORAGE);}catch{storageError=true;}
 // Parse the same immutable snapshot used by conflict detection.
@@ -162,7 +163,18 @@ function usage(min){if(!clock()){save();render();return;}const counted=Math.min(
 function issuePermit(values={}){if(!authorized())return;try{if(!clock())throw Error('时间异常，不能分配临时时段');const minutes=Number(fieldValue(values,'permitMinutes'));s.permit=createTemporaryAccess({permitId:hex(crypto.getRandomValues(new Uint8Array(12))),minutes},permitContext());audit('permit_issue',{minutes});s.answerNote='临时时段已分配，不增加原有额度。';}catch{s.answerNote='无法分配：须处于可使用状态，分钟数为1–30且不超过本轮与每日余量。';}save();render();}
 function endPermit(){if(!authorized())return;if(s.permit){closeTemporaryAccess(s.permit,Date.now());audit('permit_end');s.permit=null;}s.answerNote='临时时段结束，按原有规则检查使用资格。';save();render();}
 function learningSummary(){return {schemaVersion:1,generatedAt:Date.now(),simulated:true,deviceControlValidated:false,day:s.day,dailyUsedMinutes:(s.dailyUsed*60+s.dailyRemainderSeconds)/60,dailyUsedSeconds:s.dailyUsed*60+s.dailyRemainderSeconds,recordWindow:200,records:s.history.map(r=>({at:r.at,correct:r.correct,total:r.total,passed:r.passed})),wrongAnswerCount:s.mistakes.length};}
-function exportSummary(){if(!authorized())return;const blob=new Blob([JSON.stringify(learningSummary(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='beaa-learning-summary.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);audit('export');save();render();}
+function finishNativeExport(id,status){if(!pendingNativeExport||id!==pendingNativeExport)return;withStateLock(()=>{if(id!==pendingNativeExport)return;pendingNativeExport=null;clearTimeout(nativeExportTimer);nativeExportTimer=null;syncState();const messages={saved:'摘要已保存到所选位置。',cancelled:'已取消保存摘要。',busy:'仍有一个原生保存操作正在处理。',invalid_summary:'摘要格式未通过校验。',failed:'未能确认摘要保存，请检查所选位置。'};s.answerNote=messages[status]||'保存结果尚未确认，请检查所选位置。';if(status==='saved')audit('export');save();render();});}
+function exportSummary(){if(!authorized())return;
+ if(typeof window!=='undefined'&&window.beaaNative&&typeof window.beaaNative.exportLearningSummary==='function'){
+  if(pendingNativeExport){s.answerNote='正在等待原生保存结果，请先完成当前操作。';render();return;}
+  const id=hex(crypto.getRandomValues(new Uint8Array(16)));pendingNativeExport=id;
+  s.answerNote='正在等待选择保存位置并确认保存。';render();
+  nativeExportTimer=setTimeout(()=>finishNativeExport(id,'unconfirmed'),120000);
+  try{const ack=window.beaaNative.exportLearningSummary(id,JSON.stringify(learningSummary()));if(ack!=='accepted')finishNativeExport(id,'failed');}catch{finishNativeExport(id,'failed');}
+  return;
+ }
+ const blob=new Blob([JSON.stringify(learningSummary(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='beaa-learning-summary.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);audit('export');save();render();}
+if(typeof window!=='undefined')window.onNativeExportCompleted=finishNativeExport;
 function reminderText(){if(s.phase!=='available')return '';const c=permitContext(),left=Math.min(c.cycleRemainingSeconds,c.dailyRemainingSeconds);const rule=c.dailyRemainingSeconds<=c.cycleRemainingSeconds?'今日额度':'本轮';return left<=300?rule+'剩余 '+Math.ceil(left/60)+' 分钟，请准备学习和休息。':'';}
 function permitText(){if(!s.permit)return '';const v=getTemporaryAccessStatus(s.permit,permitContext());return v.active?'临时时段剩余 '+Math.ceil(v.remainingSeconds)+' 秒（不增加周期或每日额度）':'临时时段已结束，请由家长处理；原使用记录保持。';}
 function permitFields(){const labels={settings:'规则保存',reset:'演示重置',unlock:'家长验证',import:'题库导入',permit_issue:'临时时段分配',permit_end:'临时时段结束',permit_stop:'临时时段停止',export:'摘要导出'};return '<h2>临时使用时段</h2><p>只分配当前已有资格，不能跳过答题、休息或每日上限。有效期和使用预算同时受限，到期后须家长处理。</p><label for="permitMinutes">临时时段（分钟）</label><input id="permitMinutes" type="number" min="1" max="30" value="5">'+action('issuePermit','分配临时时段')+' '+action('endPermit','结束临时模式')+'<p id="permit-clock">'+escapeHTML(permitText())+'</p><h2>学习摘要与操作记录</h2>'+action('exportSummary','导出学习摘要 JSON')+'<p>最近100条本机操作记录，不含PIN或授权凭据。</p><ol>'+s.audit.slice().reverse().map(r=>'<li>'+escapeHTML(new Date(r.at).toLocaleString())+' · '+labels[r.type]+(r.minutes?' · '+r.minutes+'分钟':'')+'</li>').join('')+'</ol>';}
