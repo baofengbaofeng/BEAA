@@ -16,7 +16,12 @@
     "build:browser-check": "python3 scripts/package-browser-check.py",
     "demo:device": "node apps/node-reference/device-demo.mjs",
     "demo:bank": "node apps/node-reference/question-bank-demo.mjs",
-    "build:starter-bank": "node scripts/package-starter-bank.mjs"
+    "demo:reminders": "node apps/node-reference/reminder-demo.mjs",
+    "build:starter-bank": "node scripts/package-starter-bank.mjs",
+    "sync:preview": "node scripts/embed-preview-domain.mjs",
+    "check:sources": "node scripts/embed-preview-domain.mjs --check && node scripts/package-native-preview.mjs --check",
+    "build:native-preview": "node scripts/package-native-preview.mjs",
+    "build:delivery": "python3 scripts/package-delivery.py"
   },
   "engines": {
     "node": ">=20"

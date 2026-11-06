@@ -1,0 +1,17 @@
+
+Running 2 tests using 2 workers
+
+(node:257801) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:257807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"issuedAtMs":1793966401001,"nowMs":1793966401001,"usedSeconds":60,"dailyMinutes":1,"remainder":0}
+  ✓  1 tests/browser/ci-clock-race.spec.mjs:2:1 › diagnose queued issuance while test clock moves (1.2s)
+  ✓  2 tests/browser/delivery.spec.mjs:27:1 › delayed minimum permit can spend sub-minute allowance and keep exact seconds after reload (1.2s)
+
+  2 passed (2.3s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

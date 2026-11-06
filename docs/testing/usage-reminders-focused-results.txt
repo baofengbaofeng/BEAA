@@ -1,0 +1,31 @@
+✔ guidance derives default cycle and daily remaining from the ledger without mutating it (6.835092ms)
+✔ five-minute and one-minute boundaries include their exact endpoints (4.730959ms)
+✔ an earlier daily limit governs guidance and wins ties with the cycle (1.588634ms)
+✔ over-cap root usage survives lowered then raised policy limits (1.412964ms)
+✔ challenge, quiz, failed quiz, rest and daily lock do not schedule usable time (47.179053ms)
+✔ a verified new cycle resets only cycle guidance and keeps daily usage (14.96548ms)
+✔ calendar rollover preserves the cycle and does not itself emit reminders (0.781983ms)
+✔ pending policy remains blocked during rest and becomes guidance only at its safe boundary (13.033675ms)
+✔ crossing thresholds produces deterministic distinct advisory event IDs (2.758399ms)
+✔ same snapshot, zero usage and movements inside a threshold bucket produce no extra event (1.792885ms)
+✔ a large sample chooses the most urgent present boundary instead of sending stale notices (1.351163ms)
+✔ daily exhaustion reports the daily guard even when both limits expire (0.647155ms)
+✔ a five-minute fresh cycle emits once on the first positive sample (0.705962ms)
+✔ a fresh cycle with only one daily minute left emits only the urgent reminder (21.161234ms)
+✔ policy edits can change visible guidance but do not create usage reminder events (1.124619ms)
+✔ different family, skipped revisions and forged valid-shaped receipts are rejected (1.786716ms)
+✔ invalid lifecycle data is never converted into an available countdown (0.601618ms)
+✔ guidance reads no local wall clock (0.428012ms)
+✔ read guidance leaves a committed legacy snapshot untouched (1.244776ms)
+✔ guidance and events expose no pinned answers or populated learning history (11.574243ms)
+✔ store errors and corrupted snapshots remain explicit without exporting private error details (0.500829ms)
+✔ committed SQLite boundaries survive reopening and guidance never writes a new revision (1365.04422ms)
+✔ SQLite reminders obey an earlier daily cap and a stale commit cannot produce a new snapshot (621.926993ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2068.914296
