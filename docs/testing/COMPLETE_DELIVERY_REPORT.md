@@ -33,12 +33,12 @@
 - Task1 Node339/339、针对38/38、新增真实浏览器5/5通过。
 - 首轮完整浏览器40通过/2本地file策略跳过/1失败：失败为旧故障注入替换点已不存在导致未注入；修正为实际注入休息期使用漏洞并断言替换生效，针对用例通过，严格门禁未放宽。
 - Task2资源/交付测试已验证源码字节一致、校验和、复现构建、外来目录与输出软链接保护。软链接保护先以实际文件重现失败，再修复；ZIP最终写入使用临时文件替换。
-- 最终Node345/345通过，无失败/跳过；浏览器完整44项，本地42通过/2项file://企业策略跳过。CI仍严格要求零跳过。
+- 最终Node345/345通过，无失败/跳过；浏览器完整45项，本地43通过/2项file://企业策略跳过。CI仍严格要求零跳过。
 - 六个参考示例demo、demo:sqlite、demo:parent、demo:device、demo:bank、demo:reminders均实际通过；输入使用量/休息仍为合成数据。
 - 原生预检实际退出2，缺ohpm/hvigor/sdk，compatibilityVerified/buildAttempted/signingVerified/deviceVerified均false。
 - 独立整分支审查发现两项重要问题，已分别以失败测试重现并修复：启动观察到的到期/回拨必须在同一锁与版本检测下保存，写失败暂停；不足一分钟的有效余量用整秒消费并保留分钟余数，避免最短时段一秒后不可用。新增启动/回拨/写失败、延迟1001ms与真实浏览器刷新用例，最终全套结果如上。没有未处理的重要或次要审查项。
 
-原始证据：[Node](complete-delivery-node-results.txt)、[浏览器](complete-delivery-browser-results.txt)、[原生预检](complete-delivery-native-preflight.txt)、[审查回归失败重现](complete-delivery-review-red.txt)、[针对回归通过](complete-delivery-review-green.txt)。最终新增浏览器延迟/秒计数测试随上述完整44项执行。远程CI以相同源码提交的GitHub检查为准。
+原始证据：[Node](complete-delivery-node-results.txt)、[浏览器](complete-delivery-browser-results.txt)、[原生预检](complete-delivery-native-preflight.txt)、[审查回归失败重现](complete-delivery-review-red.txt)、[针对回归通过](complete-delivery-review-green.txt)。最终新增浏览器延迟/秒计数测试随上述完整45项执行。首次远程CI [42163893819](https://github.com/baofengbaofeng/BEAA/actions/runs/42163893819)在提交7c6158e报告43通过/1失败/零跳过：延迟测试在分配命令确认保存前推进了模拟时钟。已通过真实Web Lock持锁复现开始时间改变的竞态；修复为等待“已分配”回执后再推进时钟，保留58/59秒严格断言，新增排队开始时间测试。修复后本地完整45项为43通过/2策略跳过；远程最终结果以新提交的GitHub检查为准。复现证据见[timing输出](complete-delivery-timing-proof.txt)。
 
 ## 剩余人工/目标工具链工作
 

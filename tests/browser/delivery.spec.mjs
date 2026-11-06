@@ -25,5 +25,17 @@ test('two real tabs cannot spend a temporary budget twice',async({page,context})
 });
 
 test('delayed minimum permit can spend sub-minute allowance and keep exact seconds after reload',async({page})=>{
- const start=new Date('2026-11-06T12:00:00Z');await page.clock.setFixedTime(start);await page.goto('/apps/web-preview/');await parent(page);await page.getByLabel('临时时段（分钟）').fill('1');await page.getByRole('button',{name:'分配临时时段',exact:true}).click();await page.clock.setFixedTime(new Date(start.getTime()+1001));await page.getByRole('button',{name:'儿童主页',exact:true}).click();await page.getByRole('button',{name:'模拟使用 1 分钟',exact:true}).click();await expect(page.getByText('已使用 0 分钟 58 秒',{exact:true})).toBeVisible();await page.reload();await expect(page.getByText('已使用 0 分钟 58 秒',{exact:true})).toBeVisible();await page.getByRole('button',{name:'模拟使用 1 秒',exact:true}).click();await expect(page.getByText('已使用 0 分钟 59 秒',{exact:true})).toBeVisible();
+ const start=new Date('2026-11-06T12:00:00Z');await page.clock.setFixedTime(start);
+ await page.goto('/apps/web-preview/');await parent(page);
+ await page.getByLabel('临时时段（分钟）').fill('1');
+ await page.getByRole('button',{name:'分配临时时段',exact:true}).click();
+ // Click queues a Web Lock operation. Advance test time only after confirmed save/render.
+ await expect(page.getByRole('status')).toContainText('临时时段已分配');
+ await page.clock.setFixedTime(new Date(start.getTime()+1001));
+ await page.getByRole('button',{name:'儿童主页',exact:true}).click();
+ await page.getByRole('button',{name:'模拟使用 1 分钟',exact:true}).click();
+ await expect(page.getByText('已使用 0 分钟 58 秒',{exact:true})).toBeVisible();
+ await page.reload();await expect(page.getByText('已使用 0 分钟 58 秒',{exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'模拟使用 1 秒',exact:true}).click();
+ await expect(page.getByText('已使用 0 分钟 59 秒',{exact:true})).toBeVisible();
 });
