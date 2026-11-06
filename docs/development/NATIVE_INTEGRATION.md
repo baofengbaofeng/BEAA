@@ -24,6 +24,10 @@ SessionEnvelope 设计包含 schemaVersion、revision、policyVersion、session�
 
 敏感家长凭据需平台安全存储，不能复用浏览器可修改的 localStorage 作为安全边界。浏览器实现只保留最近 200 条错题/挑战和 100 条家长操作，原生保存策略应独立实现。跨日不得绕过日上限，跨日中的休息和挑战不得靠重启重复发奖。
 
+## 逐步验收入口
+
+设备到手后先从[操作手册](../DEVICE_POC.md)收集型号/系统/电脑信息，再依阶段执行；复制[记录模板](../testing/DEVICE_ACCEPTANCE_RECORD_TEMPLATE.md)保存每项预期/实际/证据/阻塞，不把现有演示包或静态检查作为原生通过。
+
 ## 人工准备后的验证命令/证据
 
 在匹配 SDK 的 DevEco Studio 中同步 hvigor/ohpm，执行 IDE 对应的 assembleHap 任务（具体任务及版本由生成模板确定），保存完整工具版本、命令和退出状态；仅使用本地签名配置。安装后按 `docs/DEVICE_POC.md` 与 `tests/ACCEPTANCE.md` 收集型号/系统子版本、权限、横竖屏、后台/重启/分屏和撤权证据。只有这些证据齐全才允许更新原生构建/真机门禁。

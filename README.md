@@ -19,6 +19,7 @@
 - [UI规范](docs/UI_DESIGN.md)
 - [开发路线](docs/ROADMAP.md)
 - [验收测试](tests/ACCEPTANCE.md)
+- [拿到设备后的逐步验收手册](docs/DEVICE_POC.md) · [填写记录模板](docs/testing/DEVICE_ACCEPTANCE_RECORD_TEMPLATE.md)
 
 ## 目录
 `apps/harmony` 首发客户端；`apps/ios` 未来版本；`shared/schemas` 配置定义；`shared/quiz` 题库样例；`tests` 验收基线。
