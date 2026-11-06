@@ -1,0 +1,66 @@
+✖ status never rounds a partial wall second up into usable full seconds (2.571027ms)
+✖ startup-observed expiry and rollback are committed and cannot revive after reload (25.598412ms)
+✖ a delayed one-minute permit can consume bounded seconds and preserve them on reload (17.74849ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 113.131143
+
+✖ failing tests:
+
+test at shared/domain/temporary-access.test.mjs:46:1
+✖ status never rounds a partial wall second up into usable full seconds (2.571027ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  59 !== 58
+
+      at TestContext.<anonymous> (file:///workspace/BEAA/shared/domain/temporary-access.test.mjs:47:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 59,
+    expected: 58,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/web-preview.test.mjs:284:1
+✖ startup-observed expiry and rollback are committed and cannot revive after reload (25.598412ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  null !== 'expired'
+
+      at TestContext.<anonymous> (file:///workspace/BEAA/tests/web-preview.test.mjs:287:58)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'expired',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/web-preview.test.mjs:292:1
+✖ a delayed one-minute permit can consume bounded seconds and preserve them on reload (17.74849ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  undefined !== 58
+
+      at TestContext.<anonymous> (file:///workspace/BEAA/tests/web-preview.test.mjs:293:176)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 58,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
