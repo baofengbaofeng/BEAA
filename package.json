@@ -19,7 +19,9 @@
     "demo:reminders": "node apps/node-reference/reminder-demo.mjs",
     "build:starter-bank": "node scripts/package-starter-bank.mjs",
     "sync:preview": "node scripts/embed-preview-domain.mjs",
-    "check:sources": "node scripts/embed-preview-domain.mjs --check"
+    "check:sources": "node scripts/embed-preview-domain.mjs --check && node scripts/package-native-preview.mjs --check",
+    "build:native-preview": "node scripts/package-native-preview.mjs",
+    "build:delivery": "python3 scripts/package-delivery.py"
   },
   "engines": {
     "node": ">=20"

@@ -16,6 +16,8 @@ jobs:
           node-version: '20'
           cache: npm
       - run: npm ci
+      - name: Verify embedded browser and native source synchronization
+        run: npm run check:sources
       - name: Run business and scaffold tests
         run: npm test
       - name: Run domain demonstration
@@ -39,6 +41,8 @@ jobs:
         run: node scripts/report-browser-results.mjs
       - name: Package standalone browser demonstration
         run: npm run build:demo
+      - name: Package complete local delivery
+        run: npm run build:delivery
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -2,7 +2,7 @@
 
 ## 当前证据与门禁
 
-云环境具有 Node/Python/Chromium，无 hvigor、ohpm、DevEco Studio 或配套 HarmonyOS SDK；没有目标设备、签名或授权。原生目录中的 Stage/ArkUI 工程和页面源码保留，`tests/harmony-scaffold.test.mjs` 仅检查文件与资源，不是编译测试。此阶段不更改 SDK/API 版本或宣称生成 HAP。正式工程配置需要与可用 DevEco Studio 模板核对后才能构建。
+云环境具有 Node/Python/Chromium，无 hvigor、ohpm、DevEco Studio 或配套 HarmonyOS SDK；没有目标设备、签名或授权。原生目录沿用Stage工程，主入口现为ArkWeb离线预览，旧内存演示另存reference；`tests/harmony-scaffold.test.mjs` 仅检查文件与资源，不是编译测试。此阶段不更改 SDK/API 版本或宣称生成 HAP。正式工程配置需要与可用 DevEco Studio 模板核对后才能构建。
 
 ## 业务与平台接口
 
@@ -121,3 +121,7 @@ schema2根policy/dailyUsageSeconds/pendingPolicy保留权威实际累计；领�
 Linux参考guardian/auth/bank库现统一在SQLite连接之前核对受保护文件头部的专属application_id、user_version和DELETE读写标记，再以既有完整校验确认表、摘要/凭据和领域载荷。头部不承担认证或防回滚；所有支持writer保持这些格式标记不变。新文件初始化/备份新目标不套用既有文件头检查，仍需独占创建。
 
 家长status不执行凭据更新，但允许正确库的未提交热日志恢复，保持最后提交的PIN、版本与失败次数；不得将此描述成自动登录或重置失败计数。guardian的严格只读inspect与备份内部源快照阶段遇需恢复的热日志应失败且不改变源，不生成误导性目标。正常打开主库后才继续检查/备份。真实断电、设备重启和原生持久性须另行验收，本轮没有迁移原生存储实现。
+
+## 本轮离线入口与生产接入的区别
+
+`Index.ets`仅加载与浏览器逐字节一致的rawfile，没有设备JS桥，构建检查先确认共享时段嵌入和资源同步。此入口复用网页已有功能，不代表上文guardian/SQLite业务层已经接入ArkTS或原生安全后端。网页PIN、墙钟、localStorage与下载行为均未在目标WebView验收；详见[手册N10](../DEVICE_POC.md)。后续生产客户端仍需可信数据源/原子后端/原生认证及正式权限，不能将离线容器改称完整受控客户端。

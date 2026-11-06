@@ -9,7 +9,7 @@
 - 本地优先，不依赖联网解答基础题目
 
 ## 状态
-**已提交 ArkUI 原生交互页面与 Stage 项目骨架，但尚未经过 DevEco Studio 编译或真机安装验证。** HarmonyOS 4 对第三方应用的使用监控与限制能力尚需真机验证，不能宣称已支持全设备锁定。
+**已有浏览器闭环和Stage原生工程源码；原生入口现复用离线页面，但尚未经过DevEco Studio编译、WebView业务或真机安装验证。** HarmonyOS 4 对第三方应用的使用监控与限制能力尚需真机验证，不能宣称已支持全设备锁定。
 
 原生 UI 源码入口：[apps/harmony/entry/src/main/ets/pages/Index.ets](apps/harmony/entry/src/main/ets/pages/Index.ets)。运行说明：[apps/harmony/README.md](apps/harmony/README.md)。设备能力验证：[docs/DEVICE_POC.md](docs/DEVICE_POC.md)。
 
@@ -68,3 +68,9 @@
 ## 使用预提醒计算
 
 `npm run demo:reminders`以真实SQLite与合成使用数据验证5分钟、1分钟及到期提示，优先服从较早的每日硬上限。[接口说明](shared/domain/USAGE_REMINDERS.md) · [测试报告](docs/testing/USAGE_REMINDERS_REPORT.md)。当前仅共享计算，尚未发送系统通知；拿到设备后的实际通知验收见[手册N09](docs/DEVICE_POC.md)。
+
+## 整体阶段交付
+
+本地运行：在仓库根目录执行`python3 -m http.server 4173 --bind 127.0.0.1`，打开`http://127.0.0.1:4173/apps/web-preview/`。Windows可将`python3`改为`py`，前端无需先安装npm依赖。首次由家长设置PIN。
+
+`npm run build:delivery`生成`dist/beaa-delivery.zip`，集中包含离线演示、规则检查、可导入题库、源码、手册和校验和。新增临时时段/审计/摘要、页面提醒和恢复保护；原生离线资源与同一页面同步，未接真实设备权限。[运行与交付说明](docs/DELIVERY_GUIDE.md) · [需求与验证清单](docs/testing/COMPLETE_DELIVERY_REPORT.md)。打包不等于测试通过或原生安装成功，剩余设备/签名/权限项目见清单。

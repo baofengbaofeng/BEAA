@@ -34,7 +34,7 @@ test('unavailable storage isolation never runs the app or touches real progress'
 });
 
 test('attempting use during pending rest exposes a bypass regression',async({page})=>{
- await page.route('**/web-preview/index.html',async route=>{const response=await route.fetch();const original=await response.text();const body=original.replace('function usableMinutes(){',"function usableMinutes(){if(s.phase==='rest')return 10;");expect(body).not.toBe(original);await route.fulfill({response,body});});
+ await page.route('**/web-preview/index.html',async route=>{const response=await route.fetch();const original=await response.text();const body=original.replace('function usableSeconds(){',"function usableSeconds(){if(s.phase==='rest')return 600;");expect(body).not.toBe(original);await route.fulfill({response,body});});
  await page.goto(path);await run(page);await expect(page.locator('#summary')).toHaveAttribute('data-status','failed');await expect(page.locator('[data-case="rest"]')).toHaveAttribute('data-status','failed');
 });
 test('a never-settling app operation times out with a downloadable failed report',async({page})=>{

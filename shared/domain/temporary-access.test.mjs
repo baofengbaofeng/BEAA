@@ -42,3 +42,7 @@ test('parent cancellation is terminal and duplicate closing or zero samples do n
  const next=closeTemporaryAccess(fresh(),1000000);assert.equal(next.closedReason,'parent_closed');assert.deepEqual(closeTemporaryAccess(next,1000001),next);assert.equal(getTemporaryAccessStatus(next,context()).active,false);
  assert.equal(observeTemporaryAccess(fresh(),{nowMs:1000001,usedSeconds:0}).usedSeconds,0);
 });
+
+test('status never rounds a partial wall second up into usable full seconds',()=>{
+ assert.equal(getTemporaryAccessStatus(fresh(1),context({nowMs:1001001})).remainingSeconds,58);
+});

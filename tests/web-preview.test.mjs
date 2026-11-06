@@ -9,10 +9,10 @@ const match = html.match(/<script>([\s\S]*?)<\/script>/);
 assert.ok(match, 'embedded preview script exists');
 const script = match[1];
 
-export function harness(initial = null, storageFails = false, readHook = null) {
+export function harness(initial = null, storageFails = false, readHook = null, initialNow = 1_000_000) {
   let handler;
   const storage = new Map(initial ? [['beaa-web-preview-v1', JSON.stringify(initial)]] : []);
-  let now = 1_000_000;
+  let now = initialNow;
   const elements = {
     app: { innerHTML: '' },
     nav: { innerHTML: '' }
@@ -279,4 +279,17 @@ test('a daily rollover preserves an exhausted cycle and still requires a challen
 test('learning summary excludes credentials and audit details survive a normal reload',async()=>{
  const h=harness();await h.parent();h.fields.permitMinutes={value:'2'};h.action('issuePermit');const summary=JSON.parse(h.evaluate('JSON.stringify(learningSummary())'));assert.equal(summary.deviceControlValidated,false);assert.equal(summary.simulated,true);assert(!JSON.stringify(summary).match(/pinHash|pinSalt|839271/));
  const next=harness(h.current());assert.equal(next.current().audit.at(-1).minutes,2);await next.parent();next.navigate('settings');assert.match(next.page(),/临时时段分配/);
+});
+
+test('startup-observed expiry and rollback are committed and cannot revive after reload',async()=>{
+ const h=harness();await h.parent();h.fields.permitMinutes={value:'5'};h.action('issuePermit');const original=h.current();
+ for(const [now,reason] of [[1300001,'expired'],[999999,'clock_rollback']]){
+  const observed=harness(original,false,null,now);assert.equal(observed.current().permit.closedReason,reason);
+  const reopened=harness(observed.current(),false,null,1060000);reopened.action('useOne');assert.equal(reopened.current().dailyUsed,0);assert.equal(reopened.current().permit.closedReason,reason);
+ }
+ const failed=harness(original,true,null,1300001);failed.action('useOne');assert.equal(failed.current().dailyUsed,0);assert.match(failed.page(),/无法保存/);
+});
+test('a delayed one-minute permit can consume bounded seconds and preserve them on reload',async()=>{
+ const h=harness();await h.parent();h.fields.permitMinutes={value:'1'};h.action('issuePermit');h.advance(1001);h.action('useOne');assert.equal(h.current().dailyUsed,0);assert.equal(h.current().dailyRemainderSeconds,58);assert.equal(h.current().cycleRemainderSeconds,58);assert.equal(h.current().permit.usedSeconds,58);
+ const reopened=harness(h.current(),false,null,1001001);assert.equal(reopened.current().dailyRemainderSeconds,58);reopened.action('useSecond');assert.equal(reopened.current().dailyRemainderSeconds,59);assert.equal(reopened.current().permit.usedSeconds,59);
 });

@@ -32,7 +32,7 @@ export function createTemporaryAccess(request,trustedContext){
 export function getTemporaryAccessStatus(value,trustedContext){
  const s=validateTemporaryAccess(value),c=taContext(trustedContext);
  const reason=s.closedReason??(c.nowMs<s.lastObservedAtMs?'clock_rollback':c.nowMs>=s.expiresAtMs?'expired':c.phase!=='AVAILABLE'?'guardian_blocked':c.cycleRemainingSeconds===0||c.dailyRemainingSeconds===0?'allowance_exhausted':null);
- const remainingSeconds=reason===null?Math.min(s.budgetSeconds-s.usedSeconds,Math.ceil((s.expiresAtMs-c.nowMs)/1000),c.cycleRemainingSeconds,c.dailyRemainingSeconds):0;
+ const remainingSeconds=reason===null?Math.min(s.budgetSeconds-s.usedSeconds,Math.floor((s.expiresAtMs-c.nowMs)/1000),c.cycleRemainingSeconds,c.dailyRemainingSeconds):0;
  return {permitId:s.permitId,active:reason===null,reason,remainingSeconds,expiresAtMs:s.expiresAtMs,usedSeconds:s.usedSeconds,budgetSeconds:s.budgetSeconds,advisoryOnly:true};
 }
 export function observeTemporaryAccess(value,sample){
