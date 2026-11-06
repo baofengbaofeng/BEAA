@@ -1,0 +1,25 @@
+✔ parent status reopens an interrupted PIN update and retains committed PIN, version and failure count (711.616117ms)
+✔ auth rejects a hot guardian database before changing its files (274.641443ms)
+✔ bank rejects a hot guardian database before changing its files (261.655789ms)
+✔ guardian rejects a hot auth database before changing its files (731.170567ms)
+✔ bank rejects a hot auth database before changing its files (722.011084ms)
+✔ guardian rejects a hot bank database before changing its files (236.274547ms)
+✔ auth rejects a hot bank database before changing its files (235.823762ms)
+✔ read-only guardian inspection preserves its hot journal until a normal open recovers it (315.787582ms)
+✔ guardian refuses PRAGMA user_version=2 before creating auxiliary files (198.932191ms)
+✔ guardian refuses PRAGMA journal_mode=WAL before creating auxiliary files (167.703367ms)
+✔ auth refuses PRAGMA user_version=2 before creating auxiliary files (429.369701ms)
+✔ auth refuses PRAGMA journal_mode=WAL before creating auxiliary files (490.511661ms)
+✔ bank refuses PRAGMA user_version=2 before creating auxiliary files (141.982378ms)
+✔ bank refuses PRAGMA journal_mode=WAL before creating auxiliary files (139.961291ms)
+✔ backup dispatch rejects a hot auth source without creating a destination (833.416531ms)
+✔ backup dispatch rejects a hot bank source without creating a destination (225.807048ms)
+✔ the read-only backup phase preserves a hot source and creates no target until normal recovery (423.73895ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6611.913673
