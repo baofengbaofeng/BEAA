@@ -64,3 +64,7 @@
 ## 参考存储中断恢复修复
 
 已修复家长验证库热日志导致重开失败，以及错误格式数据库在拒绝前被SQLite恢复的问题。三库连接前分别检查格式，保留已提交凭据/失败次数与使用账本；只读检查仍不执行恢复。实际子进程中断、跨库文件保持、备份边界与全量测试见[验证报告](docs/testing/SQLITE_RECOVERY_ISOLATION_REPORT.md)。这是Linux参考实现，不是原生设备恢复验收。
+
+## 使用预提醒计算
+
+`npm run demo:reminders`以真实SQLite与合成使用数据验证5分钟、1分钟及到期提示，优先服从较早的每日硬上限。[接口说明](shared/domain/USAGE_REMINDERS.md) · [测试报告](docs/testing/USAGE_REMINDERS_REPORT.md)。当前仅共享计算，尚未发送系统通知；拿到设备后的实际通知验收见[手册N09](docs/DEVICE_POC.md)。

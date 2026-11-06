@@ -98,3 +98,7 @@ npm run inspect:sqlite -- --source local-data/backups/checkpoint.sqlite3
 三种参考库在连接前使用共同头部格式初筛，核对各自application_id、user_version与DELETE标记，之后仍做完整表/数据校验。误传其他应用库在SQLite自动恢复之前拒绝，数据库和回滚日志内容保持；初始化和备份新目标仍为独占创建。
 
 正常打开guardian、auth、bank允许SQLite回滚正确库的未提交事务，不等于清空记录或重置凭据。家长status读取可能发生事务恢复，但不更新失败计数/版本，也不创建token。`inspectSqliteLifecycleBackup`及备份内部源快照阶段仍以mode=ro打开：若热日志需要恢复则失败并保留文件；正常backup的前置读取可先恢复正确主库。错误来源在产生目标文件前拒绝。见[恢复与隔离报告](../../docs/testing/SQLITE_RECOVERY_ISOLATION_REPORT.md)。
+
+## 使用预提醒计算参考
+
+`npm run demo:reminders`将合成有效使用量通过controller提交到真实临时SQLite，在300/60/0秒边界计算5分钟/1分钟/到期事件，验证较早日上限与重新打开后日累计保持。读取提示不提交新修订。见[接口、并发与投递限制](../../shared/domain/USAGE_REMINDERS.md)；这不是通知发送示例，不包含原生采样、通知权限或设备操作。

@@ -1,0 +1,18 @@
+
+> beaa-core-prototype@0.2.0 demo:reminders
+> node apps/node-reference/reminder-demo.mjs
+
+真实SQLite提醒计算演示；使用量为合成输入，没有发送系统通知或采集/限制其他应用。
+{"scenario":"cycle","reminderId":"[\"reminder-cycle\",1,\"five_minutes\"]","lifecycleId":"reminder-cycle","revision":1,"round":0,"dayKey":"2026-11-06","kind":"five_minutes","remainingSeconds":300,"limitingRule":"cycle","phase":"AVAILABLE","advisoryOnly":true}
+{"scenario":"cycle","reminderId":"[\"reminder-cycle\",2,\"one_minute\"]","lifecycleId":"reminder-cycle","revision":2,"round":0,"dayKey":"2026-11-06","kind":"one_minute","remainingSeconds":60,"limitingRule":"cycle","phase":"AVAILABLE","advisoryOnly":true}
+{"scenario":"cycle","reminderId":"[\"reminder-cycle\",3,\"time_up\"]","lifecycleId":"reminder-cycle","revision":3,"round":0,"dayKey":"2026-11-06","kind":"time_up","remainingSeconds":0,"limitingRule":"cycle","phase":"CHALLENGE_REQUIRED","advisoryOnly":true}
+{"scenario":"cycle","reopened":true,"phase":"CHALLENGE_REQUIRED","dailyUsedSeconds":1800,"unchanged":true}
+{"scenario":"daily","reminderId":"[\"reminder-daily\",1,\"five_minutes\"]","lifecycleId":"reminder-daily","revision":1,"round":0,"dayKey":"2026-11-06","kind":"five_minutes","remainingSeconds":300,"limitingRule":"daily_limit","phase":"AVAILABLE","advisoryOnly":true}
+{"scenario":"daily","reminderId":"[\"reminder-daily\",2,\"one_minute\"]","lifecycleId":"reminder-daily","revision":2,"round":0,"dayKey":"2026-11-06","kind":"one_minute","remainingSeconds":60,"limitingRule":"daily_limit","phase":"AVAILABLE","advisoryOnly":true}
+{"scenario":"daily","reminderId":"[\"reminder-daily\",3,\"time_up\"]","lifecycleId":"reminder-daily","revision":3,"round":0,"dayKey":"2026-11-06","kind":"time_up","remainingSeconds":0,"limitingRule":"daily_limit","phase":"DAILY_LOCKED","advisoryOnly":true}
+{"scenario":"daily","reopened":true,"phase":"DAILY_LOCKED","dailyUsedSeconds":900,"unchanged":true}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
