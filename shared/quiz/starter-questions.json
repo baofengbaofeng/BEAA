@@ -1,0 +1,2795 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "starter-math-g1-001",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "3 + 4 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        },
+        {
+          "id": "D",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "3加4等于7。",
+      "knowledgePoints": [
+        "arithmetic",
+        "addition_subtraction"
+      ]
+    },
+    {
+      "id": "starter-math-g1-002",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "8 - 3 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        },
+        {
+          "id": "D",
+          "text": "3"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "从8里去掉3，剩下5。",
+      "knowledgePoints": [
+        "arithmetic",
+        "addition_subtraction"
+      ]
+    },
+    {
+      "id": "starter-math-g1-003",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "6 + 2 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        },
+        {
+          "id": "D",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "6加2等于8。",
+      "knowledgePoints": [
+        "arithmetic",
+        "addition_subtraction"
+      ]
+    },
+    {
+      "id": "starter-math-g1-004",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "9 - 4 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        },
+        {
+          "id": "D",
+          "text": "5"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "从9里去掉4，剩下5。",
+      "knowledgePoints": [
+        "arithmetic",
+        "addition_subtraction"
+      ]
+    },
+    {
+      "id": "starter-math-g1-005",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "5 + 5 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "11"
+        },
+        {
+          "id": "D",
+          "text": "12"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "两个5相加等于10。",
+      "knowledgePoints": [
+        "arithmetic",
+        "addition_subtraction"
+      ]
+    },
+    {
+      "id": "starter-math-g2-001",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "4 × 3 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "12"
+        },
+        {
+          "id": "C",
+          "text": "9"
+        },
+        {
+          "id": "D",
+          "text": "16"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "4×3表示3个4相加，结果是12。",
+      "knowledgePoints": [
+        "arithmetic",
+        "multiplication_division"
+      ]
+    },
+    {
+      "id": "starter-math-g2-002",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "24 ÷ 6 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        },
+        {
+          "id": "D",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "24平均分成6份，每份是4。",
+      "knowledgePoints": [
+        "arithmetic",
+        "multiplication_division"
+      ]
+    },
+    {
+      "id": "starter-math-g2-003",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "6 × 7 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "36"
+        },
+        {
+          "id": "B",
+          "text": "48"
+        },
+        {
+          "id": "C",
+          "text": "49"
+        },
+        {
+          "id": "D",
+          "text": "42"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "6×7=42。",
+      "knowledgePoints": [
+        "arithmetic",
+        "multiplication_division"
+      ]
+    },
+    {
+      "id": "starter-math-g2-004",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "32 ÷ 4 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        },
+        {
+          "id": "D",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "32÷4=8。",
+      "knowledgePoints": [
+        "arithmetic",
+        "multiplication_division"
+      ]
+    },
+    {
+      "id": "starter-math-g2-005",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "8 × 9 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "63"
+        },
+        {
+          "id": "B",
+          "text": "72"
+        },
+        {
+          "id": "C",
+          "text": "64"
+        },
+        {
+          "id": "D",
+          "text": "81"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "8×9=72。",
+      "knowledgePoints": [
+        "arithmetic",
+        "multiplication_division"
+      ]
+    },
+    {
+      "id": "starter-math-g3-001",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "36 ÷ 4 + 7 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "14"
+        },
+        {
+          "id": "B",
+          "text": "15"
+        },
+        {
+          "id": "C",
+          "text": "16"
+        },
+        {
+          "id": "D",
+          "text": "17"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "先算36÷4=9，再算9+7=16。",
+      "knowledgePoints": [
+        "arithmetic",
+        "operation_order"
+      ]
+    },
+    {
+      "id": "starter-math-g3-002",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "80 - 36 ÷ 4 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "11"
+        },
+        {
+          "id": "B",
+          "text": "44"
+        },
+        {
+          "id": "C",
+          "text": "76"
+        },
+        {
+          "id": "D",
+          "text": "71"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "先算36÷4=9，再算80-9=71。",
+      "knowledgePoints": [
+        "arithmetic",
+        "operation_order"
+      ]
+    },
+    {
+      "id": "starter-math-g3-003",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "6 × 8 + 5 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "53"
+        },
+        {
+          "id": "B",
+          "text": "48"
+        },
+        {
+          "id": "C",
+          "text": "58"
+        },
+        {
+          "id": "D",
+          "text": "78"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "先算6×8=48，再算48+5=53。",
+      "knowledgePoints": [
+        "arithmetic",
+        "operation_order"
+      ]
+    },
+    {
+      "id": "starter-math-g3-004",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "7 × 9 - 8 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "49"
+        },
+        {
+          "id": "B",
+          "text": "55"
+        },
+        {
+          "id": "C",
+          "text": "56"
+        },
+        {
+          "id": "D",
+          "text": "63"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "先算7×9=63，再算63-8=55。",
+      "knowledgePoints": [
+        "arithmetic",
+        "operation_order"
+      ]
+    },
+    {
+      "id": "starter-math-g3-005",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "42 ÷ 7 + 19 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "21"
+        },
+        {
+          "id": "B",
+          "text": "24"
+        },
+        {
+          "id": "C",
+          "text": "25"
+        },
+        {
+          "id": "D",
+          "text": "26"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "先算42÷7=6，再算6+19=25。",
+      "knowledgePoints": [
+        "arithmetic",
+        "operation_order"
+      ]
+    },
+    {
+      "id": "starter-math-g4-001",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "125 × 8 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "900"
+        },
+        {
+          "id": "B",
+          "text": "1025"
+        },
+        {
+          "id": "C",
+          "text": "1100"
+        },
+        {
+          "id": "D",
+          "text": "1000"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "125×8=1000。",
+      "knowledgePoints": [
+        "arithmetic",
+        "integer_operations"
+      ]
+    },
+    {
+      "id": "starter-math-g4-002",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "360 ÷ 12 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "30"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "36"
+        },
+        {
+          "id": "D",
+          "text": "40"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "12×30=360，所以360÷12=30。",
+      "knowledgePoints": [
+        "arithmetic",
+        "integer_operations"
+      ]
+    },
+    {
+      "id": "starter-math-g4-003",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "45 × 20 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "450"
+        },
+        {
+          "id": "B",
+          "text": "900"
+        },
+        {
+          "id": "C",
+          "text": "800"
+        },
+        {
+          "id": "D",
+          "text": "950"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "45×20=45×2×10=900。",
+      "knowledgePoints": [
+        "arithmetic",
+        "integer_operations"
+      ]
+    },
+    {
+      "id": "starter-math-g4-004",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "960 ÷ 24 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "30"
+        },
+        {
+          "id": "B",
+          "text": "42"
+        },
+        {
+          "id": "C",
+          "text": "40"
+        },
+        {
+          "id": "D",
+          "text": "48"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "24×40=960，所以960÷24=40。",
+      "knowledgePoints": [
+        "arithmetic",
+        "integer_operations"
+      ]
+    },
+    {
+      "id": "starter-math-g4-005",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "250 × 4 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "750"
+        },
+        {
+          "id": "B",
+          "text": "900"
+        },
+        {
+          "id": "C",
+          "text": "1250"
+        },
+        {
+          "id": "D",
+          "text": "1000"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "250×4=1000。",
+      "knowledgePoints": [
+        "arithmetic",
+        "integer_operations"
+      ]
+    },
+    {
+      "id": "starter-math-g5-001",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "1.2 + 2.35 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3.55"
+        },
+        {
+          "id": "B",
+          "text": "2.47"
+        },
+        {
+          "id": "C",
+          "text": "3.45"
+        },
+        {
+          "id": "D",
+          "text": "3.65"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "小数点对齐相加：1.20+2.35=3.55。",
+      "knowledgePoints": [
+        "arithmetic",
+        "decimals"
+      ]
+    },
+    {
+      "id": "starter-math-g5-002",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "5.6 - 1.85 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3.65"
+        },
+        {
+          "id": "B",
+          "text": "3.75"
+        },
+        {
+          "id": "C",
+          "text": "4.25"
+        },
+        {
+          "id": "D",
+          "text": "4.75"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "小数点对齐相减：5.60-1.85=3.75。",
+      "knowledgePoints": [
+        "arithmetic",
+        "decimals"
+      ]
+    },
+    {
+      "id": "starter-math-g5-003",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "0.4 × 0.5 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "0.02"
+        },
+        {
+          "id": "B",
+          "text": "0.9"
+        },
+        {
+          "id": "C",
+          "text": "0.2"
+        },
+        {
+          "id": "D",
+          "text": "2"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "4×5=20，两个因数共有两位小数，所以0.4×0.5=0.20，即0.2。",
+      "knowledgePoints": [
+        "arithmetic",
+        "decimals"
+      ]
+    },
+    {
+      "id": "starter-math-g5-004",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "7.2 ÷ 0.9 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "0.8"
+        },
+        {
+          "id": "B",
+          "text": "6.3"
+        },
+        {
+          "id": "C",
+          "text": "80"
+        },
+        {
+          "id": "D",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "被除数和除数同时乘10：7.2÷0.9=72÷9=8。",
+      "knowledgePoints": [
+        "arithmetic",
+        "decimals"
+      ]
+    },
+    {
+      "id": "starter-math-g5-005",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "3.5 × 4 = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "14"
+        },
+        {
+          "id": "B",
+          "text": "7.5"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        },
+        {
+          "id": "D",
+          "text": "140"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "3.5×4=14。",
+      "knowledgePoints": [
+        "arithmetic",
+        "decimals"
+      ]
+    },
+    {
+      "id": "starter-math-g6-001",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "(1/2) + (1/3) = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "2/5"
+        },
+        {
+          "id": "B",
+          "text": "5/6"
+        },
+        {
+          "id": "C",
+          "text": "1/6"
+        },
+        {
+          "id": "D",
+          "text": "1"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "通分后1/2=3/6、1/3=2/6，相加得到5/6。",
+      "knowledgePoints": [
+        "arithmetic",
+        "fractions"
+      ]
+    },
+    {
+      "id": "starter-math-g6-002",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "(3/4) - (1/8) = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1/2"
+        },
+        {
+          "id": "B",
+          "text": "3/8"
+        },
+        {
+          "id": "C",
+          "text": "5/8"
+        },
+        {
+          "id": "D",
+          "text": "7/8"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "3/4=6/8，所以6/8-1/8=5/8。",
+      "knowledgePoints": [
+        "arithmetic",
+        "fractions"
+      ]
+    },
+    {
+      "id": "starter-math-g6-003",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "(2/3) × (3/5) = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1/5"
+        },
+        {
+          "id": "B",
+          "text": "3/5"
+        },
+        {
+          "id": "C",
+          "text": "5/8"
+        },
+        {
+          "id": "D",
+          "text": "2/5"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "分子相乘、分母相乘并约分：6/15=2/5。",
+      "knowledgePoints": [
+        "arithmetic",
+        "fractions"
+      ]
+    },
+    {
+      "id": "starter-math-g6-004",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "(4/5) ÷ (2/3) = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "6/5"
+        },
+        {
+          "id": "B",
+          "text": "8/15"
+        },
+        {
+          "id": "C",
+          "text": "2/5"
+        },
+        {
+          "id": "D",
+          "text": "5/6"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "除以2/3等于乘3/2：12/10=6/5。",
+      "knowledgePoints": [
+        "arithmetic",
+        "fractions"
+      ]
+    },
+    {
+      "id": "starter-math-g6-005",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "(5/6) + (1/12) = ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1/2"
+        },
+        {
+          "id": "B",
+          "text": "11/12"
+        },
+        {
+          "id": "C",
+          "text": "5/12"
+        },
+        {
+          "id": "D",
+          "text": "7/12"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "5/6=10/12，所以10/12+1/12=11/12。",
+      "knowledgePoints": [
+        "arithmetic",
+        "fractions"
+      ]
+    },
+    {
+      "id": "starter-chinese-g1-001",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“大”的反义词是哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "小"
+        },
+        {
+          "id": "B",
+          "text": "高"
+        },
+        {
+          "id": "C",
+          "text": "多"
+        },
+        {
+          "id": "D",
+          "text": "长"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "“大”和“小”意思相反，是一组反义词。",
+      "knowledgePoints": [
+        "literacy",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g1-002",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“上”的反义词是哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "左"
+        },
+        {
+          "id": "B",
+          "text": "下"
+        },
+        {
+          "id": "C",
+          "text": "前"
+        },
+        {
+          "id": "D",
+          "text": "中"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "“上”和“下”表示相反的方位。",
+      "knowledgePoints": [
+        "literacy",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g1-003",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“多”的反义词是哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "快"
+        },
+        {
+          "id": "B",
+          "text": "远"
+        },
+        {
+          "id": "C",
+          "text": "少"
+        },
+        {
+          "id": "D",
+          "text": "红"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "“多”和“少”表示相反的数量。",
+      "knowledgePoints": [
+        "literacy",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g1-004",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“山”的正确拼音是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "sān"
+        },
+        {
+          "id": "B",
+          "text": "shǎn"
+        },
+        {
+          "id": "C",
+          "text": "shàn"
+        },
+        {
+          "id": "D",
+          "text": "shān"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "“山”的拼音是shān，声调是第一声。",
+      "knowledgePoints": [
+        "literacy",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g1-005",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“鱼”的正确拼音是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "yú"
+        },
+        {
+          "id": "B",
+          "text": "yǔ"
+        },
+        {
+          "id": "C",
+          "text": "yù"
+        },
+        {
+          "id": "D",
+          "text": "yī"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "“鱼”的拼音是yú，声调是第二声。",
+      "knowledgePoints": [
+        "literacy",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g2-001",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "成语“画蛇添（ ）”中应填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "手"
+        },
+        {
+          "id": "B",
+          "text": "足"
+        },
+        {
+          "id": "C",
+          "text": "头"
+        },
+        {
+          "id": "D",
+          "text": "目"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "“画蛇添足”比喻做了多余的事，反而不合适。",
+      "knowledgePoints": [
+        "idioms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g2-002",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "成语“守株待（ ）”中应填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "鱼"
+        },
+        {
+          "id": "B",
+          "text": "鸟"
+        },
+        {
+          "id": "C",
+          "text": "兔"
+        },
+        {
+          "id": "D",
+          "text": "马"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "“守株待兔”比喻不主动努力，只想侥幸得到收获。",
+      "knowledgePoints": [
+        "idioms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g2-003",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "成语“亡羊补（ ）”中应填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "桥"
+        },
+        {
+          "id": "B",
+          "text": "屋"
+        },
+        {
+          "id": "C",
+          "text": "门"
+        },
+        {
+          "id": "D",
+          "text": "牢"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "“亡羊补牢”中的“牢”指羊圈，比喻出了问题后及时补救。",
+      "knowledgePoints": [
+        "idioms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g2-004",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "成语“井底之（ ）”中应填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "蛙"
+        },
+        {
+          "id": "B",
+          "text": "鱼"
+        },
+        {
+          "id": "C",
+          "text": "鸟"
+        },
+        {
+          "id": "D",
+          "text": "虫"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "“井底之蛙”比喻见识狭窄的人。",
+      "knowledgePoints": [
+        "idioms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g2-005",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "成语“四面八（ ）”中应填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "text": "角"
+        },
+        {
+          "id": "B",
+          "text": "方"
+        },
+        {
+          "id": "C",
+          "text": "边"
+        },
+        {
+          "id": "D",
+          "text": "向"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "“四面八方”指各个方向。",
+      "knowledgePoints": [
+        "idioms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g3-001",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "李白《静夜思》中，“床前明月光”的下一句是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "举头望明月"
+        },
+        {
+          "id": "B",
+          "text": "低头思故乡"
+        },
+        {
+          "id": "C",
+          "text": "疑是地上霜"
+        },
+        {
+          "id": "D",
+          "text": "明月松间照"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "“床前明月光，疑是地上霜。”出自李白《静夜思》。",
+      "knowledgePoints": [
+        "poetry",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g3-002",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "李白《望庐山瀑布》中，“飞流直下三千尺”的下一句是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "日照香炉生紫烟"
+        },
+        {
+          "id": "B",
+          "text": "遥看瀑布挂前川"
+        },
+        {
+          "id": "C",
+          "text": "轻舟已过万重山"
+        },
+        {
+          "id": "D",
+          "text": "疑是银河落九天"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "“飞流直下三千尺，疑是银河落九天。”出自李白《望庐山瀑布》。",
+      "knowledgePoints": [
+        "poetry",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g3-003",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "李白《赠汪伦》中，“桃花潭水深千尺”的下一句是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "不及汪伦送我情"
+        },
+        {
+          "id": "B",
+          "text": "李白乘舟将欲行"
+        },
+        {
+          "id": "C",
+          "text": "忽闻岸上踏歌声"
+        },
+        {
+          "id": "D",
+          "text": "孤帆远影碧空尽"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "“桃花潭水深千尺，不及汪伦送我情。”出自李白《赠汪伦》。",
+      "knowledgePoints": [
+        "poetry",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g3-004",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "杜甫《绝句》中，“两个黄鹂鸣翠柳”的下一句是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "窗含西岭千秋雪"
+        },
+        {
+          "id": "B",
+          "text": "一行白鹭上青天"
+        },
+        {
+          "id": "C",
+          "text": "门泊东吴万里船"
+        },
+        {
+          "id": "D",
+          "text": "映日荷花别样红"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "“两个黄鹂鸣翠柳，一行白鹭上青天。”出自杜甫《绝句》。",
+      "knowledgePoints": [
+        "poetry",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g3-005",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "贺知章《咏柳》中，“不知细叶谁裁出”的下一句是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "碧玉妆成一树高"
+        },
+        {
+          "id": "B",
+          "text": "万条垂下绿丝绦"
+        },
+        {
+          "id": "C",
+          "text": "二月春风似剪刀"
+        },
+        {
+          "id": "D",
+          "text": "春风又绿江南岸"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "“不知细叶谁裁出，二月春风似剪刀。”出自贺知章《咏柳》。",
+      "knowledgePoints": [
+        "poetry",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g4-001",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“宽阔”的近义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "狭窄"
+        },
+        {
+          "id": "B",
+          "text": "细小"
+        },
+        {
+          "id": "C",
+          "text": "拥挤"
+        },
+        {
+          "id": "D",
+          "text": "宽广"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "“宽阔”和“宽广”都可以形容范围大、开阔。",
+      "knowledgePoints": [
+        "synonyms_antonyms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g4-002",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“坚定”的近义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "坚决"
+        },
+        {
+          "id": "B",
+          "text": "柔软"
+        },
+        {
+          "id": "C",
+          "text": "安静"
+        },
+        {
+          "id": "D",
+          "text": "悲伤"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "“坚定”和“坚决”都含有不动摇的意思。",
+      "knowledgePoints": [
+        "synonyms_antonyms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g4-003",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“谦虚”的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "认真"
+        },
+        {
+          "id": "B",
+          "text": "骄傲"
+        },
+        {
+          "id": "C",
+          "text": "诚实"
+        },
+        {
+          "id": "D",
+          "text": "耐心"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "“谦虚”与表示自满的“骄傲”意思相反。",
+      "knowledgePoints": [
+        "synonyms_antonyms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g4-004",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“清晰”的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "明白"
+        },
+        {
+          "id": "B",
+          "text": "清楚"
+        },
+        {
+          "id": "C",
+          "text": "模糊"
+        },
+        {
+          "id": "D",
+          "text": "整齐"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "“清晰”表示清楚，“模糊”表示不清楚。",
+      "knowledgePoints": [
+        "synonyms_antonyms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g4-005",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“珍惜”的近义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "浪费"
+        },
+        {
+          "id": "B",
+          "text": "丢弃"
+        },
+        {
+          "id": "C",
+          "text": "忽视"
+        },
+        {
+          "id": "D",
+          "text": "珍爱"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "“珍惜”和“珍爱”都表示重视、爱惜。",
+      "knowledgePoints": [
+        "synonyms_antonyms",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g5-001",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“弯弯的月亮像小船。”主要运用了哪种修辞手法？",
+      "options": [
+        {
+          "id": "A",
+          "text": "比喻"
+        },
+        {
+          "id": "B",
+          "text": "反问"
+        },
+        {
+          "id": "C",
+          "text": "设问"
+        },
+        {
+          "id": "D",
+          "text": "夸张"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "把月亮比作小船，属于比喻。",
+      "knowledgePoints": [
+        "rhetoric",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g5-002",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“花儿在微风中点头。”主要运用了哪种修辞手法？",
+      "options": [
+        {
+          "id": "A",
+          "text": "排比"
+        },
+        {
+          "id": "B",
+          "text": "拟人"
+        },
+        {
+          "id": "C",
+          "text": "反问"
+        },
+        {
+          "id": "D",
+          "text": "设问"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "把人的“点头”动作赋予花儿，属于拟人。",
+      "knowledgePoints": [
+        "rhetoric",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g5-003",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“难道我们不应该珍惜时间吗？”主要运用了哪种修辞手法？",
+      "options": [
+        {
+          "id": "A",
+          "text": "比喻"
+        },
+        {
+          "id": "B",
+          "text": "排比"
+        },
+        {
+          "id": "C",
+          "text": "反问"
+        },
+        {
+          "id": "D",
+          "text": "拟人"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "用疑问形式表达“我们应该珍惜时间”的意思，属于反问。",
+      "knowledgePoints": [
+        "rhetoric",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g5-004",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“什么是合作？合作就是大家一起完成任务。”属于哪种修辞手法？",
+      "options": [
+        {
+          "id": "A",
+          "text": "反问"
+        },
+        {
+          "id": "B",
+          "text": "夸张"
+        },
+        {
+          "id": "C",
+          "text": "拟人"
+        },
+        {
+          "id": "D",
+          "text": "设问"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "先提出问题，再自己回答，属于设问。",
+      "knowledgePoints": [
+        "rhetoric",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g5-005",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "实际只等了十分钟，却说“我都等了一万年了！”这句话用了哪种修辞手法？",
+      "options": [
+        {
+          "id": "A",
+          "text": "夸张"
+        },
+        {
+          "id": "B",
+          "text": "比喻"
+        },
+        {
+          "id": "C",
+          "text": "设问"
+        },
+        {
+          "id": "D",
+          "text": "排比"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "把十分钟说成一万年，故意放大等待时间，属于夸张。",
+      "knowledgePoints": [
+        "rhetoric",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g6-001",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "《春晓》（“春眠不觉晓”）的作者是谁？",
+      "options": [
+        {
+          "id": "A",
+          "text": "李白"
+        },
+        {
+          "id": "B",
+          "text": "孟浩然"
+        },
+        {
+          "id": "C",
+          "text": "杜甫"
+        },
+        {
+          "id": "D",
+          "text": "王维"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "“春眠不觉晓”出自孟浩然的《春晓》。",
+      "knowledgePoints": [
+        "literary_facts",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g6-002",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "《静夜思》（“床前明月光”）的作者是谁？",
+      "options": [
+        {
+          "id": "A",
+          "text": "杜甫"
+        },
+        {
+          "id": "B",
+          "text": "白居易"
+        },
+        {
+          "id": "C",
+          "text": "李白"
+        },
+        {
+          "id": "D",
+          "text": "孟浩然"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "“床前明月光”出自李白的《静夜思》。",
+      "knowledgePoints": [
+        "literary_facts",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g6-003",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "《咏鹅》（“鹅，鹅，鹅，曲项向天歌”）的作者是谁？",
+      "options": [
+        {
+          "id": "A",
+          "text": "王维"
+        },
+        {
+          "id": "B",
+          "text": "李白"
+        },
+        {
+          "id": "C",
+          "text": "杜甫"
+        },
+        {
+          "id": "D",
+          "text": "骆宾王"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "《咏鹅》的作者是骆宾王。",
+      "knowledgePoints": [
+        "literary_facts",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g6-004",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "《悯农二首·其二》（“锄禾日当午”）的作者是谁？",
+      "options": [
+        {
+          "id": "A",
+          "text": "李绅"
+        },
+        {
+          "id": "B",
+          "text": "白居易"
+        },
+        {
+          "id": "C",
+          "text": "李白"
+        },
+        {
+          "id": "D",
+          "text": "杜甫"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "“锄禾日当午”出自李绅的《悯农二首·其二》。",
+      "knowledgePoints": [
+        "literary_facts",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-chinese-g6-005",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "《春夜喜雨》（“好雨知时节”）的作者是谁？",
+      "options": [
+        {
+          "id": "A",
+          "text": "李白"
+        },
+        {
+          "id": "B",
+          "text": "杜甫"
+        },
+        {
+          "id": "C",
+          "text": "孟浩然"
+        },
+        {
+          "id": "D",
+          "text": "王维"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "“好雨知时节”出自杜甫的《春夜喜雨》。",
+      "knowledgePoints": [
+        "literary_facts",
+        "chinese_basics"
+      ]
+    },
+    {
+      "id": "starter-english-g1-001",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语颜色词“red”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "红色"
+        },
+        {
+          "id": "B",
+          "text": "蓝色"
+        },
+        {
+          "id": "C",
+          "text": "绿色"
+        },
+        {
+          "id": "D",
+          "text": "黄色"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "在这里，red表示红色。",
+      "knowledgePoints": [
+        "colors",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g1-002",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语颜色词“blue”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "绿色"
+        },
+        {
+          "id": "B",
+          "text": "蓝色"
+        },
+        {
+          "id": "C",
+          "text": "黄色"
+        },
+        {
+          "id": "D",
+          "text": "黑色"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "在这里，blue表示蓝色。",
+      "knowledgePoints": [
+        "colors",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g1-003",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语颜色词“green”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "黄色"
+        },
+        {
+          "id": "B",
+          "text": "黑色"
+        },
+        {
+          "id": "C",
+          "text": "绿色"
+        },
+        {
+          "id": "D",
+          "text": "红色"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "在这里，green表示绿色。",
+      "knowledgePoints": [
+        "colors",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g1-004",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语颜色词“yellow”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "黑色"
+        },
+        {
+          "id": "B",
+          "text": "红色"
+        },
+        {
+          "id": "C",
+          "text": "蓝色"
+        },
+        {
+          "id": "D",
+          "text": "黄色"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "在这里，yellow表示黄色。",
+      "knowledgePoints": [
+        "colors",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g1-005",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语颜色词“black”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "黑色"
+        },
+        {
+          "id": "B",
+          "text": "红色"
+        },
+        {
+          "id": "C",
+          "text": "蓝色"
+        },
+        {
+          "id": "D",
+          "text": "绿色"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "在这里，black表示黑色。",
+      "knowledgePoints": [
+        "colors",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g2-001",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语动物词“cat”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "狗"
+        },
+        {
+          "id": "B",
+          "text": "猫"
+        },
+        {
+          "id": "C",
+          "text": "鸟"
+        },
+        {
+          "id": "D",
+          "text": "鱼"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "在这里，cat表示猫。",
+      "knowledgePoints": [
+        "animals",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g2-002",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语动物词“dog”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "鸟"
+        },
+        {
+          "id": "B",
+          "text": "鱼"
+        },
+        {
+          "id": "C",
+          "text": "狗"
+        },
+        {
+          "id": "D",
+          "text": "兔子"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "在这里，dog表示狗。",
+      "knowledgePoints": [
+        "animals",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g2-003",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语动物词“bird”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "鱼"
+        },
+        {
+          "id": "B",
+          "text": "兔子"
+        },
+        {
+          "id": "C",
+          "text": "猫"
+        },
+        {
+          "id": "D",
+          "text": "鸟"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "在这里，bird表示鸟。",
+      "knowledgePoints": [
+        "animals",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g2-004",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语动物词“fish”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "鱼"
+        },
+        {
+          "id": "B",
+          "text": "兔子"
+        },
+        {
+          "id": "C",
+          "text": "猫"
+        },
+        {
+          "id": "D",
+          "text": "狗"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "在这里，fish表示鱼。",
+      "knowledgePoints": [
+        "animals",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g2-005",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语动物词“rabbit”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "猫"
+        },
+        {
+          "id": "B",
+          "text": "兔子"
+        },
+        {
+          "id": "C",
+          "text": "狗"
+        },
+        {
+          "id": "D",
+          "text": "鸟"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "在这里，rabbit表示兔子。",
+      "knowledgePoints": [
+        "animals",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g3-001",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语水果词“apple”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "香蕉"
+        },
+        {
+          "id": "B",
+          "text": "橙子"
+        },
+        {
+          "id": "C",
+          "text": "苹果"
+        },
+        {
+          "id": "D",
+          "text": "梨"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "在这里，apple表示苹果。",
+      "knowledgePoints": [
+        "fruit",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g3-002",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语水果词“banana”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "橙子"
+        },
+        {
+          "id": "B",
+          "text": "梨"
+        },
+        {
+          "id": "C",
+          "text": "葡萄"
+        },
+        {
+          "id": "D",
+          "text": "香蕉"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "在这里，banana表示香蕉。",
+      "knowledgePoints": [
+        "fruit",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g3-003",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语水果词“orange”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "橙子"
+        },
+        {
+          "id": "B",
+          "text": "梨"
+        },
+        {
+          "id": "C",
+          "text": "葡萄"
+        },
+        {
+          "id": "D",
+          "text": "苹果"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "在这里，orange表示橙子。",
+      "knowledgePoints": [
+        "fruit",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g3-004",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语水果词“pear”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "葡萄"
+        },
+        {
+          "id": "B",
+          "text": "梨"
+        },
+        {
+          "id": "C",
+          "text": "苹果"
+        },
+        {
+          "id": "D",
+          "text": "香蕉"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "在这里，pear表示梨。",
+      "knowledgePoints": [
+        "fruit",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g3-005",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语水果词“grape”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "苹果"
+        },
+        {
+          "id": "B",
+          "text": "香蕉"
+        },
+        {
+          "id": "C",
+          "text": "葡萄"
+        },
+        {
+          "id": "D",
+          "text": "橙子"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "在这里，grape表示葡萄。",
+      "knowledgePoints": [
+        "fruit",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g4-001",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语校园词“ruler”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "铅笔"
+        },
+        {
+          "id": "B",
+          "text": "橡皮"
+        },
+        {
+          "id": "C",
+          "text": "笔记本"
+        },
+        {
+          "id": "D",
+          "text": "尺子"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "在这里，ruler表示尺子。",
+      "knowledgePoints": [
+        "school_words",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g4-002",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语校园词“pencil”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "铅笔"
+        },
+        {
+          "id": "B",
+          "text": "橡皮"
+        },
+        {
+          "id": "C",
+          "text": "笔记本"
+        },
+        {
+          "id": "D",
+          "text": "学校"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "在这里，pencil表示铅笔。",
+      "knowledgePoints": [
+        "school_words",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g4-003",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语校园词“eraser”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "笔记本"
+        },
+        {
+          "id": "B",
+          "text": "橡皮"
+        },
+        {
+          "id": "C",
+          "text": "学校"
+        },
+        {
+          "id": "D",
+          "text": "尺子"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "在这里，eraser表示橡皮。",
+      "knowledgePoints": [
+        "school_words",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g4-004",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语校园词“notebook”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "学校"
+        },
+        {
+          "id": "B",
+          "text": "尺子"
+        },
+        {
+          "id": "C",
+          "text": "笔记本"
+        },
+        {
+          "id": "D",
+          "text": "铅笔"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "在这里，notebook表示笔记本。",
+      "knowledgePoints": [
+        "school_words",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g4-005",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "英语校园词“school”对应的中文意思是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "尺子"
+        },
+        {
+          "id": "B",
+          "text": "铅笔"
+        },
+        {
+          "id": "C",
+          "text": "橡皮"
+        },
+        {
+          "id": "D",
+          "text": "学校"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "在这里，school表示学校。",
+      "knowledgePoints": [
+        "school_words",
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "starter-english-g5-001",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "名词“child”的不规则复数形式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "children"
+        },
+        {
+          "id": "B",
+          "text": "child"
+        },
+        {
+          "id": "C",
+          "text": "childs"
+        },
+        {
+          "id": "D",
+          "text": "childes"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "child的不规则复数形式是children。",
+      "knowledgePoints": [
+        "irregular_plurals",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g5-002",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "名词“foot”的不规则复数形式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "foot"
+        },
+        {
+          "id": "B",
+          "text": "feet"
+        },
+        {
+          "id": "C",
+          "text": "foots"
+        },
+        {
+          "id": "D",
+          "text": "footes"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "foot的不规则复数形式是feet。",
+      "knowledgePoints": [
+        "irregular_plurals",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g5-003",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "名词“tooth”的不规则复数形式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "tooth"
+        },
+        {
+          "id": "B",
+          "text": "tooths"
+        },
+        {
+          "id": "C",
+          "text": "teeth"
+        },
+        {
+          "id": "D",
+          "text": "toothes"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "tooth的不规则复数形式是teeth。",
+      "knowledgePoints": [
+        "irregular_plurals",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g5-004",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "名词“mouse”的不规则复数形式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "mouse"
+        },
+        {
+          "id": "B",
+          "text": "mouses"
+        },
+        {
+          "id": "C",
+          "text": "mousees"
+        },
+        {
+          "id": "D",
+          "text": "mice"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "mouse的不规则复数形式是mice。",
+      "knowledgePoints": [
+        "irregular_plurals",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g5-005",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "名词“goose”的不规则复数形式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "geese"
+        },
+        {
+          "id": "B",
+          "text": "goose"
+        },
+        {
+          "id": "C",
+          "text": "gooses"
+        },
+        {
+          "id": "D",
+          "text": "goosees"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "goose的不规则复数形式是geese。",
+      "knowledgePoints": [
+        "irregular_plurals",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g6-001",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "动词“go”的一般过去式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "go"
+        },
+        {
+          "id": "B",
+          "text": "went"
+        },
+        {
+          "id": "C",
+          "text": "goed"
+        },
+        {
+          "id": "D",
+          "text": "going"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "go的一般过去式是went。",
+      "knowledgePoints": [
+        "past_tense",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g6-002",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "动词“see”的一般过去式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "see"
+        },
+        {
+          "id": "B",
+          "text": "seeed"
+        },
+        {
+          "id": "C",
+          "text": "saw"
+        },
+        {
+          "id": "D",
+          "text": "seeing"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "see的一般过去式是saw。",
+      "knowledgePoints": [
+        "past_tense",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g6-003",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "动词“eat”的一般过去式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "eat"
+        },
+        {
+          "id": "B",
+          "text": "eated"
+        },
+        {
+          "id": "C",
+          "text": "eating"
+        },
+        {
+          "id": "D",
+          "text": "ate"
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "eat的一般过去式是ate。",
+      "knowledgePoints": [
+        "past_tense",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g6-004",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "动词“write”的一般过去式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "wrote"
+        },
+        {
+          "id": "B",
+          "text": "write"
+        },
+        {
+          "id": "C",
+          "text": "writeed"
+        },
+        {
+          "id": "D",
+          "text": "writeing"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "write的一般过去式是wrote。",
+      "knowledgePoints": [
+        "past_tense",
+        "grammar"
+      ]
+    },
+    {
+      "id": "starter-english-g6-005",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "动词“take”的一般过去式是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "take"
+        },
+        {
+          "id": "B",
+          "text": "took"
+        },
+        {
+          "id": "C",
+          "text": "takeed"
+        },
+        {
+          "id": "D",
+          "text": "takeing"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "take的一般过去式是took。",
+      "knowledgePoints": [
+        "past_tense",
+        "grammar"
+      ]
+    }
+  ]
+}
