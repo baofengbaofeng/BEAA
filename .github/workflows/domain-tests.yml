@@ -28,6 +28,8 @@ jobs:
         run: npm run demo:device
       - name: Run persistent question bank demonstration
         run: npm run demo:bank
+      - name: Run committed usage reminder demonstration
+        run: npm run demo:reminders
       - name: Install browser and runtime libraries
         run: npx playwright install --with-deps chromium
       - name: Run actual browser and accessibility checks
