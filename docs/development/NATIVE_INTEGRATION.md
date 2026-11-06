@@ -124,4 +124,8 @@ Linux参考guardian/auth/bank库现统一在SQLite连接之前核对受保护文
 
 ## 本轮离线入口与生产接入的区别
 
-`Index.ets`仅加载与浏览器逐字节一致的rawfile，没有设备JS桥，构建检查先确认共享时段嵌入和资源同步。此入口复用网页已有功能，不代表上文guardian/SQLite业务层已经接入ArkTS或原生安全后端。网页PIN、墙钟、localStorage与下载行为均未在目标WebView验收；详见[手册N10](../DEVICE_POC.md)。后续生产客户端仍需可信数据源/原子后端/原生认证及正式权限，不能将离线容器改称完整受控客户端。
+`Index.ets`仅加载与浏览器逐字节一致的rawfile，只有摘要保存/模拟提醒状态/暂停的窄桥，没有设备控制或凭据JS桥，构建检查先确认共享时段嵌入和资源同步。此入口复用网页已有功能，不代表上文guardian/SQLite业务层已经接入ArkTS或原生安全后端。网页PIN、墙钟、localStorage与下载行为均未在目标WebView验收；详见[手册N10](../DEVICE_POC.md)。后续生产客户端仍需可信数据源/原子后端/原生认证及正式权限，不能将离线容器改称完整受控客户端。
+
+## 候选原生摘要与提醒实现
+
+纯TS服务同源用于Node严格类型检查和实际执行，原生OS文件、RDB、通知API按固定公开API10参考写入候选源码，仍未SDK构建。提醒队列只保存通知元数据，不替代上文安全认证、guardian原子使用账本或可信采集；源码与API依据见[宿主说明](../../apps/harmony/NATIVE_SERVICES.md)。

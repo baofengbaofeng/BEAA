@@ -5,7 +5,7 @@ import sqlite3
 import sys
 
 path, kind = sys.argv[1:]
-assert kind in ('guardian', 'auth', 'bank')
+assert kind in ('guardian', 'auth', 'bank', 'reminder')
 connection = sqlite3.connect(path, isolation_level=None)
 connection.execute('PRAGMA cache_size=1')
 connection.execute('BEGIN IMMEDIATE')
@@ -17,6 +17,6 @@ if kind == 'auth':
     connection.execute('CREATE TABLE uncommitted_spill(data BLOB)')
     connection.execute('INSERT INTO uncommitted_spill VALUES (?)', (b'x' * 262144,))
 else:
-    table = 'guardian_state' if kind == 'guardian' else 'question_bank'
+    table = {'guardian': 'guardian_state', 'bank': 'question_bank', 'reminder': 'reminder_outbox'}[kind]
     connection.execute(f'UPDATE {table} SET payload=?,sha256=? WHERE id=1', ('x' * 262144, '0' * 64))
 os._exit(0)

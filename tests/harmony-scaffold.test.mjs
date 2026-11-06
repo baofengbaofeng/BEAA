@@ -19,7 +19,7 @@ test('native application scaffold has required entry and resources', () => {
 test('native offline entry uses the same tested responsive page with a narrow summary export bridge', () => {
   const page=read('entry/src/main/ets/pages/Index.ets');
   assert.match(page,/Web\(/);assert.match(page,/\$rawfile\('beaa-preview.html'\)/);assert.match(page,/domStorageAccess\(true\)/);
-  assert.match(page,/javaScriptProxy/);assert.match(page,/exportLearningSummary/);assert.doesNotMatch(page,/restrictApps|releaseApps|setPolicy|verifyPin/);
+  assert.match(page,/javaScriptProxy/);assert.match(page,/exportLearningSummary/);const methods=[...page.match(/methodList:\s*\[([^\]]+)\]/)[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);assert.deepEqual(methods,['exportLearningSummary','updateReminderState','pauseReminders']);assert.doesNotMatch(page,/restrictApps|releaseApps|setPolicy|verifyPin/);
   const embedded=read('entry/src/main/resources/rawfile/beaa-preview.html');
   assert.equal(embedded,readFileSync(new URL('../apps/web-preview/index.html',import.meta.url),'utf8'));
   for(const marker of ['@media(max-width:760px)','学习挑战','家长设置','检查休息条件','不具备设备管控权限'])assert.ok(embedded.includes(marker),marker);
@@ -59,4 +59,11 @@ test('application metadata resolves its label and icon inside AppScope', () => {
   const strings=JSON.parse(read('AppScope/resources/base/element/string.json')).string;
   assert.equal(strings.find(s=>s.name===labelName)?.value,'学知守护');
   assert.ok(['svg','png','jpg'].some(ext=>existsSync(new URL(`AppScope/resources/base/media/${iconName}.${ext}`,root))),`missing application icon ${iconName}`);
+});
+
+test('native notification and queue candidates declare restricted API use without credential or device control bridges',()=>{
+ const notification=read('entry/src/main/ets/services/NativeNotificationPort.ets'),store=read('entry/src/main/ets/services/NativeReminderStore.ets');
+ for(const marker of ['isNotificationEnabled','requestEnableNotification','isAlertOnce','autoDeletedTime','beaa-preview-reminder'])assert.ok(notification.includes(marker),marker);
+ for(const marker of ['encrypt: true','beginTransaction','rollBack','native_reminder_queue','validateReminderQueue'])assert.ok(store.includes(marker),marker);
+ assert.doesNotMatch(notification+store,/restrictApps|releaseApps|verifyPin|deleteRdbStore/);
 });

@@ -1,0 +1,66 @@
+✖ a failed publish acknowledgement is cancelled when source changes, permission is lost or the host pauses (4.851407ms)
+✖ failed cleanup of an applied but rejected publish remains durably pending (1.416239ms)
+✖ a refreshed claim after CAS conflict respects another worker persisted retry deadline (1.24015ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 792.084489
+
+✖ failing tests:
+
+test at tests/reminder-delivery.test.mjs:90:1
+✖ a failed publish acknowledgement is cancelled when source changes, permission is lost or the host pauses (4.851407ms)
+  AssertionError [ERR_ASSERTION]: phase
+
+  1 !== 0
+
+      at TestContext.<anonymous> (file:///workspace/BEAA/tests/reminder-delivery.test.mjs:91:399)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reminder-delivery.test.mjs:93:1
+✖ failed cleanup of an applied but rejected publish remains durably pending (1.416239ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'idle'
+  - 'cleanup_pending'
+
+      at TestContext.<anonymous> (file:///workspace/BEAA/tests/reminder-delivery.test.mjs:94:280)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'cleanup_pending',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reminder-delivery.test.mjs:96:1
+✖ a refreshed claim after CAS conflict respects another worker persisted retry deadline (1.24015ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  2 !== 1
+
+      at TestContext.<anonymous> (file:///workspace/BEAA/tests/reminder-delivery.test.mjs:97:427)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
