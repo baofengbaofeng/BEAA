@@ -203,7 +203,7 @@ test('stale question button cannot answer the following question', () => {
 });
 
 test('invalid persisted answering phase cannot grant already exhausted daily allowance', () => {
- const h=harness({phase:'answering',dailyUsed:120,page:'home'});assert.equal(h.evaluate('s.phase'),'daily');h.navigate('home');h.action('start');assert.equal(h.current().phase,'daily');
+ const h=harness({...harness().current(),phase:'answering',dailyUsed:120,page:'home'});assert.equal(h.evaluate('s.phase'),'daily');h.navigate('home');h.action('start');assert.equal(h.current().phase,'daily');
 });
 
 test('corrupt optional records never erase PIN or daily allowance', async () => {
@@ -241,4 +241,42 @@ test('initialization binds state and version to the same raw storage snapshot',a
  resumed.navigate('home');
  assert.equal(resumed.current().pinHash,committed.pinHash);
  assert.equal(resumed.current().dailyUsed,30);
+});
+
+test('temporary use requires parent validation, remains within current allowance and records audit',async()=>{
+ const h=harness();h.fields.permitMinutes={value:'5'};h.action('issuePermit');assert.equal(h.current().permit??null,null);
+ await h.parent();h.action('issuePermit');assert.equal(h.current().permit.budgetSeconds,300);assert.equal(h.current().audit.at(-1).type,'permit_issue');
+ h.action('use');assert.equal(h.current().dailyUsed,5);assert.equal(h.current().cycleUsed,5);assert.equal(h.current().permit.closedReason,'budget_exhausted');
+ h.action('use');assert.equal(h.current().dailyUsed,5);h.action('endPermit');h.action('use');assert.equal(h.current().dailyUsed,15);
+});
+test('temporary expiry survives reload, requires parent action and cannot bypass rest or daily cap',async()=>{
+ const h=harness();await h.parent();h.fields.permitMinutes={value:'1'};h.action('issuePermit');h.advance(60000);h.action('use');assert.equal(h.current().dailyUsed,0);assert.equal(h.current().permit.closedReason,'expired');
+ const resumed=harness(h.current());resumed.advance(60000);resumed.action('use');assert.equal(resumed.current().dailyUsed,0);resumed.action('endPermit');assert.notEqual(resumed.current().permit,null);
+ await resumed.parent();resumed.action('endPermit');resumed.action('fill');resumed.action('start');[2,1,0,2,2].forEach(resumed.answer);resumed.fields.permitMinutes={value:'5'};resumed.action('issuePermit');assert.equal(resumed.current().permit,null);assert.equal(resumed.current().phase,'rest');
+ const locked=harness({...h.current(),permit:null,dailyUsed:120,phase:'daily'});locked.advance(60000);await locked.parent();locked.fields.permitMinutes={value:'1'};locked.action('issuePermit');assert.equal(locked.current().permit,null);assert.equal(locked.current().dailyUsed,120);
+});
+test('temporary access rejects excess daily allowance and closes permanently on clock rollback',async()=>{
+ const h=harness();await h.parent();h.fields.dailyLimit.value='15';h.action('saveSettings');h.action('use');h.fields.permitMinutes={value:'6'};h.action('issuePermit');assert.equal(h.current().permit,null);
+ h.fields.permitMinutes.value='5';h.action('issuePermit');h.advance(-1);h.action('use');assert.equal(h.current().permit.closedReason,'clock_rollback');h.advance(2);h.action('use');assert.equal(h.current().dailyUsed,10);
+});
+test('one-minute simulation exposes urgent page reminders and a daily cap wins ties',()=>{
+ const h=harness();for(let i=0;i<25;i++)h.action('useOne');assert.equal(h.current().dailyUsed,25);assert.match(h.page(),/剩余 5 分钟/);
+ for(let i=0;i<4;i++)h.action('useOne');assert.match(h.page(),/剩余 1 分钟/);h.action('useOne');assert.equal(h.current().phase,'challenge');assert.doesNotMatch(h.page(),/本轮剩余时间<\/div><div class="big">30/);
+});
+test('broken critical snapshots remain untouched and never accept usage or parent setup',async()=>{
+ const seed=harness();seed.action('fill');const original=seed.current();
+ for(const extra of [{dailyUsed:-1},{cycleUsed:'0'},{phase:'unknown'},{pinHash:'invalid',pinSalt:'x'},{day:'2026-99-99'},{permit:{invalid:true}}]){
+  const h=harness({...original,...extra}),before=h.storage.get('beaa-web-preview-v1');h.action('fill');await h.parent();assert.equal(h.storage.get('beaa-web-preview-v1'),before);assert.match(h.page(),/数据需要恢复/);
+ }
+ const broken=harness(null,false,()=>'{broken');broken.action('fill');await broken.parent();assert.equal(broken.storage.size,0);assert.match(broken.page(),/数据需要恢复/);
+});
+test('a storage write failure cannot return a new in-memory usage grant',()=>{
+ const h=harness(null,true);h.action('fill');h.action('use');assert.equal(h.evaluate('s.dailyUsed'),0);assert.match(h.page(),/无法保存/);
+});
+test('a daily rollover preserves an exhausted cycle and still requires a challenge',()=>{
+ const h=harness();h.action('fill');const locked=harness({...h.current(),dailyLimit:30,dailyUsed:30,phase:'daily'});locked.advance(86400000);locked.action('use');assert.equal(locked.current().dailyUsed,0);assert.equal(locked.current().cycleUsed,30);assert.equal(locked.current().phase,'challenge');
+});
+test('learning summary excludes credentials and audit details survive a normal reload',async()=>{
+ const h=harness();await h.parent();h.fields.permitMinutes={value:'2'};h.action('issuePermit');const summary=JSON.parse(h.evaluate('JSON.stringify(learningSummary())'));assert.equal(summary.deviceControlValidated,false);assert.equal(summary.simulated,true);assert(!JSON.stringify(summary).match(/pinHash|pinSalt|839271/));
+ const next=harness(h.current());assert.equal(next.current().audit.at(-1).minutes,2);await next.parent();next.navigate('settings');assert.match(next.page(),/临时时段分配/);
 });
