@@ -84,3 +84,11 @@ npm run inspect:sqlite -- --source local-data/backups/checkpoint.sqlite3
 ## 家长验证与报告
 
 `npm run demo:parent`运行独立私有凭据库、PBKDF2 PIN验证、持久失败冷却、短时token及受保护学习报告。登录/注销/换PIN不改使用账本；原生安全存储尚未验证。见[家长验证参考说明](PARENT_AUTH.md)。
+
+## 只读设备状态接入准备
+
+`npm run demo:device`使用真实临时SQLite与明确不支持的默认适配器，输出业务期望和设备观察状态，断言查询不修改账本。使用事件为合成数据，不连接设备或申请权限。共享接口与时效限制见[平台状态契约](../../shared/domain/DEVICE_CONTROL.md)；这不是原生应用或跨应用管控验收。
+
+## 题库目录参考
+
+`npm run demo:bank`运行真实PIN和guardian/auth/bank三份私有SQLite示例，演示受保护导入、重开目录、导入不改当前题和累计/历史、新轮读取新版。新增`createSqliteQuestionBankStore/openSqliteQuestionBankStore`，目录与使用账本格式隔离，不覆盖已有文件。见[接口与限制](../../shared/quiz/CATALOG.md)。使用/休息仍为合成输入，原生安全存储与真机门禁不变。

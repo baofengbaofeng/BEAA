@@ -6,7 +6,7 @@
 
 ## 业务与平台接口
 
-沿用 `docs/ARCHITECTURE.md` 的 DeviceControlAdapter 和 `shared/domain/engine.mjs`。原生接入时用 ArkTS 类型适配业务契约，而非直接导入 `.mjs`。能力报告必须分别描述 usage/restriction/restore；不支持时返回 unsupported，不抛装成功，不回退为系统已锁定。计时、日期与休息只接收经设备适配器核实的事件。浏览器 demo 中的按钮、系统墙钟和 PIN 摘要不是这些可信来源。
+沿用 `docs/ARCHITECTURE.md` 的 DeviceControlAdapter 和 `shared/domain/engine.mjs`。原生接入时用 ArkTS 类型适配业务契约，而非直接导入 `.mjs`。完整设备动作接入必须分别验证 usage/restriction/restore；本轮只读状态契约仅包含 usage/restriction，见[平台状态契约](../../shared/domain/DEVICE_CONTROL.md)，restore（解除限制能力）在未来动作服务中单独定义与验收，不能由reported_ready推断；不支持时返回 unsupported，不抛装成功，不回退为系统已锁定。计时、日期与休息只接收经设备适配器核实的事件。浏览器 demo 中的按钮、系统墙钟和 PIN 摘要不是这些可信来源。
 
 推荐服务边界：
 
@@ -107,3 +107,7 @@ Linux参考服务使用独立auth SQLite、PBKDF2-HMAC-SHA256 600k、随机盐�
 schema2根policy/dailyUsageSeconds/pendingPolicy保留权威实际累计；领域session仍schema1并存min(actual,cap)投影。展示/保存实际累计必须用根账本或view，不能以投影替代，否则降低再提高上限会丢已用时间。仅可信日切换清零，周期/原休息/历史保持。
 
 旧schema1由冻结只读validator严格校验后内存升级，身份/revision/round不变；SQLite表user_version1不变，下一成功CAS写payload2。旧版程序读payload2应拒绝，不得丢字段降版。参考SQLite/PIN真实验证已覆盖迁移/应答丢失/注销拒写，原生格式迁移、事务、权限和真机仍需验收。
+
+## 独立题库目录与测验题源
+
+共享`catalog.mjs`与`question-bank-service.mjs`现提供按lifecycleId归属的版本化目录、家长验证前后检查、CAS导入和从目录开始测验的可信入口。Node/Python专用SQLite参考目录与guardian/auth库格式隔离；目录变更不写使用账本。测验开始固定原题，之后答题/恢复/归档不读取当前目录；最近开始命令重试优先恢复已提交回执。新轮读取时若题量不足或目录无效应保留挑战状态，不重复凑题或默认放行。详见[目录契约](../../shared/quiz/CATALOG.md)。原生应实现同等端口行为、可信初始化和家长授权，不直接导入Node/Python模块；课程完整性、原生存储/UI及设备门禁尚未验收。
