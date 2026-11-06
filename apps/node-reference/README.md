@@ -92,3 +92,9 @@ npm run inspect:sqlite -- --source local-data/backups/checkpoint.sqlite3
 ## 题库目录参考
 
 `npm run demo:bank`运行真实PIN和guardian/auth/bank三份私有SQLite示例，演示受保护导入、重开目录、导入不改当前题和累计/历史、新轮读取新版。新增`createSqliteQuestionBankStore/openSqliteQuestionBankStore`，目录与使用账本格式隔离，不覆盖已有文件。见[接口与限制](../../shared/quiz/CATALOG.md)。使用/休息仍为合成输入，原生安全存储与真机门禁不变。
+
+## SQLite中断恢复与格式隔离
+
+三种参考库在连接前使用共同头部格式初筛，核对各自application_id、user_version与DELETE标记，之后仍做完整表/数据校验。误传其他应用库在SQLite自动恢复之前拒绝，数据库和回滚日志内容保持；初始化和备份新目标仍为独占创建。
+
+正常打开guardian、auth、bank允许SQLite回滚正确库的未提交事务，不等于清空记录或重置凭据。家长status读取可能发生事务恢复，但不更新失败计数/版本，也不创建token。`inspectSqliteLifecycleBackup`及备份内部源快照阶段仍以mode=ro打开：若热日志需要恢复则失败并保留文件；正常backup的前置读取可先恢复正确主库。错误来源在产生目标文件前拒绝。见[恢复与隔离报告](../../docs/testing/SQLITE_RECOVERY_ISOLATION_REPORT.md)。

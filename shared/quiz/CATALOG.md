@@ -46,7 +46,7 @@ const view=await beginQuizFromQuestionBank(guardianStore,bankStore,beginQuizComm
 
 ## 参考SQLite和运行
 
-`apps/node-reference/question-bank-store.mjs`提供createSqliteQuestionBankStore(path,initial)与openSqliteQuestionBankStore(path)。专用question_bank表、独立application_id=0x42454151、schema user_version1，不能与guardian/auth数据库混用。使用已有私有路径检查、独占新文件、0600、DELETE journal、FULL同步、BEGIN IMMEDIATE CAS与SHA256损坏检测。读取前先核对受保护文件的SQLite头部、专属application_id/版本/DELETE格式，再用可恢复连接读取：必要时由SQLite回滚未提交事务，之后完整校验表与目录。误传其他应用的热日志数据库时，在连接前拒绝，不触发其恢复。逻辑读取可发生事务恢复，不能描述为物理只读。损坏/未知/缺失不自动初始化或覆盖；同UID恶意篡改或回滚不在这些保护能力内，摘要不是认证。
+`apps/node-reference/question-bank-store.mjs`提供createSqliteQuestionBankStore(path,initial)与openSqliteQuestionBankStore(path)。专用question_bank表、独立application_id=0x42454151、schema user_version1，不能与guardian/auth数据库混用。使用已有私有路径检查、独占新文件、0600、DELETE journal、FULL同步、BEGIN IMMEDIATE CAS与SHA256损坏检测。读取前先通过三类参考库共用的辅助函数核对受保护文件的SQLite头部、专属application_id/版本/DELETE格式，再用可恢复连接读取：必要时由SQLite回滚未提交事务，之后完整校验表与目录。误传其他应用的热日志数据库时，在连接前拒绝，不触发其恢复。逻辑读取可发生事务恢复，不能描述为物理只读。损坏/未知/缺失不自动初始化或覆盖；同UID恶意篡改或回滚不在这些保护能力内，摘要不是认证。
 
 `npm run demo:bank`需要POSIX、Node20+、Python3.11+，会创建并清理独立的guardian/auth/bank临时数据库，实际PIN验证后导入并重开，原轮按旧题完成，新轮使用新版，累计使用与历史保留。使用和休息都是合成输入，没有真实跨应用管控。演示不打印PIN/token或生成可发放额度的授权。
 

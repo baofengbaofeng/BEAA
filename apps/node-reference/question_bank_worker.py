@@ -6,7 +6,7 @@ from pathlib import Path
 import os
 import sqlite3
 import sys
-from sqlite_worker import StoreFailure, check, fields, revision, reserve_private_file, connect_existing, secure_path
+from sqlite_worker import StoreFailure, check, fields, revision, reserve_private_file, connect_existing, validate_header
 
 APPLICATION_ID = 0x42454151
 COLUMNS = ['id', 'lifecycle_id', 'revision', 'payload', 'sha256']
@@ -59,18 +59,6 @@ def initialize(path, text):
     return True
 
 
-def validate_header(path):
-    # Identify the private catalog before SQLite may recover a hot journal.
-    # This is only a format preflight; read_row validates the recovered database.
-    secure_path(path)
-    with path.open('rb') as source:
-        header = source.read(100)
-    check(len(header) == 100 and header[:16] == b'SQLite format 3\x00', 'CORRUPT_STORE')
-    check(int.from_bytes(header[68:72], 'big') == APPLICATION_ID and
-          int.from_bytes(header[60:64], 'big') == 1 and
-          header[18] == 1 and header[19] == 1, 'UNSUPPORTED_STORE')
-
-
 def run(path, message):
     check(type(message) is dict, 'INVALID_REQUEST')
     operation = message.get('operation')
@@ -85,7 +73,7 @@ def run(path, message):
         check(type(expected['lifecycleId']) is str and revision(expected['revision']), 'INVALID_REQUEST')
         identity, rev = metadata(message['text'])
         check(identity == expected['lifecycleId'] and rev == expected['revision'] + 1, 'INVALID_REQUEST')
-    validate_header(path)
+    validate_header(path, APPLICATION_ID)
     # Even a logical read must permit SQLite to roll back a valid interrupted import.
     connection = connect_existing(path)
     try:
