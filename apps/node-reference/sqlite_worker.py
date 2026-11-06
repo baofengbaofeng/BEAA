@@ -66,6 +66,19 @@ def secure_path(path, existing=True):
           entry.st_nlink == 1 and entry.st_mode & 0o077 == 0, 'UNSAFE_STORAGE')
 
 
+def validate_header(path, application_id, schema_version=1,
+                    corrupt_code='CORRUPT_STORE', unsupported_code='UNSUPPORTED_STORE'):
+    # Format preflight before SQLite can change files during hot-journal recovery.
+    # Markers remain fixed in supported writers; this is not authentication.
+    secure_path(path)
+    with path.open('rb') as source:
+        header = source.read(100)
+    check(len(header) == 100 and header[:16] == b'SQLite format 3\x00', corrupt_code)
+    check(int.from_bytes(header[68:72], 'big') == application_id and
+          int.from_bytes(header[60:64], 'big') == schema_version and
+          header[18] == 1 and header[19] == 1, unsupported_code)
+
+
 def connect_existing(path, read_only=False):
     secure_path(path)
     connection = sqlite3.connect(path.as_uri() + ('?mode=ro' if read_only else '?mode=rw'), uri=True, timeout=2, isolation_level=None)
@@ -127,6 +140,7 @@ def initialize(path, text):
 def backup_database(path, target):
     # Pin the source read snapshot before reserving any destination. Copy the database
     # with SQLite, never by copying a live database/journal file pair.
+    validate_header(path, APPLICATION_ID, SCHEMA_VERSION)
     source = connect_existing(path, read_only=True)
     try:
         source.execute('BEGIN')
@@ -163,6 +177,7 @@ def run(path, message):
         check(type(expected['lifecycleId']) is str and revision(expected['revision']), 'INVALID_REQUEST')
         identity, rev = metadata(message['text'])
         check(identity == expected['lifecycleId'] and rev == expected['revision'] + 1, 'INVALID_REQUEST')
+    validate_header(path, APPLICATION_ID, SCHEMA_VERSION)
     connection = connect_existing(path, read_only=operation == 'inspect')
     try:
         connection.execute('BEGIN' if operation in ('read', 'inspect') else 'BEGIN IMMEDIATE')

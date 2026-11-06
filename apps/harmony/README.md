@@ -8,6 +8,10 @@
 - 五个交互页面状态：儿童主页、5题挑战、成功、休息、家长设置
 - 示例题目与错误解释（当前只是页面内演示数据）
 
+## 拿到设备后按步骤验收
+
+先阅读[逐步操作手册](../../docs/DEVICE_POC.md)，复制[验收记录模板](../../docs/testing/DEVICE_ACCEPTANCE_RECORD_TEMPLATE.md)。从型号/系统/电脑信息开始，按连接、正式权限验证、原生接入/构建、安装和默认规则实测顺序执行；模板全部未执行，不能把本说明或演示骨架当作已通过报告。
+
 ## 如何尝试
 1. 使用与目标设备相匹配的 DevEco Studio 版本和 HarmonyOS SDK 打开 `apps/harmony/`。
 2. 让 IDE 同步 `hvigor` 和 `ohpm` 依赖；如 SDK 与构建插件不匹配，以 **DevEco Studio 同版本生成的 Empty Ability/Stage 模板** 配置为准，迁移本目录 `entry/src/main/ets` 与资源文件。

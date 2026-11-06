@@ -9,7 +9,7 @@ import secrets
 import sqlite3
 import sys
 import time
-from sqlite_worker import StoreFailure, check, fields, reserve_private_file, connect_existing, revision
+from sqlite_worker import StoreFailure, check, fields, reserve_private_file, connect_existing, revision, validate_header
 
 APPLICATION_ID = 0x42454150
 ITERATIONS = 600000
@@ -39,7 +39,8 @@ def identity(row):
 
 def read_row(connection):
     check(connection.execute('PRAGMA application_id').fetchone()[0] == APPLICATION_ID and
-          connection.execute('PRAGMA user_version').fetchone()[0] == 1, 'UNSUPPORTED_AUTH_STORE')
+          connection.execute('PRAGMA user_version').fetchone()[0] == 1 and
+          connection.execute('PRAGMA journal_mode').fetchone()[0].lower() == 'delete', 'UNSUPPORTED_AUTH_STORE')
     check([r[1] for r in connection.execute('PRAGMA table_info(parent_auth)')] == COLUMNS, 'CORRUPT_AUTH_STORE')
     rows = connection.execute('SELECT * FROM parent_auth').fetchall()
     check(len(rows) == 1, 'CORRUPT_AUTH_STORE')
@@ -101,7 +102,10 @@ def run(path, message):
         return initialize(path, message)
     check(operation in ('status', 'login', 'change_pin'), 'INVALID_REQUEST')
     fields(message, ['operation'] if operation == 'status' else ['operation', 'pin'] if operation == 'login' else ['operation', 'expectedVersion', 'pin'])
-    connection = connect_existing(path, read_only=operation == 'status')
+    validate_header(path, APPLICATION_ID, corrupt_code='CORRUPT_AUTH_STORE',
+                    unsupported_code='UNSUPPORTED_AUTH_STORE')
+    # Status performs no credential updates, but must permit SQLite crash recovery.
+    connection = connect_existing(path)
     try:
         connection.execute('BEGIN' if operation == 'status' else 'BEGIN IMMEDIATE'); row = read_row(connection)
         if operation == 'status':

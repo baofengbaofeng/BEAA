@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node --test shared/domain/*.test.mjs shared/quiz/*.test.mjs tests/*.test.mjs",
     "demo": "node shared/domain/demo.mjs",
-    "test:browser": "npm run build:browser-check && playwright test",
+    "test:browser": "npm run build:browser-check && npm run build:starter-bank && playwright test",
     "build:demo": "python3 scripts/package-demo.py",
     "native:preflight": "node scripts/native-preflight.mjs",
     "demo:sqlite": "node apps/node-reference/demo.mjs",
@@ -15,7 +15,8 @@
     "demo:parent": "node apps/node-reference/parent-demo.mjs",
     "build:browser-check": "python3 scripts/package-browser-check.py",
     "demo:device": "node apps/node-reference/device-demo.mjs",
-    "demo:bank": "node apps/node-reference/question-bank-demo.mjs"
+    "demo:bank": "node apps/node-reference/question-bank-demo.mjs",
+    "build:starter-bank": "node scripts/package-starter-bank.mjs"
   },
   "engines": {
     "node": ">=20"

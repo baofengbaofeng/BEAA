@@ -19,6 +19,7 @@
 - [UI规范](docs/UI_DESIGN.md)
 - [开发路线](docs/ROADMAP.md)
 - [验收测试](tests/ACCEPTANCE.md)
+- [拿到设备后的逐步验收手册](docs/DEVICE_POC.md) · [填写记录模板](docs/testing/DEVICE_ACCEPTANCE_RECORD_TEMPLATE.md)
 
 ## 目录
 `apps/harmony` 首发客户端；`apps/ios` 未来版本；`shared/schemas` 配置定义；`shared/quiz` 题库样例；`tests` 验收基线。
@@ -55,3 +56,11 @@
 ## 可配置题库持久化参考
 
 `npm run demo:bank`实际验证家长PIN导入、SQLite版本保存/重开、当前测验保留原题及新轮次读取新版，导入不清空使用累计或学习记录。[目录接口](shared/quiz/CATALOG.md) · [验证报告](docs/testing/QUESTION_BANK_CATALOG_REPORT.md)。内置仍为5道三年级流程样例，不代表完整课程；未接原生UI或设备权限。
+
+## 90道基础练习与浏览器导入
+
+新增可选基础题库，按1–6参考年级、语数英分为18组，每组5题。`npm run build:starter-bank`生成`dist/beaa-starter-bank/beaa-starter-bank.browser.json`，普通用户复制全部内容后即可在现有家长设置的题库导入框粘贴使用。[使用说明](shared/quiz/STARTER_BANK.md) · [测试报告](docs/testing/STARTER_BANK_REPORT.md)。不自动替换已有数据，也不代表完整课程或已通过教师审核。
+
+## 参考存储中断恢复修复
+
+已修复家长验证库热日志导致重开失败，以及错误格式数据库在拒绝前被SQLite恢复的问题。三库连接前分别检查格式，保留已提交凭据/失败次数与使用账本；只读检查仍不执行恢复。实际子进程中断、跨库文件保持、备份边界与全量测试见[验证报告](docs/testing/SQLITE_RECOVERY_ISOLATION_REPORT.md)。这是Linux参考实现，不是原生设备恢复验收。
