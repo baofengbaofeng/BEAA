@@ -14,7 +14,8 @@
     "inspect:sqlite": "node apps/node-reference/backup.mjs inspect",
     "demo:parent": "node apps/node-reference/parent-demo.mjs",
     "build:browser-check": "python3 scripts/package-browser-check.py",
-    "demo:device": "node apps/node-reference/device-demo.mjs"
+    "demo:device": "node apps/node-reference/device-demo.mjs",
+    "demo:bank": "node apps/node-reference/question-bank-demo.mjs"
   },
   "engines": {
     "node": ">=20"

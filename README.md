@@ -51,3 +51,7 @@
 ## 平台状态接入准备
 
 `npm run demo:device`用真实SQLite和明确不支持的默认适配器展示业务资格与设备观察分离，并验证查询不修改进度。[接口说明](shared/domain/DEVICE_CONTROL.md) · [验证报告](docs/testing/DEVICE_CAPABILITY_REPORT.md)。权限撤销、超时或不支持不会被当成设备已解锁；本轮未实现真实设备监控/限制。
+
+## 可配置题库持久化参考
+
+`npm run demo:bank`实际验证家长PIN导入、SQLite版本保存/重开、当前测验保留原题及新轮次读取新版，导入不清空使用累计或学习记录。[目录接口](shared/quiz/CATALOG.md) · [验证报告](docs/testing/QUESTION_BANK_CATALOG_REPORT.md)。内置仍为5道三年级流程样例，不代表完整课程；未接原生UI或设备权限。
