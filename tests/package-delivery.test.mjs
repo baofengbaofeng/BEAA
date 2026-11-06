@@ -29,11 +29,14 @@ with ZipFile(sys.argv[1]+'.zip') as z:
  manifest=json.loads(z.read('BEAA-delivery/manifest.json'))
  assert manifest['nativeBuildValidated'] is False and manifest['deviceControlValidated'] is False and manifest['healthOutcomeValidated'] is False
  assert manifest['testsExecutedByPackager'] is False
+ assert manifest['testEvidence']=='BEAA/docs/testing/NATIVE_SERVICES_REPORT.md'
  assert z.read('BEAA-delivery/web/index.html')==Path('apps/web-preview/index.html').read_bytes()
  with ZipFile(BytesIO(z.read('BEAA-delivery/beaa-source.zip'))) as source:
   assert source.read('BEAA/apps/web-preview/index.html')==z.read('BEAA-delivery/web/index.html')
   assert source.read('BEAA/apps/harmony/entry/src/main/resources/rawfile/beaa-preview.html')==z.read('BEAA-delivery/web/index.html')
   assert 'BEAA/shared/domain/temporary-access.mjs' in source.namelist()
+  assert 'BEAA/apps/harmony/entry/src/main/ets/services/NativeSummary.ts' in source.namelist()
+  assert 'BEAA/apps/harmony/entry/src/main/ets/services/ReminderDelivery.ts' in source.namelist()
   assert not any(n.lower().endswith(('.sqlite3','.db','.pem','.p12','.pfx','.key')) or '/local-data/' in n or '/device-logs/' in n for n in source.namelist())
 print('delivery consumer verification passed')
 `,out],{cwd:root,encoding:'utf8'});assert.match(result,/delivery consumer verification passed/);

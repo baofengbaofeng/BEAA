@@ -1,0 +1,17 @@
+
+> beaa-core-prototype@0.2.0 demo:notifications
+> node apps/node-reference/notification-demo.mjs
+
+真实SQLite队列演示；使用数据为合成输入，通知端口为记录型测试替身，没有发送系统通知或控制其他应用。
+{"operation":"recorded_publish","id":1,"kind":"five_minutes","nativeDeliveryValidated":false}
+{"operation":"recorded_cancel","id":1}
+{"operation":"recorded_publish","id":2,"kind":"one_minute","nativeDeliveryValidated":false}
+{"operation":"recorded_cancel","id":2}
+{"operation":"recorded_publish","id":3,"kind":"time_up","nativeDeliveryValidated":false}
+{"operation":"recorded_cancel","id":3}
+重开、同ID重试、去重和旧项取消通过；使用账本仍为1800秒，没有生成使用资格。
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

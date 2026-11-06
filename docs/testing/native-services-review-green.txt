@@ -1,0 +1,41 @@
+✔ current five/one/expiry reminders replace older ones with stable non-reused IDs (8.455814ms)
+✔ daily hard limit wins ties and non-available learning/rest stages never get usage reminders (1.927324ms)
+✔ reopening suppresses already published reminders but a new cycle gets a fresh ID (1.335811ms)
+✔ denied permission holds pending work and revocation cleans visible messages (0.775784ms)
+✔ publish failure persists exponential retry state without exporting adapter errors (1.414667ms)
+✔ failed stale cancellation stays pending and is retried before publishing newer work (2.34514ms)
+✔ a phase or permission change during publish cancels the result and never marks it submitted (2.256029ms)
+✔ same-instance and cross-instance pumps respect a sending lease (1.535885ms)
+✔ an abandoned sending lease is recovered with the original ID after restart (1.182835ms)
+✔ a committed but unacknowledged publication receipt survives a re-read (1.370091ms)
+✔ clock rollback cleans old messages and source rollback never resets the queue watermark (0.906877ms)
+✔ strict snapshots reject private fields, wrong scope, corrupt queues and fake device validation (0.763406ms)
+✔ a timed-out publish is retired and its eventual late completion is cancelled (20.549156ms)
+✔ a concurrent cancellation while publication receipt CAS conflicts cannot report submitted (2.175359ms)
+✔ source revision rollback during publication is treated as an unconfirmed current state (2.045548ms)
+✔ late publish cleanup still cancels the OS message when queue storage is temporarily unavailable (24.773773ms)
+✔ an explicit pause cancels reminders without reading a missing source or resetting the watermark (1.102226ms)
+✔ pause preserves never-published work for revalidation instead of manufacturing a delivery receipt (0.489843ms)
+✔ idle polling and repeated pauses do not rewrite the durable outbox (0.581928ms)
+✔ a lease taken by another worker before publish does not let the old owner publish or cancel its receipt (0.473999ms)
+✔ losing a lease after a current publish preserves the shared valid notification (0.576972ms)
+✔ late completion after a timeout does not cancel a still-current notification owned by a newer worker (16.963206ms)
+✔ a timeout whose retirement write fails still cleans its own late publication (16.269076ms)
+✔ a failed publish acknowledgement is cancelled when source changes, permission is lost or the host pauses (2.699452ms)
+✔ failed cleanup of an applied but rejected publish remains durably pending (1.311665ms)
+✔ a refreshed claim after CAS conflict respects another worker persisted retry deadline (0.963602ms)
+✔ a stale publish whose cancellation fails reports cleanup pending instead of cancelled (0.792058ms)
+✔ actual SQLite delivery queue reopens without replaying a published warning (695.021306ms)
+✔ independent real SQLite helpers atomically compare both scope and queue revision (196.659877ms)
+✔ a lost reply after real SQLite publication acknowledgement recovers from durable state (617.077132ms)
+✔ hot queue journals are rejected unchanged by other owners then recovered by the correct store (678.325054ms)
+✔ queue storage rejects all other database formats before opening them (322.020791ms)
+✔ queue open never initializes or overwrites missing, corrupt or unsafe stores (159.955144ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4069.941261

@@ -39,3 +39,7 @@ DAILY_LOCKED、SCHEDULE_LOCKED 由高优先级守卫条件覆盖；PARENT_OVERRI
 ## SDK无关的平台状态接入准备
 
 [device-control.mjs](../shared/domain/device-control.mjs)已提供只读严格响应契约、整体超时、权限/配置前后复核和明确unsupported的默认适配器；完整字段见[平台状态契约](../shared/domain/DEVICE_CONTROL.md)。`readGuardedUsageView`分开返回业务规则与设备报告，并拒绝查询期间变化的账本。所有结果标记为适配器报告、未通过设备控制验证；一致性诊断不能作为实际解除限制的授权。原生适配、真实操作服务和设备门禁仍未实现。
+
+## 摘要与演示通知宿主
+
+原生预览新增固定窄桥和同源纯TS提醒队列服务，保存脱敏摘要、接收明确模拟快照及暂停。原生文件/通知/RDB为未构建候选，Node真实SQLite提供参考恢复证据；不提供设备权限、凭据或资格账本入口。详见[宿主契约](../apps/harmony/NATIVE_SERVICES.md)与[剩余清单](REMAINING_WORK.md)。
