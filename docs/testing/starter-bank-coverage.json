@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "sourceSha256": "d8784b4698d7a5dd8d4b7228c05abc502f30255665d2978a3778aa4bef84b270",
+  "sharedSha256": "d8784b4698d7a5dd8d4b7228c05abc502f30255665d2978a3778aa4bef84b270",
+  "questionCount": 90,
+  "minimumPerGroup": 5,
+  "groups": [
+    {
+      "grade": 1,
+      "subject": "chinese",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "literacy"
+    },
+    {
+      "grade": 1,
+      "subject": "math",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "arithmetic"
+    },
+    {
+      "grade": 1,
+      "subject": "english",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "colors"
+    },
+    {
+      "grade": 2,
+      "subject": "chinese",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "idioms"
+    },
+    {
+      "grade": 2,
+      "subject": "math",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "arithmetic"
+    },
+    {
+      "grade": 2,
+      "subject": "english",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "animals"
+    },
+    {
+      "grade": 3,
+      "subject": "chinese",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "poetry"
+    },
+    {
+      "grade": 3,
+      "subject": "math",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "arithmetic"
+    },
+    {
+      "grade": 3,
+      "subject": "english",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "fruit"
+    },
+    {
+      "grade": 4,
+      "subject": "chinese",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "synonyms_antonyms"
+    },
+    {
+      "grade": 4,
+      "subject": "math",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "arithmetic"
+    },
+    {
+      "grade": 4,
+      "subject": "english",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "school_words"
+    },
+    {
+      "grade": 5,
+      "subject": "chinese",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "rhetoric"
+    },
+    {
+      "grade": 5,
+      "subject": "math",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "arithmetic"
+    },
+    {
+      "grade": 5,
+      "subject": "english",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "irregular_plurals"
+    },
+    {
+      "grade": 6,
+      "subject": "chinese",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "literary_facts"
+    },
+    {
+      "grade": 6,
+      "subject": "math",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "arithmetic"
+    },
+    {
+      "grade": 6,
+      "subject": "english",
+      "available": 5,
+      "selected": 5,
+      "mainKnowledgePoint": "past_tense"
+    }
+  ],
+  "coverageStatus": "passed",
+  "educatorReview": "pending",
+  "curriculumAlignmentVerified": false
+}

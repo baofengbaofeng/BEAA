@@ -55,3 +55,7 @@
 ## 可配置题库持久化参考
 
 `npm run demo:bank`实际验证家长PIN导入、SQLite版本保存/重开、当前测验保留原题及新轮次读取新版，导入不清空使用累计或学习记录。[目录接口](shared/quiz/CATALOG.md) · [验证报告](docs/testing/QUESTION_BANK_CATALOG_REPORT.md)。内置仍为5道三年级流程样例，不代表完整课程；未接原生UI或设备权限。
+
+## 90道基础练习与浏览器导入
+
+新增可选基础题库，按1–6参考年级、语数英分为18组，每组5题。`npm run build:starter-bank`生成`dist/beaa-starter-bank/beaa-starter-bank.browser.json`，普通用户复制全部内容后即可在现有家长设置的题库导入框粘贴使用。[使用说明](shared/quiz/STARTER_BANK.md) · [测试报告](docs/testing/STARTER_BANK_REPORT.md)。不自动替换已有数据，也不代表完整课程或已通过教师审核。

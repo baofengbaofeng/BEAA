@@ -1,0 +1,67 @@
+
+> beaa-core-prototype@0.2.0 test:browser
+> npm run build:browser-check && npm run build:starter-bank && playwright test
+
+
+> beaa-core-prototype@0.2.0 build:browser-check
+> python3 scripts/package-browser-check.py
+
+Packaged offline browser check: /workspace/BEAA/dist/beaa-browser-check.html
+
+> beaa-core-prototype@0.2.0 build:starter-bank
+> node scripts/package-starter-bank.mjs
+
+Built 90 starter questions across 18 grade/subject groups: /workspace/BEAA/dist/beaa-starter-bank
+
+Running 38 tests using 2 workers
+
+(node:217557) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:217555) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/browser-check.spec.mjs:17:1 › daily limit regression is detected instead of reporting success (3.0s)
+  ✓   3 tests/browser/browser-check.spec.mjs:21:1 › tampered embedded source blocks execution (791ms)
+  -   4 tests/browser/browser-check.spec.mjs:25:1 › standalone file completes with no HTTP requests
+  ✓   2 tests/browser/browser-check.spec.mjs:6:1 › isolated checks pass, export honest report and preserve all real storage (5.2s)
+  ✓   5 tests/browser/browser-check.spec.mjs:30:1 › unavailable storage isolation never runs the app or touches real progress (993ms)
+  ✓   6 tests/browser/browser-check.spec.mjs:36:1 › attempting use during pending rest exposes a bypass regression (2.8s)
+  ✓   8 tests/browser/mvp.spec.mjs:17:1 › PIN-protected settings, refresh, rest and daily cap (1.9s)
+  ✓   9 tests/browser/mvp.spec.mjs:38:1 › failed first attempt records review, statistics and refuses a grant (1.4s)
+  ✓  10 tests/browser/mvp.spec.mjs:50:1 › pending rest refuses early completion and clock rollback (1.2s)
+  ✓  11 tests/browser/mvp.spec.mjs:58:1 › resizing and reloading retain exact current question (1.0s)
+  ✓  12 tests/browser/mvp.spec.mjs:70:1 › keyboard navigation, semantic accessibility and narrow layout (2.5s)
+  ✓  13 tests/browser/mvp.spec.mjs:82:1 › imported questions use selected grade and render as text (856ms)
+  -  14 tests/browser/mvp.spec.mjs:96:1 › single HTML file works without any server or network requests
+  ✓  15 tests/browser/mvp.spec.mjs:106:1 › active quiz, rest, review and unlocked settings pass accessibility checks (3.2s)
+  ✓  16 tests/browser/mvp.spec.mjs:120:1 › loaded standalone page completes a challenge while offline (877ms)
+  ✓  17 tests/browser/mvp.spec.mjs:126:1 › two tabs preserve PIN and serialize simulated usage at the daily cap (1.6s)
+  ✓  18 tests/browser/mvp.spec.mjs:143:1 › keyboard can retry a wrong answer without losing focus (546ms)
+  ✓  19 tests/browser/mvp.spec.mjs:150:1 › opening a tab during first PIN derivation preserves one complete credential (896ms)
+  ✓   7 tests/browser/browser-check.spec.mjs:40:1 › a never-settling app operation times out with a downloadable failed report (19.5s)
+  ✓  20 tests/browser/mvp.spec.mjs:172:1 › an answer queued behind a state lock is committed before acknowledged progress reloads (704ms)
+  ✓  22 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 1 math: import, retain usage and pass five real UI questions (1.7s)
+  ✓  21 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 1 chinese: import, retain usage and pass five real UI questions (1.9s)
+  ✓  24 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 2 chinese: import, retain usage and pass five real UI questions (1.7s)
+  ✓  23 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 1 english: import, retain usage and pass five real UI questions (1.8s)
+  ✓  25 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 2 math: import, retain usage and pass five real UI questions (1.7s)
+  ✓  26 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 2 english: import, retain usage and pass five real UI questions (1.8s)
+  ✓  27 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 3 chinese: import, retain usage and pass five real UI questions (1.8s)
+  ✓  28 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 3 math: import, retain usage and pass five real UI questions (1.9s)
+  ✓  29 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 3 english: import, retain usage and pass five real UI questions (1.6s)
+  ✓  30 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 4 chinese: import, retain usage and pass five real UI questions (1.6s)
+  ✓  31 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 4 math: import, retain usage and pass five real UI questions (1.6s)
+  ✓  32 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 4 english: import, retain usage and pass five real UI questions (1.5s)
+  ✓  33 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 5 chinese: import, retain usage and pass five real UI questions (1.6s)
+  ✓  34 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 5 math: import, retain usage and pass five real UI questions (1.6s)
+  ✓  35 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 5 english: import, retain usage and pass five real UI questions (1.7s)
+  ✓  36 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 6 chinese: import, retain usage and pass five real UI questions (1.6s)
+  ✓  37 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 6 math: import, retain usage and pass five real UI questions (1.8s)
+  ✓  38 tests/browser/starter-bank.spec.mjs:4:84 › starter grade 6 english: import, retain usage and pass five real UI questions (1.7s)
+
+  2 skipped
+  36 passed (41.6s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
