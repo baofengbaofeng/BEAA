@@ -33,8 +33,8 @@ DAILY_LOCKED、SCHEDULE_LOCKED 由高优先级守卫条件覆盖；PARENT_OVERRI
 ## HarmonyOS 4 P0验证
 确认目标机型子版本、可用正式SDK/API及受限权限；真机验证跨应用使用统计、施加限制、限制页跳转答题、恢复、重启、分屏及权限撤销。较新版本Screen Time Guard API**不能默认适用于HarmonyOS 4**。不具备正式管控能力时只能提供可诚实描述的降级功能。
 
-## 后续 iPadOS
-单独研究 Family Controls / Device Activity / Managed Settings 框架、entitlement 授权与审核条件。共享业务规则设计，不假设底层权限等价。
+## iPhone / iPad 原生客户端（待 Apple 验证）
+已加入 SwiftUI 页面、Foundation 业务状态、本地原子文件和 Keychain 家长凭据。当前计时仅覆盖本应用前台；原生编译、模拟器、签名与设备测试未在 Linux 执行。Family Controls / Device Activity / Managed Settings 框架、entitlement 授权与审核条件仍需单独验证，不假设底层权限等价。见 apps/ios/README.md。
 
 ## SDK无关的平台状态接入准备
 

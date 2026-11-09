@@ -1,0 +1,5 @@
+// Copy to User.xcconfig and use identifiers owned by your developer team.
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+BEAA_BUNDLE_IDENTIFIER = your.organization.learning
+BEAA_APP_GROUP = group.your.organization.learning
+BEAA_CLOUD_CONTAINER = iCloud.your.organization.learning

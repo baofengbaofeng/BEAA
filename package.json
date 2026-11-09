@@ -19,11 +19,12 @@
     "demo:reminders": "node apps/node-reference/reminder-demo.mjs",
     "build:starter-bank": "node scripts/package-starter-bank.mjs",
     "sync:preview": "node scripts/embed-preview-domain.mjs",
-    "check:sources": "node scripts/embed-preview-domain.mjs --check && node scripts/package-native-preview.mjs --check && npm run check:native-core",
+    "check:sources": "node scripts/embed-pinyin.mjs --check && node scripts/embed-preview-domain.mjs --check && node scripts/package-native-preview.mjs --check && npm run check:native-core",
     "build:native-preview": "node scripts/package-native-preview.mjs",
     "build:delivery": "python3 scripts/package-delivery.py",
     "check:native-core": "node scripts/native-core.mjs",
-    "demo:notifications": "node apps/node-reference/notification-demo.mjs"
+    "demo:notifications": "node apps/node-reference/notification-demo.mjs",
+    "sync:pinyin": "node scripts/embed-pinyin.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -33,5 +34,8 @@
     "@playwright/test": "1.64.1",
     "json5": "2.2.3",
     "typescript": "5.6.3"
+  },
+  "dependencies": {
+    "pinyin-pro": "3.29.5"
   }
 }

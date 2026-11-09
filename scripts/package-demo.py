@@ -10,6 +10,7 @@ out.mkdir(parents=True, exist_ok=True)
 files = {
     'index.html': (root / 'apps/web-preview/index.html').read_bytes(),
     'README.md': (root / 'apps/web-preview/README.md').read_bytes(),
+    'mixed-bank.json': (root / 'shared/quiz/mixed-browser-questions.json').read_bytes(),
     'sample-bank.json': (json.dumps([{
         'id': 'math-g3-add-001', 'grade': 3, 'subject': 'math',
         'topic': 'arithmetic', 'text': '15 + 17 = ?', 'options': ['31', '32', '33'],

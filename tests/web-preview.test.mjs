@@ -306,3 +306,57 @@ test('native simulation cycle IDs survive history retention and failed writes on
 test('parent demo reset keeps monotonic native notification revisions and starts a fresh cycle identity',async()=>{
  const h=harness();await h.parent();h.action('useOne');const before=h.current();h.action('reset');assert(h.current().stateRevision>before.stateRevision);assert(h.current().cycleSequence>before.cycleSequence);assert.equal(h.current().dailyUsed,0);
 });
+
+test('quiet-hour editing requires parent authority and legacy progress migrates without reset',async()=>{
+ const h=harness();h.action('useOne');const before=h.current();
+ assert.equal(h.evaluate('typeof addQuietWindow'),'function');
+ h.evaluate('addQuietWindow({quietDays:[1],quietStart:"21:00",quietEnd:"07:00"})');assert.deepEqual(h.current().quietWindows,[]);
+ await h.parent();h.evaluate('addQuietWindow({quietDays:[1],quietStart:"21:00",quietEnd:"07:00"})');
+ assert.equal(h.current().quietWindows.length,1);assert.equal(h.current().dailyUsed,before.dailyUsed);
+ const legacy=h.current();delete legacy.quietWindows;const restored=harness(legacy);assert.deepEqual(restored.evaluate('JSON.stringify(s.quietWindows)'), '[]');assert.equal(restored.current().dailyUsed,1);
+});
+test('quiet hours block use and permits, preserve a pending quiz, and restore it at end',async()=>{
+ const h=harness();h.action('fill');h.action('start');const old=h.current();const date=new Date(1_000_000);const minute=date.getHours()*60+date.getMinutes();const day=(date.getDay()+6)%7+1;
+ old.quietWindows=[{days:[day],startMinute:minute,endMinute:minute+2}];
+ const blocked=harness(old);const original=blocked.current();blocked.answer(2);assert.equal(blocked.current().question,original.question);assert.equal(blocked.current().phase,'answering');assert.match(blocked.page(),/禁用时段/);
+ blocked.advance(120000);blocked.answer(2);assert.equal(blocked.current().question,1);
+});
+test('corrupt quiet schedules preserve the raw record and enter recovery protection',()=>{
+ for(const value of [null,[{days:[1],startMinute:60,endMinute:60}],{}]){
+  const h=harness();h.action('useOne');const bad={...h.current(),quietWindows:value};const restored=harness(bad);
+  assert.match(restored.page(),/数据需要恢复/);assert.deepEqual(restored.current(),bad);
+ }
+});
+test('editing quiet hours during rest cannot retroactively count time spent in a blocked window',async()=>{
+ const h=harness();h.action('fill');h.action('start');for(const answer of [2,1,0,2,2])h.answer(answer);assert.equal(h.current().phase,'rest');await h.parent();
+ const date=new Date(1_000_000),day=(date.getDay()+6)%7+1,minute=date.getHours()*60+date.getMinutes();
+ h.evaluate(`addQuietWindow({quietDays:[${day}],quietStart:"${String(Math.floor((minute+1)/60)).padStart(2,'0')}:${String((minute+1)%60).padStart(2,'0')}",quietEnd:"${String(Math.floor((minute+3)/60)).padStart(2,'0')}:${String((minute+3)%60).padStart(2,'0')}"})`);
+ h.advance(140000);h.evaluate('removeQuietWindow(0)');h.advance(460000);h.action('rest');assert.equal(h.current().phase,'rest');h.advance(120000);h.action('rest');assert.equal(h.current().phase,'available');
+});
+test('rest accumulator damage is rejected without rewriting the original snapshot',()=>{
+ const h=harness();h.action('fill');h.action('start');for(const answer of [2,1,0,2,2])h.answer(answer);
+ for(const fields of [{restCreditedMs:3600000},{restObservedAt:h.current().restStart-1}]){
+  const bad={...h.current(),...fields};const restored=harness(bad);assert.match(restored.page(),/数据需要恢复/);assert.deepEqual(restored.current(),bad);
+ }
+});
+test('a quiet window crossed while away terminates an active permit without resetting counters',async()=>{
+ const h=harness();await h.parent();h.fields.permitMinutes={value:'5'};h.action('issuePermit');
+ const date=new Date(1_000_000),day=(date.getDay()+6)%7+1,minute=date.getHours()*60+date.getMinutes();const start=String(Math.floor((minute+1)/60)).padStart(2,'0')+':'+String((minute+1)%60).padStart(2,'0'),end=String(Math.floor((minute+3)/60)).padStart(2,'0')+':'+String((minute+3)%60).padStart(2,'0');
+ h.evaluate(`addQuietWindow({quietDays:[${day}],quietStart:"${start}",quietEnd:"${end}"})`);h.advance(140000);h.navigate('home');assert.notEqual(h.current().permit.closedReason,null);h.action('useOne');assert.equal(h.current().dailyUsed,0);h.action('endPermit');h.action('useOne');assert.equal(h.current().dailyUsed,1);
+});
+test('an unavailable local clock never rewrites counters or day markers with invalid time',()=>{
+ const h=harness();h.action('useOne');const before=h.current();h.evaluate('Date.now=()=>NaN');h.action('useOne');const after=h.current();assert.equal(after.dailyUsed,before.dailyUsed);assert.equal(after.day,before.day);assert.equal(after.lastTime,before.lastTime);
+});
+
+test('numeric import, invalid input, wrong-first correction and reload preserve exact scoring',async()=>{
+ const q={id:'numeric-client',grade:3,subject:'math',topic:'arithmetic',type:'numeric',text:'1.5 + 1 = ?',answer:'2.5',explain:'1.5加1等于2.5。'};
+ const h=harness();await h.parent();h.fields.questionCount.value='1';h.fields.requiredCorrect.value='1';h.fields.rest.value='0';h.action('saveSettings');h.fields.bank={value:JSON.stringify([q])};h.action('import');assert.equal(h.current().bank.length,1);h.action('fill');h.action('start');
+ h.evaluate('choose("2.5元","numeric-client")');assert.equal(h.current().attempted.length,0);assert.equal(h.current().mistakes.length,0);
+ h.evaluate('choose("4.00","numeric-client")');assert.equal(h.current().mistakes[0].chosen,'4');assert.equal(h.current().correct,0);
+ const reloaded=harness(h.current());assert.equal(reloaded.current().activeQuestions[0].type,'numeric');reloaded.evaluate('choose("２．５００","numeric-client")');assert.equal(reloaded.current().phase,'challenge');assert.equal(reloaded.current().history[0].correct,0);assert.equal(reloaded.current().history[0].passed,false);
+ reloaded.navigate('review');assert.match(reloaded.page(),/原选择：4/);assert.match(reloaded.page(),/data-review-input/);
+});
+test('true false questions show two choices and retain the rest gate',async()=>{
+ const q={id:'boolean-client',grade:3,subject:'math',topic:'arithmetic',type:'true_false',text:'2大于1。',options:['正确','错误'],answer:0,explain:'2比1大。'};
+ const h=harness();await h.parent();h.fields.questionCount.value='1';h.fields.requiredCorrect.value='1';h.action('saveSettings');h.fields.bank={value:JSON.stringify([q])};h.action('import');h.action('fill');h.action('start');assert.match(h.page(),/判断题/);h.answer(0);assert.equal(h.current().phase,'rest');h.action('rest');assert.equal(h.current().phase,'rest');
+});

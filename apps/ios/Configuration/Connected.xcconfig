@@ -1,0 +1,2 @@
+#include "Common.xcconfig"
+CODE_SIGN_ENTITLEMENTS = Configuration/Connected.entitlements
