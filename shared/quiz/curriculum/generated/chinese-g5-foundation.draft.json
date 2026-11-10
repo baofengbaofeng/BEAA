@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g5-u1-q1",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "医生（ ）病人的情况。",
+      "options": [
+        {
+          "id": "A",
+          "text": "审问"
+        },
+        {
+          "id": "B",
+          "text": "询问"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "询问用于一般了解情况；审问用于审查追问。",
+      "knowledgePoints": [
+        "chinese-g5-u1"
+      ]
+    },
+    {
+      "id": "chinese-g5-u1-q2",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "灯光（ ）地照着书桌。",
+      "options": [
+        {
+          "id": "A",
+          "text": "柔和"
+        },
+        {
+          "id": "B",
+          "text": "温柔"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "柔和可描写不刺眼的光。",
+      "knowledgePoints": [
+        "chinese-g5-u1"
+      ]
+    },
+    {
+      "id": "chinese-g5-u2-q1",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“难道努力没有意义吗？”表达什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "努力有意义"
+        },
+        {
+          "id": "B",
+          "text": "努力没有意义"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "反问加强肯定的意思。",
+      "knowledgePoints": [
+        "chinese-g5-u2"
+      ]
+    },
+    {
+      "id": "chinese-g5-u2-q2",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "把“他完成了任务”改为被字句。",
+      "options": [
+        {
+          "id": "A",
+          "text": "他被任务完成了。"
+        },
+        {
+          "id": "B",
+          "text": "任务被他完成了。"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "被字句把承受动作的任务放在前面。",
+      "knowledgePoints": [
+        "chinese-g5-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g5-u1",
+    "chinese-g5-u2"
+  ]
+}

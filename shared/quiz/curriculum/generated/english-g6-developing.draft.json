@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g6-u3-q1",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "I stayed home ___ I was ill.",
+      "options": [
+        {
+          "id": "A",
+          "text": "because"
+        },
+        {
+          "id": "B",
+          "text": "although"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Because introduces the reason.",
+      "knowledgePoints": [
+        "english-g6-u3"
+      ]
+    },
+    {
+      "id": "english-g6-u3-q2",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "If it rains, we ___ stay inside.",
+      "options": [
+        {
+          "id": "A",
+          "text": "yesterday"
+        },
+        {
+          "id": "B",
+          "text": "will"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Will describes the possible future result.",
+      "knowledgePoints": [
+        "english-g6-u3"
+      ]
+    },
+    {
+      "id": "english-g6-u4-q1",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Please return library books by Friday.” Its purpose is to ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "sell bicycles"
+        },
+        {
+          "id": "B",
+          "text": "remind borrowers"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "It reminds readers of a return deadline.",
+      "knowledgePoints": [
+        "english-g6-u4"
+      ]
+    },
+    {
+      "id": "english-g6-u4-q2",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "A recipe mainly tells readers ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "how to prepare food"
+        },
+        {
+          "id": "B",
+          "text": "where birds migrate"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Recipes give food preparation instructions.",
+      "knowledgePoints": [
+        "english-g6-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g6-u3",
+    "english-g6-u4"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g2-u5-q1",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "先洗手，再吃饭。先做什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "洗手"
+        },
+        {
+          "id": "B",
+          "text": "吃饭"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "先字提示第一步。",
+      "knowledgePoints": [
+        "chinese-g2-u5"
+      ]
+    },
+    {
+      "id": "chinese-g2-u5-q2",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "种子发芽后长出叶子。后发生什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "种子发芽"
+        },
+        {
+          "id": "B",
+          "text": "长出叶子"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "后字表示接下来的变化。",
+      "knowledgePoints": [
+        "chinese-g2-u5"
+      ]
+    },
+    {
+      "id": "chinese-g2-u6-q1",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小雨把伞借给没带伞的同学。她做了什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "损坏雨伞"
+        },
+        {
+          "id": "B",
+          "text": "帮助同学"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "借伞解决了同学淋雨的问题。",
+      "knowledgePoints": [
+        "chinese-g2-u6"
+      ]
+    },
+    {
+      "id": "chinese-g2-u6-q2",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小林忘带笔，小安借给他一支。他应说什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "谢谢你。"
+        },
+        {
+          "id": "B",
+          "text": "快走开。"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "接受帮助后应表达感谢。",
+      "knowledgePoints": [
+        "chinese-g2-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g2-u5",
+    "chinese-g2-u6"
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g4-u5-q1",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形两个角分别为60度、40度，第三角多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "82"
+        },
+        {
+          "id": "B",
+          "text": "80"
+        },
+        {
+          "id": "C",
+          "text": "81"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "内角和180度，180−60−40=80度。",
+      "knowledgePoints": [
+        "math-g4-u5"
+      ]
+    },
+    {
+      "id": "math-g4-u5-q2",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形两个角分别为60度、45度，第三角多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "75"
+        },
+        {
+          "id": "B",
+          "text": "76"
+        },
+        {
+          "id": "C",
+          "text": "77"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "内角和180度，180−60−45=75度。",
+      "knowledgePoints": [
+        "math-g4-u5"
+      ]
+    },
+    {
+      "id": "math-g4-u5-q3",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形两个角分别为60度、50度，第三角多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "71"
+        },
+        {
+          "id": "B",
+          "text": "72"
+        },
+        {
+          "id": "C",
+          "text": "70"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "内角和180度，180−60−50=70度。",
+      "knowledgePoints": [
+        "math-g4-u5"
+      ]
+    },
+    {
+      "id": "math-g4-u5-q4",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形两个角分别为60度、55度，第三角多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "67"
+        },
+        {
+          "id": "B",
+          "text": "65"
+        },
+        {
+          "id": "C",
+          "text": "66"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "内角和180度，180−60−55=65度。",
+      "knowledgePoints": [
+        "math-g4-u5"
+      ]
+    },
+    {
+      "id": "math-g4-u6-q1",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三次跳绳次数是20、22、24，平均几次？",
+      "options": [
+        {
+          "id": "A",
+          "text": "22"
+        },
+        {
+          "id": "B",
+          "text": "23"
+        },
+        {
+          "id": "C",
+          "text": "24"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "（20+22+24）÷3=22。",
+      "knowledgePoints": [
+        "math-g4-u6"
+      ]
+    },
+    {
+      "id": "math-g4-u6-q2",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三次跳绳次数是21、23、25，平均几次？",
+      "options": [
+        {
+          "id": "A",
+          "text": "24"
+        },
+        {
+          "id": "B",
+          "text": "25"
+        },
+        {
+          "id": "C",
+          "text": "23"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "（21+23+25）÷3=23。",
+      "knowledgePoints": [
+        "math-g4-u6"
+      ]
+    },
+    {
+      "id": "math-g4-u6-q3",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三次跳绳次数是22、24、26，平均几次？",
+      "options": [
+        {
+          "id": "A",
+          "text": "26"
+        },
+        {
+          "id": "B",
+          "text": "24"
+        },
+        {
+          "id": "C",
+          "text": "25"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "（22+24+26）÷3=24。",
+      "knowledgePoints": [
+        "math-g4-u6"
+      ]
+    },
+    {
+      "id": "math-g4-u6-q4",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三次跳绳次数是23、25、27，平均几次？",
+      "options": [
+        {
+          "id": "A",
+          "text": "25"
+        },
+        {
+          "id": "B",
+          "text": "26"
+        },
+        {
+          "id": "C",
+          "text": "27"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "（23+25+27）÷3=25。",
+      "knowledgePoints": [
+        "math-g4-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g4-u5",
+    "math-g4-u6"
+  ]
+}

@@ -1,5 +1,6 @@
 import notificationManager from '@ohos.notificationManager';
 import common from '@ohos.app.ability.common';
+import { nativeReading } from './NativeChineseReading';
 import { ReminderNotificationPort } from './ReminderDelivery';
 
 /** Only simulated preview reminders. Public API references do not prove device support. */
@@ -23,7 +24,7 @@ export class NativeNotificationPort implements ReminderNotificationPort {
     const text = (limitingRule === 'daily_limit' ? '今日演示额度提醒。' : '本轮演示使用提醒。') + '模拟数据，请以页面当前状态为准，准备学习与休息。';
     await notificationManager.publish({ id: id, label: 'beaa-preview-reminder', isAlertOnce: true,
       tapDismissed: true, autoDeletedTime: Date.now() + 60000,
-      content: { contentType: notificationManager.ContentType.NOTIFICATION_CONTENT_BASIC_TEXT, normal: { title: title, text: text } }
+      content: { contentType: notificationManager.ContentType.NOTIFICATION_CONTENT_BASIC_TEXT, normal: { title: nativeReading(title), text: nativeReading(text) } }
     });
   }
   cancel(id: number): Promise<void> { return notificationManager.cancel(id, 'beaa-preview-reminder'); }

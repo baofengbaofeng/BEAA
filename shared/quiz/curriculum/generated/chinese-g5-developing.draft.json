@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g5-u3-q1",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "图书馆周一闭馆，周二到周日开放。哪天可借书？",
+      "options": [
+        {
+          "id": "A",
+          "text": "周一"
+        },
+        {
+          "id": "B",
+          "text": "周三"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "周三在开放日期内。",
+      "knowledgePoints": [
+        "chinese-g5-u3"
+      ]
+    },
+    {
+      "id": "chinese-g5-u3-q2",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "甲车8时发车，乙车9时发车，路程耗时相同。谁先到？",
+      "options": [
+        {
+          "id": "A",
+          "text": "甲车"
+        },
+        {
+          "id": "B",
+          "text": "乙车"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "耗时相同，先发车的先到。",
+      "knowledgePoints": [
+        "chinese-g5-u3"
+      ]
+    },
+    {
+      "id": "chinese-g5-u4-q1",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "先总说校园美，再写花坛和操场。属于？",
+      "options": [
+        {
+          "id": "A",
+          "text": "总分结构"
+        },
+        {
+          "id": "B",
+          "text": "倒叙结构"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "总的评价之后分别介绍局部。",
+      "knowledgePoints": [
+        "chinese-g5-u4"
+      ]
+    },
+    {
+      "id": "chinese-g5-u4-q2",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "开头提老槐树，结尾再次写老槐树。可能形成？",
+      "options": [
+        {
+          "id": "A",
+          "text": "数字说明"
+        },
+        {
+          "id": "B",
+          "text": "首尾呼应"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "开头结尾围绕同一对象形成呼应。",
+      "knowledgePoints": [
+        "chinese-g5-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g5-u3",
+    "chinese-g5-u4"
+  ]
+}

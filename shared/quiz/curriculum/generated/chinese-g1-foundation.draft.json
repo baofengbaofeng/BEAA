@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g1-u1-q1",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪一个是声母？",
+      "options": [
+        {
+          "id": "A",
+          "text": "ai"
+        },
+        {
+          "id": "B",
+          "text": "b"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "b是声母，ai是复韵母。",
+      "knowledgePoints": [
+        "chinese-g1-u1"
+      ]
+    },
+    {
+      "id": "chinese-g1-u1-q2",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪一个是韵母？",
+      "options": [
+        {
+          "id": "A",
+          "text": "ao"
+        },
+        {
+          "id": "B",
+          "text": "m"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "ao是复韵母，m是声母。",
+      "knowledgePoints": [
+        "chinese-g1-u1"
+      ]
+    },
+    {
+      "id": "chinese-g1-u2-q1",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“mǎ”是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "text": "第三声"
+        },
+        {
+          "id": "B",
+          "text": "第一声"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "上声用ˇ标记。",
+      "knowledgePoints": [
+        "chinese-g1-u2"
+      ]
+    },
+    {
+      "id": "chinese-g1-u2-q2",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“mā”是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "text": "第四声"
+        },
+        {
+          "id": "B",
+          "text": "第一声"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "阴平用ˉ标记。",
+      "knowledgePoints": [
+        "chinese-g1-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g1-u1",
+    "chinese-g1-u2"
+  ]
+}

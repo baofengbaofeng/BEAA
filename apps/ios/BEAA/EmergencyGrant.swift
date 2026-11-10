@@ -19,7 +19,7 @@ struct EmergencyAudit: Codable, Identifiable {
 extension LearningState {
     /// Eligibility only; system authorization and confirmed enforcement are separate platform state.
     func canUse(now: Date = Date()) -> Bool {
-        guard !isQuiet(now: now), dailySeconds < policy.dailyMinutes * 60 else { return false }
+        guard migrationConfirmationPending != true, !isQuiet(now: now), dailySeconds < policy.dailyMinutes * 60 else { return false }
         if phase == .challengeRequired { return emergencyRemaining(now: now) > 0 }
         guard phase == .available else { return false }
         return !permitMode || (permit?.remaining(now: now) ?? 0) > 0

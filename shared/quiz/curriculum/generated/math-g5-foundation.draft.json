@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g5-u1-q1",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "每本笔记本2.5元，买2本需要几元？",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "2.5×2=5元。",
+      "knowledgePoints": [
+        "math-g5-u1"
+      ]
+    },
+    {
+      "id": "math-g5-u1-q2",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "每本笔记本2.5元，买4本需要几元？",
+      "options": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "11"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "2.5×4=10元。",
+      "knowledgePoints": [
+        "math-g5-u1"
+      ]
+    },
+    {
+      "id": "math-g5-u1-q3",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "每本笔记本2.5元，买6本需要几元？",
+      "options": [
+        {
+          "id": "A",
+          "text": "16"
+        },
+        {
+          "id": "B",
+          "text": "17"
+        },
+        {
+          "id": "C",
+          "text": "15"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "2.5×6=15元。",
+      "knowledgePoints": [
+        "math-g5-u1"
+      ]
+    },
+    {
+      "id": "math-g5-u1-q4",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "每本笔记本2.5元，买8本需要几元？",
+      "options": [
+        {
+          "id": "A",
+          "text": "22"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "21"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "2.5×8=20元。",
+      "knowledgePoints": [
+        "math-g5-u1"
+      ]
+    },
+    {
+      "id": "math-g5-u2-q1",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "比6大的下一个6的倍数是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "13"
+        },
+        {
+          "id": "C",
+          "text": "14"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "相邻6的倍数相差6，6+6=12。",
+      "knowledgePoints": [
+        "math-g5-u2"
+      ]
+    },
+    {
+      "id": "math-g5-u2-q2",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "比12大的下一个6的倍数是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "19"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "18"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "相邻6的倍数相差6，12+6=18。",
+      "knowledgePoints": [
+        "math-g5-u2"
+      ]
+    },
+    {
+      "id": "math-g5-u2-q3",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "比18大的下一个6的倍数是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "26"
+        },
+        {
+          "id": "B",
+          "text": "24"
+        },
+        {
+          "id": "C",
+          "text": "25"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "相邻6的倍数相差6，18+6=24。",
+      "knowledgePoints": [
+        "math-g5-u2"
+      ]
+    },
+    {
+      "id": "math-g5-u2-q4",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "比24大的下一个6的倍数是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "30"
+        },
+        {
+          "id": "B",
+          "text": "31"
+        },
+        {
+          "id": "C",
+          "text": "32"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "相邻6的倍数相差6，24+6=30。",
+      "knowledgePoints": [
+        "math-g5-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g5-u1",
+    "math-g5-u2"
+  ]
+}

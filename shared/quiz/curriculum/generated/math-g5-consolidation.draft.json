@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g5-u5-q1",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形底6厘米，高4厘米，面积多少平方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "13"
+        },
+        {
+          "id": "C",
+          "text": "14"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "面积=底×高÷2=6×4÷2=12。",
+      "knowledgePoints": [
+        "math-g5-u5"
+      ]
+    },
+    {
+      "id": "math-g5-u5-q2",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形底7厘米，高4厘米，面积多少平方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "15"
+        },
+        {
+          "id": "B",
+          "text": "16"
+        },
+        {
+          "id": "C",
+          "text": "14"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "面积=底×高÷2=7×4÷2=14。",
+      "knowledgePoints": [
+        "math-g5-u5"
+      ]
+    },
+    {
+      "id": "math-g5-u5-q3",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形底8厘米，高4厘米，面积多少平方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "18"
+        },
+        {
+          "id": "B",
+          "text": "16"
+        },
+        {
+          "id": "C",
+          "text": "17"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "面积=底×高÷2=8×4÷2=16。",
+      "knowledgePoints": [
+        "math-g5-u5"
+      ]
+    },
+    {
+      "id": "math-g5-u5-q4",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三角形底9厘米，高4厘米，面积多少平方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "18"
+        },
+        {
+          "id": "B",
+          "text": "19"
+        },
+        {
+          "id": "C",
+          "text": "20"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "面积=底×高÷2=9×4÷2=18。",
+      "knowledgePoints": [
+        "math-g5-u5"
+      ]
+    },
+    {
+      "id": "math-g5-u6-q1",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "袋中有3个红球和2个蓝球，任取一个，红球比蓝球多几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "2"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "1"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "红球数量减蓝球数量：3−2=1；球除颜色外相同，红球抽中可能性更大。",
+      "knowledgePoints": [
+        "math-g5-u6"
+      ]
+    },
+    {
+      "id": "math-g5-u6-q2",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "袋中有4个红球和2个蓝球，任取一个，红球比蓝球多几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "2"
+        },
+        {
+          "id": "C",
+          "text": "3"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "红球数量减蓝球数量：4−2=2；球除颜色外相同，红球抽中可能性更大。",
+      "knowledgePoints": [
+        "math-g5-u6"
+      ]
+    },
+    {
+      "id": "math-g5-u6-q3",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "袋中有5个红球和2个蓝球，任取一个，红球比蓝球多几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "红球数量减蓝球数量：5−2=3；球除颜色外相同，红球抽中可能性更大。",
+      "knowledgePoints": [
+        "math-g5-u6"
+      ]
+    },
+    {
+      "id": "math-g5-u6-q4",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "袋中有6个红球和2个蓝球，任取一个，红球比蓝球多几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "红球数量减蓝球数量：6−2=4；球除颜色外相同，红球抽中可能性更大。",
+      "knowledgePoints": [
+        "math-g5-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g5-u5",
+    "math-g5-u6"
+  ]
+}

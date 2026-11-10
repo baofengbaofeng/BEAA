@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g3-u5-q1",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪句描写更具体？",
+      "options": [
+        {
+          "id": "A",
+          "text": "叶子真好。"
+        },
+        {
+          "id": "B",
+          "text": "叶片边缘有细小的锯齿。"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "形状细节能让读者想象叶片。",
+      "knowledgePoints": [
+        "chinese-g3-u5"
+      ]
+    },
+    {
+      "id": "chinese-g3-u5-q2",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪句包含声音描写？",
+      "options": [
+        {
+          "id": "A",
+          "text": "雨点敲得窗台滴答响。"
+        },
+        {
+          "id": "B",
+          "text": "窗台是白色的。"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "滴答响描写听到的声音。",
+      "knowledgePoints": [
+        "chinese-g3-u5"
+      ]
+    },
+    {
+      "id": "chinese-g3-u6-q1",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小禾捂住耳朵，远处鞭炮响了。她可能为什么捂耳？",
+      "options": [
+        {
+          "id": "A",
+          "text": "声音太响"
+        },
+        {
+          "id": "B",
+          "text": "天色太暗"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "鞭炮声与捂耳行为相关。",
+      "knowledgePoints": [
+        "chinese-g3-u6"
+      ]
+    },
+    {
+      "id": "chinese-g3-u6-q2",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小文把湿鞋放到通风处。主要想做什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "让鞋变重"
+        },
+        {
+          "id": "B",
+          "text": "让鞋变干"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "通风有助于水分散去。",
+      "knowledgePoints": [
+        "chinese-g3-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g3-u5",
+    "chinese-g3-u6"
+  ]
+}

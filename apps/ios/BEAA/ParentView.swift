@@ -141,6 +141,8 @@ struct ParentView: View {
     private var featureLinks: some View {
         LearningCard {
             PinyinText("家长工具", large: true)
+            NavigationLink { ParentSessionView { ScrollView { TransferMigrationView(store: model.secureStore, parentAllowed: { model.parentAuthorized && !model.blocked }, restored: model.acceptRestored, prepareExport: model.prepareMigrationExport) } } } label: { PinyinText("跨设备加密迁移") }
+            if model.state.migrationConfirmationPending == true { PinyinText("迁移记录待确认，学习与使用保持暂停。请进入跨设备加密迁移确认原累计。") }
             if model.state.pendingPolicy != nil { PinyinText("有待生效的规则，当前挑战和休息不会被跳过。") }
             NavigationLink { ParentSessionView { SecuritySettingsView(vault: model.vault, parentAllowed: { model.parentAuthorized }, onCredentialsChanged: model.credentialsChanged) } } label: { PinyinText("密码、恢复码与生物识别") }
             NavigationLink { ParentSessionView { ScrollView { BackupRecoveryView(store: model.secureStore, parentAllowed: { model.parentAuthorized }, restored: model.acceptRestored) } } } label: { PinyinText("加密备份与恢复") }

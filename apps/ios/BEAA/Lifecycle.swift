@@ -56,6 +56,7 @@ struct LearningRecord: Codable, Identifiable {
 }
 struct LearningState: Codable {
     var version = 1
+    var migrationConfirmationPending: Bool?
     var controlRevision: Int?
     var pendingPolicy: Policy?
     var protectedRestAnchor: ProtectedRestAnchor?
@@ -167,6 +168,7 @@ struct LearningState: Codable {
         else if phase == .dailyLocked { phase = cycleSeconds >= policy.periodMinutes * 60 ? .challengeRequired : .available }
     }
     func validate() throws {
+        guard migrationConfirmationPending != false else { throw LearningError.invalidState }
         try policy.validate()
         try validateEmergency()
         try permit?.validate()

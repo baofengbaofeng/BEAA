@@ -1,6 +1,6 @@
 import { Phase,startChallenge,submitAnswer } from './engine.mjs';
 import { validateSession,encodeSession,decodeSession } from './snapshot.mjs';
-import { QuizError,validateQuestionBank,selectQuestions } from '../quiz/bank.mjs';
+import { QuizError,validateQuestionBank,selectQuestions,evaluateQuestionResponse,questionBankVersion } from '../quiz/bank.mjs';
 
 const LIMIT=1_000_000;
 function check(value,message,code='INVALID_ATTEMPT'){if(!value)throw new QuizError(code,message);}
@@ -13,12 +13,12 @@ function sessionState(input){try{return validateSession(input);}catch{throw new 
 /** Attempts include private answer snapshots and belong to the trusted controller/store. */
 export function validateQuizAttempt(input){
   fields(input,['session','questions']);const session=sessionState(input.session);let questions;
-  try{questions=validateQuestionBank({version:1,questions:input.questions}).questions;}catch{throw new QuizError('INVALID_ATTEMPT','Invalid pinned question snapshot');}
+  try{questions=validateQuestionBank({version:questionBankVersion(input.questions),questions:input.questions}).questions;}catch{throw new QuizError('INVALID_ATTEMPT','Invalid pinned question snapshot');}
   check(session.challenge!==null && questions.length===session.policy.questionCount,'Quiz attempt has no matching challenge');
   for(const [index,q] of questions.entries()){
     check(q.id===session.challenge.questionIds[index] && q.grade===session.policy.grade && session.policy.subjects.includes(q.subject),'Pinned questions disagree with the session');
     const answer=session.challenge.answers[index];
-    if(answer)check(q.options.some(o=>o.id===answer.chosen) && answer.correct===(answer.chosen===q.correctOptionId),'Stored grade disagrees with the pinned answer key');
+    if(answer)check(evaluateQuestionResponse(q,answer.chosen).valid && evaluateQuestionResponse(q,answer.chosen).value===answer.chosen && answer.correct===evaluateQuestionResponse(q,answer.chosen).correct,'Stored grade disagrees with the pinned answer key');
   }
   return {session,questions};
 }
@@ -29,7 +29,7 @@ export function startQuiz(session,bank,options={}){
   return validateQuizAttempt({session:startChallenge(state,questions.map(q=>q.id)),questions});
 }
 function publicQuestion(q){
-  return structuredClone({id:q.id,grade:q.grade,subject:q.subject,type:q.type,stem:q.stem,options:q.options,knowledgePoints:q.knowledgePoints});
+  return structuredClone({id:q.id,grade:q.grade,subject:q.subject,type:q.type,stem:q.stem,...(q.options?{options:q.options}:{}),...(q.absoluteTolerance!==undefined?{absoluteTolerance:q.absoluteTolerance}:{}),knowledgePoints:q.knowledgePoints});
 }
 export function getCurrentQuestion(input){
   const attempt=validateQuizAttempt(input);
@@ -40,7 +40,7 @@ export function getCurrentQuestion(input){
 export function getQuizReview(input){
   const attempt=validateQuizAttempt(input);
   return attempt.session.challenge.answers.map((answer,index)=>({question:publicQuestion(attempt.questions[index]),chosen:answer.chosen,correct:answer.correct,
-    correctOptionId:attempt.questions[index].correctOptionId,explanation:attempt.questions[index].explanation}));
+    ...(attempt.questions[index].options?{correctOptionId:attempt.questions[index].correctOptionId}:{correctAnswer:attempt.questions[index].correctAnswer}),explanation:attempt.questions[index].explanation}));
 }
 
 /** The submission contains only the chosen option, never a claimed grade or answer key. */
@@ -48,16 +48,17 @@ export function submitQuizAnswer(input,submission){
   const attempt=validateQuizAttempt(input);fields(submission,['questionId','chosen'],'INVALID_ANSWER');
   check(attempt.session.phase===Phase.CHALLENGE_ACTIVE,'Quiz is not active');
   const q=attempt.questions[attempt.session.challenge.answers.length];
-  check(submission.questionId===q.id && typeof submission.chosen==='string' && q.options.some(o=>o.id===submission.chosen),'Unknown, stale or unoffered answer','INVALID_ANSWER');
-  const session=submitAnswer(attempt.session,q.id,submission.chosen,q.correctOptionId);
-  return {attempt:{session,questions:attempt.questions},feedback:{questionId:q.id,correct:submission.chosen===q.correctOptionId,correctOptionId:q.correctOptionId,explanation:q.explanation}};
+  const graded=evaluateQuestionResponse(q,submission.chosen);
+  check(submission.questionId===q.id && graded.valid,'Unknown, stale or unoffered answer','INVALID_ANSWER');
+  const session=submitAnswer(attempt.session,q.id,graded.value,graded.correct?graded.value:(q.correctOptionId??q.correctAnswer));
+  return {attempt:{session,questions:attempt.questions},feedback:{questionId:q.id,correct:graded.correct,...(q.options?{correctOptionId:q.correctOptionId}:{correctAnswer:q.correctAnswer}),explanation:q.explanation}};
 }
 
 /** Revision/authentication/atomic commit remain the persistence adapter's responsibility. */
 export function encodeQuizAttempt(input,revision=0){
   const attempt=validateQuizAttempt(input);let domain;
   try{domain=JSON.parse(encodeSession(attempt.session,revision));}catch{throw new QuizError('INVALID_ATTEMPT','Invalid quiz snapshot revision or session');}
-  const text=JSON.stringify({schemaVersion:1,domain,quizSnapshot:{version:1,questions:attempt.questions}});
+  const text=JSON.stringify({schemaVersion:1,domain,quizSnapshot:{version:questionBankVersion(attempt.questions),questions:attempt.questions}});
   check(text.length<=LIMIT,'Quiz snapshot is too large','SNAPSHOT_TOO_LARGE');return text;
 }
 export function decodeQuizAttempt(text){

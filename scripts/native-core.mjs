@@ -17,5 +17,5 @@ export function loadNativeCore(names){
 }
 
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
- loadNativeCore(['NativeSummary','ReminderDelivery']);console.log('Portable native service TypeScript checked; no SDK/HAP build performed');
+ loadNativeCore(['NativeSummary','ReminderDelivery','GuardianCore','NativeDeviceCapabilities']);console.log('Portable native service TypeScript checked; no SDK/HAP build performed');
 }

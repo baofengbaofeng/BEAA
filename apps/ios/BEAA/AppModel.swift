@@ -3,6 +3,7 @@ import SwiftUI
 @MainActor final class AppModel: ObservableObject {
     @Published private(set) var state = LearningState()
     @Published private(set) var blocked = false
+    @Published private(set) var parentConfigured = false
     @Published private(set) var storageRevision = 0
     @Published var notice = ""
     @Published private(set) var parentUntil: TimeInterval = 0
@@ -24,13 +25,13 @@ import SwiftUI
     var quietBlocked: Bool { state.isQuiet() }
     var controlRevision: Int { state.controlRevision ?? 0 }
     var platformReady: Bool { !screenTime.monitoringRequested || (screenTime.monitoringActive && screenTime.isAuthorized && !platformFault) }
-    var canUse: Bool { !blocked && platformReady && businessAllowsUse && !quietBlocked }
+    var canUse: Bool { parentConfigured && !parentAuthorized && state.migrationConfirmationPending != true && !blocked && platformReady && businessAllowsUse && !quietBlocked }
     var usageSourceDescription: String {
         screenTime.monitoringRequested ? "已计入所选范围预算；系统回执是下界，保守结算不是整机精确用时。" : "本应用前台练习计时，离开后暂停；不代表其他应用用时。"
     }
     private var dayCurrent: Bool { Calendar.current.isDate(state.dayStarted, inSameDayAs: Date()) }
     private var businessAllowsUse: Bool {
-        guard state.dailySeconds < state.policy.dailyMinutes * 60 else { return false }
+        guard state.migrationConfirmationPending != true, state.dailySeconds < state.policy.dailyMinutes * 60 else { return false }
         if screenTime.monitoringRequested && !dayCurrent { return false }
         if state.phase == .challengeRequired { return state.emergencyRemaining() > 0 }
         return state.phase == .available && (!state.permitMode || (state.permit?.remaining(now: Date()) ?? 0) > 0)
@@ -43,8 +44,10 @@ import SwiftUI
         cloud = CloudCoordinator(deviceID: deviceID)
         let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         secureStore = store ?? SecureStateStore(url: directory.appendingPathComponent("BEAA/state.json"))
+        parentConfigured = (try? vault.read()) != nil
         do { state = try secureStore.load(); storageRevision = secureStore.revision }
         catch { blocked = true; notice = "记录需要恢复。已保留原文件，使用和资格均已暂停。请家长验证后检查本机加密备份。" }
+        if !parentConfigured && !blocked { notice = "请家长先设置密码；新设备可在开始使用前导入加密迁移包。" }
     }
     private func commit(_ operation: (inout LearningState) throws -> Void) throws {
         guard !blocked else { throw SecureStoreError.unavailable }
@@ -61,6 +64,7 @@ import SwiftUI
         if changedPlan { monitorPlanDirty = true }
     }
     @discardableResult func change(_ operation: (inout LearningState) throws -> Void) -> Bool {
+        guard state.migrationConfirmationPending != true else { notice = "请家长先确认已迁移的记录，原有额度保持。"; return false }
         do { try commit(operation); updatePlatform(); return true }
         catch LearningError.invalidAction { notice = "当前条件不允许此操作，请查看最新进度。" }
         catch LearningError.invalidPolicy { notice = "规则无效或匹配题量不足，请检查时间、筛选和通过条件。" }
@@ -94,7 +98,7 @@ import SwiftUI
     }
     func tick() {
         objectWillChange.send()
-        guard appActive, !blocked else { return }
+        guard appActive, !blocked, parentConfigured, !parentAuthorized, state.migrationConfirmationPending != true else { lastTick = Date(); clock.start(at: ProcessInfo.processInfo.systemUptime); return }
         let now = Date(), previous = lastTick; lastTick = now
         drainPlatformReceipts()
         guard !blocked else { return }
@@ -127,7 +131,7 @@ import SwiftUI
                 guard pin == confirmation else { notice = "两次输入不一致，请重新输入。"; return }
                 try vault.enroll(pin)
             } else { try vault.verify(pin) }
-            parentUntil = ProcessInfo.processInfo.systemUptime + 300; notice = ""
+            parentConfigured = true; parentUntil = ProcessInfo.processInfo.systemUptime + 300; notice = ""
         } catch { notice = "验证未完成。请检查六位密码，或等待冷却结束后重试。" }
     }
     func authenticateForRecovery(pin: String) {
@@ -154,7 +158,7 @@ import SwiftUI
         monitorPlanDirty = true; updatePlatform()
     }
     func startChallenge() {
-        guard !blocked, !quietBlocked, state.phase == .challengeRequired else { return }
+        guard parentConfigured, state.migrationConfirmationPending != true, !blocked, !quietBlocked, state.phase == .challengeRequired else { return }
         if screenTime.monitoringRequested && state.emergencyGrant?.active == true {
             guard change({ try $0.settleUnmeasuredScope() }) else { return }
             guard state.phase == .challengeRequired else { return }
@@ -196,7 +200,7 @@ import SwiftUI
         updatePlatform()
     }
     func issuePermit(minutes: Int) {
-        guard parentAuthorized, !blocked, platformReady else { return }
+        guard parentAuthorized, state.migrationConfirmationPending != true, !blocked, platformReady else { return }
         _ = change { try $0.issuePermit(minutes: minutes); try $0.advanceControlRevision() }
     }
     func endPermit() {
@@ -204,7 +208,7 @@ import SwiftUI
         _ = change { if screenTime.monitoringRequested { try $0.settleUnmeasuredScope() }; $0.endPermit(); try $0.advanceControlRevision() }
     }
     func issueEmergency(minutes: Int) {
-        guard parentAuthorized, !blocked, platformReady else { return }
+        guard parentAuthorized, state.migrationConfirmationPending != true, !blocked, platformReady else { return }
         _ = change { try $0.issueEmergency(minutes: minutes); try $0.advanceControlRevision() }
     }
     func endEmergency() {
@@ -212,7 +216,7 @@ import SwiftUI
         _ = change { if screenTime.monitoringRequested { try $0.settleUnmeasuredScope() }; $0.endEmergency(); try $0.advanceControlRevision() }
     }
     func startSystemMonitoring() {
-        guard parentAuthorized, !blocked, dayCurrent else { notice = "请先由家长确认今天的记录。"; return }
+        guard parentAuthorized, state.migrationConfirmationPending != true, !blocked, dayCurrent else { notice = "请先由家长确认今天的记录。"; return }
         drainPlatformReceipts()
         do {
             if screenTime.monitoringRequested {
@@ -294,7 +298,7 @@ import SwiftUI
         CloudSummary(deviceID: deviceID, revision: controlRevision, date: Date(), answeredCount: state.records.reduce(0) { $0 + $1.answers.count }, correctCount: state.records.reduce(0) { $0 + $1.answers.filter(\.correct).count }, usedSeconds: state.dailySeconds, policy: state.policy)
     }
     func applyRemote(_ command: RemoteCommand) throws {
-        guard !blocked, command.targetDeviceID == deviceID, command.expectedRevision == controlRevision else { throw RemoteError.stale }
+        guard state.migrationConfirmationPending != true, !blocked, command.targetDeviceID == deviceID, command.expectedRevision == controlRevision else { throw RemoteError.stale }
         switch command.kind {
         case .setPolicy:
             guard let policy = command.policy else { throw RemoteError.invalid }
@@ -311,6 +315,12 @@ import SwiftUI
     func refreshCloud() async {
         guard cloud.enabled, !blocked else { return }
         await cloud.process(revision: { self.controlRevision }, summary: { self.makeCloudSummary() }, apply: { try self.applyRemote($0) })
+    }
+    func prepareMigrationExport() throws {
+        guard parentAuthorized, !blocked, state.migrationConfirmationPending != true else { throw SecureStoreError.unauthorized }
+        drainPlatformReceipts()
+        guard !blocked, !platformFault else { throw SecureStoreError.unavailable }
+        if screenTime.monitoringRequested { try commit { try $0.settleUnmeasuredScope() }; updatePlatform() }
     }
     func receiveShare(_ url: URL) { pendingShareURL = url; notice = "收到家庭分享邀请，请由家长验证后确认。" }
     func acceptPendingShare() async {

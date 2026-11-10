@@ -42,3 +42,7 @@ xcodebuild -project BEAA.xcodeproj -scheme BEAA \
 `generate_project.py` 可重复生成项目；自定义配置放在 `User.xcconfig`。`generate_project.py --check` 和 `validate_project.py` 是只读结构检查，发现本地项目差异时不会覆盖它。它们不解析 Swift 类型、不链接框架，也不执行 XCTest。
 
 交付与待验收清单见 [本轮报告](../../docs/testing/IOS_COMPLETION_REPORT.md)。没有发布或推送任何内容。
+
+## 跨设备迁移
+
+新增独立口令加密的跨设备迁移，不改变原有同机备份规则。目标必须是未使用的新账本；导入后保留来源累计/未完挑战并锁定，家长确认后将原累计计入今天。新安装在家长设置前不自动计入练习时间；家长配置期间暂停本应用练习采样。系统监控开启时导出前先处理回执并保守结算未知用时。入口为家长工具中的“跨设备加密迁移”。[迁移安全和验收说明](../../docs/IOS_MIGRATION.md)。新增XCTest源代码未执行。

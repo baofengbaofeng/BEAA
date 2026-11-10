@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g5-u1-q1",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Yesterday we ___ football.",
+      "options": [
+        {
+          "id": "A",
+          "text": "play"
+        },
+        {
+          "id": "B",
+          "text": "played"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Yesterday calls for the past form played.",
+      "knowledgePoints": [
+        "english-g5-u1"
+      ]
+    },
+    {
+      "id": "english-g5-u1-q2",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "She ___ to the park last Sunday.",
+      "options": [
+        {
+          "id": "A",
+          "text": "went"
+        },
+        {
+          "id": "B",
+          "text": "goes"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Went is the past form of go.",
+      "knowledgePoints": [
+        "english-g5-u1"
+      ]
+    },
+    {
+      "id": "english-g5-u2-q1",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Tomorrow I am going to ___ my aunt.",
+      "options": [
+        {
+          "id": "A",
+          "text": "visit"
+        },
+        {
+          "id": "B",
+          "text": "visited"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Going to is followed by the base verb.",
+      "knowledgePoints": [
+        "english-g5-u2"
+      ]
+    },
+    {
+      "id": "english-g5-u2-q2",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Which sentence describes a plan?",
+      "options": [
+        {
+          "id": "A",
+          "text": "I read yesterday."
+        },
+        {
+          "id": "B",
+          "text": "I will read tonight."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Will and tonight indicate the future.",
+      "knowledgePoints": [
+        "english-g5-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g5-u1",
+    "english-g5-u2"
+  ]
+}

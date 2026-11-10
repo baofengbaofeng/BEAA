@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g3-u5-q1",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Birds ___ fly.",
+      "options": [
+        {
+          "id": "A",
+          "text": "is"
+        },
+        {
+          "id": "B",
+          "text": "can"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Can expresses ability.",
+      "knowledgePoints": [
+        "english-g3-u5"
+      ]
+    },
+    {
+      "id": "english-g3-u5-q2",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Choose a polite request.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Can you help me, please?"
+        },
+        {
+          "id": "B",
+          "text": "You help now!"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Please and a question make a polite request.",
+      "knowledgePoints": [
+        "english-g3-u5"
+      ]
+    },
+    {
+      "id": "english-g3-u6-q1",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Ben has a red kite.” What is red?",
+      "options": [
+        {
+          "id": "A",
+          "text": "the kite"
+        },
+        {
+          "id": "B",
+          "text": "Ben’s shoes"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "The sentence calls the kite red.",
+      "knowledgePoints": [
+        "english-g3-u6"
+      ]
+    },
+    {
+      "id": "english-g3-u6-q2",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Mia reads after lunch.” When does she read?",
+      "options": [
+        {
+          "id": "A",
+          "text": "before breakfast"
+        },
+        {
+          "id": "B",
+          "text": "after lunch"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "After lunch is stated directly.",
+      "knowledgePoints": [
+        "english-g3-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g3-u5",
+    "english-g3-u6"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g3-u1-q1",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "She ___ my friend.",
+      "options": [
+        {
+          "id": "A",
+          "text": "are"
+        },
+        {
+          "id": "B",
+          "text": "is"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "She takes is.",
+      "knowledgePoints": [
+        "english-g3-u1"
+      ]
+    },
+    {
+      "id": "english-g3-u1-q2",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "They ___ happy.",
+      "options": [
+        {
+          "id": "A",
+          "text": "are"
+        },
+        {
+          "id": "B",
+          "text": "am"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "They takes are.",
+      "knowledgePoints": [
+        "english-g3-u1"
+      ]
+    },
+    {
+      "id": "english-g3-u2-q1",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "This is ___ apple.",
+      "options": [
+        {
+          "id": "A",
+          "text": "an"
+        },
+        {
+          "id": "B",
+          "text": "a"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Apple starts with a vowel sound.",
+      "knowledgePoints": [
+        "english-g3-u2"
+      ]
+    },
+    {
+      "id": "english-g3-u2-q2",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "One book, two ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "book"
+        },
+        {
+          "id": "B",
+          "text": "books"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Regular plural nouns add s.",
+      "knowledgePoints": [
+        "english-g3-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g3-u1",
+    "english-g3-u2"
+  ]
+}

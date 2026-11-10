@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g6-u3-q1",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "200人的25%是多少人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "52"
+        },
+        {
+          "id": "B",
+          "text": "50"
+        },
+        {
+          "id": "C",
+          "text": "51"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "25%=1/4，200÷4=50人。",
+      "knowledgePoints": [
+        "math-g6-u3"
+      ]
+    },
+    {
+      "id": "math-g6-u3-q2",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "300人的25%是多少人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "75"
+        },
+        {
+          "id": "B",
+          "text": "76"
+        },
+        {
+          "id": "C",
+          "text": "77"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "25%=1/4，300÷4=75人。",
+      "knowledgePoints": [
+        "math-g6-u3"
+      ]
+    },
+    {
+      "id": "math-g6-u3-q3",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "400人的25%是多少人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "101"
+        },
+        {
+          "id": "B",
+          "text": "102"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "25%=1/4，400÷4=100人。",
+      "knowledgePoints": [
+        "math-g6-u3"
+      ]
+    },
+    {
+      "id": "math-g6-u3-q4",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "500人的25%是多少人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "127"
+        },
+        {
+          "id": "B",
+          "text": "125"
+        },
+        {
+          "id": "C",
+          "text": "126"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "25%=1/4，500÷4=125人。",
+      "knowledgePoints": [
+        "math-g6-u3"
+      ]
+    },
+    {
+      "id": "math-g6-u4-q1",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "圆的半径是3厘米，直径多少厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "6"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "直径=2×半径=6厘米。",
+      "knowledgePoints": [
+        "math-g6-u4"
+      ]
+    },
+    {
+      "id": "math-g6-u4-q2",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "圆的半径是4厘米，直径多少厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "直径=2×半径=8厘米。",
+      "knowledgePoints": [
+        "math-g6-u4"
+      ]
+    },
+    {
+      "id": "math-g6-u4-q3",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "圆的半径是5厘米，直径多少厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "11"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "直径=2×半径=10厘米。",
+      "knowledgePoints": [
+        "math-g6-u4"
+      ]
+    },
+    {
+      "id": "math-g6-u4-q4",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "圆的半径是6厘米，直径多少厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "13"
+        },
+        {
+          "id": "C",
+          "text": "14"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "直径=2×半径=12厘米。",
+      "knowledgePoints": [
+        "math-g6-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g6-u3",
+    "math-g6-u4"
+  ]
+}

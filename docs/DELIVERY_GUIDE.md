@@ -57,3 +57,5 @@ npm run build:delivery
 ## iPhone 与 iPad
 
 iOS 后续功能源码集中位于 `apps/ios`，包含默认离线练习和可选 Connected 两套方案及三个扩展。家长安全/恢复、加密备份、复杂题型与统计、应急授权、系统范围管控、通知、家庭云端分享及远程指令均已接线。请阅读源码中的 `apps/ios/README.md` 与 `docs/testing/IOS_COMPLETION_REPORT.md`，按平台/安全/云端指南配置自己的标识。Apple 编译、XCTest、签名和真机验收由用户后续执行；源码包不含 IPA 或开发者签名。
+
+本轮源码还包含 `apps/family-service` 可选家庭服务、共享v2混合题型、鸿蒙原生练习服务、iOS加密迁移，以及 `shared/quiz/curriculum/generated` 中54个待审核分级练习包。网页已离线嵌入这些草稿包。请优先阅读 `docs/testing/CROSS_PLATFORM_COMPLETION_REPORT.md`；旧报告是历史证据，不能替代本轮结果。家庭服务需自行配置HTTPS/Origin/密钥，没有随源码包远端部署。

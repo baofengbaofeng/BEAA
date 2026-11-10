@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g4-u5-q1",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“春天花开。____。冬天落雪。”补哪句顺序合理？",
+      "options": [
+        {
+          "id": "A",
+          "text": "夏天树荫浓，秋天果实熟。"
+        },
+        {
+          "id": "B",
+          "text": "昨天我买了一本书。"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "四季顺序构成连贯内容。",
+      "knowledgePoints": [
+        "chinese-g4-u5"
+      ]
+    },
+    {
+      "id": "chinese-g4-u5-q2",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“先观察，再记录。”下句应接什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "还没有开始观察。"
+        },
+        {
+          "id": "B",
+          "text": "最后整理记录。"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "最后承接前面的步骤。",
+      "knowledgePoints": [
+        "chinese-g4-u5"
+      ]
+    },
+    {
+      "id": "chinese-g4-u6-q1",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪一句没有重复？",
+      "options": [
+        {
+          "id": "A",
+          "text": "他走进进入教室。"
+        },
+        {
+          "id": "B",
+          "text": "他走进教室。"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "走进和进入重复，保留一个即可。",
+      "knowledgePoints": [
+        "chinese-g4-u6"
+      ]
+    },
+    {
+      "id": "chinese-g4-u6-q2",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪句搭配正确？",
+      "options": [
+        {
+          "id": "A",
+          "text": "我们提高了阅读速度。"
+        },
+        {
+          "id": "B",
+          "text": "我们增加了阅读速度。"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "速度通常与提高搭配。",
+      "knowledgePoints": [
+        "chinese-g4-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g4-u5",
+    "chinese-g4-u6"
+  ]
+}

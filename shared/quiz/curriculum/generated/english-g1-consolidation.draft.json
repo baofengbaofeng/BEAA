@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g1-u5-q1",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "You write with a ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "shoe"
+        },
+        {
+          "id": "B",
+          "text": "pencil"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "A pencil is used for writing.",
+      "knowledgePoints": [
+        "english-g1-u5"
+      ]
+    },
+    {
+      "id": "english-g1-u5-q2",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "You read a ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "book"
+        },
+        {
+          "id": "B",
+          "text": "spoon"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "A book contains text to read.",
+      "knowledgePoints": [
+        "english-g1-u5"
+      ]
+    },
+    {
+      "id": "english-g1-u6-q1",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Your mother is part of your ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "family"
+        },
+        {
+          "id": "B",
+          "text": "classroom"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Family includes parents.",
+      "knowledgePoints": [
+        "english-g1-u6"
+      ]
+    },
+    {
+      "id": "english-g1-u6-q2",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“I am happy” describes a ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "color"
+        },
+        {
+          "id": "B",
+          "text": "feeling"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Happy names a feeling.",
+      "knowledgePoints": [
+        "english-g1-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g1-u5",
+    "english-g1-u6"
+  ]
+}

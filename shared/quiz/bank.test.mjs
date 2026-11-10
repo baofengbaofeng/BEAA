@@ -38,7 +38,7 @@ test('legacy questions without knowledge-point tags remain valid and selection i
 test('bank rejects duplicate IDs, invalid answer references, sparse data and ambiguous choices',()=>{
  const q=sample.questions[0];
  const invalid=[
-  null,{version:2,questions:[q]},{version:1,questions:[]},{version:1,questions:new Array(1)},
+  null,{version:3,questions:[q]},{version:1,questions:[]},{version:1,questions:new Array(1)},
   {version:1,questions:[q,q]}, {version:1,questions:[{...q,grade:0}]},
   {version:1,questions:[{...q,subject:'physics'}]}, {version:1,questions:[{...q,type:'unknown'}]},
   {version:1,questions:[{...q,correctOptionId:'missing'}]},

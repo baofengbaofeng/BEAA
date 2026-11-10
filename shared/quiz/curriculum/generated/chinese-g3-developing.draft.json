@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g3-u3-q1",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "院里有红花、白花、黄花。这段主要写什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "山上的树"
+        },
+        {
+          "id": "B",
+          "text": "院里的花"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "列举的内容都是院里的花。",
+      "knowledgePoints": [
+        "chinese-g3-u3"
+      ]
+    },
+    {
+      "id": "chinese-g3-u3-q2",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小兔会跳，会跑，也会钻洞。这段主要写什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "小兔的本领"
+        },
+        {
+          "id": "B",
+          "text": "小兔的颜色"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "三个动作都在介绍本领。",
+      "knowledgePoints": [
+        "chinese-g3-u3"
+      ]
+    },
+    {
+      "id": "chinese-g3-u4-q1",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "先揉面，再包馅，最后蒸熟。第二步是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "包馅"
+        },
+        {
+          "id": "B",
+          "text": "蒸熟"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "再标记中间一步。",
+      "knowledgePoints": [
+        "chinese-g3-u4"
+      ]
+    },
+    {
+      "id": "chinese-g3-u4-q2",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "放学后小东先回家，再做作业。做作业之前做什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "睡觉"
+        },
+        {
+          "id": "B",
+          "text": "回家"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "原句明确先回家。",
+      "knowledgePoints": [
+        "chinese-g3-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g3-u3",
+    "chinese-g3-u4"
+  ]
+}

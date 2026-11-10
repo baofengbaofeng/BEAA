@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g2-u3-q1",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "A bird has ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "wings"
+        },
+        {
+          "id": "B",
+          "text": "wheels"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Birds have wings.",
+      "knowledgePoints": [
+        "english-g2-u3"
+      ]
+    },
+    {
+      "id": "english-g2-u3-q2",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Which animal can usually swim?",
+      "options": [
+        {
+          "id": "A",
+          "text": "hen"
+        },
+        {
+          "id": "B",
+          "text": "fish"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Fish live and swim in water.",
+      "knowledgePoints": [
+        "english-g2-u3"
+      ]
+    },
+    {
+      "id": "english-g2-u4-q1",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Do you like apples?” —",
+      "options": [
+        {
+          "id": "A",
+          "text": "Yes, it blue."
+        },
+        {
+          "id": "B",
+          "text": "Yes, I do."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Yes, I do answers a do question.",
+      "knowledgePoints": [
+        "english-g2-u4"
+      ]
+    },
+    {
+      "id": "english-g2-u4-q2",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Choose a food.",
+      "options": [
+        {
+          "id": "A",
+          "text": "rice"
+        },
+        {
+          "id": "B",
+          "text": "desk"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Rice is food.",
+      "knowledgePoints": [
+        "english-g2-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g2-u3",
+    "english-g2-u4"
+  ]
+}

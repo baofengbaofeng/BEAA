@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g2-u3-q1",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "10颗糖平均分给5人，每人几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "2"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "10÷5=2。",
+      "knowledgePoints": [
+        "math-g2-u3"
+      ]
+    },
+    {
+      "id": "math-g2-u3-q2",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "15颗糖平均分给5人，每人几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "15÷5=3。",
+      "knowledgePoints": [
+        "math-g2-u3"
+      ]
+    },
+    {
+      "id": "math-g2-u3-q3",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "20颗糖平均分给5人，每人几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "20÷5=4。",
+      "knowledgePoints": [
+        "math-g2-u3"
+      ]
+    },
+    {
+      "id": "math-g2-u3-q4",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "25颗糖平均分给5人，每人几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "6"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "25÷5=5。",
+      "knowledgePoints": [
+        "math-g2-u3"
+      ]
+    },
+    {
+      "id": "math-g2-u4-q1",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "1小时2分钟合计多少分钟？",
+      "options": [
+        {
+          "id": "A",
+          "text": "64"
+        },
+        {
+          "id": "B",
+          "text": "62"
+        },
+        {
+          "id": "C",
+          "text": "63"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "1小时=60分钟，60+2=62。",
+      "knowledgePoints": [
+        "math-g2-u4"
+      ]
+    },
+    {
+      "id": "math-g2-u4-q2",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "1小时3分钟合计多少分钟？",
+      "options": [
+        {
+          "id": "A",
+          "text": "63"
+        },
+        {
+          "id": "B",
+          "text": "64"
+        },
+        {
+          "id": "C",
+          "text": "65"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "1小时=60分钟，60+3=63。",
+      "knowledgePoints": [
+        "math-g2-u4"
+      ]
+    },
+    {
+      "id": "math-g2-u4-q3",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "1小时4分钟合计多少分钟？",
+      "options": [
+        {
+          "id": "A",
+          "text": "65"
+        },
+        {
+          "id": "B",
+          "text": "66"
+        },
+        {
+          "id": "C",
+          "text": "64"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "1小时=60分钟，60+4=64。",
+      "knowledgePoints": [
+        "math-g2-u4"
+      ]
+    },
+    {
+      "id": "math-g2-u4-q4",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "1小时5分钟合计多少分钟？",
+      "options": [
+        {
+          "id": "A",
+          "text": "67"
+        },
+        {
+          "id": "B",
+          "text": "65"
+        },
+        {
+          "id": "C",
+          "text": "66"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "1小时=60分钟，60+5=65。",
+      "knowledgePoints": [
+        "math-g2-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g2-u3",
+    "math-g2-u4"
+  ]
+}

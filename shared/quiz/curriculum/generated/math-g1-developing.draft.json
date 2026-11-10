@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g1-u3-q1",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "篮里有10个苹果，拿走3个，还剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "8"
+        },
+        {
+          "id": "C",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "10−3=7。",
+      "knowledgePoints": [
+        "math-g1-u3"
+      ]
+    },
+    {
+      "id": "math-g1-u3-q2",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "篮里有11个苹果，拿走3个，还剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "11−3=8。",
+      "knowledgePoints": [
+        "math-g1-u3"
+      ]
+    },
+    {
+      "id": "math-g1-u3-q3",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "篮里有12个苹果，拿走3个，还剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "11"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "12−3=9。",
+      "knowledgePoints": [
+        "math-g1-u3"
+      ]
+    },
+    {
+      "id": "math-g1-u3-q4",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "篮里有13个苹果，拿走3个，还剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "11"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "13−3=10。",
+      "knowledgePoints": [
+        "math-g1-u3"
+      ]
+    },
+    {
+      "id": "math-g1-u4-q1",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "有1个三角形，每个有3条边，共数到几条边？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "3"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "逐个数边，1个三角形共3条边（图形互不重叠）。",
+      "knowledgePoints": [
+        "math-g1-u4"
+      ]
+    },
+    {
+      "id": "math-g1-u4-q2",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "有2个三角形，每个有3条边，共数到几条边？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "逐个数边，2个三角形共6条边（图形互不重叠）。",
+      "knowledgePoints": [
+        "math-g1-u4"
+      ]
+    },
+    {
+      "id": "math-g1-u4-q3",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "有3个三角形，每个有3条边，共数到几条边？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "11"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "逐个数边，3个三角形共9条边（图形互不重叠）。",
+      "knowledgePoints": [
+        "math-g1-u4"
+      ]
+    },
+    {
+      "id": "math-g1-u4-q4",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "有4个三角形，每个有3条边，共数到几条边？",
+      "options": [
+        {
+          "id": "A",
+          "text": "13"
+        },
+        {
+          "id": "B",
+          "text": "14"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "逐个数边，4个三角形共12条边（图形互不重叠）。",
+      "knowledgePoints": [
+        "math-g1-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g1-u3",
+    "math-g1-u4"
+  ]
+}

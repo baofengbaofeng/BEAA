@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g6-u3-q1",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "甲文写植树降温，乙文写绿地吸水。共同话题是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "绿化的作用"
+        },
+        {
+          "id": "B",
+          "text": "交通工具"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "两则都介绍植物或绿地带来的作用。",
+      "knowledgePoints": [
+        "chinese-g6-u3"
+      ]
+    },
+    {
+      "id": "chinese-g6-u3-q2",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "甲文主张步行，乙文主张骑车，理由都是少排放。共同目标是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "增加耗油"
+        },
+        {
+          "id": "B",
+          "text": "减少污染"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "少排放指向减少污染。",
+      "knowledgePoints": [
+        "chinese-g6-u3"
+      ]
+    },
+    {
+      "id": "chinese-g6-u4-q1",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "要说明阅读增长知识，哪项证据最相关？",
+      "options": [
+        {
+          "id": "A",
+          "text": "新书封面是蓝色"
+        },
+        {
+          "id": "B",
+          "text": "读科普后理解了潮汐"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "理解新知识直接支持结论。",
+      "knowledgePoints": [
+        "chinese-g6-u4"
+      ]
+    },
+    {
+      "id": "chinese-g6-u4-q2",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "只问一个同学便说“全班都赞成”，问题是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "样本不足"
+        },
+        {
+          "id": "B",
+          "text": "标点过多"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "一个人的回答不足以代表全班。",
+      "knowledgePoints": [
+        "chinese-g6-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g6-u3",
+    "chinese-g6-u4"
+  ]
+}

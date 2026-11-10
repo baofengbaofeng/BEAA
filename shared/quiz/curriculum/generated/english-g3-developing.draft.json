@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g3-u3-q1",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "I have a bag. It is ___ bag.",
+      "options": [
+        {
+          "id": "A",
+          "text": "his"
+        },
+        {
+          "id": "B",
+          "text": "my"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "My means belonging to me.",
+      "knowledgePoints": [
+        "english-g3-u3"
+      ]
+    },
+    {
+      "id": "english-g3-u3-q2",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "She has a pen. It is ___ pen.",
+      "options": [
+        {
+          "id": "A",
+          "text": "her"
+        },
+        {
+          "id": "B",
+          "text": "our"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Her refers to something belonging to her.",
+      "knowledgePoints": [
+        "english-g3-u3"
+      ]
+    },
+    {
+      "id": "english-g3-u4-q1",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Which day follows Monday?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tuesday"
+        },
+        {
+          "id": "B",
+          "text": "Sunday"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Tuesday comes after Monday.",
+      "knowledgePoints": [
+        "english-g3-u4"
+      ]
+    },
+    {
+      "id": "english-g3-u4-q2",
+      "grade": 3,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "The clock shows 7:00. It is ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "half past seven"
+        },
+        {
+          "id": "B",
+          "text": "seven o’clock"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "7:00 is seven o’clock.",
+      "knowledgePoints": [
+        "english-g3-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g3-u3",
+    "english-g3-u4"
+  ]
+}

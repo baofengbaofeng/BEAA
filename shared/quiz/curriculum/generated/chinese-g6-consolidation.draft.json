@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g6-u5-q1",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“也许明天会下雨”属于？",
+      "options": [
+        {
+          "id": "A",
+          "text": "推测"
+        },
+        {
+          "id": "B",
+          "text": "已发生的事实"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "也许表示尚不确定。",
+      "knowledgePoints": [
+        "chinese-g6-u5"
+      ]
+    },
+    {
+      "id": "chinese-g6-u5-q2",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“调查记录了30只鸟”属于？",
+      "options": [
+        {
+          "id": "A",
+          "text": "个人喜好"
+        },
+        {
+          "id": "B",
+          "text": "可核查的事实陈述"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "数量记录可以查证。",
+      "knowledgePoints": [
+        "chinese-g6-u5"
+      ]
+    },
+    {
+      "id": "chinese-g6-u6-q1",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "活动通知最需要写清什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "写信人的爱好"
+        },
+        {
+          "id": "B",
+          "text": "时间地点和活动事项"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "通知让读者知道何时何地做什么。",
+      "knowledgePoints": [
+        "chinese-g6-u6"
+      ]
+    },
+    {
+      "id": "chinese-g6-u6-q2",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "倡议书提出行动后，补充哪项更有说服力？",
+      "options": [
+        {
+          "id": "A",
+          "text": "行动的理由与具体做法"
+        },
+        {
+          "id": "B",
+          "text": "无关的天气记录"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "理由说明必要性，做法帮助落实。",
+      "knowledgePoints": [
+        "chinese-g6-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g6-u5",
+    "chinese-g6-u6"
+  ]
+}

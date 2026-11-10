@@ -179,4 +179,53 @@ final class SecureStateStore {
             return state
         }
     }
+    func exportMigration(password: String, parentAllowed: () -> Bool) throws -> Data {
+        guard parentAllowed() else { throw SecureStoreError.unauthorized }
+        return try locked {
+            guard let anchor = try readAnchor(), revision == anchor.revision else { throw SecureStoreError.stale }
+            let (_, state) = try exactSnapshot(url, anchor: anchor)
+            let result = try TransferMigration.encode(state, password: password)
+            guard parentAllowed() else { throw SecureStoreError.unauthorized }
+            return result
+        }
+    }
+    func importMigration(_ data: Data, password: String, parentAllowed: () -> Bool) throws -> LearningState {
+        guard parentAllowed() else { throw SecureStoreError.unauthorized }
+        let incoming = try TransferMigration.decode(data, password: password)
+        guard parentAllowed() else { throw SecureStoreError.unauthorized }
+        return try locked {
+            guard let anchor = try readAnchor(), revision == anchor.revision else { throw SecureStoreError.stale }
+            let (_, current) = try exactSnapshot(url, anchor: anchor)
+            // Revision one is the enrolled initial snapshot. Never replace an occupied
+            // target, even if an edited ledger has subsequently returned to zero usage.
+            guard anchor.revision == 1, try Self.isPristineMigrationTarget(current) else { throw TransferMigrationError.occupied }
+            guard parentAllowed() else { throw SecureStoreError.unauthorized }
+            try commit(incoming, anchor: anchor)
+            return incoming
+        }
+    }
+    private static func isPristineMigrationTarget(_ state: LearningState) throws -> Bool {
+        func normalized(_ value: LearningState) throws -> NSDictionary {
+            var object = try JSONSerialization.jsonObject(with: JSONEncoder().encode(value)) as! [String: Any]
+            object.removeValue(forKey: "dayStarted"); object.removeValue(forKey: "roundID")
+            return object as NSDictionary
+        }
+        return try normalized(state).isEqual(normalized(LearningState()))
+    }
+    func confirmMigration(parentAllowed: () -> Bool, now: Date = Date()) throws -> LearningState {
+        guard parentAllowed() else { throw SecureStoreError.unauthorized }
+        return try locked {
+            guard let anchor = try readAnchor(), revision == anchor.revision else { throw SecureStoreError.stale }
+            var (_, state) = try exactSnapshot(url, anchor: anchor)
+            guard state.migrationConfirmationPending == true,
+                  Calendar.current.startOfDay(for: state.dayStarted) <= Calendar.current.startOfDay(for: now) else { throw TransferMigrationError.confirmationRequired }
+            // Confirmation carries spent source budgets into today, never rolls them
+            // down to zero. Future source dates require clock correction first.
+            state.dayStarted = now; state.migrationConfirmationPending = nil
+            guard parentAllowed() else { throw SecureStoreError.unauthorized }
+            try commit(state, anchor: anchor)
+            return state
+        }
+    }
+
 }

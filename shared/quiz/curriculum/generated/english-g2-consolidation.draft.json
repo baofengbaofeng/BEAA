@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g2-u5-q1",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "The ball is inside the box. It is ___ the box.",
+      "options": [
+        {
+          "id": "A",
+          "text": "in"
+        },
+        {
+          "id": "B",
+          "text": "under"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "In means inside.",
+      "knowledgePoints": [
+        "english-g2-u5"
+      ]
+    },
+    {
+      "id": "english-g2-u5-q2",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "A cat sits below a table. It is ___ the table.",
+      "options": [
+        {
+          "id": "A",
+          "text": "on"
+        },
+        {
+          "id": "B",
+          "text": "under"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Under means below.",
+      "knowledgePoints": [
+        "english-g2-u5"
+      ]
+    },
+    {
+      "id": "english-g2-u6-q1",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Before sleeping, I say ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Good morning."
+        },
+        {
+          "id": "B",
+          "text": "Good night."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Good night is used at bedtime.",
+      "knowledgePoints": [
+        "english-g2-u6"
+      ]
+    },
+    {
+      "id": "english-g2-u6-q2",
+      "grade": 2,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "After waking, I ___ my teeth.",
+      "options": [
+        {
+          "id": "A",
+          "text": "brush"
+        },
+        {
+          "id": "B",
+          "text": "read"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Brush is the verb used with teeth.",
+      "knowledgePoints": [
+        "english-g2-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g2-u5",
+    "english-g2-u6"
+  ]
+}
