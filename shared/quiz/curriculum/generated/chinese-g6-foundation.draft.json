@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g6-u1-q1",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“失败后她又站起来继续尝试”，“站起来”还暗示？",
+      "options": [
+        {
+          "id": "A",
+          "text": "重新振作"
+        },
+        {
+          "id": "B",
+          "text": "马上休息"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "继续尝试表明没有被失败击倒。",
+      "knowledgePoints": [
+        "chinese-g6-u1"
+      ]
+    },
+    {
+      "id": "chinese-g6-u1-q2",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“这座桥连接的不只是两岸，还有人心。”强调什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "桥只有装饰作用"
+        },
+        {
+          "id": "B",
+          "text": "桥促进交流"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "人心的连接表示人与人的交流。",
+      "knowledgePoints": [
+        "chinese-g6-u1"
+      ]
+    },
+    {
+      "id": "chinese-g6-u2-q1",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“一盏灯，一份暖，一份希望”反复使用“一份”有助于？",
+      "options": [
+        {
+          "id": "A",
+          "text": "证明精确数量"
+        },
+        {
+          "id": "B",
+          "text": "增强节奏和情感"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "重复句式可以加强表达。",
+      "knowledgePoints": [
+        "chinese-g6-u2"
+      ]
+    },
+    {
+      "id": "chinese-g6-u2-q2",
+      "grade": 6,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“书是通向世界的窗”说明什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "阅读拓宽认识"
+        },
+        {
+          "id": "B",
+          "text": "书由玻璃制成"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "窗是比喻，说明书能开阔视野。",
+      "knowledgePoints": [
+        "chinese-g6-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g6-u1",
+    "chinese-g6-u2"
+  ]
+}

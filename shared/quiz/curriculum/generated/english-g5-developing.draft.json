@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g5-u3-q1",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "A giraffe is ___ than a cat.",
+      "options": [
+        {
+          "id": "A",
+          "text": "tallest"
+        },
+        {
+          "id": "B",
+          "text": "taller"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Than is used with comparative taller.",
+      "knowledgePoints": [
+        "english-g5-u3"
+      ]
+    },
+    {
+      "id": "english-g5-u3-q2",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "This box weighs 2 kg; that one weighs 5 kg. This box is ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "lighter"
+        },
+        {
+          "id": "B",
+          "text": "heavier"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Two kilograms is less than five.",
+      "knowledgePoints": [
+        "english-g5-u3"
+      ]
+    },
+    {
+      "id": "english-g5-u4-q1",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“I always wash before meals.” Always means ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "every time"
+        },
+        {
+          "id": "B",
+          "text": "never"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Always means on every occasion.",
+      "knowledgePoints": [
+        "english-g5-u4"
+      ]
+    },
+    {
+      "id": "english-g5-u4-q2",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“I never eat in class.” This means I do it ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "every day"
+        },
+        {
+          "id": "B",
+          "text": "zero times"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Never means at no time.",
+      "knowledgePoints": [
+        "english-g5-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g5-u3",
+    "english-g5-u4"
+  ]
+}

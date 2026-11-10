@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g1-u1-q1",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "5后面的一个整数是几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "8"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "5再增加1，得到6。",
+      "knowledgePoints": [
+        "math-g1-u1"
+      ]
+    },
+    {
+      "id": "math-g1-u1-q2",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "6后面的一个整数是几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "6再增加1，得到7。",
+      "knowledgePoints": [
+        "math-g1-u1"
+      ]
+    },
+    {
+      "id": "math-g1-u1-q3",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "7后面的一个整数是几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "7再增加1，得到8。",
+      "knowledgePoints": [
+        "math-g1-u1"
+      ]
+    },
+    {
+      "id": "math-g1-u1-q4",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "8后面的一个整数是几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "11"
+        },
+        {
+          "id": "C",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "8再增加1，得到9。",
+      "knowledgePoints": [
+        "math-g1-u1"
+      ]
+    },
+    {
+      "id": "math-g1-u2-q1",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "小禾有3颗珠子，又得到4颗，现在有几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "3+4=7。",
+      "knowledgePoints": [
+        "math-g1-u2"
+      ]
+    },
+    {
+      "id": "math-g1-u2-q2",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "小禾有4颗珠子，又得到4颗，现在有几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "4+4=8。",
+      "knowledgePoints": [
+        "math-g1-u2"
+      ]
+    },
+    {
+      "id": "math-g1-u2-q3",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "小禾有5颗珠子，又得到4颗，现在有几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "11"
+        },
+        {
+          "id": "C",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "5+4=9。",
+      "knowledgePoints": [
+        "math-g1-u2"
+      ]
+    },
+    {
+      "id": "math-g1-u2-q4",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "小禾有6颗珠子，又得到4颗，现在有几颗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "11"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "6+4=10。",
+      "knowledgePoints": [
+        "math-g1-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g1-u1",
+    "math-g1-u2"
+  ]
+}

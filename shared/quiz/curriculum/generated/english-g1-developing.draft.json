@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g1-u3-q1",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Grass is often ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "purple"
+        },
+        {
+          "id": "B",
+          "text": "green"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Green is the usual color of healthy grass.",
+      "knowledgePoints": [
+        "english-g1-u3"
+      ]
+    },
+    {
+      "id": "english-g1-u3-q2",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "A clear daytime sky is usually ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "blue"
+        },
+        {
+          "id": "B",
+          "text": "brown"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Blue describes a clear sky.",
+      "knowledgePoints": [
+        "english-g1-u3"
+      ]
+    },
+    {
+      "id": "english-g1-u4-q1",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Which word means 3?",
+      "options": [
+        {
+          "id": "A",
+          "text": "three"
+        },
+        {
+          "id": "B",
+          "text": "eight"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Three is the word for 3.",
+      "knowledgePoints": [
+        "english-g1-u4"
+      ]
+    },
+    {
+      "id": "english-g1-u4-q2",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "One, two, ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "nine"
+        },
+        {
+          "id": "B",
+          "text": "three"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Three follows two.",
+      "knowledgePoints": [
+        "english-g1-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g1-u3",
+    "english-g1-u4"
+  ]
+}

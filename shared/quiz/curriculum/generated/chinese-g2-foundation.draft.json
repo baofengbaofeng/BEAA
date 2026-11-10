@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g2-u1-q1",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“河”的部首是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "氵"
+        },
+        {
+          "id": "B",
+          "text": "口"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "河的左边是三点水。",
+      "knowledgePoints": [
+        "chinese-g2-u1"
+      ]
+    },
+    {
+      "id": "chinese-g2-u1-q2",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“树”的部首是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "扌"
+        },
+        {
+          "id": "B",
+          "text": "木"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "树的左边是木字旁。",
+      "knowledgePoints": [
+        "chinese-g2-u1"
+      ]
+    },
+    {
+      "id": "chinese-g2-u2-q1",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "选择正确的字：一（ ）小鸟。",
+      "options": [
+        {
+          "id": "A",
+          "text": "支"
+        },
+        {
+          "id": "B",
+          "text": "只"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "小鸟通常用量词只。",
+      "knowledgePoints": [
+        "chinese-g2-u2"
+      ]
+    },
+    {
+      "id": "chinese-g2-u2-q2",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "选择正确的字：我（ ）家了。",
+      "options": [
+        {
+          "id": "A",
+          "text": "回"
+        },
+        {
+          "id": "B",
+          "text": "园"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "回家表示返回家中。",
+      "knowledgePoints": [
+        "chinese-g2-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g2-u1",
+    "chinese-g2-u2"
+  ]
+}

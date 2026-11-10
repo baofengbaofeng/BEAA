@@ -306,3 +306,97 @@ test('native simulation cycle IDs survive history retention and failed writes on
 test('parent demo reset keeps monotonic native notification revisions and starts a fresh cycle identity',async()=>{
  const h=harness();await h.parent();h.action('useOne');const before=h.current();h.action('reset');assert(h.current().stateRevision>before.stateRevision);assert(h.current().cycleSequence>before.cycleSequence);assert.equal(h.current().dailyUsed,0);
 });
+
+test('quiet-hour editing requires parent authority and legacy progress migrates without reset',async()=>{
+ const h=harness();h.action('useOne');const before=h.current();
+ assert.equal(h.evaluate('typeof addQuietWindow'),'function');
+ h.evaluate('addQuietWindow({quietDays:[1],quietStart:"21:00",quietEnd:"07:00"})');assert.deepEqual(h.current().quietWindows,[]);
+ await h.parent();h.evaluate('addQuietWindow({quietDays:[1],quietStart:"21:00",quietEnd:"07:00"})');
+ assert.equal(h.current().quietWindows.length,1);assert.equal(h.current().dailyUsed,before.dailyUsed);
+ const legacy=h.current();delete legacy.quietWindows;const restored=harness(legacy);assert.deepEqual(restored.evaluate('JSON.stringify(s.quietWindows)'), '[]');assert.equal(restored.current().dailyUsed,1);
+});
+test('quiet hours block use and permits, preserve a pending quiz, and restore it at end',async()=>{
+ const h=harness();h.action('fill');h.action('start');const old=h.current();const date=new Date(1_000_000);const minute=date.getHours()*60+date.getMinutes();const day=(date.getDay()+6)%7+1;
+ old.quietWindows=[{days:[day],startMinute:minute,endMinute:minute+2}];
+ const blocked=harness(old);const original=blocked.current();blocked.answer(2);assert.equal(blocked.current().question,original.question);assert.equal(blocked.current().phase,'answering');assert.match(blocked.page(),/禁用时段/);
+ blocked.advance(120000);blocked.answer(2);assert.equal(blocked.current().question,1);
+});
+test('corrupt quiet schedules preserve the raw record and enter recovery protection',()=>{
+ for(const value of [null,[{days:[1],startMinute:60,endMinute:60}],{}]){
+  const h=harness();h.action('useOne');const bad={...h.current(),quietWindows:value};const restored=harness(bad);
+  assert.match(restored.page(),/数据需要恢复/);assert.deepEqual(restored.current(),bad);
+ }
+});
+test('editing quiet hours during rest cannot retroactively count time spent in a blocked window',async()=>{
+ const h=harness();h.action('fill');h.action('start');for(const answer of [2,1,0,2,2])h.answer(answer);assert.equal(h.current().phase,'rest');await h.parent();
+ const date=new Date(1_000_000),day=(date.getDay()+6)%7+1,minute=date.getHours()*60+date.getMinutes();
+ h.evaluate(`addQuietWindow({quietDays:[${day}],quietStart:"${String(Math.floor((minute+1)/60)).padStart(2,'0')}:${String((minute+1)%60).padStart(2,'0')}",quietEnd:"${String(Math.floor((minute+3)/60)).padStart(2,'0')}:${String((minute+3)%60).padStart(2,'0')}"})`);
+ h.advance(140000);h.evaluate('removeQuietWindow(0)');h.advance(460000);h.action('rest');assert.equal(h.current().phase,'rest');h.advance(120000);h.action('rest');assert.equal(h.current().phase,'available');
+});
+test('rest accumulator damage is rejected without rewriting the original snapshot',()=>{
+ const h=harness();h.action('fill');h.action('start');for(const answer of [2,1,0,2,2])h.answer(answer);
+ for(const fields of [{restCreditedMs:3600000},{restObservedAt:h.current().restStart-1}]){
+  const bad={...h.current(),...fields};const restored=harness(bad);assert.match(restored.page(),/数据需要恢复/);assert.deepEqual(restored.current(),bad);
+ }
+});
+test('a quiet window crossed while away terminates an active permit without resetting counters',async()=>{
+ const h=harness();await h.parent();h.fields.permitMinutes={value:'5'};h.action('issuePermit');
+ const date=new Date(1_000_000),day=(date.getDay()+6)%7+1,minute=date.getHours()*60+date.getMinutes();const start=String(Math.floor((minute+1)/60)).padStart(2,'0')+':'+String((minute+1)%60).padStart(2,'0'),end=String(Math.floor((minute+3)/60)).padStart(2,'0')+':'+String((minute+3)%60).padStart(2,'0');
+ h.evaluate(`addQuietWindow({quietDays:[${day}],quietStart:"${start}",quietEnd:"${end}"})`);h.advance(140000);h.navigate('home');assert.notEqual(h.current().permit.closedReason,null);h.action('useOne');assert.equal(h.current().dailyUsed,0);h.action('endPermit');h.action('useOne');assert.equal(h.current().dailyUsed,1);
+});
+test('an unavailable local clock never rewrites counters or day markers with invalid time',()=>{
+ const h=harness();h.action('useOne');const before=h.current();h.evaluate('Date.now=()=>NaN');h.action('useOne');const after=h.current();assert.equal(after.dailyUsed,before.dailyUsed);assert.equal(after.day,before.day);assert.equal(after.lastTime,before.lastTime);
+});
+
+test('numeric import, invalid input, wrong-first correction and reload preserve exact scoring',async()=>{
+ const q={id:'numeric-client',grade:3,subject:'math',topic:'arithmetic',type:'numeric',text:'1.5 + 1 = ?',answer:'2.5',explain:'1.5加1等于2.5。'};
+ const h=harness();await h.parent();h.fields.questionCount.value='1';h.fields.requiredCorrect.value='1';h.fields.rest.value='0';h.action('saveSettings');h.fields.bank={value:JSON.stringify([q])};h.action('import');assert.equal(h.current().bank.length,1);h.action('fill');h.action('start');
+ h.evaluate('choose("2.5元","numeric-client")');assert.equal(h.current().attempted.length,0);assert.equal(h.current().mistakes.length,0);
+ h.evaluate('choose("4.00","numeric-client")');assert.equal(h.current().mistakes[0].chosen,'4');assert.equal(h.current().correct,0);
+ const reloaded=harness(h.current());assert.equal(reloaded.current().activeQuestions[0].type,'numeric');reloaded.evaluate('choose("２．５００","numeric-client")');assert.equal(reloaded.current().phase,'challenge');assert.equal(reloaded.current().history[0].correct,0);assert.equal(reloaded.current().history[0].passed,false);
+ reloaded.navigate('review');assert.match(reloaded.page(),/原选择：4/);assert.match(reloaded.page(),/data-review-input/);
+});
+test('true false questions show two choices and retain the rest gate',async()=>{
+ const q={id:'boolean-client',grade:3,subject:'math',topic:'arithmetic',type:'true_false',text:'2大于1。',options:['正确','错误'],answer:0,explain:'2比1大。'};
+ const h=harness();await h.parent();h.fields.questionCount.value='1';h.fields.requiredCorrect.value='1';h.action('saveSettings');h.fields.bank={value:JSON.stringify([q])};h.action('import');h.action('fill');h.action('start');assert.match(h.page(),/判断题/);h.answer(0);assert.equal(h.current().phase,'rest');h.action('rest');assert.equal(h.current().phase,'rest');
+});
+
+test('fraction and explicit tolerance keep canonical snapshots and first-attempt scoring',async()=>{
+ for(const [type,answer,extra,wrong,right] of [['fraction','1/2',{},'1/3','２／４'],['numeric_tolerance','2.5',{absoluteTolerance:'0.1'},'2.61','2.6']]){
+  const h=harness();await h.parent();h.fields.questionCount.value='1';h.fields.requiredCorrect.value='1';h.action('saveSettings');const q={id:type,grade:3,subject:'math',topic:'arithmetic',type,text:'填写答案。',answer,explain:'认真计算。',...extra};h.fields.bank={value:JSON.stringify([q])};h.action('import');h.action('fill');h.action('start');
+  h.evaluate(`choose(${JSON.stringify(wrong)},${JSON.stringify(type)})`);assert.equal(h.current().mistakes.length,1);const resumed=harness(h.current());resumed.evaluate(`choose(${JSON.stringify(right)},${JSON.stringify(type)})`);assert.equal(resumed.current().history[0].correct,0);assert.equal(resumed.current().history[0].passed,false);
+  const before=resumed.current();resumed.evaluate(`reviewResponse(0,${JSON.stringify(right)},${JSON.stringify(type)})`);assert.equal(resumed.current().mistakes[0].practiceCorrect,1);assert.deepEqual(resumed.current().history,before.history);assert.equal(resumed.current().dailyUsed,before.dailyUsed);
+ }
+});
+test('retained history practice and statistics include older entries and survive reload',()=>{
+ const h=harness();h.action('fill');h.action('start');h.answer(0);const seed=h.current();seed.mistakes=Array.from({length:200},(_,i)=>({...seed.mistakes[0],at:i}));const full=harness(seed);full.evaluate('reviewResponse(0,2)');full.evaluate('reviewResponse(199,0)');const restored=harness(full.current());assert.equal(restored.current().mistakes[0].practiceCorrect,1);assert.equal(restored.current().mistakes[199].practiceAttempts,1);restored.navigate('records');assert.match(restored.page(),/错题复习 2 次 · 答对 1 次/);assert.match(restored.page(),/错题 200 条/);
+});
+test('emergency challenge grant preserves existing subpermit and exhausted cycle across reload',async()=>{
+ const h=harness();await h.parent();h.fields.permitMinutes={value:'1'};h.action('issuePermit');h.action('useOne');h.action('endPermit');h.action('fill');const seed=h.current();seed.permit={...createClosedPermit(h)};const ready=harness(seed);await ready.parent();ready.fields.emergencyMinutes={value:'2'};ready.action('issueEmergency');const permit=ready.current().permit;assert.equal(ready.current().emergencyGrant.budgetSeconds,120);ready.action('useOne');assert.equal(ready.current().dailyUsed,31);assert.equal(ready.current().cycleUsed,31);assert.equal(ready.current().phase,'challenge');assert.deepEqual(ready.current().permit,permit);
+ const restored=harness(ready.current());restored.action('useOne');assert.equal(restored.current().dailyUsed,32);assert.equal(restored.current().emergencyGrant.closedReason,'budget_exhausted');assert.equal(restored.current().audit.at(-1).type,'emergency_stop');
+ function createClosedPermit(source){return {version:1,permitId:'retained-subpermit',issuedAtMs:1000000,expiresAtMs:1060000,budgetSeconds:60,usedSeconds:60,lastObservedAtMs:1000000,closedReason:'budget_exhausted'};}
+});
+test('emergency authorization fails closed outside pending challenge and terminal clocks persist',async()=>{
+ const h=harness();await h.parent();h.fields.emergencyMinutes={value:'1'};h.action('issueEmergency');assert.equal(h.current().emergencyGrant,null);h.action('fill');h.action('issueEmergency');const seed=h.current();
+ for(const [now,reason] of [[1060000,'expired'],[999999,'clock_rollback']]){const observed=harness(seed,false,null,now);assert.equal(observed.current().emergencyGrant.closedReason,reason);const reopen=harness(observed.current());reopen.action('useOne');assert.equal(reopen.current().dailyUsed,30);}
+ h.action('start');h.action('issueEmergency');assert.notEqual(h.current().emergencyGrant.closedReason,null);[2,1,0,2,2].forEach(h.answer);assert.equal(h.current().phase,'rest');h.action('issueEmergency');assert.notEqual(h.current().emergencyGrant.closedReason,null);
+ const daily=harness({...seed,dailyUsed:120,phase:'daily',emergencyGrant:null});await daily.parent();daily.fields.emergencyMinutes={value:'1'};daily.action('issueEmergency');assert.equal(daily.current().emergencyGrant,null);
+});
+
+test('an emergency grant crossing quiet time terminates permanently and preserves its subpermit',async()=>{
+ const h=harness();await h.parent();h.action('fill');h.fields.emergencyMinutes={value:'5'};h.action('issueEmergency');const original=h.current();const date=new Date(1000000),minute=date.getHours()*60+date.getMinutes(),day=(date.getDay()+6)%7+1;original.quietWindows=[{days:[day],startMinute:minute+1,endMinute:minute+2}];
+ const crossed=harness(original,false,null,1140000);assert.equal(crossed.current().emergencyGrant.closedReason,'parent_closed');assert.equal(crossed.current().audit.at(-1).type,'emergency_stop');crossed.action('useOne');assert.equal(crossed.current().dailyUsed,30);assert.equal(crossed.current().cycleUsed,30);assert.equal(crossed.current().phase,'challenge');const reopened=harness(crossed.current(),false,null,1140000);reopened.action('useOne');assert.equal(reopened.current().dailyUsed,30);
+});
+
+test('paired family remote commands require correct target/revision and never bypass rest', async()=>{
+ const h=harness();await h.parent();h.action('fill');const id='12345678-1234-4123-8123-123456789abc';
+ h.storage.set('beaa-family-connection-v1',JSON.stringify({base:'http://localhost:8787',deviceID:id,token:'x'.repeat(43),receipts:[]}));
+ const command={id:'abcdef01-1234-4123-8123-123456789abc',targetDeviceID:id,kind:'emergencyGrant',expectedRevision:h.current().stateRevision,issuedAt:1000000,expiresAt:1300000,minutes:2};
+ const result=await h.evaluate('beaaFamily.applyCommand('+JSON.stringify(command)+')');assert.equal(result.applied,true);assert.equal(h.current().phase,'challenge');assert.equal(h.current().emergencyGrant.budgetSeconds,120);
+ const again=await h.evaluate('beaaFamily.applyCommand('+JSON.stringify(command)+')');assert.equal(again.applied,true);assert.equal(h.current().emergencyGrant.budgetSeconds,120);
+ const stale={...command,id:'abcdef02-1234-4123-8123-123456789abc',expectedRevision:0};assert.equal((await h.evaluate('beaaFamily.applyCommand('+JSON.stringify(stale)+')')).reason,'stale');
+ h.evaluate("s.phase='rest';save()");const rest={...command,id:'abcdef03-1234-4123-8123-123456789abc',expectedRevision:h.current().stateRevision};assert.equal((await h.evaluate('beaaFamily.applyCommand('+JSON.stringify(rest)+')')).applied,false);assert.equal(h.current().phase,'rest');
+});
+test('family summary excludes credentials and remote opt-in defaults off',async()=>{const h=harness();const s=h.evaluate('beaaFamily.getSummary()');assert.deepEqual(Object.keys(s).sort(),['answeredCount','correctCount','policy','revision','usedSeconds']);assert.equal(JSON.stringify(s).includes('pinHash'),false);const c={id:'abcdef01-1234-4123-8123-123456789abc',targetDeviceID:'12345678-1234-4123-8123-123456789abc',kind:'requestSummary',expectedRevision:h.current().stateRevision,issuedAt:1000000,expiresAt:1300000};assert.equal((await h.evaluate('beaaFamily.applyCommand('+JSON.stringify(c)+')')).applied,false);});
+test('family command persistence conflict preserves a newer tab state instead of overwriting it',async()=>{const h=harness();await h.parent();h.action('fill');const id='12345678-1234-4123-8123-123456789abc';h.storage.set('beaa-family-connection-v1',JSON.stringify({base:'http://localhost:8787',deviceID:id,token:'x'.repeat(43),receipts:[]}));const revision=h.current().stateRevision;h.evaluate("const actualSave=save;save=()=>{const latest=JSON.parse(localStorage.getItem(STORAGE));latest.dailyUsed=45;latest.stateRevision++;localStorage.setItem(STORAGE,JSON.stringify(latest));return actualSave();}");const command={id:'abcdef05-1234-4123-8123-123456789abc',targetDeviceID:id,kind:'emergencyGrant',expectedRevision:revision,issuedAt:1000000,expiresAt:1300000,minutes:1};assert.equal((await h.evaluate('beaaFamily.applyCommand('+JSON.stringify(command)+')')).applied,false);assert.equal(h.evaluate('s.dailyUsed'),45);assert.equal(h.current().dailyUsed,45);});
+test('draft course loading fails atomically when browser persistence is unavailable',async()=>{const h=harness();await h.parent();const before=h.evaluate('JSON.stringify(s)');h.evaluate("localStorage.setItem=()=>{throw Error('quota');}");assert.equal(await h.evaluate('beaaFamily.loadCourse(0)'),false);assert.equal(h.evaluate('JSON.stringify(s)'),before);});

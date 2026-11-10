@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g5-u3-q1",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "（1/12）+（2/12）的结果，保持分母12时分子是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "3"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "同分母相加，分子1+2=3，分母不变。",
+      "knowledgePoints": [
+        "math-g5-u3"
+      ]
+    },
+    {
+      "id": "math-g5-u3-q2",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "（2/12）+（2/12）的结果，保持分母12时分子是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "6"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "同分母相加，分子2+2=4，分母不变。",
+      "knowledgePoints": [
+        "math-g5-u3"
+      ]
+    },
+    {
+      "id": "math-g5-u3-q3",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "（3/12）+（2/12）的结果，保持分母12时分子是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "同分母相加，分子3+2=5，分母不变。",
+      "knowledgePoints": [
+        "math-g5-u3"
+      ]
+    },
+    {
+      "id": "math-g5-u3-q4",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "（4/12）+（2/12）的结果，保持分母12时分子是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "8"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "同分母相加，分子4+2=6，分母不变。",
+      "knowledgePoints": [
+        "math-g5-u3"
+      ]
+    },
+    {
+      "id": "math-g5-u4-q1",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "方程3x+6=18，x是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "6"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "两边先减6，再除以3，x=4。",
+      "knowledgePoints": [
+        "math-g5-u4"
+      ]
+    },
+    {
+      "id": "math-g5-u4-q2",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "方程3x+6=21，x是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "两边先减6，再除以3，x=5。",
+      "knowledgePoints": [
+        "math-g5-u4"
+      ]
+    },
+    {
+      "id": "math-g5-u4-q3",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "方程3x+6=24，x是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "8"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "两边先减6，再除以3，x=6。",
+      "knowledgePoints": [
+        "math-g5-u4"
+      ]
+    },
+    {
+      "id": "math-g5-u4-q4",
+      "grade": 5,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "方程3x+6=27，x是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "两边先减6，再除以3，x=7。",
+      "knowledgePoints": [
+        "math-g5-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g5-u3",
+    "math-g5-u4"
+  ]
+}

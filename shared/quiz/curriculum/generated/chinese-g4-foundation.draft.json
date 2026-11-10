@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g4-u1-q1",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“他做事一丝不苟”是在？",
+      "options": [
+        {
+          "id": "A",
+          "text": "称赞认真"
+        },
+        {
+          "id": "B",
+          "text": "批评粗心"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "一丝不苟形容十分认真。",
+      "knowledgePoints": [
+        "chinese-g4-u1"
+      ]
+    },
+    {
+      "id": "chinese-g4-u1-q2",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“他不顾他人，独占座位”中独占表示？",
+      "options": [
+        {
+          "id": "A",
+          "text": "轮流分享"
+        },
+        {
+          "id": "B",
+          "text": "一个人霸占"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "独占强调只供自己占有。",
+      "knowledgePoints": [
+        "chinese-g4-u1"
+      ]
+    },
+    {
+      "id": "chinese-g4-u2-q1",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "虽然下雨，（ ）我们仍去上学。",
+      "options": [
+        {
+          "id": "A",
+          "text": "因为"
+        },
+        {
+          "id": "B",
+          "text": "但是"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "虽然与但是表示转折。",
+      "knowledgePoints": [
+        "chinese-g4-u2"
+      ]
+    },
+    {
+      "id": "chinese-g4-u2-q2",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "因为道路结冰，（ ）车辆减速。",
+      "options": [
+        {
+          "id": "A",
+          "text": "所以"
+        },
+        {
+          "id": "B",
+          "text": "虽然"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "因为与所以表示因果。",
+      "knowledgePoints": [
+        "chinese-g4-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g4-u1",
+    "chinese-g4-u2"
+  ]
+}

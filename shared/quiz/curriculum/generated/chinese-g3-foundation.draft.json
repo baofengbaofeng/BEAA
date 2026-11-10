@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g3-u1-q1",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "雨停了，天空渐渐明亮。“渐渐”指？",
+      "options": [
+        {
+          "id": "A",
+          "text": "突然地"
+        },
+        {
+          "id": "B",
+          "text": "慢慢地"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "渐渐表示变化逐步发生。",
+      "knowledgePoints": [
+        "chinese-g3-u1"
+      ]
+    },
+    {
+      "id": "chinese-g3-u1-q2",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "他仔细检查作业。“仔细”指？",
+      "options": [
+        {
+          "id": "A",
+          "text": "认真细致"
+        },
+        {
+          "id": "B",
+          "text": "随便看看"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "仔细强调注意细节。",
+      "knowledgePoints": [
+        "chinese-g3-u1"
+      ]
+    },
+    {
+      "id": "chinese-g3-u2-q1",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“月亮像小船”用了什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "比喻"
+        },
+        {
+          "id": "B",
+          "text": "拟人"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "用小船作比喻来描写月亮。",
+      "knowledgePoints": [
+        "chinese-g3-u2"
+      ]
+    },
+    {
+      "id": "chinese-g3-u2-q2",
+      "grade": 3,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“小草向我点头”用了什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "排比"
+        },
+        {
+          "id": "B",
+          "text": "拟人"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "点头是赋予小草人的动作。",
+      "knowledgePoints": [
+        "chinese-g3-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g3-u1",
+    "chinese-g3-u2"
+  ]
+}

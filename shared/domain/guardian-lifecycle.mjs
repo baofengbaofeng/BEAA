@@ -1,3 +1,4 @@
+import {evaluateQuestionResponse} from '../quiz/bank.mjs';
 import { validateLegacyLifecycle,getLegacySession } from './guardian-legacy.mjs';
 import { Phase,createSession,recordUsage,rollDay,validateDayKey } from './engine.mjs';
 import { validateSession } from './snapshot.mjs';
@@ -81,7 +82,7 @@ function advanceCounter(n){check(n<Number.MAX_SAFE_INTEGER,'Lifecycle counter ex
 function expectedFeedback(p){
   const index=p.revision-1,q=p.attempt.questions[index],a=p.attempt.session.challenge.answers[index];
   check(q && a,'Answer receipt lacks an answered question');
-  return {questionId:q.id,correct:a.correct,correctOptionId:q.correctOptionId,explanation:q.explanation};
+  return {questionId:q.id,correct:a.correct,...(q.options?{correctOptionId:q.correctOptionId}:{correctAnswer:q.correctAnswer}),explanation:q.explanation};
 }
 function validateReceipt(s,input){
   if(s.revision===0){
@@ -95,7 +96,7 @@ function validateReceipt(s,input){
     check(s.stage.kind==='quiz' || s.stage.kind==='rest','Answer receipt lacks its quiz');
     const p=unpackQuiz(s.stage.kind==='quiz'?s.stage.progress:s.stage.quiz,s.history),last=p.attempt.session.challenge.answers.at(-1);
     feedback=expectedFeedback(p);fields(input.feedback,Object.keys(feedback));
-    check(same(input.feedback,feedback) && last.questionId===c.payload.questionId && last.chosen===c.payload.chosen,'Answer receipt disagrees with the pinned quiz');
+    check(same(input.feedback,feedback) && last.questionId===c.payload.questionId && last.chosen===evaluateQuestionResponse(p.attempt.questions[p.revision-1],c.payload.chosen).value,'Answer receipt disagrees with the pinned quiz');
     const final=p.completion!==null;
     check(final?c.payload.completedAt===p.completion.completedAt && c.payload.restAnchor!==null:c.payload.completedAt===null && c.payload.restAnchor===null,'Answer receipt has an unrelated completion');
     if(s.stage.kind==='rest')check(s.stage.progress.revision===0 && s.stage.progress.bootId===c.payload.restAnchor.bootId && s.stage.progress.cursorMs===c.payload.restAnchor.monotonicMs,'Answer receipt disagrees with initial rest anchor');

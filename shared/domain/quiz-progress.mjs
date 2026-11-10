@@ -1,3 +1,4 @@
+import {evaluateQuestionResponse} from '../quiz/bank.mjs';
 import { Phase } from './engine.mjs';
 import { validateQuizAttempt,submitQuizAnswer } from './quiz-service.mjs';
 import { createLearningHistory,validateLearningHistory,recordCompletedQuiz } from './learning-history.mjs';
@@ -61,7 +62,7 @@ export function validateQuizProgress(input){
 }
 function feedback(progress,index){
   const q=progress.attempt.questions[index],answer=progress.attempt.session.challenge.answers[index];
-  return {questionId:q.id,correct:answer.correct,correctOptionId:q.correctOptionId,explanation:q.explanation};
+  return {questionId:q.id,correct:answer.correct,...(q.options?{correctOptionId:q.correctOptionId}:{correctAnswer:q.correctAnswer}),explanation:q.explanation};
 }
 
 /** Compute both answer and archive before storage; this pure function does not commit anything. */
@@ -69,11 +70,12 @@ export function submitProgressAnswer(input,command){
   const progress=validateQuizProgress(input);
   fields(command,['attemptId','expectedRevision','questionId','chosen','completedAt'],'INVALID_COMMAND');
   check(id(command.attemptId) && Number.isSafeInteger(command.expectedRevision) && command.expectedRevision>=0 &&
-    id(command.questionId) && id(command.chosen,64),'Invalid answer command','INVALID_COMMAND');
+    id(command.questionId) && typeof command.chosen==='string' && command.chosen.length<=64,'Invalid answer command','INVALID_COMMAND');
   check(command.attemptId===progress.attemptId,'Answer belongs to another quiz round','CONFLICT');
   check(command.expectedRevision<=progress.revision,'Answer is ahead of stored progress','CONFLICT');
   const index=command.expectedRevision,q=progress.attempt.questions[index];
-  check(q && command.questionId===q.id && q.options.some(o=>o.id===command.chosen),'Answer does not identify an offered question/option','INVALID_COMMAND');
+  check(q && command.questionId===q.id && evaluateQuestionResponse(q,command.chosen).valid,'Answer does not identify an offered question/option','INVALID_COMMAND');
+  command={...command,chosen:evaluateQuestionResponse(q,command.chosen).value};
   const final=index===progress.attempt.questions.length-1;
   check(final?timestamp(command.completedAt):command.completedAt===null,'Invalid completion timestamp','INVALID_COMMAND');
   if(index<progress.revision){

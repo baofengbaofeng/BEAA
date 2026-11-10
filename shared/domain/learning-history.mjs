@@ -1,6 +1,6 @@
 import { validateDayKey } from './engine.mjs';
 import { validateQuizAttempt } from './quiz-service.mjs';
-import { validateQuestionBank } from '../quiz/bank.mjs';
+import { validateQuestionBank,evaluateQuestionResponse,questionBankVersion } from '../quiz/bank.mjs';
 
 const SUBJECTS=['chinese','math','english'];
 const SNAPSHOT_LIMIT=5_000_000;
@@ -23,9 +23,7 @@ function compare(a,b){return a.completedAt-b.completedAt || (a.id<b.id?-1:a.id>b
 function validLimit(limit){check(Number.isInteger(limit) && limit>=1 && limit<=200,'Invalid history retention limit');}
 function timestamp(value){return Number.isSafeInteger(value) && value>=0 && value<=8_640_000_000_000_000;}
 function canonicalQuestion(q){
-  return {id:q.id,grade:q.grade,subject:q.subject,type:q.type,stem:q.stem,
-    options:q.options.map(o=>({id:o.id,text:o.text})),correctOptionId:q.correctOptionId,
-    explanation:q.explanation,knowledgePoints:[...q.knowledgePoints]};
+  return {id:q.id,grade:q.grade,subject:q.subject,type:q.type,stem:q.stem,...(q.options?{options:q.options.map(o=>({id:o.id,text:o.text})),correctOptionId:q.correctOptionId}:{correctAnswer:q.correctAnswer,...(q.absoluteTolerance!==undefined?{absoluteTolerance:q.absoluteTolerance}:{})}),explanation:q.explanation,knowledgePoints:[...q.knowledgePoints]};
 }
 function validateRecord(record){
   fields(record,['id','completedAt','dayKey','requiredCorrect','questions','answers']);
@@ -35,14 +33,14 @@ function validateRecord(record){
   // Unlike bank imports, persisted records must include every canonical field.
   check(record.questions.every(q=>q!==null && typeof q==='object' && Object.hasOwn(q,'knowledgePoints')),'Missing recorded knowledge points');
   let questions;
-  try{questions=validateQuestionBank({version:1,questions:record.questions}).questions.map(canonicalQuestion);}
+  try{questions=validateQuestionBank({version:questionBankVersion(record.questions),questions:record.questions}).questions.map(canonicalQuestion);}
   catch{throw new LearningHistoryError('INVALID_HISTORY','Invalid recorded question snapshot');}
   check(questions.every(q=>q.grade===questions[0].grade),'Mixed grades in recorded quiz');
   check(Number.isInteger(record.requiredCorrect) && record.requiredCorrect>=1 && record.requiredCorrect<=questions.length,'Invalid recorded pass threshold');
   check(dense(record.answers) && record.answers.length===questions.length,'Incomplete recorded quiz');
   const answers=record.answers.map((a,i)=>{
     fields(a,['questionId','chosen']);
-    check(a.questionId===questions[i].id && questions[i].options.some(o=>o.id===a.chosen),'Recorded answer does not match its question');
+    check(a.questionId===questions[i].id && evaluateQuestionResponse(questions[i],a.chosen).valid && evaluateQuestionResponse(questions[i],a.chosen).value===a.chosen,'Recorded answer does not match its question');
     return {questionId:a.questionId,chosen:a.chosen};
   });
   return {id:record.id,completedAt:record.completedAt,dayKey:record.dayKey,requiredCorrect:record.requiredCorrect,questions,answers};
@@ -91,7 +89,7 @@ function queryRecords(input,query,wrongQuery=false){
   if(Object.hasOwn(query,'knowledgePoint'))check(identifier(query.knowledgePoint,80),'Invalid knowledge-point filter','INVALID_QUERY');
   return history.records.filter(r=>(!Object.hasOwn(query,'dayKey') || r.dayKey===query.dayKey) && (!Object.hasOwn(query,'grade') || r.questions[0].grade===query.grade)).reverse();
 }
-function correct(record,index){return record.answers[index].chosen===record.questions[index].correctOptionId;}
+function correct(record,index){return evaluateQuestionResponse(record.questions[index],record.answers[index].chosen).correct;}
 export function listLearningRecords(input,query={}){
   return queryRecords(input,query).map(r=>{
     const correctCount=r.answers.filter((_,i)=>correct(r,i)).length;
@@ -105,8 +103,8 @@ export function getWrongAnswers(input,query={}){
   for(const r of records)for(const [i,q] of r.questions.entries()){
     if(correct(r,i) || (Object.hasOwn(query,'subject') && q.subject!==query.subject) ||
       (Object.hasOwn(query,'knowledgePoint') && !q.knowledgePoints.includes(query.knowledgePoint)))continue;
-    const {correctOptionId,explanation,...question}=q;
-    result.push({attemptId:r.id,completedAt:r.completedAt,dayKey:r.dayKey,question,chosen:r.answers[i].chosen,correctOptionId,explanation});
+    const {correctOptionId,correctAnswer,explanation,...question}=q;
+    result.push({attemptId:r.id,completedAt:r.completedAt,dayKey:r.dayKey,question,chosen:r.answers[i].chosen,...(q.options?{correctOptionId}:{correctAnswer}),explanation});
   }
   return result;
 }

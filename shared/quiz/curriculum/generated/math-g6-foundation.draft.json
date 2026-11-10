@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g6-u1-q1",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "36的四分之三是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "27"
+        },
+        {
+          "id": "B",
+          "text": "28"
+        },
+        {
+          "id": "C",
+          "text": "29"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "先除以4再乘3：36÷4×3=27。",
+      "knowledgePoints": [
+        "math-g6-u1"
+      ]
+    },
+    {
+      "id": "math-g6-u1-q2",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "48的四分之三是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "37"
+        },
+        {
+          "id": "B",
+          "text": "38"
+        },
+        {
+          "id": "C",
+          "text": "36"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "先除以4再乘3：48÷4×3=36。",
+      "knowledgePoints": [
+        "math-g6-u1"
+      ]
+    },
+    {
+      "id": "math-g6-u1-q3",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "60的四分之三是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "47"
+        },
+        {
+          "id": "B",
+          "text": "45"
+        },
+        {
+          "id": "C",
+          "text": "46"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "先除以4再乘3：60÷4×3=45。",
+      "knowledgePoints": [
+        "math-g6-u1"
+      ]
+    },
+    {
+      "id": "math-g6-u1-q4",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "72的四分之三是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "54"
+        },
+        {
+          "id": "B",
+          "text": "55"
+        },
+        {
+          "id": "C",
+          "text": "56"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "先除以4再乘3：72÷4×3=54。",
+      "knowledgePoints": [
+        "math-g6-u1"
+      ]
+    },
+    {
+      "id": "math-g6-u2-q1",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红蓝球数量比为2:3，共10个，红球几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "共有5份，每份2个，红球2份是4个。",
+      "knowledgePoints": [
+        "math-g6-u2"
+      ]
+    },
+    {
+      "id": "math-g6-u2-q2",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红蓝球数量比为2:3，共15个，红球几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "共有5份，每份3个，红球2份是6个。",
+      "knowledgePoints": [
+        "math-g6-u2"
+      ]
+    },
+    {
+      "id": "math-g6-u2-q3",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红蓝球数量比为2:3，共20个，红球几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "共有5份，每份4个，红球2份是8个。",
+      "knowledgePoints": [
+        "math-g6-u2"
+      ]
+    },
+    {
+      "id": "math-g6-u2-q4",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红蓝球数量比为2:3，共25个，红球几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "11"
+        },
+        {
+          "id": "B",
+          "text": "12"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "共有5份，每份5个，红球2份是10个。",
+      "knowledgePoints": [
+        "math-g6-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g6-u1",
+    "math-g6-u2"
+  ]
+}

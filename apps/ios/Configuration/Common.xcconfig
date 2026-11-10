@@ -1,0 +1,10 @@
+// Defaults are development examples. Override in ignored User.xcconfig.
+BEAA_BUNDLE_IDENTIFIER = org.beaa.learning
+BEAA_APP_GROUP = group.org.beaa.learning
+BEAA_CLOUD_CONTAINER = iCloud.org.beaa.learning
+BEAA_ICLOUD_ENVIRONMENT = Development
+BEAA_PUSH_ENVIRONMENT = development
+MARKETING_VERSION = 0.3.0
+CURRENT_PROJECT_VERSION = 3
+CODE_SIGN_STYLE = Automatic
+#include? "User.xcconfig"

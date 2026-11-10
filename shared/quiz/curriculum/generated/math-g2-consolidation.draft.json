@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g2-u5-q1",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "1个互不重叠的正方形一共有几个直角？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "每个正方形4个直角，1×4=4。",
+      "knowledgePoints": [
+        "math-g2-u5"
+      ]
+    },
+    {
+      "id": "math-g2-u5-q2",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "2个互不重叠的正方形一共有几个直角？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "每个正方形4个直角，2×4=8。",
+      "knowledgePoints": [
+        "math-g2-u5"
+      ]
+    },
+    {
+      "id": "math-g2-u5-q3",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "3个互不重叠的正方形一共有几个直角？",
+      "options": [
+        {
+          "id": "A",
+          "text": "14"
+        },
+        {
+          "id": "B",
+          "text": "12"
+        },
+        {
+          "id": "C",
+          "text": "13"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "每个正方形4个直角，3×4=12。",
+      "knowledgePoints": [
+        "math-g2-u5"
+      ]
+    },
+    {
+      "id": "math-g2-u5-q4",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "4个互不重叠的正方形一共有几个直角？",
+      "options": [
+        {
+          "id": "A",
+          "text": "16"
+        },
+        {
+          "id": "B",
+          "text": "17"
+        },
+        {
+          "id": "C",
+          "text": "18"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "每个正方形4个直角，4×4=16。",
+      "knowledgePoints": [
+        "math-g2-u5"
+      ]
+    },
+    {
+      "id": "math-g2-u6-q1",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "甲组收集15张卡片，乙组收集9张，甲组多几张？",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "8"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "15−9=6张。",
+      "knowledgePoints": [
+        "math-g2-u6"
+      ]
+    },
+    {
+      "id": "math-g2-u6-q2",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "甲组收集16张卡片，乙组收集9张，甲组多几张？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "16−9=7张。",
+      "knowledgePoints": [
+        "math-g2-u6"
+      ]
+    },
+    {
+      "id": "math-g2-u6-q3",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "甲组收集17张卡片，乙组收集9张，甲组多几张？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "17−9=8张。",
+      "knowledgePoints": [
+        "math-g2-u6"
+      ]
+    },
+    {
+      "id": "math-g2-u6-q4",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "甲组收集18张卡片，乙组收集9张，甲组多几张？",
+      "options": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "11"
+        },
+        {
+          "id": "C",
+          "text": "9"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "18−9=9张。",
+      "knowledgePoints": [
+        "math-g2-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g2-u5",
+    "math-g2-u6"
+  ]
+}

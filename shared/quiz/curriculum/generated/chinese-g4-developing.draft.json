@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g4-u3-q1",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "甲树高三米，乙树高两米。这句用了？",
+      "options": [
+        {
+          "id": "A",
+          "text": "比较"
+        },
+        {
+          "id": "B",
+          "text": "拟人"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "并列高度可以比较两棵树。",
+      "knowledgePoints": [
+        "chinese-g4-u3"
+      ]
+    },
+    {
+      "id": "chinese-g4-u3-q2",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“杯子能装250毫升水”主要用了？",
+      "options": [
+        {
+          "id": "A",
+          "text": "打比方"
+        },
+        {
+          "id": "B",
+          "text": "列数字"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "250毫升是具体数量。",
+      "knowledgePoints": [
+        "chinese-g4-u3"
+      ]
+    },
+    {
+      "id": "chinese-g4-u4-q1",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小安每天练琴，从不间断。可见他？",
+      "options": [
+        {
+          "id": "A",
+          "text": "轻易放弃"
+        },
+        {
+          "id": "B",
+          "text": "坚持不懈"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "每天持续练习支持坚持的评价。",
+      "knowledgePoints": [
+        "chinese-g4-u4"
+      ]
+    },
+    {
+      "id": "chinese-g4-u4-q2",
+      "grade": 4,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小禾发现少找的钱，主动退还。可见她？",
+      "options": [
+        {
+          "id": "A",
+          "text": "诚实"
+        },
+        {
+          "id": "B",
+          "text": "贪心"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "主动退钱支持诚实的评价。",
+      "knowledgePoints": [
+        "chinese-g4-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g4-u3",
+    "chinese-g4-u4"
+  ]
+}

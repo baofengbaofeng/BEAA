@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g4-u1-q1",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "He ___ to school every day.",
+      "options": [
+        {
+          "id": "A",
+          "text": "walks"
+        },
+        {
+          "id": "B",
+          "text": "walk"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "He takes walks in the present simple.",
+      "knowledgePoints": [
+        "english-g4-u1"
+      ]
+    },
+    {
+      "id": "english-g4-u1-q2",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Do they play tennis? — No, they ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "doesn’t"
+        },
+        {
+          "id": "B",
+          "text": "don’t"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "They uses do and don’t.",
+      "knowledgePoints": [
+        "english-g4-u1"
+      ]
+    },
+    {
+      "id": "english-g4-u2-q1",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Look! She ___ running.",
+      "options": [
+        {
+          "id": "A",
+          "text": "are"
+        },
+        {
+          "id": "B",
+          "text": "is"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "She is running uses is plus the ing form.",
+      "knowledgePoints": [
+        "english-g4-u2"
+      ]
+    },
+    {
+      "id": "english-g4-u2-q2",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "They are ___ now.",
+      "options": [
+        {
+          "id": "A",
+          "text": "swimming"
+        },
+        {
+          "id": "B",
+          "text": "swim"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Continuous forms use the ing form.",
+      "knowledgePoints": [
+        "english-g4-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g4-u1",
+    "english-g4-u2"
+  ]
+}

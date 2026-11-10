@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g4-u3-q1",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "2个十分之一等于零点几？请选十分位上的数字。",
+      "options": [
+        {
+          "id": "A",
+          "text": "2"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "2个十分之一是0.2，十分位数字为2。",
+      "knowledgePoints": [
+        "math-g4-u3"
+      ]
+    },
+    {
+      "id": "math-g4-u3-q2",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "3个十分之一等于零点几？请选十分位上的数字。",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "3"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "3个十分之一是0.3，十分位数字为3。",
+      "knowledgePoints": [
+        "math-g4-u3"
+      ]
+    },
+    {
+      "id": "math-g4-u3-q3",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "4个十分之一等于零点几？请选十分位上的数字。",
+      "options": [
+        {
+          "id": "A",
+          "text": "6"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "4个十分之一是0.4，十分位数字为4。",
+      "knowledgePoints": [
+        "math-g4-u3"
+      ]
+    },
+    {
+      "id": "math-g4-u3-q4",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "5个十分之一等于零点几？请选十分位上的数字。",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "5个十分之一是0.5，十分位数字为5。",
+      "knowledgePoints": [
+        "math-g4-u3"
+      ]
+    },
+    {
+      "id": "math-g4-u4-q1",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "一个平角被分成30度和另一个角，另一个角是多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "151"
+        },
+        {
+          "id": "B",
+          "text": "152"
+        },
+        {
+          "id": "C",
+          "text": "150"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "平角180度，180−30=150度。",
+      "knowledgePoints": [
+        "math-g4-u4"
+      ]
+    },
+    {
+      "id": "math-g4-u4-q2",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "一个平角被分成40度和另一个角，另一个角是多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "142"
+        },
+        {
+          "id": "B",
+          "text": "140"
+        },
+        {
+          "id": "C",
+          "text": "141"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "平角180度，180−40=140度。",
+      "knowledgePoints": [
+        "math-g4-u4"
+      ]
+    },
+    {
+      "id": "math-g4-u4-q3",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "一个平角被分成50度和另一个角，另一个角是多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "130"
+        },
+        {
+          "id": "B",
+          "text": "131"
+        },
+        {
+          "id": "C",
+          "text": "132"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "平角180度，180−50=130度。",
+      "knowledgePoints": [
+        "math-g4-u4"
+      ]
+    },
+    {
+      "id": "math-g4-u4-q4",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "一个平角被分成60度和另一个角，另一个角是多少度？",
+      "options": [
+        {
+          "id": "A",
+          "text": "121"
+        },
+        {
+          "id": "B",
+          "text": "122"
+        },
+        {
+          "id": "C",
+          "text": "120"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "平角180度，180−60=120度。",
+      "knowledgePoints": [
+        "math-g4-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g4-u3",
+    "math-g4-u4"
+  ]
+}

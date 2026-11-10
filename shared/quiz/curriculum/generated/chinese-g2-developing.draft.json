@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g2-u3-q1",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "（ ）的天空：哪一个更合适？",
+      "options": [
+        {
+          "id": "A",
+          "text": "蓝蓝"
+        },
+        {
+          "id": "B",
+          "text": "甜甜"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "蓝蓝描述天空颜色。",
+      "knowledgePoints": [
+        "chinese-g2-u3"
+      ]
+    },
+    {
+      "id": "chinese-g2-u3-q2",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "（ ）的面包：哪一个更合适？",
+      "options": [
+        {
+          "id": "A",
+          "text": "响亮"
+        },
+        {
+          "id": "B",
+          "text": "松软"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "松软可以描述面包质地。",
+      "knowledgePoints": [
+        "chinese-g2-u3"
+      ]
+    },
+    {
+      "id": "chinese-g2-u4-q1",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪句话交代了地点？",
+      "options": [
+        {
+          "id": "A",
+          "text": "小明跑步。"
+        },
+        {
+          "id": "B",
+          "text": "小明在操场跑步。"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "在操场补充了地点。",
+      "knowledgePoints": [
+        "chinese-g2-u4"
+      ]
+    },
+    {
+      "id": "chinese-g2-u4-q2",
+      "grade": 2,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪句话交代了动作？",
+      "options": [
+        {
+          "id": "A",
+          "text": "小猫跳上椅子。"
+        },
+        {
+          "id": "B",
+          "text": "这是一只小猫。"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "跳上椅子交代了动作。",
+      "knowledgePoints": [
+        "chinese-g2-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g2-u3",
+    "chinese-g2-u4"
+  ]
+}

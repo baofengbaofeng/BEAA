@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g6-u1-q1",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "She usually walks, but yesterday she ___ a bus.",
+      "options": [
+        {
+          "id": "A",
+          "text": "took"
+        },
+        {
+          "id": "B",
+          "text": "takes"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Yesterday requires the past form took.",
+      "knowledgePoints": [
+        "english-g6-u1"
+      ]
+    },
+    {
+      "id": "english-g6-u1-q2",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "I have lived here ___ 2020.",
+      "options": [
+        {
+          "id": "A",
+          "text": "for"
+        },
+        {
+          "id": "B",
+          "text": "since"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Since introduces the starting point.",
+      "knowledgePoints": [
+        "english-g6-u1"
+      ]
+    },
+    {
+      "id": "english-g6-u2-q1",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "You have a toothache. You ___ see a dentist.",
+      "options": [
+        {
+          "id": "A",
+          "text": "are"
+        },
+        {
+          "id": "B",
+          "text": "should"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Should gives advice.",
+      "knowledgePoints": [
+        "english-g6-u2"
+      ]
+    },
+    {
+      "id": "english-g6-u2-q2",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "The sign says “Must wear a helmet.” A helmet is ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "required"
+        },
+        {
+          "id": "B",
+          "text": "optional"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Must expresses a requirement.",
+      "knowledgePoints": [
+        "english-g6-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g6-u1",
+    "english-g6-u2"
+  ]
+}

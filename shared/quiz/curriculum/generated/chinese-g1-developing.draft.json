@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g1-u3-q1",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“木”与哪种事物有关？",
+      "options": [
+        {
+          "id": "A",
+          "text": "河水"
+        },
+        {
+          "id": "B",
+          "text": "树木"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "木的基本意思与树木有关。",
+      "knowledgePoints": [
+        "chinese-g1-u3"
+      ]
+    },
+    {
+      "id": "chinese-g1-u3-q2",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“日”通常表示什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "太阳"
+        },
+        {
+          "id": "B",
+          "text": "月亮"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "日可以指太阳。",
+      "knowledgePoints": [
+        "chinese-g1-u3"
+      ]
+    },
+    {
+      "id": "chinese-g1-u4-q1",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“大”的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "小"
+        },
+        {
+          "id": "B",
+          "text": "高"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "大和小表示相反的大小。",
+      "knowledgePoints": [
+        "chinese-g1-u4"
+      ]
+    },
+    {
+      "id": "chinese-g1-u4-q2",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“上”的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "左"
+        },
+        {
+          "id": "B",
+          "text": "下"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "上和下表示相反的位置。",
+      "knowledgePoints": [
+        "chinese-g1-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g1-u3",
+    "chinese-g1-u4"
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g1-u5-q1",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红绳长8厘米，蓝绳长5厘米，红绳比蓝绳长几厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "长度差是8−5=3厘米。",
+      "knowledgePoints": [
+        "math-g1-u5"
+      ]
+    },
+    {
+      "id": "math-g1-u5-q2",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红绳长9厘米，蓝绳长5厘米，红绳比蓝绳长几厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "长度差是9−5=4厘米。",
+      "knowledgePoints": [
+        "math-g1-u5"
+      ]
+    },
+    {
+      "id": "math-g1-u5-q3",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红绳长10厘米，蓝绳长5厘米，红绳比蓝绳长几厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "6"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "长度差是10−5=5厘米。",
+      "knowledgePoints": [
+        "math-g1-u5"
+      ]
+    },
+    {
+      "id": "math-g1-u5-q4",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "红绳长11厘米，蓝绳长5厘米，红绳比蓝绳长几厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "长度差是11−5=6厘米。",
+      "knowledgePoints": [
+        "math-g1-u5"
+      ]
+    },
+    {
+      "id": "math-g1-u6-q1",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "调查中喜欢苹果的有2人，喜欢梨的有3人，每人只选一种，共几人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "6"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "两组互不重叠，2+3=5人。",
+      "knowledgePoints": [
+        "math-g1-u6"
+      ]
+    },
+    {
+      "id": "math-g1-u6-q2",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "调查中喜欢苹果的有3人，喜欢梨的有3人，每人只选一种，共几人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "8"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "两组互不重叠，3+3=6人。",
+      "knowledgePoints": [
+        "math-g1-u6"
+      ]
+    },
+    {
+      "id": "math-g1-u6-q3",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "调查中喜欢苹果的有4人，喜欢梨的有3人，每人只选一种，共几人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "两组互不重叠，4+3=7人。",
+      "knowledgePoints": [
+        "math-g1-u6"
+      ]
+    },
+    {
+      "id": "math-g1-u6-q4",
+      "grade": 1,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "调查中喜欢苹果的有5人，喜欢梨的有3人，每人只选一种，共几人？",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "两组互不重叠，5+3=8人。",
+      "knowledgePoints": [
+        "math-g1-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g1-u5",
+    "math-g1-u6"
+  ]
+}

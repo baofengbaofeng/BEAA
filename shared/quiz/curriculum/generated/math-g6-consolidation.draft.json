@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g6-u5-q1",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "长方体长4厘米、宽3厘米、高2厘米，体积多少立方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "25"
+        },
+        {
+          "id": "B",
+          "text": "26"
+        },
+        {
+          "id": "C",
+          "text": "24"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "体积=长×宽×高=4×3×2=24。",
+      "knowledgePoints": [
+        "math-g6-u5"
+      ]
+    },
+    {
+      "id": "math-g6-u5-q2",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "长方体长5厘米、宽3厘米、高2厘米，体积多少立方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "32"
+        },
+        {
+          "id": "B",
+          "text": "30"
+        },
+        {
+          "id": "C",
+          "text": "31"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "体积=长×宽×高=5×3×2=30。",
+      "knowledgePoints": [
+        "math-g6-u5"
+      ]
+    },
+    {
+      "id": "math-g6-u5-q3",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "长方体长6厘米、宽3厘米、高2厘米，体积多少立方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "36"
+        },
+        {
+          "id": "B",
+          "text": "37"
+        },
+        {
+          "id": "C",
+          "text": "38"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "体积=长×宽×高=6×3×2=36。",
+      "knowledgePoints": [
+        "math-g6-u5"
+      ]
+    },
+    {
+      "id": "math-g6-u5-q4",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "长方体长7厘米、宽3厘米、高2厘米，体积多少立方厘米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "43"
+        },
+        {
+          "id": "B",
+          "text": "44"
+        },
+        {
+          "id": "C",
+          "text": "42"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "体积=长×宽×高=7×3×2=42。",
+      "knowledgePoints": [
+        "math-g6-u5"
+      ]
+    },
+    {
+      "id": "math-g6-u6-q1",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "全程180千米，用3小时匀速行完，平均每小时几千米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "62"
+        },
+        {
+          "id": "B",
+          "text": "60"
+        },
+        {
+          "id": "C",
+          "text": "61"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "速度=路程÷时间=180÷3=60千米/时。",
+      "knowledgePoints": [
+        "math-g6-u6"
+      ]
+    },
+    {
+      "id": "math-g6-u6-q2",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "全程240千米，用3小时匀速行完，平均每小时几千米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "80"
+        },
+        {
+          "id": "B",
+          "text": "81"
+        },
+        {
+          "id": "C",
+          "text": "82"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "速度=路程÷时间=240÷3=80千米/时。",
+      "knowledgePoints": [
+        "math-g6-u6"
+      ]
+    },
+    {
+      "id": "math-g6-u6-q3",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "全程300千米，用3小时匀速行完，平均每小时几千米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "101"
+        },
+        {
+          "id": "B",
+          "text": "102"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "速度=路程÷时间=300÷3=100千米/时。",
+      "knowledgePoints": [
+        "math-g6-u6"
+      ]
+    },
+    {
+      "id": "math-g6-u6-q4",
+      "grade": 6,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "全程360千米，用3小时匀速行完，平均每小时几千米？",
+      "options": [
+        {
+          "id": "A",
+          "text": "122"
+        },
+        {
+          "id": "B",
+          "text": "120"
+        },
+        {
+          "id": "C",
+          "text": "121"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "速度=路程÷时间=360÷3=120千米/时。",
+      "knowledgePoints": [
+        "math-g6-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g6-u5",
+    "math-g6-u6"
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g3-u5-q1",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "1千克等于多少克？",
+      "options": [
+        {
+          "id": "A",
+          "text": "1001"
+        },
+        {
+          "id": "B",
+          "text": "1002"
+        },
+        {
+          "id": "C",
+          "text": "1000"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "1千克=1000克，所以是1000克。",
+      "knowledgePoints": [
+        "math-g3-u5"
+      ]
+    },
+    {
+      "id": "math-g3-u5-q2",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "2千克等于多少克？",
+      "options": [
+        {
+          "id": "A",
+          "text": "2002"
+        },
+        {
+          "id": "B",
+          "text": "2000"
+        },
+        {
+          "id": "C",
+          "text": "2001"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "1千克=1000克，所以是2000克。",
+      "knowledgePoints": [
+        "math-g3-u5"
+      ]
+    },
+    {
+      "id": "math-g3-u5-q3",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "3千克等于多少克？",
+      "options": [
+        {
+          "id": "A",
+          "text": "3000"
+        },
+        {
+          "id": "B",
+          "text": "3001"
+        },
+        {
+          "id": "C",
+          "text": "3002"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "1千克=1000克，所以是3000克。",
+      "knowledgePoints": [
+        "math-g3-u5"
+      ]
+    },
+    {
+      "id": "math-g3-u5-q4",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "4千克等于多少克？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4001"
+        },
+        {
+          "id": "B",
+          "text": "4002"
+        },
+        {
+          "id": "C",
+          "text": "4000"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "1千克=1000克，所以是4000克。",
+      "knowledgePoints": [
+        "math-g3-u5"
+      ]
+    },
+    {
+      "id": "math-g3-u6-q1",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三天借书量分别为12、18、20本，三天合计几本？",
+      "options": [
+        {
+          "id": "A",
+          "text": "52"
+        },
+        {
+          "id": "B",
+          "text": "50"
+        },
+        {
+          "id": "C",
+          "text": "51"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "12+18+20=50本。",
+      "knowledgePoints": [
+        "math-g3-u6"
+      ]
+    },
+    {
+      "id": "math-g3-u6-q2",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三天借书量分别为13、18、20本，三天合计几本？",
+      "options": [
+        {
+          "id": "A",
+          "text": "51"
+        },
+        {
+          "id": "B",
+          "text": "52"
+        },
+        {
+          "id": "C",
+          "text": "53"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "13+18+20=51本。",
+      "knowledgePoints": [
+        "math-g3-u6"
+      ]
+    },
+    {
+      "id": "math-g3-u6-q3",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三天借书量分别为14、18、20本，三天合计几本？",
+      "options": [
+        {
+          "id": "A",
+          "text": "53"
+        },
+        {
+          "id": "B",
+          "text": "54"
+        },
+        {
+          "id": "C",
+          "text": "52"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "14+18+20=52本。",
+      "knowledgePoints": [
+        "math-g3-u6"
+      ]
+    },
+    {
+      "id": "math-g3-u6-q4",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "三天借书量分别为15、18、20本，三天合计几本？",
+      "options": [
+        {
+          "id": "A",
+          "text": "55"
+        },
+        {
+          "id": "B",
+          "text": "53"
+        },
+        {
+          "id": "C",
+          "text": "54"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "15+18+20=53本。",
+      "knowledgePoints": [
+        "math-g3-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g3-u5",
+    "math-g3-u6"
+  ]
+}

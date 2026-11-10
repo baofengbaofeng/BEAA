@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g4-u3-q1",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "How ___ apples are there?",
+      "options": [
+        {
+          "id": "A",
+          "text": "many"
+        },
+        {
+          "id": "B",
+          "text": "much"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Many is used with plural countable nouns.",
+      "knowledgePoints": [
+        "english-g4-u3"
+      ]
+    },
+    {
+      "id": "english-g4-u3-q2",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "How ___ water do you need?",
+      "options": [
+        {
+          "id": "A",
+          "text": "many"
+        },
+        {
+          "id": "B",
+          "text": "much"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Water is uncountable here.",
+      "knowledgePoints": [
+        "english-g4-u3"
+      ]
+    },
+    {
+      "id": "english-g4-u4-q1",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "It is raining. Take an ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "ice cream"
+        },
+        {
+          "id": "B",
+          "text": "umbrella"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "An umbrella keeps rain off.",
+      "knowledgePoints": [
+        "english-g4-u4"
+      ]
+    },
+    {
+      "id": "english-g4-u4-q2",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "It is cold. Wear a ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "coat"
+        },
+        {
+          "id": "B",
+          "text": "swimsuit"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "A coat provides warmth.",
+      "knowledgePoints": [
+        "english-g4-u4"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g4-u3",
+    "english-g4-u4"
+  ]
+}

@@ -4,7 +4,7 @@
 
 ## 当前范围
 - 首发验证：MatePad 11 / HarmonyOS 4（仅内部技术信息，软件界面不显示平台品牌）
-- 未来预留 iPadOS 实现；横竖屏自动适配
+- 已增加 iPhone / iPad 原生 SwiftUI 源码，待 Apple 工具链和设备验证；横竖屏自动适配
 - 初始规则：30分钟/轮、120分钟/日、语数英5题全对、休息10分钟；均由家长设置
 - 本地优先，不依赖联网解答基础题目
 
@@ -22,7 +22,7 @@
 - [拿到设备后的逐步验收手册](docs/DEVICE_POC.md) · [填写记录模板](docs/testing/DEVICE_ACCEPTANCE_RECORD_TEMPLATE.md)
 
 ## 目录
-`apps/harmony` 首发客户端；`apps/ios` 未来版本；`shared/schemas` 配置定义；`shared/quiz` 题库样例；`tests` 验收基线。
+`apps/harmony` 首发客户端；`apps/ios` SwiftUI 原生客户端（待 Apple 工具链验证）；`shared/schemas` 配置定义；`shared/quiz` 题库样例；`tests` 验收基线。
 
 ## 分支
 `master` 稳定；`dev` 开发集成；新增功能通过 `feature/*` 分支和PR进入开发分支。
@@ -78,3 +78,24 @@
 ## 原生宿主与通知队列接入
 
 已增加严格摘要保存宿主、模拟提醒的持久队列/重试/去重/取消、原生文件/通知/RDB候选适配。`npm run demo:notifications`验证真实SQLite恢复与记录型通知端口；`npm run check:native-core`验证纯TS服务，不是HAP编译。[宿主说明](apps/harmony/NATIVE_SERVICES.md) · [测试报告](docs/testing/NATIVE_SERVICES_REPORT.md) · [当前剩余清单](docs/REMAINING_WORK.md)。真实采样、原生安全资格账本与跨应用控制仍未实现/未验收。
+
+
+## 幼儿拼音与原生 iOS 客户端
+
+中文界面默认配带声调拼音，覆盖导航、表单、动态提示、题目和规则自查；拼音离线生成，不上传内容。响应式导航、表单和长文本布局已调整，并做浏览器无障碍与窄屏检查。见[验证说明](docs/testing/PINYIN_CLIENT_REPORT.md)。
+
+iPhone / iPad 已增加独立 SwiftUI 原生工程、本地持久化、Keychain 家长验证、答题与休息流程、题库导入和摘要导出。见[原生构建说明](apps/ios/README.md)。当前云端 Linux 无 Xcode，项目结构检查不能代替 Apple 编译和真机验收；本轮已增加可选系统范围管控、三个扩展、加密备份/恢复、应急授权、家庭云端分享及远程指令源码。配置与当前证据见[iOS交付报告](docs/testing/IOS_COMPLETION_REPORT.md)。新增 macOS CI 工作流，需实际运行后才能取得编译及 XCTest 证据。
+
+
+## 每周禁用时段
+
+家长可设置最多14条每周重复禁用时段，支持跨午夜；禁用期间暂停应用内使用、挑战和资格生效，保留累计与答题/休息进度。活动临时时段会终止，不增加额度。中文提示默认配拼音；网页、鸿蒙离线资源和iOS原生源码均已接入。见[设置及验证说明](docs/QUIET_HOURS.md)。iOS 可选系统方案另有禁用监控源码，仍须权限配置和真机验收；网页/鸿蒙应用内暂停不代表系统限制。
+
+
+## 判断题和数值填空
+
+客户端题库可混合单选、判断和精确数值填空。全角数字与等值小数可规范化，无效格式不消耗首次尝试；答错后纠正仍保留原首次成绩，刷新和错题复习保持一致。演示包提供mixed-bank.json，不自动替换已有题库。[题型与导入说明](docs/ANSWER_TYPES.md)。iOS源码同步，仍待Apple工具链验收；共享v1参考账本本批仍只支持单选。
+
+## 跨平台后续开发
+
+共享v2混合题型、网页/鸿蒙离线复杂题型与历史练习/应急授权、可选实际家庭服务、鸿蒙原生前台练习安全账本、iOS跨设备加密迁移，以及课程覆盖目录和审核门禁已加入。所有新增中文应用提示继续附拼音。见[本轮报告](docs/testing/CROSS_PLATFORM_COMPLETION_REPORT.md)及[准确剩余清单](docs/REMAINING_WORK.md)。鸿蒙真实系统管控仍需正式资格和目标SDK；课程草稿尚未成为完整、教师审核课程。Apple编译测试仍由用户后续执行。

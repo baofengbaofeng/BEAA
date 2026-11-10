@@ -72,6 +72,7 @@ def main():
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(data)
         for command in [
+            ['node', 'scripts/embed-family.mjs', '--check'],
             ['node', 'scripts/package-native-preview.mjs', '--check'],
             [sys.executable, 'scripts/package-demo.py'],
             [sys.executable, 'scripts/package-browser-check.py'],
@@ -92,7 +93,7 @@ def main():
         'sourceContainsWorkingTreeChanges': dirty,
         'sourceTreeSha256': digest(json.dumps([(name, digest(data)) for name, data in sorted(files.items())], separators=(',', ':')).encode()),
         'nativeBuildValidated': False, 'deviceControlValidated': False, 'healthOutcomeValidated': False,
-        'testsExecutedByPackager': False, 'testEvidence': 'BEAA/docs/testing/NATIVE_SERVICES_REPORT.md',
+        'testsExecutedByPackager': False, 'testEvidence': 'BEAA/docs/testing/CROSS_PLATFORM_COMPLETION_REPORT.md',
         'outputFiles': sorted([*contents, 'manifest.json', 'SHA256SUMS'])
     }
     contents['manifest.json'] = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode()

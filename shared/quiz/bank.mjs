@@ -1,3 +1,4 @@
+import {normalizeNumericAnswer,normalizeFractionAnswer,evaluateScalarResponse} from './answer-types.mjs';
 import { validatePolicy } from '../domain/engine.mjs';
 
 export class QuizError extends Error {
@@ -17,19 +18,21 @@ function points(value,code='INVALID_BANK') {
 
 /** Validate data consistency, not curriculum quality or authenticity. */
 export function validateQuestionBank(input) {
-  fields(input,['version','questions']);check(input.version===1,'Unsupported question-bank version');
+  fields(input,['version','questions']);check([1,2].includes(input.version),'Unsupported question-bank version');
   check(dense(input.questions) && input.questions.length>0 && input.questions.length<=2000,'Invalid question-bank size');
   const seen=new Set();
-  const required=['id','grade','subject','type','stem','options','correctOptionId','explanation'];
+  const common=['id','grade','subject','type','stem','explanation'];
   for(const q of input.questions){
-    fields(q,[...required,'knowledgePoints'],required);
+    const scalar=input.version===2&&['numeric','fraction','numeric_tolerance'].includes(q.type);const required=[...common,...(scalar?['correctAnswer',...(q.type==='numeric_tolerance'?['absoluteTolerance']:[])]:['options','correctOptionId'])];fields(q,[...required,'knowledgePoints'],required);
     check(id(q.id) && !seen.has(q.id),'Invalid or duplicate question identifier');seen.add(q.id);
     check(Number.isInteger(q.grade) && q.grade>=1 && q.grade<=6 && ['chinese','math','english'].includes(q.subject),'Invalid question grade or subject');
-    check(q.type==='single_choice' && text(q.stem,2000) && text(q.explanation,4000),'Unsupported or incomplete question');
+    check((q.type==='single_choice'||input.version===2&&['true_false','numeric','fraction','numeric_tolerance'].includes(q.type)) && text(q.stem,2000) && text(q.explanation,4000),'Unsupported or incomplete question');
+    if(scalar){const normalize=q.type==='fraction'?normalizeFractionAnswer:normalizeNumericAnswer;check(typeof q.correctAnswer==='string'&&normalize(q.correctAnswer)===q.correctAnswer,'Invalid scalar key');if(q.type==='numeric_tolerance')check(typeof q.absoluteTolerance==='string'&&normalizeNumericAnswer(q.absoluteTolerance)===q.absoluteTolerance&&!q.absoluteTolerance.startsWith('-'),'Invalid tolerance');}else{
     check(dense(q.options) && q.options.length>=2 && q.options.length<=8,'Invalid question options');
     for(const option of q.options){fields(option,['id','text']);check(id(option.id,64) && text(option.text,1000),'Invalid option');}
     check(new Set(q.options.map(o=>o.id)).size===q.options.length && new Set(q.options.map(o=>o.text.trim())).size===q.options.length,'Duplicate or ambiguous options');
     check(id(q.correctOptionId,64) && q.options.some(o=>o.id===q.correctOptionId),'Answer key is not an offered option');
+    if(q.type==='true_false')check(q.options.length===2&&q.options[0].text==='正确'&&q.options[1].text==='错误','Invalid boolean options');}
     if(Object.hasOwn(q,'knowledgePoints'))points(q.knowledgePoints);
   }
   const bank=structuredClone(input);
@@ -53,3 +56,6 @@ export function selectQuestions(input,policy,options={}) {
   }
   return selected;
 }
+
+export function evaluateQuestionResponse(q,response){if(q.options){const valid=typeof response==='string'&&q.options.some(o=>o.id===response);return {valid,correct:valid&&response===q.correctOptionId,value:valid?response:null};}return evaluateScalarResponse(q.type,q.correctAnswer,response,q.absoluteTolerance);}
+export function questionBankVersion(questions){return questions.some(q=>q.type!=='single_choice')?2:1;}

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g5-u5-q1",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“应节约用水，因为淡水资源有限。”理由是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "应节约用水"
+        },
+        {
+          "id": "B",
+          "text": "淡水资源有限"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "因为之后提供支持观点的原因。",
+      "knowledgePoints": [
+        "chinese-g5-u5"
+      ]
+    },
+    {
+      "id": "chinese-g5-u5-q2",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "哪句是观点？",
+      "options": [
+        {
+          "id": "A",
+          "text": "我认为课间运动有益。"
+        },
+        {
+          "id": "B",
+          "text": "操场上有二十人。"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "我认为引出对事情的判断。",
+      "knowledgePoints": [
+        "chinese-g5-u5"
+      ]
+    },
+    {
+      "id": "chinese-g5-u6-q1",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "写“难忘的合作”，哪件事最切题？",
+      "options": [
+        {
+          "id": "A",
+          "text": "一起搭桥模型并解决分歧"
+        },
+        {
+          "id": "B",
+          "text": "独自买一支铅笔"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "共同解决问题体现合作。",
+      "knowledgePoints": [
+        "chinese-g5-u6"
+      ]
+    },
+    {
+      "id": "chinese-g5-u6-q2",
+      "grade": 5,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "写一次实验，最应写清什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "邻居的生日"
+        },
+        {
+          "id": "B",
+          "text": "步骤和观察结果"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "步骤和结果是实验记录的核心。",
+      "knowledgePoints": [
+        "chinese-g5-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g5-u5",
+    "chinese-g5-u6"
+  ]
+}

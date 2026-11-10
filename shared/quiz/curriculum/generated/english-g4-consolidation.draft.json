@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g4-u5-q1",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Turn left means go to the ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "left"
+        },
+        {
+          "id": "B",
+          "text": "right"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "The direction is explicitly left.",
+      "knowledgePoints": [
+        "english-g4-u5"
+      ]
+    },
+    {
+      "id": "english-g4-u5-q2",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "The shop is next to the bank. It is ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "far from the bank"
+        },
+        {
+          "id": "B",
+          "text": "beside the bank"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Next to means beside.",
+      "knowledgePoints": [
+        "english-g4-u5"
+      ]
+    },
+    {
+      "id": "english-g4-u6-q1",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Tom ate, then washed the plate.” What happened first?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tom washed the plate."
+        },
+        {
+          "id": "B",
+          "text": "Tom ate."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Then marks the second event.",
+      "knowledgePoints": [
+        "english-g4-u6"
+      ]
+    },
+    {
+      "id": "english-g4-u6-q2",
+      "grade": 4,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Lily lost her key, so she asked for help.” Why did she ask?",
+      "options": [
+        {
+          "id": "A",
+          "text": "She lost her key."
+        },
+        {
+          "id": "B",
+          "text": "She found a book."
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "So connects the lost key with asking for help.",
+      "knowledgePoints": [
+        "english-g4-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g4-u5",
+    "english-g4-u6"
+  ]
+}

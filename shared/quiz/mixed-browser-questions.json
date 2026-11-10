@@ -1,0 +1,7 @@
+[
+  {"id":"mixed-number-add","grade":3,"subject":"math","topic":"arithmetic","type":"numeric","text":"15 + 17 = ?","answer":"32","explain":"15加17等于32。"},
+  {"id":"mixed-true-multiply","grade":3,"subject":"math","topic":"arithmetic","type":"true_false","text":"8 × 6 = 48。","options":["正确","错误"],"answer":0,"explain":"8乘6等于48，所以这个说法正确。"},
+  {"id":"mixed-number-decimal","grade":3,"subject":"math","topic":"arithmetic","type":"numeric","text":"1.5 + 1 = ?","answer":"2.5","explain":"1.5加1等于2.5。"},
+  {"id":"mixed-false-compare","grade":3,"subject":"math","topic":"arithmetic","type":"true_false","text":"5小于3。","options":["正确","错误"],"answer":1,"explain":"5比3大，所以这个说法错误。"},
+  {"id":"mixed-choice-apple","grade":3,"subject":"english","topic":"vocabulary","text":"apple 的中文意思是什么？","options":["苹果","书","猫"],"answer":0,"explain":"apple表示苹果。"}
+]

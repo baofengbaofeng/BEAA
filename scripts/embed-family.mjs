@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync,readdirSync} from 'node:fs';
+import {exportBrowserQuestionBank} from '../shared/quiz/browser-export.mjs';
+const root=new URL('../',import.meta.url);
+const dir=new URL('shared/quiz/curriculum/generated/',root);
+const subjects={math:'数学',chinese:'语文',english:'英语'},stages={foundation:'基础',developing:'进阶',consolidation:'巩固'};
+const packs=readdirSync(dir).filter(n=>/^(math|chinese|english)-g[1-6]-.*\.draft\.json$/.test(n)).sort().map(name=>{const p=JSON.parse(readFileSync(new URL(name,dir)));const [,subject,grade,stage]=name.match(/^(math|chinese|english)-g([1-6])-(.*)\.draft\.json$/);return {label:`${grade}年级${subjects[subject]}${stages[stage]}`,grade:Number(grade),subject,questions:exportBrowserQuestionBank({version:p.version,questions:p.questions})};});
+const block='// BEGIN BEAA FAMILY\nconst beaaCoursePacks='+JSON.stringify(packs).replace(/</g,'\\u003c')+';\n'+readFileSync(new URL('shared/ui/family-sync.js',root),'utf8')+'\n// END BEAA FAMILY';
+const path=new URL('apps/web-preview/index.html',root),source=readFileSync(path,'utf8');
+const result=source.includes('// BEGIN BEAA FAMILY')?source.replace(/\/\/ BEGIN BEAA FAMILY[\s\S]*?\/\/ END BEAA FAMILY/,()=>block):source.replace('</script>',()=>block+'\n</script>');
+if(process.argv.includes('--check')){if(result!==source)throw Error('Family client resource is stale');}else writeFileSync(path,result);
+console.log('Family client and '+packs.length+' draft course packs '+(process.argv.includes('--check')?'match':'embedded'));

@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g3-u1-q1",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "12×6等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "72"
+        },
+        {
+          "id": "B",
+          "text": "73"
+        },
+        {
+          "id": "C",
+          "text": "74"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "把十位与个位分别乘6再相加，得到72。",
+      "knowledgePoints": [
+        "math-g3-u1"
+      ]
+    },
+    {
+      "id": "math-g3-u1-q2",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "13×6等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "79"
+        },
+        {
+          "id": "B",
+          "text": "80"
+        },
+        {
+          "id": "C",
+          "text": "78"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "把十位与个位分别乘6再相加，得到78。",
+      "knowledgePoints": [
+        "math-g3-u1"
+      ]
+    },
+    {
+      "id": "math-g3-u1-q3",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "14×6等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "86"
+        },
+        {
+          "id": "B",
+          "text": "84"
+        },
+        {
+          "id": "C",
+          "text": "85"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "把十位与个位分别乘6再相加，得到84。",
+      "knowledgePoints": [
+        "math-g3-u1"
+      ]
+    },
+    {
+      "id": "math-g3-u1-q4",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "15×6等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "90"
+        },
+        {
+          "id": "B",
+          "text": "91"
+        },
+        {
+          "id": "C",
+          "text": "92"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "把十位与个位分别乘6再相加，得到90。",
+      "knowledgePoints": [
+        "math-g3-u1"
+      ]
+    },
+    {
+      "id": "math-g3-u2-q1",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "14个球每4个装一盒，装满3盒后剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "2"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "14=4×3+2，余数2小于4。",
+      "knowledgePoints": [
+        "math-g3-u2"
+      ]
+    },
+    {
+      "id": "math-g3-u2-q2",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "18个球每4个装一盒，装满4盒后剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "2"
+        },
+        {
+          "id": "C",
+          "text": "3"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "18=4×4+2，余数2小于4。",
+      "knowledgePoints": [
+        "math-g3-u2"
+      ]
+    },
+    {
+      "id": "math-g3-u2-q3",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "22个球每4个装一盒，装满5盒后剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "2"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "22=4×5+2，余数2小于4。",
+      "knowledgePoints": [
+        "math-g3-u2"
+      ]
+    },
+    {
+      "id": "math-g3-u2-q4",
+      "grade": 3,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "26个球每4个装一盒，装满6盒后剩几个？",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "4"
+        },
+        {
+          "id": "C",
+          "text": "2"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "26=4×6+2，余数2小于4。",
+      "knowledgePoints": [
+        "math-g3-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g3-u1",
+    "math-g3-u2"
+  ]
+}

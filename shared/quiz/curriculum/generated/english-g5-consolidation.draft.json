@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g5-u5-q1",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Ada took a coat and shivered outside.” It was probably ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "very hot"
+        },
+        {
+          "id": "B",
+          "text": "cold"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "A coat and shivering suggest cold weather.",
+      "knowledgePoints": [
+        "english-g5-u5"
+      ]
+    },
+    {
+      "id": "english-g5-u5-q2",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“The soil was dry, so Leo fetched water.” He probably wanted to ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "water a plant"
+        },
+        {
+          "id": "B",
+          "text": "paint a wall"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Dry soil and water suggest watering plants.",
+      "knowledgePoints": [
+        "english-g5-u5"
+      ]
+    },
+    {
+      "id": "english-g5-u6-q1",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Come to my party at 3 on Saturday.” This is ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "an invitation"
+        },
+        {
+          "id": "B",
+          "text": "a weather report"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "It asks someone to attend a party.",
+      "knowledgePoints": [
+        "english-g5-u6"
+      ]
+    },
+    {
+      "id": "english-g5-u6-q2",
+      "grade": 5,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Which detail helps a guest find a party?",
+      "options": [
+        {
+          "id": "A",
+          "text": "the host’s favorite number"
+        },
+        {
+          "id": "B",
+          "text": "the address"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "An address gives the location.",
+      "knowledgePoints": [
+        "english-g5-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g5-u5",
+    "english-g5-u6"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g6-u5-q1",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“All three buses arrived late.” Which claim is supported?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Those three buses were late."
+        },
+        {
+          "id": "B",
+          "text": "Every bus is always late."
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Evidence about three buses does not establish all buses always being late.",
+      "knowledgePoints": [
+        "english-g6-u5"
+      ]
+    },
+    {
+      "id": "english-g6-u5-q2",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“Perhaps the team will win.” This expresses ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "a certain past fact"
+        },
+        {
+          "id": "B",
+          "text": "a possibility"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Perhaps signals uncertainty.",
+      "knowledgePoints": [
+        "english-g6-u5"
+      ]
+    },
+    {
+      "id": "english-g6-u6-q1",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Choose the correct sentence.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Everyone have a notebook."
+        },
+        {
+          "id": "B",
+          "text": "Everyone has a notebook."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Everyone takes a singular verb.",
+      "knowledgePoints": [
+        "english-g6-u6"
+      ]
+    },
+    {
+      "id": "english-g6-u6-q2",
+      "grade": 6,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "A paragraph about saving water should include ___.",
+      "options": [
+        {
+          "id": "A",
+          "text": "turning off unused taps"
+        },
+        {
+          "id": "B",
+          "text": "the color of a new bicycle"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Turning off taps is relevant to saving water.",
+      "knowledgePoints": [
+        "english-g6-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g6-u5",
+    "english-g6-u6"
+  ]
+}

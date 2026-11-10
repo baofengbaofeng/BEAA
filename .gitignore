@@ -22,3 +22,9 @@ test-results/
 playwright-report/
 
 __pycache__/
+
+# Local Apple signing/configuration overrides
+apps/ios/Configuration/User.xcconfig
+apps/ios/DerivedData/
+**/xcuserdata/
+*.xcuserstate

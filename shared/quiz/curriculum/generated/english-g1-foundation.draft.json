@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "english-g1-u1-q1",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "You meet a friend in the morning. Say:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Good night!"
+        },
+        {
+          "id": "B",
+          "text": "Good morning!"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Morning greetings use Good morning.",
+      "knowledgePoints": [
+        "english-g1-u1"
+      ]
+    },
+    {
+      "id": "english-g1-u1-q2",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Someone says “Hello!” Reply:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hi!"
+        },
+        {
+          "id": "B",
+          "text": "Goodbye forever!"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Hi is a friendly greeting.",
+      "knowledgePoints": [
+        "english-g1-u1"
+      ]
+    },
+    {
+      "id": "english-g1-u2-q1",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "“What is your name?” —",
+      "options": [
+        {
+          "id": "A",
+          "text": "My name is Sam."
+        },
+        {
+          "id": "B",
+          "text": "I am a book."
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "My name is introduces a name.",
+      "knowledgePoints": [
+        "english-g1-u2"
+      ]
+    },
+    {
+      "id": "english-g1-u2-q2",
+      "grade": 1,
+      "subject": "english",
+      "type": "single_choice",
+      "stem": "Choose a question asking for a name.",
+      "options": [
+        {
+          "id": "A",
+          "text": "What color is it?"
+        },
+        {
+          "id": "B",
+          "text": "What is your name?"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Name asks what someone is called.",
+      "knowledgePoints": [
+        "english-g1-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "english-g1-u1",
+    "english-g1-u2"
+  ]
+}

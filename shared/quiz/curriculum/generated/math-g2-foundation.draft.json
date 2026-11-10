@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g2-u1-q1",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "38+27等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "67"
+        },
+        {
+          "id": "B",
+          "text": "65"
+        },
+        {
+          "id": "C",
+          "text": "66"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "先加20，再加7：38+20+7=65。",
+      "knowledgePoints": [
+        "math-g2-u1"
+      ]
+    },
+    {
+      "id": "math-g2-u1-q2",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "39+27等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "66"
+        },
+        {
+          "id": "B",
+          "text": "67"
+        },
+        {
+          "id": "C",
+          "text": "68"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "先加20，再加7：39+20+7=66。",
+      "knowledgePoints": [
+        "math-g2-u1"
+      ]
+    },
+    {
+      "id": "math-g2-u1-q3",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "40+27等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "68"
+        },
+        {
+          "id": "B",
+          "text": "69"
+        },
+        {
+          "id": "C",
+          "text": "67"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "先加20，再加7：40+20+7=67。",
+      "knowledgePoints": [
+        "math-g2-u1"
+      ]
+    },
+    {
+      "id": "math-g2-u1-q4",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "41+27等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "70"
+        },
+        {
+          "id": "B",
+          "text": "68"
+        },
+        {
+          "id": "C",
+          "text": "69"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "先加20，再加7：41+20+7=68。",
+      "knowledgePoints": [
+        "math-g2-u1"
+      ]
+    },
+    {
+      "id": "math-g2-u2-q1",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "3盒铅笔，每盒4支，共几支？",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "13"
+        },
+        {
+          "id": "C",
+          "text": "14"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "3个4相加，3×4=12。",
+      "knowledgePoints": [
+        "math-g2-u2"
+      ]
+    },
+    {
+      "id": "math-g2-u2-q2",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "4盒铅笔，每盒4支，共几支？",
+      "options": [
+        {
+          "id": "A",
+          "text": "17"
+        },
+        {
+          "id": "B",
+          "text": "18"
+        },
+        {
+          "id": "C",
+          "text": "16"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "4个4相加，4×4=16。",
+      "knowledgePoints": [
+        "math-g2-u2"
+      ]
+    },
+    {
+      "id": "math-g2-u2-q3",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "5盒铅笔，每盒4支，共几支？",
+      "options": [
+        {
+          "id": "A",
+          "text": "22"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "21"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "5个4相加，5×4=20。",
+      "knowledgePoints": [
+        "math-g2-u2"
+      ]
+    },
+    {
+      "id": "math-g2-u2-q4",
+      "grade": 2,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "6盒铅笔，每盒4支，共几支？",
+      "options": [
+        {
+          "id": "A",
+          "text": "24"
+        },
+        {
+          "id": "B",
+          "text": "25"
+        },
+        {
+          "id": "C",
+          "text": "26"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "6个4相加，6×4=24。",
+      "knowledgePoints": [
+        "math-g2-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g2-u1",
+    "math-g2-u2"
+  ]
+}

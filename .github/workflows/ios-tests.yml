@@ -1,0 +1,45 @@
+name: Native iOS build and tests
+on:
+  push:
+    branches: [dev, 'feature/**']
+  pull_request:
+    branches: [dev, master]
+jobs:
+  native-ios:
+    runs-on: macos-15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate project generation
+        run: python3 apps/ios/validate_project.py
+      - name: Select an installed phone simulator
+        shell: bash
+        run: |
+          xcodebuild -version
+          xcrun simctl list devices available --json > "$RUNNER_TEMP/ios-devices.json"
+          python3 - <<'PY'
+          import json, os
+          with open(os.environ['RUNNER_TEMP'] + '/ios-devices.json') as source:
+              devices = json.load(source)['devices']
+          phones = [device for runtime, values in devices.items() if 'iOS' in runtime
+                    for device in values if device.get('isAvailable') and device['name'].startswith('iPhone')]
+          if not phones:
+              raise SystemExit('No installed iOS phone simulator is available')
+          with open(os.environ['GITHUB_ENV'], 'a') as target:
+              target.write('BEAA_SIMULATOR_ID=' + phones[0]['udid'] + '\n')
+          PY
+      - name: Build native app and execute XCTest
+        shell: bash
+        run: |
+          mkdir -p test-results
+          xcodebuild -project apps/ios/BEAA.xcodeproj -scheme BEAA \
+            -destination "platform=iOS Simulator,id=$BEAA_SIMULATOR_ID" \
+            -resultBundlePath test-results/ios.xcresult \
+            CODE_SIGNING_ALLOWED=NO test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-ios-test-evidence
+          path: test-results/ios.xcresult
+          if-no-files-found: warn

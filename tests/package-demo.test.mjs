@@ -18,11 +18,11 @@ from pathlib import Path
 from zipfile import ZipFile
 import hashlib,json
 with ZipFile('dist/beaa-web-demo.zip') as package:
-    expected={'index.html','README.md','sample-bank.json','SHA256SUMS'}
+    expected={'index.html','README.md','sample-bank.json','mixed-bank.json','SHA256SUMS'}
     names={name.removeprefix('beaa-web-demo/') for name in package.namelist()}
     assert names == expected
     manifest=package.read('beaa-web-demo/SHA256SUMS').decode().splitlines()
-    assert len(manifest) == 3
+    assert len(manifest) == 4
     seen=set()
     for line in manifest:
         digest,name=line.split('  ')
@@ -33,6 +33,11 @@ with ZipFile('dist/beaa-web-demo.zip') as package:
     assert seen == expected - {'SHA256SUMS'}
     for name in ['index.html','README.md']:
         assert package.read('beaa-web-demo/'+name) == Path('apps/web-preview',name).read_bytes()
+    assert package.read('beaa-web-demo/mixed-bank.json') == Path('shared/quiz/mixed-browser-questions.json').read_bytes()
+    mixed=json.loads(package.read('beaa-web-demo/mixed-bank.json'))
+    assert len(mixed) == 5
+    assert sum(q.get('type') == 'numeric' for q in mixed) == 2
+    assert sum(q.get('type') == 'true_false' for q in mixed) == 2
     bank=json.loads(package.read('beaa-web-demo/sample-bank.json'))
     assert len(bank) > 0
     for q in bank:

@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "math-g4-u1-q1",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "2个万是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "20001"
+        },
+        {
+          "id": "B",
+          "text": "20002"
+        },
+        {
+          "id": "C",
+          "text": "20000"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "1万=10000，2万=20000。",
+      "knowledgePoints": [
+        "math-g4-u1"
+      ]
+    },
+    {
+      "id": "math-g4-u1-q2",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "3个万是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "30002"
+        },
+        {
+          "id": "B",
+          "text": "30000"
+        },
+        {
+          "id": "C",
+          "text": "30001"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "1万=10000，3万=30000。",
+      "knowledgePoints": [
+        "math-g4-u1"
+      ]
+    },
+    {
+      "id": "math-g4-u1-q3",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "4个万是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "40000"
+        },
+        {
+          "id": "B",
+          "text": "40001"
+        },
+        {
+          "id": "C",
+          "text": "40002"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "1万=10000，4万=40000。",
+      "knowledgePoints": [
+        "math-g4-u1"
+      ]
+    },
+    {
+      "id": "math-g4-u1-q4",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "5个万是多少？",
+      "options": [
+        {
+          "id": "A",
+          "text": "50001"
+        },
+        {
+          "id": "B",
+          "text": "50002"
+        },
+        {
+          "id": "C",
+          "text": "50000"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "1万=10000，5万=50000。",
+      "knowledgePoints": [
+        "math-g4-u1"
+      ]
+    },
+    {
+      "id": "math-g4-u2-q1",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "25×4+75×4等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "402"
+        },
+        {
+          "id": "B",
+          "text": "400"
+        },
+        {
+          "id": "C",
+          "text": "401"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "提取相同因数：（25+75）×4=400。",
+      "knowledgePoints": [
+        "math-g4-u2"
+      ]
+    },
+    {
+      "id": "math-g4-u2-q2",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "25×5+75×5等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "500"
+        },
+        {
+          "id": "B",
+          "text": "501"
+        },
+        {
+          "id": "C",
+          "text": "502"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "提取相同因数：（25+75）×5=500。",
+      "knowledgePoints": [
+        "math-g4-u2"
+      ]
+    },
+    {
+      "id": "math-g4-u2-q3",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "25×6+75×6等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "601"
+        },
+        {
+          "id": "B",
+          "text": "602"
+        },
+        {
+          "id": "C",
+          "text": "600"
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "提取相同因数：（25+75）×6=600。",
+      "knowledgePoints": [
+        "math-g4-u2"
+      ]
+    },
+    {
+      "id": "math-g4-u2-q4",
+      "grade": 4,
+      "subject": "math",
+      "type": "single_choice",
+      "stem": "25×7+75×7等于几？",
+      "options": [
+        {
+          "id": "A",
+          "text": "702"
+        },
+        {
+          "id": "B",
+          "text": "700"
+        },
+        {
+          "id": "C",
+          "text": "701"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "提取相同因数：（25+75）×7=700。",
+      "knowledgePoints": [
+        "math-g4-u2"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "math-g4-u1",
+    "math-g4-u2"
+  ]
+}

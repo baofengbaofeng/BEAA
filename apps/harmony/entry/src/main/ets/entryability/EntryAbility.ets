@@ -1,9 +1,10 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import window from '@ohos.window';
 import { NativePreviewBridge } from '../services/NativePreviewBridge';
+import { NativeGuardianSession } from '../services/NativeGuardianSession';
 
 export default class EntryAbility extends UIAbility {
-  onBackground(): void { NativePreviewBridge.background(); }
+  onBackground(): void { NativeGuardianSession.background(); NativePreviewBridge.background(); }
   onForeground(): void { NativePreviewBridge.foreground(); }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {

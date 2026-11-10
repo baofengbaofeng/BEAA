@@ -16,6 +16,8 @@ jobs:
           node-version: '20'
           cache: npm
       - run: npm ci
+      - name: Validate native iOS project structure
+        run: python3 apps/ios/validate_project.py
       - name: Verify embedded browser and native source synchronization
         run: npm run check:sources
       - name: Run business and scaffold tests

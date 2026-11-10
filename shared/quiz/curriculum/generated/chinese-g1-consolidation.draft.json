@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "chinese-g1-u5-q1",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“你叫什么名字”末尾用什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "句号"
+        },
+        {
+          "id": "B",
+          "text": "问号"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "询问姓名是问句。",
+      "knowledgePoints": [
+        "chinese-g1-u5"
+      ]
+    },
+    {
+      "id": "chinese-g1-u5-q2",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "“我有一本书”末尾用什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "句号"
+        },
+        {
+          "id": "B",
+          "text": "问号"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "陈述一件事用句号。",
+      "knowledgePoints": [
+        "chinese-g1-u5"
+      ]
+    },
+    {
+      "id": "chinese-g1-u6-q1",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小青在院子里浇花。谁在浇花？",
+      "options": [
+        {
+          "id": "A",
+          "text": "小青"
+        },
+        {
+          "id": "B",
+          "text": "小红"
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "句中明确说小青浇花。",
+      "knowledgePoints": [
+        "chinese-g1-u6"
+      ]
+    },
+    {
+      "id": "chinese-g1-u6-q2",
+      "grade": 1,
+      "subject": "chinese",
+      "type": "single_choice",
+      "stem": "小狗在门边睡觉。小狗在哪里？",
+      "options": [
+        {
+          "id": "A",
+          "text": "树上"
+        },
+        {
+          "id": "B",
+          "text": "门边"
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "句中的地点是门边。",
+      "knowledgePoints": [
+        "chinese-g1-u6"
+      ]
+    }
+  ],
+  "reviewStatus": "pending-teacher-review",
+  "label": "DRAFT · 待教师逐题审核",
+  "curriculumId": "beaa-original-primary-survey-1",
+  "unitIds": [
+    "chinese-g1-u5",
+    "chinese-g1-u6"
+  ]
+}
